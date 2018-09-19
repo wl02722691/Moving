@@ -1,5 +1,5 @@
 //
-//  fitnessVC.swift
+//  FitnessVC.swift
 //  Fitness-Lab
 //
 //  Created by 張書涵 on 2018/9/19.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class fitnessVC: UIViewController {
+class FitnessVC: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()

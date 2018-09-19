@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		69D37DF3215257EC00B8F1F9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69D37DF2215257EC00B8F1F9 /* AppDelegate.swift */; };
-		69D37DF5215257EC00B8F1F9 /* fitnessVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69D37DF4215257EC00B8F1F9 /* fitnessVC.swift */; };
+		69D37DF5215257EC00B8F1F9 /* FitnessVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69D37DF4215257EC00B8F1F9 /* FitnessVC.swift */; };
 		69D37DF8215257EC00B8F1F9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 69D37DF6215257EC00B8F1F9 /* Main.storyboard */; };
 		69D37DFA215257EE00B8F1F9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 69D37DF9215257EE00B8F1F9 /* Assets.xcassets */; };
 		69D37DFD215257EE00B8F1F9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 69D37DFB215257EE00B8F1F9 /* LaunchScreen.storyboard */; };
@@ -18,7 +18,7 @@
 /* Begin PBXFileReference section */
 		69D37DEF215257EC00B8F1F9 /* Fitness-Lab.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Fitness-Lab.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		69D37DF2215257EC00B8F1F9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		69D37DF4215257EC00B8F1F9 /* fitnessVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = fitnessVC.swift; sourceTree = "<group>"; };
+		69D37DF4215257EC00B8F1F9 /* FitnessVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FitnessVC.swift; sourceTree = "<group>"; };
 		69D37DF7215257EC00B8F1F9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		69D37DF9215257EE00B8F1F9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		69D37DFC215257EE00B8F1F9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -76,7 +76,7 @@
 		69D37E0621525AF100B8F1F9 /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
-				69D37DF4215257EC00B8F1F9 /* fitnessVC.swift */,
+				69D37DF4215257EC00B8F1F9 /* FitnessVC.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -233,7 +233,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				69D37DF5215257EC00B8F1F9 /* fitnessVC.swift in Sources */,
+				69D37DF5215257EC00B8F1F9 /* FitnessVC.swift in Sources */,
 				69D37DF3215257EC00B8F1F9 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
