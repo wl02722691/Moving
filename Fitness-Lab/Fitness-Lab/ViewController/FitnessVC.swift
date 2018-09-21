@@ -17,6 +17,7 @@ class FitnessVC: UIViewController {
         self.fitnessTableview.separatorStyle = UITableViewCellSeparatorStyle.none
         fitnessTableview.delegate = self
         fitnessTableview.dataSource = self
+
     }
 }
 
@@ -30,7 +31,7 @@ extension FitnessVC: UITableViewDelegate {
         cell.layer.transform = transform
         
         //2. UIView animation method to chang to the final state of the cell
-        UIView.animate(withDuration: 0.7) {
+        UIView.animate(withDuration: 0.4) {
             cell.alpha = 1.0
             cell.layer.transform = CATransform3DIdentity
         }

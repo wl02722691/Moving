@@ -26,8 +26,8 @@ class FitnessCell: UITableViewCell {
         backgroundCardView.layer.masksToBounds = false
         backgroundCardView.layer.cornerRadius = 15
         backgroundCardView.layer.shadowColor = UIColor.black.withAlphaComponent(0.2).cgColor
-        backgroundCardView.layer.shadowOffset = CGSize(width: 15, height: 15)
-        backgroundCardView.layer.shadowOpacity = 0.8
+        backgroundCardView.layer.shadowOffset = CGSize.zero
+        backgroundCardView.layer.shadowOpacity = 0.4
         contentView.backgroundColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
 
     }

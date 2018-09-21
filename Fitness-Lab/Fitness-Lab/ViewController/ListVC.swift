@@ -27,7 +27,13 @@ class ListVC: UIViewController {
     
 }
 
-extension ListVC: UITableViewDelegate{}
+extension ListVC: UITableViewDelegate{
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let index = indexPath.row
+        print(lists[index].actionModel)
+    }
+}
 
 extension ListVC: UITableViewDataSource{
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
