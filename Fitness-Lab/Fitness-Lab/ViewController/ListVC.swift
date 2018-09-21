@@ -21,7 +21,7 @@ class ListVC: UIViewController {
     }
     
     func initList(category: FitnessCategory){
-        //lists = Data.instance.getList(forListTitle: category.secondTitle)
+        lists = Data.instance.getList(forListTitle: category.secondTitle)
         
     }
     

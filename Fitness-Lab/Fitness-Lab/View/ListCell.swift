@@ -19,7 +19,7 @@ class ListCell: UITableViewCell {
         videoImg.image = UIImage(named: listModel.videoImg)
         videoTitle.text = listModel.videoTitle
         videoDescription.text = listModel.videoDescription
-        durationLbl.text = "\(listModel.durationLbl)分鐘"
+        durationLbl.text = "\(listModel.durationLbl)min"
         intensityLbl.text = listModel.intensity
     }
 }
