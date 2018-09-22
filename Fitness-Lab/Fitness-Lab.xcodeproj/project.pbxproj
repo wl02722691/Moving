@@ -22,6 +22,7 @@
 		69D37DFA215257EE00B8F1F9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 69D37DF9215257EE00B8F1F9 /* Assets.xcassets */; };
 		69D37DFD215257EE00B8F1F9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 69D37DFB215257EE00B8F1F9 /* LaunchScreen.storyboard */; };
 		69D48FC32154F76E00B92B85 /* ActionVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69D48FC22154F76E00B92B85 /* ActionVC.swift */; };
+		69ED2E6F21551EE1003490E7 /* ActionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69ED2E6E21551EE1003490E7 /* ActionCell.swift */; };
 		A394FA4E4ED337D183CF9A46 /* Pods_Fitness_Lab.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 74498F6528744DF3D21F14AB /* Pods_Fitness_Lab.framework */; };
 /* End PBXBuildFile section */
 
@@ -43,6 +44,7 @@
 		69D37DFC215257EE00B8F1F9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		69D37DFE215257EE00B8F1F9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		69D48FC22154F76E00B92B85 /* ActionVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionVC.swift; sourceTree = "<group>"; };
+		69ED2E6E21551EE1003490E7 /* ActionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionCell.swift; sourceTree = "<group>"; };
 		74498F6528744DF3D21F14AB /* Pods_Fitness_Lab.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Fitness_Lab.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A7703E2D316AA4F4017FF90D /* Pods-Fitness-Lab.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Fitness-Lab.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Fitness-Lab/Pods-Fitness-Lab.debug.xcconfig"; sourceTree = "<group>"; };
 		EAFAE02DA516C71654274620 /* Pods-Fitness-Lab.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Fitness-Lab.release.xcconfig"; path = "Pods/Target Support Files/Pods-Fitness-Lab/Pods-Fitness-Lab.release.xcconfig"; sourceTree = "<group>"; };
@@ -116,8 +118,8 @@
 			children = (
 				69D37DF4215257EC00B8F1F9 /* FitnessVC.swift */,
 				69256151215375B800531F5B /* ListVC.swift */,
-				692561532153766700531F5B /* TabBarVC.swift */,
 				69D48FC22154F76E00B92B85 /* ActionVC.swift */,
+				692561532153766700531F5B /* TabBarVC.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -127,6 +129,7 @@
 			children = (
 				694776D221534CC400141CB7 /* FitnessCell.swift */,
 				696265D721538EA200C68282 /* ListCell.swift */,
+				69ED2E6E21551EE1003490E7 /* ActionCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -286,6 +289,7 @@
 				69D48FC32154F76E00B92B85 /* ActionVC.swift in Sources */,
 				69D37DF5215257EC00B8F1F9 /* FitnessVC.swift in Sources */,
 				69D37DF3215257EC00B8F1F9 /* AppDelegate.swift in Sources */,
+				69ED2E6F21551EE1003490E7 /* ActionCell.swift in Sources */,
 				694776DC2153519B00141CB7 /* FitnessCategory.swift in Sources */,
 				696265D821538EA200C68282 /* ListCell.swift in Sources */,
 				692561542153766700531F5B /* TabBarVC.swift in Sources */,

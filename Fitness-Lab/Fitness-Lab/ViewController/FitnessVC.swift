@@ -39,6 +39,7 @@ extension FitnessVC: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let list = Data.instance.getfitCategories()[indexPath.row]
+        print(list)
         performSegue(withIdentifier: "toListVC", sender: list)
     }
     
