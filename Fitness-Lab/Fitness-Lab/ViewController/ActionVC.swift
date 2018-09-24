@@ -28,6 +28,7 @@ class ActionVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        actionTableView.separatorStyle = UITableViewCellSeparatorStyle.none
         print(lists)
         print(actionLists)
         

@@ -14,7 +14,7 @@ class FitnessVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.fitnessTableview.separatorStyle = UITableViewCellSeparatorStyle.none
+        fitnessTableview.separatorStyle = UITableViewCellSeparatorStyle.none
         fitnessTableview.delegate = self
         fitnessTableview.dataSource = self
 

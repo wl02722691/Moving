@@ -17,10 +17,10 @@ class ListVC: UIViewController {
     var selectSender = 0
     
     override func viewDidLoad() {
+         listTableView.separatorStyle = UITableViewCellSeparatorStyle.none
         super.viewDidLoad()
         listTableView.delegate = self
         listTableView.dataSource = self
-        listTableView.separatorStyle = .singleLine
     }
     
     func initList(category: FitnessCategory){
