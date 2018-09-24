@@ -23,5 +23,3 @@ struct ActionModel {
         self.restTime = restTime
     }
 }
-
-

@@ -7,5 +7,6 @@ target 'Fitness-Lab' do
 
   # Pods for Fitness-Lab
 pod 'SwiftLint'
+pod 'YouTubePlayer-Swift', '~> 1.0'
 
 end

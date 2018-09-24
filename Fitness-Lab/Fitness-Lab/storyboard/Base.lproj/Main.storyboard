@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.15" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="9we-RV-zYN">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.15" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="3B9-b9-NIQ">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -460,6 +460,99 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7oP-SJ-20e" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-770.39999999999998" y="902.69865067466276"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="a6z-a1-bra">
+            <objects>
+                <viewController id="3B9-b9-NIQ" customClass="ViewController" customModule="Fitness_Lab" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="j6G-ZH-dmL">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="njh-9d-EXh" customClass="YouTubePlayerView" customModule="YouTubePlayer_Swift">
+                                <rect key="frame" x="0.0" y="20" width="375" height="211"/>
+                                <color key="backgroundColor" red="1" green="0.1857388616" blue="0.57339501380000002" alpha="0.76158497430000005" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="njh-9d-EXh" secondAttribute="height" multiplier="16:9" id="tdV-wi-rml"/>
+                                </constraints>
+                            </view>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ylA-cp-46G">
+                                <rect key="frame" x="149.5" y="401" width="76" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="n9q-n4-vqN"/>
+                                </constraints>
+                                <state key="normal" title="X卷腹 12下"/>
+                                <connections>
+                                    <action selector="nextBtn:" destination="3B9-b9-NIQ" eventType="touchUpInside" id="1mI-Ui-aAX"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jBA-29-Yx7">
+                                <rect key="frame" x="149.5" y="471" width="77" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="O2q-bL-diI"/>
+                                </constraints>
+                                <state key="normal" title="Load Video"/>
+                                <connections>
+                                    <action selector="loadVideoBtn:" destination="3B9-b9-NIQ" eventType="touchUpInside" id="Ed8-ZD-4bM"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PGe-pt-kaL">
+                                <rect key="frame" x="138.5" y="331" width="99" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="8Jn-8B-tWv"/>
+                                </constraints>
+                                <state key="normal" title="側步棒式 45秒"/>
+                                <connections>
+                                    <action selector="previousBtn:" destination="3B9-b9-NIQ" eventType="touchUpInside" id="ojX-qU-Gur"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4wp-sm-fV7">
+                                <rect key="frame" x="144.5" y="541" width="87" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="Z5M-UN-l4H"/>
+                                    <constraint firstAttribute="width" constant="50" id="ywW-zr-C4d"/>
+                                </constraints>
+                                <state key="normal" title="Lood Playlist"/>
+                                <connections>
+                                    <action selector="loadPlaylistBtn:" destination="3B9-b9-NIQ" eventType="touchUpInside" id="sZP-AQ-cwe"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0yJ-zl-8yD">
+                                <rect key="frame" x="134" y="265" width="108" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="fAQ-jh-gKF"/>
+                                </constraints>
+                                <state key="normal" title="仰臥抬腿 45秒"/>
+                                <connections>
+                                    <action selector="playBtn:" destination="3B9-b9-NIQ" eventType="touchUpInside" id="k05-Qs-UyX"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="ylA-cp-46G" firstAttribute="centerX" secondItem="j6G-ZH-dmL" secondAttribute="centerX" id="0mx-Dy-OZZ"/>
+                            <constraint firstItem="4wp-sm-fV7" firstAttribute="centerX" secondItem="j6G-ZH-dmL" secondAttribute="centerX" id="5jT-W1-hGn"/>
+                            <constraint firstItem="jBA-29-Yx7" firstAttribute="centerX" secondItem="j6G-ZH-dmL" secondAttribute="centerX" id="Dvx-3Y-I67"/>
+                            <constraint firstItem="jBA-29-Yx7" firstAttribute="top" secondItem="ylA-cp-46G" secondAttribute="bottom" constant="20" id="JXw-wO-buT"/>
+                            <constraint firstItem="njh-9d-EXh" firstAttribute="top" secondItem="mk6-Q4-OGZ" secondAttribute="top" id="NCj-vB-M5Q"/>
+                            <constraint firstItem="4wp-sm-fV7" firstAttribute="top" secondItem="jBA-29-Yx7" secondAttribute="bottom" constant="20" id="RfZ-kX-sbx"/>
+                            <constraint firstItem="0yJ-zl-8yD" firstAttribute="centerX" secondItem="j6G-ZH-dmL" secondAttribute="centerX" id="RmH-cH-eDA"/>
+                            <constraint firstItem="njh-9d-EXh" firstAttribute="leading" secondItem="j6G-ZH-dmL" secondAttribute="leading" id="VMR-Yp-15K"/>
+                            <constraint firstItem="mk6-Q4-OGZ" firstAttribute="trailing" secondItem="njh-9d-EXh" secondAttribute="trailing" id="hjq-Wi-DJu"/>
+                            <constraint firstItem="PGe-pt-kaL" firstAttribute="top" secondItem="0yJ-zl-8yD" secondAttribute="bottom" constant="20" id="kbJ-wH-SLn"/>
+                            <constraint firstItem="PGe-pt-kaL" firstAttribute="centerX" secondItem="j6G-ZH-dmL" secondAttribute="centerX" id="oMb-WL-XAt"/>
+                            <constraint firstItem="ylA-cp-46G" firstAttribute="top" secondItem="PGe-pt-kaL" secondAttribute="bottom" constant="20" id="vi0-0z-0z0"/>
+                            <constraint firstItem="0yJ-zl-8yD" firstAttribute="top" secondItem="njh-9d-EXh" secondAttribute="bottom" constant="20" id="wZp-OI-R0Y"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="mk6-Q4-OGZ"/>
+                    </view>
+                    <connections>
+                        <outlet property="videoView" destination="njh-9d-EXh" id="Yve-vh-xAL"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="9p2-hk-nxs" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-377" y="-60"/>
         </scene>
     </scenes>
     <resources>

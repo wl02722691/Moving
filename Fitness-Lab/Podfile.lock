@@ -1,16 +1,20 @@
 PODS:
   - SwiftLint (0.27.0)
+  - YouTubePlayer-Swift (1.0)
 
 DEPENDENCIES:
   - SwiftLint
+  - YouTubePlayer-Swift (~> 1.0)
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
     - SwiftLint
+    - YouTubePlayer-Swift
 
 SPEC CHECKSUMS:
   SwiftLint: 3207c1faa2240bf8973b191820a116113cd11073
+  YouTubePlayer-Swift: ae82f4bcb504162a872b852596a9dc1fa3828c34
 
-PODFILE CHECKSUM: 8f2103b8a85a51044090eec688e4b5c598e073d1
+PODFILE CHECKSUM: e530e86215dee7c7b7472952647ae2d4d6baacff
 
 COCOAPODS: 1.5.3
