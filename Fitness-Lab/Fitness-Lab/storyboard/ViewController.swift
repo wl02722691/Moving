@@ -19,7 +19,7 @@ class ViewController: UIViewController {
         let myWebView = WKWebView(frame: CGRect(x: 20, y: 20, width: view.frame.width, height: view.frame.height))
         myWebView.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
         
-        if let url = URL(string: "https://www.apple.com"){
+        if let url = URL(string: "https://www.apple.com") {
             let request = URLRequest(url: url)
             myWebView.load(request)
        

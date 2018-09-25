@@ -19,4 +19,8 @@ struct FitnessCategory {
         self.imageName = imageName
         self.secondTitle = secondTitle
     }
+
+    init(){
+        self.init(title: "", imageName: "", secondTitle: "")
+    }
 }

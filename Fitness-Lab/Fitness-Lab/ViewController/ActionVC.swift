@@ -7,9 +7,14 @@
 //
 
 import UIKit
+import YouTubePlayer_Swift
+import AVFoundation
 
 class ActionVC: UIViewController {
     
+
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
+    @IBOutlet weak var videoView: YouTubePlayerView!
     @IBOutlet weak var startBtn: UIButton!
     @IBOutlet weak var videoTitle: UILabel!
     @IBOutlet weak var videoImg: UIImageView!
@@ -31,8 +36,25 @@ class ActionVC: UIViewController {
         actionTableView.separatorStyle = UITableViewCellSeparatorStyle.none
         print(lists)
         print(actionLists)
+        videoView.isHidden = true
+        self.videoView.delegate = self
+        activityIndicator.isHidden = true
         
     }
+    
+    @IBAction func playBtn(_ sender: UIButton) {
+        videoView.isHidden = false
+        videoView.playerVars = ["playsinline": 1 as AnyObject]
+        videoView.loadVideoID(lists[selectSender].videoID)
+        activityIndicator.startAnimating()
+        activityIndicator.isHidden = false
+        
+    }
+    
+
+    
+    
+    
 }
 
 
@@ -66,5 +88,53 @@ extension ActionVC: UITableViewDataSource{
 
             return ActionCell()
         }
+    }
+}
+
+
+    //swiftlint:disable identifier_name
+extension ActionVC: YouTubePlayerDelegate {
+
+    
+    func playerStateChanged(_ videoPlayer: YouTubePlayerView, playerState: YouTubePlayerState) {
+        
+        if playerState == .Playing{
+            DispatchQueue.main.asyncAfter(deadline: .now() + 20) {
+                videoPlayer.pause()
+                print("stop")
+            }
+        }
+        
+        if playerState == .Ended{
+            print("完成之後跳這")
+        }
+    }
+    
+    func playerQualityChanged(_ videoPlayer: YouTubePlayerView, playbackQuality: YouTubePlaybackQuality) {
+    }
+    
+    func playerReady(_ videoPlayer: YouTubePlayerView) {
+        print("Player ready")
+        activityIndicator.isHidden = true
+        
+        for i in 0...lists[selectSender].actionModel.count{
+            print(i)
+        }
+      
+        let doubleTime = Double(actionLists[0].restTime!) ?? 0
+        
+        let resttime = actionLists[0].restTime
+        let time:TimeInterval = doubleTime
+        
+        
+        videoView.play()
+        let floatYoutubeTime = Float(actionLists[0].youtubeTime) ?? 0
+        //videoPlayer.seekTo(floatYoutubeTime, seekAhead: true)
+//        let resttime = actionLists[0].restTime
+//        print(resttime!)
+        
+        
+    
+        
     }
 }
