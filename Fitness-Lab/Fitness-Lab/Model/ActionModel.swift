@@ -8,16 +8,21 @@
 
 import Foundation
 struct ActionModel {
-    private(set) public var youtubeTime: String
-    private(set) public var timesDescription: String
+    private(set) public var youtubeTime: Double
+    private(set) public var stopTime: Double?
+    private(set) public var timesDescription: Double
     private(set) public var actionDescription: String
-    private(set) public var restTime: String?
+    private(set) public var restTime: Double?
     
-    init(youtubeTime: String,
-         timesDescription: String,
-         actionDescription: String,
-         restTime: String) {
+  
+    init(youtubeTime: Double,
+         stopTime:Double,
+         restTime: Double,
+         timesDescription: Double,
+         actionDescription: String) {
+        
         self.youtubeTime = youtubeTime
+        self.stopTime = stopTime
         self.timesDescription = timesDescription
         self.actionDescription = actionDescription
         self.restTime = restTime

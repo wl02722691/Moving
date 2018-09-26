@@ -10,13 +10,16 @@ import UIKit
 
 class ActionCell: UITableViewCell {
 
+    @IBOutlet weak var progressView: UIView!
     @IBOutlet weak var timeDescription: UILabel!
     @IBOutlet weak var actionDescription: UILabel!
     
     
     func updateView(actionModel: ActionModel) {
-        timeDescription.text = actionModel.timesDescription
+        progressView.isHidden = true
+        timeDescription.text = String("\(Int(actionModel.timesDescription))秒")
         actionDescription.text = actionModel.actionDescription
         contentView.backgroundColor = #colorLiteral(red: 0.09411764706, green: 0.09411764706, blue: 0.09411764706, alpha: 1)
     }
+
 }
