@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import RealmSwift
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -15,6 +16,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication,
                      didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+        UIApplication.shared.statusBarStyle = .lightContent
+        print(Realm.Configuration.defaultConfiguration.fileURL)
+        
+        let summary = SummaryModel()
+        summary.myAge = 22
+        summary.name = "Alice"
+        
+        do{
+            let realm = try Realm()
+            try realm.write {
+                 realm.add(summary)
+            }
+        }catch{
+            print("Error initalisting new realm, \(error)")
+        }
+        
         return true
     }
 

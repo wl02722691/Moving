@@ -17,7 +17,6 @@ class ActionVC: UIViewController {
     var restSec = 10
     var nowIndex = 0
     
-    
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var videoView: YouTubePlayerView!
     @IBOutlet weak var startBtn: UIButton!
@@ -31,7 +30,7 @@ class ActionVC: UIViewController {
     var actionLists = [ActionModel]()
     var selectSender = 0
     
-    func initList(category: FitnessCategory){
+    func initList(category: FitnessCategory) {
         lists = Data.instance.getList(forListTitle: category.secondTitle)
         
     }
@@ -44,6 +43,8 @@ class ActionVC: UIViewController {
         videoView.isHidden = true
         self.videoView.delegate = self
         activityIndicator.isHidden = true
+        
+       
     }
     
     @IBAction func playBtn(_ sender: UIButton) {
@@ -72,16 +73,15 @@ class ActionVC: UIViewController {
                     self.renewVideo()
                     self.restTimer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(self.restCountDown), userInfo: nil, repeats: true)
                     print("休息時間！")
-                }else{
+                }else {
                     videoView.pause()
                     print("做完囉要去下一頁了")
-                   // indexpath都跑完了
+                    performSegue(withIdentifier: "toScoreVC", sender: nil)
                 }
         }
     }
     
-    
-    @objc func restCountDown(){
+    @objc func restCountDown() {
         
         let indexPath = IndexPath(row: nowIndex, section: 0)
         guard let cell = self.actionTableView.cellForRow(at: indexPath) as? ActionCell  else {return}
@@ -96,7 +96,7 @@ class ActionVC: UIViewController {
             }
         }
     
-    func renewVideo(){
+    func renewVideo() {
         var floatYoutubeTime = Float(actionLists[nowIndex].youtubeTime)
         videoView.seekTo(floatYoutubeTime, seekAhead: true)
         let youtubestopTime = actionLists[nowIndex].stopTime
@@ -105,90 +105,18 @@ class ActionVC: UIViewController {
             DispatchQueue.main.asyncAfter(deadline: .now() + youtubestopTime!) {
                 self.videoView.seekTo(Float(self.actionLists[self.nowIndex].youtubeTime), seekAhead: true)
             }
-            
         }
-        
     }
     
-    
-        
-//        if nowIndex <= actionLists.count{
-//            nowIndex += nowIndex
-//            print("nowIndex:\(nowIndex),actionLists.count:\(actionLists.count)")
-//
-//            //現在運動的的cell
-//            let indexPath = IndexPath(row: nowIndex, section: 0)
-//            guard let cell = self.actionTableView.cellForRow(at: indexPath) as? ActionCell  else {return}
-//            print(indexPath)
-//
-//
-//            //現在的時間播放youtube
-//            videoView.seekTo(Float(actionLists[nowIndex].youtubeTime), seekAhead: true)
-//            //超過stoptime回放
-//            let youtubestopTime = actionLists[nowIndex].stopTime
-//            DispatchQueue.main.asyncAfter(deadline: .now() + youtubestopTime!) {
-//                self.videoView.seekTo(Float(self.actionLists[self.nowIndex].youtubeTime), seekAhead: true)
-//            }
-//
-//            //遞減的actionSec與UI
-//            actionSec -= 1
-//            cell.timeDescription.text = "0:\(restSec)"
-//            if actionSec == 0 {
-//                actionTimer?.invalidate()
-//            }
-        
-
-    
-    
- 
-    
-     func actionTime(){
-        
-        //播影片
-//        let floatYoutubeTime = Float(actionLists[nowIndex].youtubeTime) ?? 0
-//        videoView.seekTo(floatYoutubeTime, seekAhead: true)
-        let youtubestopTime = actionLists[nowIndex].stopTime
-        print(youtubestopTime)
-        DispatchQueue.main.asyncAfter(deadline: .now() + youtubestopTime!) {
-            self.videoView.seekTo(Float(self.actionLists[self.nowIndex].youtubeTime), seekAhead: true)
-        }
-        
-        //現在運動的的cell
-        let indexPath = IndexPath(row: nowIndex, section: 0)
-        guard let cell = self.actionTableView.cellForRow(at: indexPath) as? ActionCell  else {return}
-        
-        //抓到cell的action時間
-        //actionSec = Int(actionLists[nowIndex].timesDescription)
-        
-        
-        
-        //遞減的actionSec與UI
-        actionSec -= 1
-        cell.timeDescription.text = "0:\(actionSec)"
-        //在actionSec==0時判斷是否有休息時間
-        if actionSec == 0 {
-            if actionLists[nowIndex].restTime != nil{
-                actionTimer?.invalidate()
-                cell.timeDescription.text = "完成"
-                //設定restTime
-                restSec = Int(actionLists[nowIndex+1].restTime!)
-                print("restSec:\(restSec)")
-               // self.restTimer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(self.restTime), userInfo: nil, repeats: true)
-            }else{
-                //沒有休息時間
-                //跳轉頁面
-            }
-
+  
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let scoreVC = segue.destination as? ScoreVC {
+            scoreVC.lists = lists
+            scoreVC.actionLists = actionLists
+            scoreVC.selectSender = selectSender
         }
     }
 }
-    
-
-    
-    
-    
-
-
 
 extension ActionVC: UITableViewDelegate{}
 
