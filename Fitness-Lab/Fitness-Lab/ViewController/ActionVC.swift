@@ -76,7 +76,8 @@ class ActionVC: UIViewController {
                 }else {
                     videoView.pause()
                     print("做完囉要去下一頁了")
-                    performSegue(withIdentifier: "toScoreVC", sender: nil)
+                   
+                  performSegue(withIdentifier: "toScoreVC", sender: nil)
                 }
         }
     }

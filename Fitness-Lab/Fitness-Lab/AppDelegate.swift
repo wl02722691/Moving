@@ -19,21 +19,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UIApplication.shared.statusBarStyle = .lightContent
         print(Realm.Configuration.defaultConfiguration.fileURL)
         
-        let summary = SummaryModel()
-        summary.durationLbl = "Alice"
-        summary.scoreTitleLbl = "Alice"
-        summary.workoutDate = Date().timeIntervalSince1970
-        summary.videoImg = "Alice"
-        summary.videoTitle = "Alicee"
-        
-        do{
-            let realm = try Realm()
-            try realm.write {
-                 realm.add(summary)
-            }
-        }catch{
-            print("Error initalisting new realm, \(error)")
-        }
+//        let summary = SummaryModel()
+//        summary.durationLbl = 132
+//        summary.scoreTitleLbl = "Alice"
+//        summary.workoutDate = Date().timeIntervalSince1970
+//        summary.videoImg = "Alice"
+//        summary.videoTitle = "Alicee"
+//        
+//        do{
+//            let realm = try Realm()
+//            try realm.write {
+//                 realm.add(summary)
+//            }
+//        }catch{
+//            print("Error initalisting new realm, \(error)")
+//        }
         
         return true
     }

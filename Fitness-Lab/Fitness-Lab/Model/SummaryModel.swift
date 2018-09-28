@@ -12,13 +12,13 @@ import RealmSwift
 class SummaryModel: Object {
     
     @objc dynamic var videoImg: String = ""
-    @objc dynamic var durationLbl: String = ""
+    @objc dynamic var durationLbl: Int = 0
     @objc dynamic var videoTitle: String = ""
     @objc dynamic var scoreTitleLbl: String = ""
     @objc dynamic var workoutDate: TimeInterval = 0.0
     
     convenience init(videoImg: String,
-                              durationLbl: String,
+                              durationLbl: Int,
                               videoTitle: String ,
                               scoreTitleLbl: String,
                               workoutDate: TimeInterval) {
