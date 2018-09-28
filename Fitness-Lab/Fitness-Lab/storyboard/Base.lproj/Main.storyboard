@@ -432,8 +432,8 @@
                                     <constraint firstAttribute="height" constant="1" id="io3-CB-mSa"/>
                                 </constraints>
                             </view>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="7rj-H4-app">
-                                <rect key="frame" x="0.0" y="109" width="375" height="459"/>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="7rj-H4-app">
+                                <rect key="frame" x="0.0" y="109" width="375" height="471"/>
                                 <color key="backgroundColor" red="0.094117647058823528" green="0.094117647058823528" blue="0.094117647058823528" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="20" minimumInteritemSpacing="10" id="aRW-cd-1uN">
                                     <size key="itemSize" width="200" height="400"/>
@@ -443,7 +443,7 @@
                                 </collectionViewFlowLayout>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="scoreCell" id="TEa-Lj-j1O" customClass="ScoreCollectionViewCell" customModule="Fitness_Lab" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="29.5" width="200" height="400"/>
+                                        <rect key="frame" x="0.0" y="35.5" width="200" height="400"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
                                             <rect key="frame" x="0.0" y="0.0" width="200" height="400"/>
@@ -510,6 +510,7 @@
                             <constraint firstItem="Jvb-aa-oUK" firstAttribute="leading" secondItem="Ve8-iX-XqV" secondAttribute="leading" constant="16" id="fw7-b9-MBM"/>
                             <constraint firstItem="8l2-G4-9tC" firstAttribute="bottom" secondItem="lAs-cL-43h" secondAttribute="bottom" id="idi-4j-7ao"/>
                             <constraint firstAttribute="trailing" secondItem="Jvb-aa-oUK" secondAttribute="trailing" constant="16" id="kw9-G2-2Lz"/>
+                            <constraint firstItem="lAs-cL-43h" firstAttribute="top" secondItem="7rj-H4-app" secondAttribute="bottom" constant="8" symbolic="YES" id="lLQ-WZ-OSU"/>
                             <constraint firstItem="7rj-H4-app" firstAttribute="leading" secondItem="8l2-G4-9tC" secondAttribute="leading" id="lXq-9n-7u3"/>
                             <constraint firstItem="Jvb-aa-oUK" firstAttribute="centerX" secondItem="Ve8-iX-XqV" secondAttribute="centerX" id="vjF-1L-cce"/>
                         </constraints>
@@ -517,7 +518,7 @@
                     </view>
                     <connections>
                         <outlet property="scoreCollectionView" destination="7rj-H4-app" id="b7C-cn-thQ"/>
-                        <segue destination="n5M-Sm-sIB" kind="show" identifier="toScoreVC" id="3hN-VO-fNq"/>
+                        <segue destination="n5M-Sm-sIB" kind="show" identifier="toSummaryVC" id="3hN-VO-fNq"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WgL-XJ-7s6" userLabel="First Responder" sceneMemberID="firstResponder"/>

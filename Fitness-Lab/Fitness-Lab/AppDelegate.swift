@@ -20,8 +20,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         print(Realm.Configuration.defaultConfiguration.fileURL)
         
         let summary = SummaryModel()
-        summary.myAge = 22
-        summary.name = "Alice"
+        summary.durationLbl = "Alice"
+        summary.scoreTitleLbl = "Alice"
+        summary.workoutDate = Date().timeIntervalSince1970
+        summary.videoImg = "Alice"
+        summary.videoTitle = "Alicee"
         
         do{
             let realm = try Realm()

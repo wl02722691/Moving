@@ -10,17 +10,25 @@ import Foundation
 import RealmSwift
 
 class SummaryModel: Object {
-    @objc dynamic var name: String = ""
-    @objc dynamic var myAge: Int = 0
-//    private(set) public var listModel: [ListModel]
-//    private(set) public var time: TimeInterval
-//    private(set) public var picture: Data? = nil
-//
-//    init(listModel: [ListModel], time: TimeInterval, picture: Data?) {
-//        self.listModel = listModel
-//        self.time = time
-//        self.picture = picture
-//    }
+    
+    @objc dynamic var videoImg: String = ""
+    @objc dynamic var durationLbl: String = ""
+    @objc dynamic var videoTitle: String = ""
+    @objc dynamic var scoreTitleLbl: String = ""
+    @objc dynamic var workoutDate: TimeInterval = 0.0
+    
+    convenience init(videoImg: String,
+                              durationLbl: String,
+                              videoTitle: String ,
+                              scoreTitleLbl: String,
+                              workoutDate: TimeInterval) {
+        self.init()
+        self.videoImg = videoImg
+        self.durationLbl = durationLbl
+        self.videoTitle = videoTitle
+        self.scoreTitleLbl = scoreTitleLbl
+        self.workoutDate = workoutDate
+    }
 }
 
 

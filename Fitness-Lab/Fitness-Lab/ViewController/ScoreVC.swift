@@ -18,7 +18,9 @@ class ScoreVC: UIViewController {
     let cellScaling:CGFloat = 0.6
     var didSelectItemAt = IndexPath(row: 0, section: 0)
     var scoreTitleLbl = "簡單"
-   
+    var time = 0.0
+    var resttime = 0.0
+    var resultTime = 0.0
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,7 +41,7 @@ class ScoreVC: UIViewController {
         
          let scoreArray = Data.instance.getScoreArray()
         
-        // Do any additional setup after loading the view.
+
     }
     
     override func dismiss(animated flag: Bool, completion: (() -> Void)? = nil) {
@@ -49,16 +51,48 @@ class ScoreVC: UIViewController {
     
 
     @IBAction func finishBtn(_ sender: UIButton) {
-        
+        performSegue(withIdentifier: "toSummaryVC", sender: nil)
+        realmWrite()
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let summaryVC = segue.destination as? SummaryVC {
+   
             summaryVC.lists = lists
             summaryVC.actionLists = actionLists
             summaryVC.selectSender = selectSender
             summaryVC.scoreTitleLbl = scoreTitleLbl
         }
+    }
+    
+    func realmWrite(){
+        
+        for actionlistsAllIndex in 0...actionLists.count-1{
+            time += actionLists[actionlistsAllIndex].timesDescription
+            print("time:\(time)")
+            resttime += (actionLists[actionlistsAllIndex].restTime)!
+            resultTime = time + resttime
+        }
+        
+        let summaryModel = SummaryModel()
+        summaryModel.videoImg = lists[selectSender].videoImg
+        summaryModel.durationLbl = String(resultTime)
+        summaryModel.videoTitle = lists[selectSender].videoTitle
+        summaryModel.scoreTitleLbl = scoreTitleLbl
+        summaryModel.workoutDate = Date().timeIntervalSince1970
+        
+        
+        
+        do {
+            let realm = try Realm()
+            try realm.write {
+                realm.add(summaryModel)
+            }
+        }catch{
+            print(error)
+        }
+    
+        
     }
     
 }
@@ -72,9 +106,10 @@ extension ScoreVC: UICollectionViewDataSource{
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if let cell = scoreCollectionView.dequeueReusableCell(withReuseIdentifier: "scoreCell", for: indexPath) as? ScoreCollectionViewCell{
             let scoreArray = Data.instance.getScoreArray()[indexPath.row]
-            cell.clipsToBounds = true
-            cell.layer.cornerRadius = 10
+//            cell.clipsToBounds = true
+//            cell.layer.cornerRadius = 10
             cell.updateView(scoreModel:scoreArray)
+         
             
             if indexPath == didSelectItemAt{
                 cell.layer.borderColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
