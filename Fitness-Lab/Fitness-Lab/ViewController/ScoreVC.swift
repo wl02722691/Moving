@@ -15,7 +15,7 @@ class ScoreVC: UIViewController {
     var lists =  [ListModel]()
     var actionLists = [ActionModel]()
     var selectSender = 0
-    let cellScaling:CGFloat = 0.6
+    let cellScaling: CGFloat = 0.6
     var didSelectItemAt = IndexPath(row: 0, section: 0)
     var scoreTitleLbl = "簡單"
     var time = 0.0
@@ -24,7 +24,6 @@ class ScoreVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // navigationController?.navigationBar.isHidden = true
         scoreCollectionView.delegate = self
         scoreCollectionView.dataSource = self
         
@@ -39,43 +38,16 @@ class ScoreVC: UIViewController {
         layout?.itemSize = CGSize(width: cellWidth, height: cellHeigh)
         scoreCollectionView.contentInset = UIEdgeInsets(top: insetY, left: insetX, bottom: insetY, right: insetX)
         
-        let scoreArray = Data.instance.getScoreArray()
-        
-        
-    }
-    
-    override func dismiss(animated flag: Bool, completion: (() -> Void)? = nil) {
-        super.dismiss(animated: true, completion: nil)
-        //  navigationController?.navigationBar.isHidden = false
-    }
-    
-    
-    @IBAction func finishBtn(_ sender: UIButton) {
-        realmWrite()
-        
-        navigationController?.popToRootViewController(animated: true)
-        
-        let tabController = self.view.window?.rootViewController as? UITabBarController
-        print(self.view.window?.rootViewController)
-        tabController?.dismiss(animated: true, completion: nil)
-        tabController?.selectedIndex = 1
-        
-        let notificationName = Notification.Name("toSummaryVC")
-        NotificationCenter.default.post(name: notificationName,
-                                        object: nil,
-                                        userInfo:["updateRealm":"updateRealm"])
-        
     }
     
     func realmWrite() {
         
-        for actionlistsAllIndex in 0...actionLists.count-1{
+        for actionlistsAllIndex in 0...actionLists.count-1 {
             time += actionLists[actionlistsAllIndex].timesDescription
             print("time:\(time)")
             resttime += (actionLists[actionlistsAllIndex].restTime)!
             resultTime = time + resttime
         }
-        
         
         let summaryModel = SummaryModel()
         summaryModel.videoImg = lists[selectSender].videoImg
@@ -85,43 +57,65 @@ class ScoreVC: UIViewController {
         summaryModel.workoutDate = Date().timeIntervalSince1970
         
         RealmService.shared.create(summaryModel)
-
+        
     }
+    
+    @IBAction func finishBtn(_ sender: UIButton) {
+        
+        realmWrite()
+        navigationController?.popToRootViewController(animated: true)
+        
+        let tabController = self.view.window?.rootViewController as? UITabBarController
+        tabController?.dismiss(animated: true, completion: nil)
+        tabController?.selectedIndex = 1
+        
+        let notificationName = Notification.Name("toSummaryVC")
+        NotificationCenter.default.post(name: notificationName,
+                                        object: nil,
+                                        userInfo: ["updateRealm": "updateRealm"])
+        
+    }
+    
 }
 
-extension ScoreVC: UICollectionViewDataSource{
+extension ScoreVC: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        
         return Data.instance.getScoreArray().count
+        
     }
     
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        if let cell = scoreCollectionView.dequeueReusableCell(withReuseIdentifier: "scoreCell", for: indexPath) as? ScoreCollectionViewCell{
+    func collectionView(_ collectionView: UICollectionView,
+                        cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        
+        if let cell = scoreCollectionView.dequeueReusableCell(withReuseIdentifier: "scoreCell",
+                                                              for: indexPath) as? ScoreCollectionViewCell {
+            
             let scoreArray = Data.instance.getScoreArray()[indexPath.row]
-            //            cell.clipsToBounds = true
-            //            cell.layer.cornerRadius = 10
-            cell.updateView(scoreModel:scoreArray)
-            
-            
-            if indexPath == didSelectItemAt{
+            cell.updateView(scoreModel: scoreArray)
+            if indexPath == didSelectItemAt {
                 cell.layer.borderColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
                 cell.layer.borderWidth = 5
-            }else{
+            } else {
                 cell.layer.borderColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 0)
                 cell.layer.borderWidth = 0
             }
-            
             return cell
-        }else{
+            
+        } else {
+            
             return ScoreCollectionViewCell()
         }
     }
 }
 
 //swiftlint:disable force_cast
-extension ScoreVC : UICollectionViewDelegate,UIScrollViewDelegate{
+extension ScoreVC: UICollectionViewDelegate, UIScrollViewDelegate {
     
-    func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
+    func scrollViewWillEndDragging(_ scrollView: UIScrollView,
+                                   withVelocity velocity: CGPoint,
+                                   targetContentOffset: UnsafeMutablePointer<CGPoint>) {
         
         let layout = self.scoreCollectionView.collectionViewLayout as! UICollectionViewFlowLayout
         let cellWidthncludingSpacing = layout.itemSize.width + layout.minimumLineSpacing
@@ -130,7 +124,8 @@ extension ScoreVC : UICollectionViewDelegate,UIScrollViewDelegate{
         let index = (offset.x + scrollView.contentInset.left) / cellWidthncludingSpacing
         let roundIndex = round(index)
         
-        offset = CGPoint(x: roundIndex * cellWidthncludingSpacing - scrollView.contentInset.left, y: -scrollView.contentInset.top)
+        offset = CGPoint(x: roundIndex * cellWidthncludingSpacing - scrollView.contentInset.left,
+                         y: -scrollView.contentInset.top)
         targetContentOffset.pointee = offset
         
     }
@@ -141,10 +136,9 @@ extension ScoreVC : UICollectionViewDelegate,UIScrollViewDelegate{
         
         guard let cell = self.scoreCollectionView.cellForItem(at: indexPath) as? ScoreCollectionViewCell  else {return}
         
-        for iiii in 0...Data.instance.getScoreArray().count{
-            let otherIndexPath = IndexPath(row: iiii, section: 0)
+        for otherRow in 0...Data.instance.getScoreArray().count {
+            let otherIndexPath = IndexPath(row: otherRow, section: 0)
             let othrtCell = self.scoreCollectionView.cellForItem(at: otherIndexPath)
-            print(othrtCell)
             othrtCell?.layer.borderColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 0)
             othrtCell?.layer.borderWidth = 0
         }

@@ -24,9 +24,6 @@ class FitnessCell: UITableViewCell {
         secondFitnessLbl.text = fitnessCategory.subTitle
     }
     
-
-    
-    
     override func awakeFromNib() {
         super.awakeFromNib()
         

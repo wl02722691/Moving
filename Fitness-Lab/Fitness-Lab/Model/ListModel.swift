@@ -33,5 +33,3 @@ struct ListModel {
         self.videoID = videoID
     }
 }
-
-

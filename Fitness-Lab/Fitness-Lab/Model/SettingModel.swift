@@ -10,8 +10,7 @@ import Foundation
 
 struct SettingModel {
     private(set) public var titleLbl: String
-    private(set) public var statusLbl : String
- 
+    private(set) public var statusLbl: String
 
     init(titleLbl: String,
          statusLbl: String) {

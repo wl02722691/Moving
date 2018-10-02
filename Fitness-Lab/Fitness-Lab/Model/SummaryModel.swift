@@ -17,11 +17,8 @@ class SummaryModel: Object {
     @objc dynamic var scoreTitleLbl: String = ""
     @objc dynamic var workoutDate: TimeInterval = 0.0
     
-    convenience init(videoImg: String,
-                              durationLbl: Int,
-                              videoTitle: String ,
-                              scoreTitleLbl: String,
-                              workoutDate: TimeInterval) {
+    convenience init(videoImg: String, durationLbl: Int, videoTitle: String,
+                     scoreTitleLbl: String, workoutDate: TimeInterval) {
         self.init()
         self.videoImg = videoImg
         self.durationLbl = durationLbl
@@ -30,5 +27,3 @@ class SummaryModel: Object {
         self.workoutDate = workoutDate
     }
 }
-
-

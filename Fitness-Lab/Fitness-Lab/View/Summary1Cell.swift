@@ -24,7 +24,7 @@ class Summary1Cell: UITableViewCell {
         // Configure the view for the selected state
     }
     
-    func updateView(){
+    func updateView() {
         
     }
 }

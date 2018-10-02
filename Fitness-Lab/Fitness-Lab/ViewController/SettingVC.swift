@@ -17,16 +17,16 @@ class SettingVC: UIViewController {
         
         tableViewSetting.delegate = self
         tableViewSetting.dataSource = self
-        tableViewSetting.register(UINib(nibName: "SettingCell", bundle: nil), forCellReuseIdentifier: "SettingCell")
-         tableViewSetting.register(UINib(nibName: "SettingSwitchCell", bundle: nil), forCellReuseIdentifier: "SettingSwitchCell")
+        tableViewSetting.register(UINib(nibName: "SettingCell", bundle: nil),
+                                  forCellReuseIdentifier: "SettingCell")
+        tableViewSetting.register(UINib(nibName: "SettingSwitchCell", bundle: nil),
+                                  forCellReuseIdentifier: "SettingSwitchCell")
         
         let editUpdatednotificationName = Notification.Name("notificationUpdate")
-        NotificationCenter.default.addObserver(self, selector: #selector(notificationUpdate(noti:)), name: editUpdatednotificationName, object: nil)
-   
+        NotificationCenter.default.addObserver(self, selector: #selector(notificationUpdate(noti:)),
+                                               name: editUpdatednotificationName, object: nil)
         
     }
-    
-
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(true)
@@ -34,7 +34,7 @@ class SettingVC: UIViewController {
     }
     
     func loadNotificationTime() {
-        if let notificationTime = UserDefaults.standard.value(forKey: "notificationtime") as? String{
+        if let notificationTime = UserDefaults.standard.value(forKey: "notificationtime") as? String {
             print(notificationTime)
             let indexPath = IndexPath(row: 0, section: 0)
             guard let cell = self.tableViewSetting.cellForRow(at: indexPath) as? SettingCell  else {return}
@@ -43,19 +43,13 @@ class SettingVC: UIViewController {
         }
     }
     
-    @objc func notificationUpdate(noti:Notification) {
+    @objc func notificationUpdate(noti: Notification) {
         let notificationTime = noti.userInfo!["timeString"] as? String
         let indexPath = IndexPath(row: 0, section: 0)
         guard let cell = self.tableViewSetting.cellForRow(at: indexPath) as? SettingCell  else {return}
         cell.statusLbl.text = notificationTime
         UserDefaults.standard.set(notificationTime, forKey: "notificationtime")
-        print(notificationTime)
     }
-    
-    
-
-    
-
 }
 
 extension SettingVC: UITableViewDelegate {
@@ -80,9 +74,8 @@ extension SettingVC: UITableViewDelegate {
     }
 }
 
-extension SettingVC: UITableViewDataSource{
-
-
+extension SettingVC: UITableViewDataSource {
+    
     func numberOfSections(in tableView: UITableView) -> Int {
         return 2
     }
@@ -96,25 +89,27 @@ extension SettingVC: UITableViewDataSource{
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-  
         
         tableViewSetting.separatorStyle = UITableViewCellSeparatorStyle.none
-        let index = indexPath.row
+        //        let index = indexPath.row
         
         switch indexPath.section {
-           
+            
         case 0:
-        guard let cell = tableViewSetting.dequeueReusableCell(withIdentifier: "SettingCell") as? SettingCell else {return UITableViewCell()}
-
-            var settingArray = Data.instance.getSettingArray()[indexPath.row]
+            guard let cell = tableViewSetting.dequeueReusableCell(withIdentifier: "SettingCell")
+                as? SettingCell else {return UITableViewCell()}
+            
+            let settingArray = Data.instance.getSettingArray()[indexPath.row]
             tableViewSetting.separatorStyle = UITableViewCellSeparatorStyle.none
             cell.selectionStyle = .none
             cell.updateView(settingModel: settingArray)
+            
             return cell
             
         case 1:
             
-            guard let cell = tableViewSetting.dequeueReusableCell(withIdentifier: "SettingSwitchCell") as? SettingSwitchCell else {return UITableViewCell()}
+            guard let cell = tableViewSetting.dequeueReusableCell(withIdentifier: "SettingSwitchCell")
+                as? SettingSwitchCell else {return UITableViewCell()}
             cell.updateView(settingModel: Data.instance.getSettingSwitchArray()[indexPath.row])
             cell.selectionStyle = .none
             
@@ -124,6 +119,6 @@ extension SettingVC: UITableViewDataSource{
             break
         }
         return UITableViewCell()
-}
-
+    }
+    
 }

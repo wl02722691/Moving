@@ -13,19 +13,12 @@ class TabBarVC: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
         let tabBarItems = tabBar.items! as [UITabBarItem]
-        tabBarItems[0].imageInsets = UIEdgeInsetsMake(6,0,-6,0)
-        tabBarItems[1].imageInsets = UIEdgeInsetsMake(6,0,-6,0)
-        tabBarItems[2].imageInsets = UIEdgeInsetsMake(6,0,-6,0)
-        // Do any additional setup after loading the view.
+        tabBarItems[0].imageInsets = UIEdgeInsetsMake(6,0, -6,0)
+        tabBarItems[1].imageInsets = UIEdgeInsetsMake(6,0, -6,0)
+        tabBarItems[2].imageInsets = UIEdgeInsetsMake(6,0, -6,0)
         
         UITabBar.appearance().barTintColor = #colorLiteral(red: 0.1411764706, green: 0.1411764706, blue: 0.1411764706, alpha: 1)
         UITabBar.appearance().barTintColor?.withAlphaComponent(1)
         
     }
-    
-    
-    
 }
-
-
-

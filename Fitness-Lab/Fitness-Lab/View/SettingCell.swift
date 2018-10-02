@@ -12,7 +12,6 @@ class SettingCell: UITableViewCell {
     @IBOutlet weak var titleLbl: UILabel!
     @IBOutlet weak var statusLbl: UILabel!
     
-    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -24,7 +23,7 @@ class SettingCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
-    func updateView(settingModel:SettingModel){
+    func updateView(settingModel: SettingModel) {
         titleLbl.text = settingModel.titleLbl
         statusLbl.text = settingModel.statusLbl
     }

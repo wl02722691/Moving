@@ -10,9 +10,8 @@ import UIKit
 
 class ListVC: UIViewController {
     
-    
     @IBAction func filterBtnWasPressed(_ sender: UIButton) {
-         performSegue(withIdentifier: "showPopover", sender: nil)
+        performSegue(withIdentifier: "showPopover", sender: nil)
     }
     
     @IBOutlet weak var listTableView: UITableView!
@@ -22,20 +21,20 @@ class ListVC: UIViewController {
     var selectSender = 0
     
     override func viewDidLoad() {
-         listTableView.separatorStyle = UITableViewCellSeparatorStyle.none
+        listTableView.separatorStyle = UITableViewCellSeparatorStyle.none
         super.viewDidLoad()
         listTableView.delegate = self
         listTableView.dataSource = self
     }
     
-    func initList(category: FitnessCategory){
+    func initList(category: FitnessCategory) {
         lists = Data.instance.getList(forListTitle: category.secondTitle)
         
     }
     
 }
 
-extension ListVC: UITableViewDelegate{
+extension ListVC: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let index = indexPath.row
@@ -52,30 +51,27 @@ extension ListVC: UITableViewDelegate{
             actionVC.lists = lists
             actionVC.actionLists = actions
             actionVC.selectSender = selectSender
-        
-}
+            
+        }
     }
 }
 
-extension ListVC: UITableViewDataSource{
+extension ListVC: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return lists.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if let cell = listTableView.dequeueReusableCell(withIdentifier: "ListCell") as? ListCell{
+        if let cell = listTableView.dequeueReusableCell(withIdentifier: "ListCell") as? ListCell {
             let list = lists[indexPath.row]
             
             cell.updateView(listModel: list)
             cell.selectionStyle = .none
             return cell
             
-        }else{
+        } else {
             
             return ListCell()
         }
     }
 }
-
-
-

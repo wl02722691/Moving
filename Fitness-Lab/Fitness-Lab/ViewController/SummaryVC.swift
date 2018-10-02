@@ -9,11 +9,11 @@
 import UIKit
 import RealmSwift
 class SummaryVC: UIViewController {
-
+    
     var allTime = 0
     var allTimeToMin = 0
-    var sectionHeaderTitleArray = ["運動總數","挑戰"]
-    var summaryArray : Results<SummaryModel>!
+    var sectionHeaderTitleArray = ["運動總數", "挑戰"]
+    var summaryArray: Results<SummaryModel>!
     
     @IBOutlet weak var tableviewSummary: UITableView!
     
@@ -25,24 +25,23 @@ class SummaryVC: UIViewController {
         tableviewSummary.register(UINib(nibName: "Summary1Cell", bundle: nil), forCellReuseIdentifier: "Summary1Cell")
         tableviewSummary.register(UINib(nibName: "Summary2Cell", bundle: nil), forCellReuseIdentifier: "Summary2Cell")
         
-        
         let realm = RealmService.shared.realm
         summaryArray = realm?.objects(SummaryModel.self)
         
         let editUpdatednotificationName = Notification.Name("toSummaryVC")
-        NotificationCenter.default.addObserver(self, selector: #selector(updateRealm(noti:)), name: editUpdatednotificationName, object: nil)
-        
-
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(updateRealm(noti:)),
+                                               name: editUpdatednotificationName, object: nil)
         
     }
     
     override func viewWillAppear(_ animated: Bool) {
-       super.viewWillAppear(true)
+        super.viewWillAppear(true)
         
         if summaryArray.count - 1 > 0 {
-            for summaryArrayIndex in 0 ... summaryArray.count - 1{
+            for summaryArrayIndex in 0 ... summaryArray.count - 1 {
                 allTime += summaryArray[summaryArrayIndex].durationLbl
-               
+                
             }
         }
         
@@ -53,12 +52,12 @@ class SummaryVC: UIViewController {
         cell.allTimeLbl.text = String(allTimeToMin)
         tableviewSummary.reloadData()
         
-        
     }
     
-    @objc func updateRealm(noti:Notification) {
+    @objc func updateRealm(noti: Notification) {
+        
         if summaryArray.count - 1 > 0 {
-            for summaryArrayIndex in 0 ... summaryArray.count - 1{
+            for summaryArrayIndex in 0 ... summaryArray.count - 1 {
                 allTime += summaryArray[summaryArrayIndex].durationLbl
                 print(allTime)
             }
@@ -66,12 +65,11 @@ class SummaryVC: UIViewController {
         tableviewSummary.reloadData()
     }
     
-
 }
 
-extension SummaryVC: UITableViewDelegate{}
+extension SummaryVC: UITableViewDelegate {}
 
-extension SummaryVC: UITableViewDataSource{
+extension SummaryVC: UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
         return 2
@@ -106,7 +104,6 @@ extension SummaryVC: UITableViewDataSource{
         return returnedView
     }
     
-   
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         tableviewSummary.separatorStyle = UITableViewCellSeparatorStyle.none
@@ -115,18 +112,19 @@ extension SummaryVC: UITableViewDataSource{
         switch indexPath.section {
         case 0:
             
-            guard let cell = tableviewSummary.dequeueReusableCell(withIdentifier: "Summary1Cell") as? Summary1Cell else {return Summary1Cell()}
+            guard let cell = tableviewSummary.dequeueReusableCell(withIdentifier: "Summary1Cell") as? Summary1Cell
+                else {return Summary1Cell()}
             cell.planNumberLbl.text = String(summaryArray.count)
             cell.allTimeLbl.text = String(allTimeToMin)
             cell.selectionStyle = .none
-            
             
             return cell
             
         case 1:
             
-            guard let cell = tableviewSummary.dequeueReusableCell(withIdentifier: "Summary2Cell") as? Summary2Cell else { return Summary2Cell()}
-     
+            guard let cell = tableviewSummary.dequeueReusableCell(withIdentifier: "Summary2Cell") as? Summary2Cell
+                else { return Summary2Cell()}
+            
             cell.updateView(summaryModel: summaryArray.reversed()[index])
             cell.selectionStyle = .none
             
@@ -135,10 +133,7 @@ extension SummaryVC: UITableViewDataSource{
         default:
             break
         }
-     
         return Summary1Cell()
-       
     }
-    
     
 }

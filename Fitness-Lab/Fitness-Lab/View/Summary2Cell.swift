@@ -27,7 +27,7 @@ class Summary2Cell: UITableViewCell {
         // Configure the view for the selected state
     }
     
-    func updateView(summaryModel:SummaryModel){
+    func updateView(summaryModel: SummaryModel) {
  
         let minutes = summaryModel.durationLbl % 3600 / 60
         let seconds = (summaryModel.durationLbl % 3600) % 60
@@ -38,10 +38,10 @@ class Summary2Cell: UITableViewCell {
         workoutDateLbl.text = timeIntervalToString(workoutDate: summaryModel.workoutDate)
         videoImg.image = UIImage(named: summaryModel.videoImg)
       
-   
     }
     
-    func timeIntervalToString(workoutDate:TimeInterval)->String{
+    func timeIntervalToString(workoutDate: TimeInterval) -> String {
+        
         let date = Date(timeIntervalSince1970: workoutDate)
         let dateFormatter = DateFormatter()
         dateFormatter.timeZone = TimeZone(abbreviation: "TW")
@@ -49,7 +49,6 @@ class Summary2Cell: UITableViewCell {
         dateFormatter.dateFormat = "yyyy MM dd HH:mm"
         let strDate = dateFormatter.string(from: date)
         return strDate
+        
     }
-  
-    
 }

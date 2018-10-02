@@ -16,12 +16,23 @@ class ListCell: UITableViewCell {
     @IBOutlet weak var intensityLbl: UILabel!
     
     func updateView(listModel: ListModel) {
+        
         videoImg.image = UIImage(named: listModel.videoImg)
+        
         videoTitle.text = listModel.videoTitle
+        
         videoDescription.text = listModel.videoDescription
+        
         durationLbl.text = "\(listModel.durationLbl)min"
+        
         intensityLbl.text = listModel.intensity
-        contentView.backgroundColor = #colorLiteral(red: 0.09411764706, green: 0.09411764706, blue: 0.09411764706, alpha: 1)
+        
+    }
+    
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        
+       contentView.backgroundColor = #colorLiteral(red: 0.09411764706, green: 0.09411764706, blue: 0.09411764706, alpha: 1)
     }
 
 }

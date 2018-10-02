@@ -18,55 +18,10 @@ class FitnessVC: UIViewController {
         fitnessTableview.separatorStyle = UITableViewCellSeparatorStyle.none
         fitnessTableview.delegate = self
         fitnessTableview.dataSource = self
-        let timeInterval = Date().timeIntervalSince1970
-        print(timeInterval)
     }
-
-//swiftlint:disable force_try
-//func scheduleNotification() {
-//    let content = UNMutableNotificationContent()
-//    content.title = "YOYOYOYO time to go home"
-//    content.subtitle = "Alice HIHIHI"
-//    content.body = "今天辛苦了❤️"
-//    content.badge = 1
-//    content.sound = UNNotificationSound(named: "gong")
-//    let imageURL = Bundle.main.url(forResource: "YOYOYO", withExtension: "png")
-//    let attachement = try! UNNotificationAttachment(identifier: "YOYOYO.png", url: imageURL!, options: nil)
-//    content.attachments = [attachement]
-//    
-//    var dateComponents = DateComponents()
-//    dateComponents.hour = 14
-//    dateComponents.minute = 13
-//    
-//    
-//    let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: true)
-//
-//    let request = UNNotificationRequest(identifier: "eveydayNotification", content: content, trigger: trigger)
-//    
-//    let notificationCenter = UNUserNotificationCenter.current()
-//    notificationCenter.add(request, withCompletionHandler: nil)
-//    notificationCenter.delegate = self
-//    
-//    
-//    }
 }
 
 //swiftlint:disable force_cast
-
-extension FitnessVC: UNUserNotificationCenterDelegate{
-    func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
-        
-        print(response.notification.request.content.userInfo)
-        completionHandler()
-    }
-    
-    func userNotificationCenter(_ center: UNUserNotificationCenter,
-                                willPresent notification: UNNotification,
-                                withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
-        print("silently handle notification")
-        completionHandler([.alert, .sound])
-    }
-}
 
 extension FitnessVC: UITableViewDelegate {
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
@@ -104,17 +59,13 @@ extension FitnessVC: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if let cell = fitnessTableview.dequeueReusableCell(withIdentifier: "FitnessCell") as? FitnessCell {
             let category = Data.instance.getfitCategories()[indexPath.row]
-            cell.updataViews(
-                fitnessCategory: FitnessCellModel(category: category)
-            )
-            
+            cell.updataViews(fitnessCategory: FitnessCellModel(category: category))
             cell.selectionStyle = .none
             return cell
-        }else {
             
+        } else {
             
             return FitnessCell()
         }
     }
 }
-

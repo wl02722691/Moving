@@ -20,6 +20,7 @@ class ScoreCollectionViewCell: UICollectionViewCell {
     
     override func layoutSubviews() {
         super.layoutSubviews()
+        
             self.layer.cornerRadius = 3.0
             layer.shadowRadius = 10
             layer.shadowOpacity = 0.3
