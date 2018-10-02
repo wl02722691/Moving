@@ -33,14 +33,14 @@
                         <color key="highlightedColor" red="0.83920373071709098" green="0.89931850932588187" blue="1" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="7:00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="irL-i7-l5k">
-                        <rect key="frame" x="136" y="109" width="34.5" height="24"/>
+                        <rect key="frame" x="136" y="108" width="34.5" height="24"/>
                         <fontDescription key="fontDescription" name="PingFangTC-Light" family="PingFang TC" pointSize="17"/>
                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <color key="highlightedColor" red="0.83920373069999998" green="0.89931850930000001" blue="1" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uLT-AL-ZJU">
                         <rect key="frame" x="136" y="62" width="230" height="28"/>
-                        <fontDescription key="fontDescription" name="PingFangTC-Medium" family="PingFang TC" pointSize="20"/>
+                        <fontDescription key="fontDescription" name="PingFangTC-Medium" family="PingFang TC" pointSize="19"/>
                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
@@ -52,13 +52,13 @@
                         </constraints>
                     </view>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="強度" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ah7-fc-1L7">
-                        <rect key="frame" x="220.5" y="109" width="34" height="24"/>
+                        <rect key="frame" x="220.5" y="108" width="34" height="24"/>
                         <fontDescription key="fontDescription" name="PingFangTC-Light" family="PingFang TC" pointSize="17"/>
                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <color key="highlightedColor" red="0.83920373069999998" green="0.89931850930000001" blue="1" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                     </label>
                 </subviews>
-                <color key="backgroundColor" red="0.094117647058823528" green="0.094117647058823528" blue="0.094117647058823528" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                <color key="backgroundColor" red="0.062745098039215685" green="0.062745098039215685" blue="0.062745098039215685" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                 <constraints>
                     <constraint firstItem="uLT-AL-ZJU" firstAttribute="leading" secondItem="ETv-BO-wI1" secondAttribute="trailing" constant="20" id="2B4-Ga-asW"/>
                     <constraint firstItem="ZLY-vf-7HB" firstAttribute="leading" secondItem="ETv-BO-wI1" secondAttribute="trailing" constant="20" id="7yf-gG-COV"/>

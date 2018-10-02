@@ -26,7 +26,7 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rK7-6k-N63">
-                        <rect key="frame" x="200" y="32" width="42" height="24"/>
+                        <rect key="frame" x="250" y="32" width="42" height="24"/>
                         <fontDescription key="fontDescription" name="PingFangTC-Thin" family="PingFang TC" pointSize="17"/>
                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <nil key="highlightedColor"/>
@@ -39,22 +39,14 @@
                             <constraint firstAttribute="height" constant="1" id="meq-jt-9fG"/>
                         </constraints>
                     </view>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="&gt;" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="I0g-yd-dJE">
-                        <rect key="frame" x="289" y="32" width="11" height="24"/>
-                        <fontDescription key="fontDescription" name="PingFangTC-Ultralight" family="PingFang TC" pointSize="17"/>
-                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                        <nil key="highlightedColor"/>
-                    </label>
                 </subviews>
-                <color key="backgroundColor" red="0.094117647058823528" green="0.094117647058823528" blue="0.094117647058823528" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                <color key="backgroundColor" red="0.066666666666666666" green="0.066666666666666666" blue="0.066666666666666666" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                 <constraints>
                     <constraint firstItem="mgL-Ro-8u2" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="B4C-Rp-EYD"/>
                     <constraint firstAttribute="trailing" secondItem="UF3-uJ-tTf" secondAttribute="trailing" id="L1e-ip-AVK"/>
-                    <constraint firstAttribute="trailing" secondItem="I0g-yd-dJE" secondAttribute="trailing" constant="20" id="LKz-tF-MD7"/>
                     <constraint firstAttribute="bottom" secondItem="UF3-uJ-tTf" secondAttribute="bottom" id="LTo-VU-X8c"/>
                     <constraint firstItem="mgL-Ro-8u2" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="50" id="d8L-QI-lzv"/>
-                    <constraint firstItem="rK7-6k-N63" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="200" id="gW0-l9-BZb"/>
-                    <constraint firstItem="I0g-yd-dJE" firstAttribute="centerY" secondItem="rK7-6k-N63" secondAttribute="centerY" id="mDm-o6-rWg"/>
+                    <constraint firstItem="rK7-6k-N63" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="250" id="gW0-l9-BZb"/>
                     <constraint firstItem="rK7-6k-N63" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="n3q-os-q6c"/>
                     <constraint firstItem="UF3-uJ-tTf" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="y70-0b-AQH"/>
                 </constraints>

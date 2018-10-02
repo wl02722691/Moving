@@ -10,6 +10,11 @@ import UIKit
 
 class ListVC: UIViewController {
     
+    
+    @IBAction func filterBtnWasPressed(_ sender: UIButton) {
+         performSegue(withIdentifier: "showPopover", sender: nil)
+    }
+    
     @IBOutlet weak var listTableView: UITableView!
     private(set) public var lists = [ListModel]()
     private(set) public var selectLists = [ListModel]()
@@ -40,12 +45,15 @@ extension ListVC: UITableViewDelegate{
         performSegue(withIdentifier: "toActionVC", sender: selectLists)
         
     }
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        //to ActionVC
         if let actionVC = segue.destination as? ActionVC {
             actionVC.lists = lists
             actionVC.actionLists = actions
             actionVC.selectSender = selectSender
-        }
+        
+}
     }
 }
 
@@ -68,3 +76,6 @@ extension ListVC: UITableViewDataSource{
         }
     }
 }
+
+
+

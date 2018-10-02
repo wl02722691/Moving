@@ -1,0 +1,23 @@
+//
+//  SettingSwitchModel.swift
+//  Fitness-Lab
+//
+//  Created by 張書涵 on 2018/10/1.
+//  Copyright © 2018年 AliceChang. All rights reserved.
+//
+
+import Foundation
+
+struct SettingSwitchModel {
+    private(set) public var titleLbl: String
+    private(set) public var statusSwitch : Bool
+    
+    
+    init(titleLbl: String,
+         statusSwitch: Bool) {
+        
+        self.titleLbl = titleLbl
+        self.statusSwitch = statusSwitch
+        
+    }
+}

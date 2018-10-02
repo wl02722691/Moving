@@ -89,10 +89,15 @@ class Data {
     private let settingArray = [
         SettingModel(titleLbl: "每日運動推播", statusLbl: "20:30"),
         SettingModel(titleLbl: "語言設定", statusLbl: "繁體中文"),
-        SettingModel(titleLbl: "Apple Health", statusLbl: "連接成功"),
-        SettingModel(titleLbl: "提示音設定", statusLbl: "開啟"),
-        SettingModel(titleLbl: "icloud 備份", statusLbl: "尚未備份")
 
+    ]
+    
+    
+    private let settingSwitchArray = [
+        
+        SettingSwitchModel(titleLbl: "Apple Health", statusSwitch: false),
+        SettingSwitchModel(titleLbl: "提示音設定", statusSwitch: false),
+        SettingSwitchModel(titleLbl: "iCloud 備份", statusSwitch: false),
     ]
     
     
@@ -149,5 +154,9 @@ class Data {
     
     func getSettingArray() -> [SettingModel]{
         return settingArray
+    }
+    
+    func getSettingSwitchArray() -> [SettingSwitchModel]{
+        return settingSwitchArray
     }
 }

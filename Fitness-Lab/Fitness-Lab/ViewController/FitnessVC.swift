@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import UserNotifications
 
 class FitnessVC: UIViewController {
     
@@ -19,7 +20,26 @@ class FitnessVC: UIViewController {
         fitnessTableview.dataSource = self
         let timeInterval = Date().timeIntervalSince1970
         print(timeInterval)
+        scheduleNotification()
     }
+}
+    //swiftlint:disable force_try
+func scheduleNotification() {
+    let content = UNMutableNotificationContent()
+    content.title = "YOYOYOYO time to go home"
+    content.subtitle = "Alice HIHIHI"
+    content.body = "今天辛苦了❤️"
+    content.badge = 1
+    content.sound = UNNotificationSound(named: "gong")
+    
+    let imageURL = Bundle.main.url(forResource: "YOYOYO", withExtension: "png")
+    let attachement = try! UNNotificationAttachment(identifier: "YOYOYO.png", url: imageURL!, options: nil)
+    content.attachments = [attachement]
+    
+    let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 10.0, repeats: false)
+    let request = UNNotificationRequest(identifier: "10.second.notification", content: content, trigger: trigger)
+    let notificationCenter = UNUserNotificationCenterDelegate.self
+    UNUserNotificationCenter.current().add(request, withCompletionHandler: nil)
 }
 
 //swiftlint:disable force_cast
@@ -60,13 +80,24 @@ extension FitnessVC: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if let cell = fitnessTableview.dequeueReusableCell(withIdentifier: "FitnessCell") as? FitnessCell {
             let category = Data.instance.getfitCategories()[indexPath.row]
-            cell.updataViews(fitnessCategory: category)
+            cell.updataViews(
+                fitnessCategory: FitnessCellModel(category: category)
+            )
+            
             cell.selectionStyle = .none
             return cell
         }else {
+            
+            
             return FitnessCell()
         }
     }
-    
-    
+}
+
+extension FitnessVC: UNUserNotificationCenterDelegate{
+    func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
+     
+        print(response.notification.request.content.userInfo)
+        completionHandler()
+    }
 }

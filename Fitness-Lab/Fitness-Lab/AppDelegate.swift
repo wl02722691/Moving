@@ -8,6 +8,7 @@
 
 import UIKit
 import RealmSwift
+import UserNotifications
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -33,6 +34,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             }
         }catch{
             print("Error initalisting new realm, \(error)")
+        }
+        
+        
+        let notificationCenter = UNUserNotificationCenter.current()
+        notificationCenter.requestAuthorization(options: [.alert, .badge, .sound]) { (granted, error) in
+            
         }
         
         return true

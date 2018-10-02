@@ -32,7 +32,6 @@ class SummaryVC: UIViewController {
         let editUpdatednotificationName = Notification.Name("toSummaryVC")
         NotificationCenter.default.addObserver(self, selector: #selector(updateRealm(noti:)), name: editUpdatednotificationName, object: nil)
         
-        UITableViewHeaderFooterView.appearance().backgroundColor = #colorLiteral(red: 0.001363023831, green: 0.6588945239, blue: 0.2931115911, alpha: 1)
 
         
     }
