@@ -15,24 +15,68 @@ class SettingVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
         tableViewSetting.delegate = self
         tableViewSetting.dataSource = self
         tableViewSetting.register(UINib(nibName: "SettingCell", bundle: nil), forCellReuseIdentifier: "SettingCell")
          tableViewSetting.register(UINib(nibName: "SettingSwitchCell", bundle: nil), forCellReuseIdentifier: "SettingSwitchCell")
         
+        let editUpdatednotificationName = Notification.Name("notificationUpdate")
+        NotificationCenter.default.addObserver(self, selector: #selector(notificationUpdate(noti:)), name: editUpdatednotificationName, object: nil)
+   
+        
     }
+    
+
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(true)
+        loadNotificationTime()
+    }
+    
+    func loadNotificationTime() {
+        if let notificationTime = UserDefaults.standard.value(forKey: "notificationtime") as? String{
+            print(notificationTime)
+            let indexPath = IndexPath(row: 0, section: 0)
+            guard let cell = self.tableViewSetting.cellForRow(at: indexPath) as? SettingCell  else {return}
+            cell.statusLbl.text = notificationTime
+            //tableViewSetting.reloadData()
+        }
+    }
+    
+    @objc func notificationUpdate(noti:Notification) {
+        let notificationTime = noti.userInfo!["timeString"] as? String
+        let indexPath = IndexPath(row: 0, section: 0)
+        guard let cell = self.tableViewSetting.cellForRow(at: indexPath) as? SettingCell  else {return}
+        cell.statusLbl.text = notificationTime
+        UserDefaults.standard.set(notificationTime, forKey: "notificationtime")
+        print(notificationTime)
+    }
+    
     
 
     
 
 }
 
-extension SettingVC: UITableViewDelegate{
+extension SettingVC: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-       
-        print(indexPath.row)
+        switch indexPath {
+        case [0, 0]:
+            performSegue(withIdentifier: "toNotificationVC", sender: nil)
+        case [0, 1]:
+            print("01!!!")
+        case [1, 0]:
+            print("10!!!")
+        case [1, 1]:
+            print("11!!!")
+        case [1, 2]:
+            print("12!!!")
+            
+        default:
+            print("not anyone")
+        }
+        
     }
 }
 
@@ -58,6 +102,7 @@ extension SettingVC: UITableViewDataSource{
         let index = indexPath.row
         
         switch indexPath.section {
+           
         case 0:
         guard let cell = tableViewSetting.dequeueReusableCell(withIdentifier: "SettingCell") as? SettingCell else {return UITableViewCell()}
 
@@ -65,7 +110,6 @@ extension SettingVC: UITableViewDataSource{
             tableViewSetting.separatorStyle = UITableViewCellSeparatorStyle.none
             cell.selectionStyle = .none
             cell.updateView(settingModel: settingArray)
-        
             return cell
             
         case 1:

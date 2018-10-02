@@ -23,6 +23,7 @@
 		693841F12161D4EF0017D2E9 /* SettingSwitchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 693841EF2161D4EF0017D2E9 /* SettingSwitchCell.swift */; };
 		693841F22161D4EF0017D2E9 /* SettingSwitchCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 693841F02161D4EF0017D2E9 /* SettingSwitchCell.xib */; };
 		693841F42161D7FD0017D2E9 /* SettingSwitchModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 693841F32161D7FD0017D2E9 /* SettingSwitchModel.swift */; };
+		6941AF89216364C700A0D0B8 /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6941AF88216364C700A0D0B8 /* UIView+Extension.swift */; };
 		694776D321534CC400141CB7 /* FitnessCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 694776D221534CC400141CB7 /* FitnessCell.swift */; };
 		694776DC2153519B00141CB7 /* FitnessCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 694776DB2153519B00141CB7 /* FitnessCategory.swift */; };
 		694776DE2153540E00141CB7 /* Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = 694776DD2153540E00141CB7 /* Data.swift */; };
@@ -64,6 +65,7 @@
 		693841EF2161D4EF0017D2E9 /* SettingSwitchCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingSwitchCell.swift; sourceTree = "<group>"; };
 		693841F02161D4EF0017D2E9 /* SettingSwitchCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SettingSwitchCell.xib; sourceTree = "<group>"; };
 		693841F32161D7FD0017D2E9 /* SettingSwitchModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingSwitchModel.swift; sourceTree = "<group>"; };
+		6941AF88216364C700A0D0B8 /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
 		694776D221534CC400141CB7 /* FitnessCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FitnessCell.swift; sourceTree = "<group>"; };
 		694776DB2153519B00141CB7 /* FitnessCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FitnessCategory.swift; sourceTree = "<group>"; };
 		694776DD2153540E00141CB7 /* Data.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Data.swift; sourceTree = "<group>"; };
@@ -113,6 +115,14 @@
 			path = storyboard;
 			sourceTree = "<group>";
 		};
+		6941AF87216364AF00A0D0B8 /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				6941AF88216364C700A0D0B8 /* UIView+Extension.swift */,
+			);
+			path = Extension;
+			sourceTree = "<group>";
+		};
 		694776D8215350A400141CB7 /* Services */ = {
 			isa = PBXGroup;
 			children = (
@@ -143,6 +153,7 @@
 		69D37DF1215257EC00B8F1F9 /* Fitness-Lab */ = {
 			isa = PBXGroup;
 			children = (
+				6941AF87216364AF00A0D0B8 /* Extension */,
 				6925614E2153753400531F5B /* storyboard */,
 				694776D8215350A400141CB7 /* Services */,
 				69D37E0821525AFE00B8F1F9 /* Model */,
@@ -353,12 +364,14 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-Fitness-Lab/Pods-Fitness-Lab-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/IQKeyboardManagerSwift/IQKeyboardManagerSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/Realm/Realm.framework",
 				"${BUILT_PRODUCTS_DIR}/RealmSwift/RealmSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/YouTubePlayer-Swift/YouTubePlayer_Swift.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/IQKeyboardManagerSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Realm.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RealmSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/YouTubePlayer_Swift.framework",
@@ -393,6 +406,7 @@
 				6917E03F215BB41800C0A743 /* ScoreCollectionViewCell.swift in Sources */,
 				694776DC2153519B00141CB7 /* FitnessCategory.swift in Sources */,
 				6917E046215CE27400C0A743 /* RealmService.swift in Sources */,
+				6941AF89216364C700A0D0B8 /* UIView+Extension.swift in Sources */,
 				693841F42161D7FD0017D2E9 /* SettingSwitchModel.swift in Sources */,
 				6917E041215BB55400C0A743 /* ScoreModel.swift in Sources */,
 				6917E04B215CE6EF00C0A743 /* Summary1Cell.swift in Sources */,

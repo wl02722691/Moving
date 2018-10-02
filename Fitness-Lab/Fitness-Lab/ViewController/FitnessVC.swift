@@ -20,29 +20,53 @@ class FitnessVC: UIViewController {
         fitnessTableview.dataSource = self
         let timeInterval = Date().timeIntervalSince1970
         print(timeInterval)
-        scheduleNotification()
     }
-}
-    //swiftlint:disable force_try
-func scheduleNotification() {
-    let content = UNMutableNotificationContent()
-    content.title = "YOYOYOYO time to go home"
-    content.subtitle = "Alice HIHIHI"
-    content.body = "今天辛苦了❤️"
-    content.badge = 1
-    content.sound = UNNotificationSound(named: "gong")
-    
-    let imageURL = Bundle.main.url(forResource: "YOYOYO", withExtension: "png")
-    let attachement = try! UNNotificationAttachment(identifier: "YOYOYO.png", url: imageURL!, options: nil)
-    content.attachments = [attachement]
-    
-    let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 10.0, repeats: false)
-    let request = UNNotificationRequest(identifier: "10.second.notification", content: content, trigger: trigger)
-    let notificationCenter = UNUserNotificationCenterDelegate.self
-    UNUserNotificationCenter.current().add(request, withCompletionHandler: nil)
+
+//swiftlint:disable force_try
+//func scheduleNotification() {
+//    let content = UNMutableNotificationContent()
+//    content.title = "YOYOYOYO time to go home"
+//    content.subtitle = "Alice HIHIHI"
+//    content.body = "今天辛苦了❤️"
+//    content.badge = 1
+//    content.sound = UNNotificationSound(named: "gong")
+//    let imageURL = Bundle.main.url(forResource: "YOYOYO", withExtension: "png")
+//    let attachement = try! UNNotificationAttachment(identifier: "YOYOYO.png", url: imageURL!, options: nil)
+//    content.attachments = [attachement]
+//    
+//    var dateComponents = DateComponents()
+//    dateComponents.hour = 14
+//    dateComponents.minute = 13
+//    
+//    
+//    let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: true)
+//
+//    let request = UNNotificationRequest(identifier: "eveydayNotification", content: content, trigger: trigger)
+//    
+//    let notificationCenter = UNUserNotificationCenter.current()
+//    notificationCenter.add(request, withCompletionHandler: nil)
+//    notificationCenter.delegate = self
+//    
+//    
+//    }
 }
 
 //swiftlint:disable force_cast
+
+extension FitnessVC: UNUserNotificationCenterDelegate{
+    func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
+        
+        print(response.notification.request.content.userInfo)
+        completionHandler()
+    }
+    
+    func userNotificationCenter(_ center: UNUserNotificationCenter,
+                                willPresent notification: UNNotification,
+                                withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+        print("silently handle notification")
+        completionHandler([.alert, .sound])
+    }
+}
 
 extension FitnessVC: UITableViewDelegate {
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
@@ -94,10 +118,3 @@ extension FitnessVC: UITableViewDataSource {
     }
 }
 
-extension FitnessVC: UNUserNotificationCenterDelegate{
-    func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
-     
-        print(response.notification.request.content.userInfo)
-        completionHandler()
-    }
-}

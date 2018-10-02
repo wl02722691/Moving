@@ -1,4 +1,5 @@
 PODS:
+  - IQKeyboardManagerSwift (6.1.1)
   - Realm (3.10.0):
     - Realm/Headers (= 3.10.0)
   - Realm/Headers (3.10.0)
@@ -8,23 +9,26 @@ PODS:
   - YouTubePlayer-Swift (1.0)
 
 DEPENDENCIES:
+  - IQKeyboardManagerSwift
   - RealmSwift
   - SwiftLint
   - YouTubePlayer-Swift (~> 1.0)
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
+    - IQKeyboardManagerSwift
     - Realm
     - RealmSwift
     - SwiftLint
     - YouTubePlayer-Swift
 
 SPEC CHECKSUMS:
+  IQKeyboardManagerSwift: 977affaeb4d6e971975c7790a6850f31d38f1207
   Realm: 85ab9e4f779d66f6e9ffeb118dc25b7f130c96ac
   RealmSwift: 69121c8b86d0ae005fb779efdb10e606732e1c74
   SwiftLint: 3207c1faa2240bf8973b191820a116113cd11073
   YouTubePlayer-Swift: ae82f4bcb504162a872b852596a9dc1fa3828c34
 
-PODFILE CHECKSUM: 902378a54215dbdb2a5f393f2ce53e5ea60e53d9
+PODFILE CHECKSUM: 574f9cc8c3fdb919ff7fb1afd8f5d1ceea3625ed
 
 COCOAPODS: 1.5.3

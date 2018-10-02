@@ -9,5 +9,6 @@ target 'Fitness-Lab' do
 pod 'SwiftLint'
 pod 'YouTubePlayer-Swift', '~> 1.0'
 pod 'RealmSwift'
+pod 'IQKeyboardManagerSwift'
 
 end
