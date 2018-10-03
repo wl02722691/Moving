@@ -53,7 +53,6 @@ class ActionVC: UIViewController {
         videoView.loadVideoID(lists[selectSender].videoID)
         activityIndicator.startAnimating()
         activityIndicator.isHidden = false
-        
     }
     
     @objc func actionCountDown() {
@@ -169,6 +168,14 @@ extension ActionVC: YouTubePlayerDelegate {
             
         }
         
+        if playerState == .Paused {
+            if actionSec > 0 {
+        
+            }
+            
+            
+        }
+        
         func start() {
             
         }
@@ -182,19 +189,20 @@ extension ActionVC: YouTubePlayerDelegate {
     func playerQualityChanged(_ videoPlayer: YouTubePlayerView, playbackQuality: YouTubePlaybackQuality) {
     }
     
-    func playerReady(_ videoPlayer: YouTubePlayerView) {
-        activityIndicator.isHidden = true
-        let floatYoutubeTime = Float(actionLists[nowIndex].youtubeTime)
-        videoPlayer.seekTo(floatYoutubeTime, seekAhead: true)
-        self.actionTimer = Timer.scheduledTimer(timeInterval: 1,
-                                                target: self,
-                                                selector: #selector(self.actionCountDown),
-                                                userInfo: nil, repeats: true)
+    func playerReady(_ videoPlayer: YouTubePlayerView){
+            activityIndicator.isHidden = true
+            let floatYoutubeTime = Float(actionLists[nowIndex].youtubeTime)
+            videoPlayer.seekTo(floatYoutubeTime, seekAhead: true)
+            self.actionTimer = Timer.scheduledTimer(timeInterval: 1,
+                                                    target: self,
+                                                    selector: #selector(self.actionCountDown),
+                                                    userInfo: nil, repeats: true)
+            
+            let youtubestopTime = actionLists[nowIndex].stopTime
         
-        let youtubestopTime = actionLists[nowIndex].stopTime
-        DispatchQueue.main.asyncAfter(deadline: .now() + youtubestopTime!) {
-            self.videoView.seekTo(Float(self.actionLists[self.nowIndex].youtubeTime), seekAhead: true)
+            DispatchQueue.main.asyncAfter(deadline: .now() + youtubestopTime!) {
+                self.videoView.seekTo(Float(self.actionLists[self.nowIndex].youtubeTime), seekAhead: true)
+            
         }
-        
     }
 }
