@@ -10,6 +10,7 @@ import UIKit
 
 class ActionCell: UITableViewCell {
 
+
     @IBOutlet weak var progressView: UIView!
     @IBOutlet weak var timeDescription: UILabel!
     @IBOutlet weak var actionDescription: UILabel!
