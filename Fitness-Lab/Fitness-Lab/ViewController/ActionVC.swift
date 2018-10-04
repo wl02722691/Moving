@@ -21,6 +21,7 @@ class ActionVC: UIViewController {
     var restTimerjustStop = false
     var actionAnimatorWidth = UIViewPropertyAnimator()
     var restAnimatorWidth = UIViewPropertyAnimator()
+    var contentInsetNumber = 0
     
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var videoView: YouTubePlayerView!
@@ -50,8 +51,7 @@ class ActionVC: UIViewController {
         self.videoView.delegate = self
         activityIndicator.isHidden = true
         
-      
-    
+        
     }
     
     @IBAction func playBtn(_ sender: UIButton) {
@@ -79,11 +79,18 @@ class ActionVC: UIViewController {
                 print("nowIndex:\(nowIndex),\(actionLists.count-1)")
                 restSec = Int(actionLists[nowIndex].restTime!)
                 self.renewVideo()
+                let indexPath = IndexPath(row: nowIndex, section: 0)
+              
+                
                 self.restTimer = Timer.scheduledTimer(timeInterval: 1,
                                                       target: self,
                                                       selector: #selector(self.restCountDown),
                                                       userInfo: nil,
                                                       repeats: true)
+                contentInsetNumber += 60
+                print(contentInsetNumber)
+                actionTableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: CGFloat(contentInsetNumber), right: 0)
+                  self.actionTableView.scrollToRow(at: indexPath, at: UITableViewScrollPosition.top, animated: true)
                 print("休息時間！")
             } else {
                 videoView.pause()
@@ -156,6 +163,11 @@ class ActionVC: UIViewController {
         guard let cell = self.actionTableView.cellForRow(at: indexPath) as? ActionCell  else {return}
         cell.progressView.isHidden = false
         print(actionLists[nowIndex].timesDescription)
+        print("cell.frame\(cell.frame),cell.bounds\(cell.bounds)")
+        print("cell.progressView.frame\(cell.progressView.frame)cell.progressView.bounds\(cell.progressView.bounds),cell.progressView.frame.size.width\(cell.progressView.frame.size.width)")
+        
+ //       cell.progressView.frame = cell.frame
+
         cell.progressView.frame = cell.bounds
         cell.progressView.frame.size.width = 0
         cell.progressView.backgroundColor = #colorLiteral(red: 0.1254901961, green: 0.7254901961, blue: 0.3294117647, alpha: 1)
@@ -164,10 +176,8 @@ class ActionVC: UIViewController {
             cell.progressView.frame.size.width = cell.frame.size.width
     
         }
-        
     
         actionAnimatorWidth.startAnimation()
-        
         
         /*
          let cellFrame = cell.frame
@@ -210,7 +220,7 @@ extension ActionVC: UITableViewDataSource {
             
             let listIndex = lists[selectSender]
             startBtn.clipsToBounds = true
-            startBtn.layer.cornerRadius = 50
+            startBtn.layer.cornerRadius = 38
             videoTitle.text = listIndex.videoTitle
             videoImg.image = UIImage(named: listIndex.videoImg)
             intensityLbl.text = listIndex.intensity

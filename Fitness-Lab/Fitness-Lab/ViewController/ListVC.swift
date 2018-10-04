@@ -10,6 +10,7 @@ import UIKit
 
 class ListVC: UIViewController {
     
+    @IBOutlet weak var planNumberLbl: UILabel!
     @IBAction func filterBtnWasPressed(_ sender: UIButton) {
         performSegue(withIdentifier: "showPopover", sender: nil)
     }
@@ -30,6 +31,11 @@ class ListVC: UIViewController {
     func initList(category: FitnessCategory) {
         lists = Data.instance.getList(forListTitle: category.secondTitle)
         
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        planNumberLbl.text = "\(lists.count) 個運動計畫"
     }
     
 }

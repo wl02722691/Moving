@@ -11,7 +11,6 @@ import UIKit
 class Summary1Cell: UITableViewCell {
 
     @IBOutlet weak var planNumberLbl: UILabel!
-    
     @IBOutlet weak var allTimeLbl: UILabel!
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -20,8 +19,6 @@ class Summary1Cell: UITableViewCell {
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
     }
     
     func updateView() {

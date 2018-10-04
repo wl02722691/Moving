@@ -29,37 +29,46 @@ class SummaryVC: UIViewController {
         summaryArray = realm?.objects(SummaryModel.self)
         
         let editUpdatednotificationName = Notification.Name("toSummaryVC")
-        NotificationCenter.default.addObserver(self,
-                                               selector: #selector(updateRealm(noti:)),
-                                               name: editUpdatednotificationName, object: nil)
+        //NotificationCenter.default.addObserver(self,
+                                       //        selector: #selector(updateRealm(noti:)),
+                                         //      name: editUpdatednotificationName, object: nil)
         
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         
+        allTime = 0
+        
         if summaryArray.count - 1 > 0 {
             for summaryArrayIndex in 0 ... summaryArray.count - 1 {
                 allTime += summaryArray[summaryArrayIndex].durationLbl
-                
+                print(summaryArray[summaryArrayIndex].durationLbl)
+                print("allTimeallTimeallTimeallTime\(allTime)")
             }
         }
         
-        allTimeToMin = allTime % 60
+
+        allTimeToMin = allTime / 60
+        
+        print(allTime)
+        print(allTimeToMin)
         
         let indexPath = IndexPath(row: 0, section: 0)
         guard let cell = self.tableviewSummary.cellForRow(at: indexPath) as? Summary1Cell  else {return}
-        cell.allTimeLbl.text = String(allTimeToMin)
-        tableviewSummary.reloadData()
+        //cell.allTimeLbl.text = String(allTime)
+        
         
     }
     
     @objc func updateRealm(noti: Notification) {
-        
         if summaryArray.count - 1 > 0 {
+         
             for summaryArrayIndex in 0 ... summaryArray.count - 1 {
+                
                 allTime += summaryArray[summaryArrayIndex].durationLbl
-                print(allTime)
+                print(summaryArray[summaryArrayIndex].durationLbl)
+                print("allTimeallTimeallTimeallTime\(allTime)")
             }
         }
         tableviewSummary.reloadData()
