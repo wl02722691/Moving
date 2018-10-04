@@ -64,11 +64,12 @@ class ActionVC: UIViewController {
     
     @objc func actionCountDown() {
         
+        print("actionTimer?.timeInterval\(actionTimer?.timeInterval)")
+        
         let indexPath = IndexPath(row: nowIndex, section: 0)
         guard let cell = self.actionTableView.cellForRow(at: indexPath) as? ActionCell  else {return}
 
         actionSec -= 1
-        cell.timeDescription.text = "0:\(actionSec)"
         if actionSec == 0 {
             actionTimer?.invalidate()
             actionSec = 0
@@ -81,12 +82,13 @@ class ActionVC: UIViewController {
                 self.renewVideo()
                 let indexPath = IndexPath(row: nowIndex, section: 0)
               
-                
                 self.restTimer = Timer.scheduledTimer(timeInterval: 1,
                                                       target: self,
                                                       selector: #selector(self.restCountDown),
                                                       userInfo: nil,
                                                       repeats: true)
+        
+                
                 contentInsetNumber += 60
                 print(contentInsetNumber)
                 actionTableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: CGFloat(contentInsetNumber), right: 0)
@@ -154,8 +156,21 @@ class ActionVC: UIViewController {
         }
         
         restAnimatorWidth.startAnimation()
-        
+       // colorLoopAnimation()
     }
+    
+    func colorLoopAnimation(){
+
+        let indexPath = IndexPath(row: nowIndex, section: 0)
+        guard let cell = self.actionTableView.cellForRow(at: indexPath) as? ActionCell  else {return}
+
+        UIView.animate(withDuration: 1, delay: 0, options: [UIViewAnimationOptions.repeat, UIViewAnimationOptions.autoreverse], animations: {
+            cell.progressView.backgroundColor = #colorLiteral(red: 0.5254901961, green: 0.5607843137, blue: 0.5882352941, alpha: 1)
+            cell.progressView.backgroundColor = #colorLiteral(red: 0.3490196078, green: 0.3803921569, blue: 0.3921568627, alpha: 1)
+        }, completion: nil)
+
+    }
+    
     
     func actionViewWidthAnimate() {
         
@@ -170,7 +185,7 @@ class ActionVC: UIViewController {
 
         cell.progressView.frame = cell.bounds
         cell.progressView.frame.size.width = 0
-        cell.progressView.backgroundColor = #colorLiteral(red: 0.1254901961, green: 0.7254901961, blue: 0.3294117647, alpha: 1)
+        cell.progressView.backgroundColor = #colorLiteral(red: 0, green: 0.8901960784, blue: 0.3921568627, alpha: 1)
         
         actionAnimatorWidth = UIViewPropertyAnimator(duration: actionLists[nowIndex].timesDescription, curve: .easeIn) {
             cell.progressView.frame.size.width = cell.frame.size.width
@@ -178,7 +193,7 @@ class ActionVC: UIViewController {
         }
     
         actionAnimatorWidth.startAnimation()
-        
+
         /*
          let cellFrame = cell.frame
          
@@ -228,6 +243,16 @@ extension ActionVC: UITableViewDataSource {
             let actionlist = actionLists[indexPath.row]
             cell.updateView(actionModel: actionlist)
             cell.selectionStyle = .none
+//            
+//            if nowIndex == indexPath.row {
+//                let allTime = Int(actionLists[nowIndex].timesDescription)
+//                
+//                print(allTime ?? 0 - actionSec)
+//                print("allTime\(allTime),現在倒數\(allTime ?? 0 - actionSec)actionSec\(actionSec)")
+//                let nowTime = allTime ?? 0 - actionSec
+//                cell.timeDescription.text = "0:\(actionSec)"
+//            }
+//            
             return cell
             
         } else {
@@ -317,6 +342,7 @@ extension ActionVC: YouTubePlayerDelegate {
                                                 target: self,
                                                 selector: #selector(self.actionCountDown),
                                                 userInfo: nil, repeats: true)
+        
         
         let youtubestopTime = actionLists[nowIndex].stopTime
         
