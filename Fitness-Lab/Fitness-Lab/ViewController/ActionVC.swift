@@ -22,6 +22,7 @@ class ActionVC: UIViewController {
     var actionAnimatorWidth = UIViewPropertyAnimator()
     var restAnimatorWidth = UIViewPropertyAnimator()
     var contentInsetNumber = 0
+    var timerArray = [Date]()
     
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var videoView: YouTubePlayerView!
@@ -44,6 +45,9 @@ class ActionVC: UIViewController {
     override func viewDidLoad() {
         
         super.viewDidLoad()
+        
+        
+        
         actionTableView.separatorStyle = UITableViewCellSeparatorStyle.none
         print(lists)
         print(actionLists)
@@ -66,22 +70,44 @@ class ActionVC: UIViewController {
         
         print("actionTimer?.timeInterval\(actionTimer?.timeInterval)")
         
+        let date = Date()
+        timerArray.append(actionTimer?.fireDate ?? date)
+        print("經過的秒數:\(timerArray.count)")
+        print(timerArray)
+        
+        let passSec = timerArray.count
+        
+        
+        
+    
+        
         let indexPath = IndexPath(row: nowIndex, section: 0)
         guard let cell = self.actionTableView.cellForRow(at: indexPath) as? ActionCell  else {return}
 
-        actionSec -= 1
-        if actionSec == 0 {
+        
+        let actionAllTimeSecInt = Int(actionLists[nowIndex].timesDescription)
+        actionSec =  actionAllTimeSecInt - passSec
+        print(actionSec)
+        
+        cell.timeDescription.text = "0:\(actionSec)"
+        
+        print("timerArray.count\(timerArray.count)actionAllTimeSecInt\(actionAllTimeSecInt)")
+        
+        if timerArray.count == actionAllTimeSecInt {
             actionTimer?.invalidate()
             actionSec = 0
+            
+            
             if nowIndex < actionLists.count-1 {
-                cell.timeDescription.text = "✓"
+                timerArray.removeAll()
+                
+                cell.timeDescription.text = "✓勾勾"
                 nowIndex += 1
                 restViewWidthAnimate()
                 print("nowIndex:\(nowIndex),\(actionLists.count-1)")
                 restSec = Int(actionLists[nowIndex].restTime!)
                 self.renewVideo()
                 let indexPath = IndexPath(row: nowIndex, section: 0)
-              
                 self.restTimer = Timer.scheduledTimer(timeInterval: 1,
                                                       target: self,
                                                       selector: #selector(self.restCountDown),
@@ -94,6 +120,8 @@ class ActionVC: UIViewController {
                 actionTableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: CGFloat(contentInsetNumber), right: 0)
                   self.actionTableView.scrollToRow(at: indexPath, at: UITableViewScrollPosition.top, animated: true)
                 print("休息時間！")
+                
+                
             } else {
                 videoView.pause()
                 print("做完囉要去下一頁了")
@@ -220,7 +248,43 @@ class ActionVC: UIViewController {
 
 }
 
-extension ActionVC: UITableViewDelegate {}
+extension ActionVC: UITableViewDelegate {
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        print(indexPath)
+    }
+    
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        print(indexPath)
+        
+        if indexPath.row <= nowIndex {
+            for lowerIndex in 0...nowIndex{
+                let index = IndexPath(row: lowerIndex, section: 0)
+                let cell = actionTableView.cellForRow(at: index) as? ActionCell
+                cell?.timeDescription.text = "willDisplay完成"
+                print("willDisplay:\(indexPath)")
+                cell?.progressView.frame = cell?.frame ?? CGRect(x: 0, y: 0, width: 375, height: 60)
+                cell?.progressView.backgroundColor = #colorLiteral(red: 0.501960814, green: 0.501960814, blue: 0.501960814, alpha: 1)
+                cell?.progressView.alpha = 0.5
+            }
+        }
+        
+    }
+    
+    
+    func tableView(_ tableView: UITableView, didEndDisplaying cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        if indexPath.row < nowIndex {
+            for lowerIndex in 0...nowIndex-1{
+                let index = IndexPath(row: lowerIndex, section: 0)
+                let cell = actionTableView.cellForRow(at: index) as? ActionCell
+               // cell?.timeDescription.text = "didEndDisplaying好囉"
+                 print("didEndDisplaying:\(indexPath)")
+                cell?.backgroundColor = #colorLiteral(red: 0.09411764706, green: 0.09411764706, blue: 0.09411764706, alpha: 1)
+            }
+        }
+        
+    }
+}
 
 extension ActionVC: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -231,28 +295,73 @@ extension ActionVC: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if let cell = actionTableView.dequeueReusableCell(withIdentifier: "ActionCell") as? ActionCell {
             
-            actionSec = Int(lists[selectSender].actionModel[0].timesDescription)
+            print(nowIndex)
+            print(indexPath.row)
             
-            let listIndex = lists[selectSender]
-            startBtn.clipsToBounds = true
-            startBtn.layer.cornerRadius = 38
-            videoTitle.text = listIndex.videoTitle
-            videoImg.image = UIImage(named: listIndex.videoImg)
-            intensityLbl.text = listIndex.intensity
-            durationLbl.text = "\(listIndex.durationLbl)min"
-            let actionlist = actionLists[indexPath.row]
-            cell.updateView(actionModel: actionlist)
-            cell.selectionStyle = .none
-//            
-//            if nowIndex == indexPath.row {
-//                let allTime = Int(actionLists[nowIndex].timesDescription)
-//                
-//                print(allTime ?? 0 - actionSec)
-//                print("allTime\(allTime),現在倒數\(allTime ?? 0 - actionSec)actionSec\(actionSec)")
-//                let nowTime = allTime ?? 0 - actionSec
+            
+            if nowIndex == indexPath.row{
+                //播放之前的第一行
+                cell.timeDescription.text = "0:\(actionSec)"
+                let actionlist = actionLists[indexPath.row]
+                cell.updateView(actionModel: actionlist)
+            }else if nowIndex == indexPath.row && videoView.playerState == .Playing{
+                //播放中的第一行
+                let actionlist = actionLists[indexPath.row]
+                cell.updateView(actionModel: actionlist)
+                cell.timeDescription.text = "0:\(actionSec)"
+            }else if indexPath.row < nowIndex{
+                for lowerIndex in 0...nowIndex{
+                    let index = IndexPath(row: lowerIndex, section: 0)
+                    let cell = actionTableView.cellForRow(at: index) as? ActionCell
+                    cell?.timeDescription.text = "cellForRow加辣"
+                }
+            }else{
+                actionSec = Int(lists[selectSender].actionModel[0].timesDescription)
+                let listIndex = lists[selectSender]
+                startBtn.clipsToBounds = true
+                startBtn.layer.cornerRadius = 38
+                videoTitle.text = listIndex.videoTitle
+                videoImg.image = UIImage(named: listIndex.videoImg)
+                intensityLbl.text = listIndex.intensity
+                durationLbl.text = "\(listIndex.durationLbl)min"
+                let actionlist = actionLists[indexPath.row]
+                cell.updateView(actionModel: actionlist)
+                cell.selectionStyle = .none
+            }
+            
+            
+            
+//
+//            if indexPath.row <= nowIndex {
+//                for lowerIndex in 0...nowIndex{
+//                    let index = IndexPath(row: lowerIndex, section: 0)
+//                    let cell = actionTableView.cellForRow(at: index) as? ActionCell
+//                    cell?.timeDescription.text = "cellForRow加辣"
+//                }
+//            }else if nowIndex == indexPath.row && videoView.playerState == .Playing{
 //                cell.timeDescription.text = "0:\(actionSec)"
-//            }
-//            
+//            }else if nowIndex == indexPath.row{
+//                cell.timeDescription.text = "0:\(actionSec)"
+//                let actionlist = actionLists[indexPath.row]
+//                cell.updateView(actionModel: actionlist)
+//            }else{
+//
+//
+//                actionSec = Int(lists[selectSender].actionModel[0].timesDescription)
+//                let listIndex = lists[selectSender]
+//                startBtn.clipsToBounds = true
+//                startBtn.layer.cornerRadius = 38
+//                videoTitle.text = listIndex.videoTitle
+//                videoImg.image = UIImage(named: listIndex.videoImg)
+//                intensityLbl.text = listIndex.intensity
+//                durationLbl.text = "\(listIndex.durationLbl)min"
+//                let actionlist = actionLists[indexPath.row]
+//                cell.updateView(actionModel: actionlist)
+//                cell.selectionStyle = .none
+            
+   //         }
+            
+           
             return cell
             
         } else {

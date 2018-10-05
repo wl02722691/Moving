@@ -13,18 +13,24 @@ struct ActionModel {
     private(set) public var timesDescription: Double
     private(set) public var actionDescription: String
     private(set) public var restTime: Double?
-    
+    public var cellStatus: CellStatus
+    public var actionOrRest: ActionOrRest?
     
     init(youtubeTime: Double,
          stopTime: Double,
          restTime: Double,
          timesDescription: Double,
-         actionDescription: String) {
+         actionDescription: String,
+         cellStatus: CellStatus,
+         actionOrRest: ActionOrRest) {
         
         self.youtubeTime = youtubeTime
         self.stopTime = stopTime
         self.timesDescription = timesDescription
         self.actionDescription = actionDescription
         self.restTime = restTime
+        self.cellStatus = cellStatus
+        self.actionOrRest = actionOrRest
+        
     }
 }
