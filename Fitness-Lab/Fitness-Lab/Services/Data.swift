@@ -26,25 +26,89 @@ class Data {
     private let coreArray = [
    
         ListModel(videoImg: "Abs3", durationLbl: "7", videoTitle: "連續22天的腹肌訓練計畫", videoDescription: "FittingRoomTW", intensity: "入門", videoID: "EIoryEvS2Gc", actionModel:[
-            ActionModel(youtubeTime: 115.0, stopTime: 115.0, restTime: 10.0, timesDescription: 45.0, actionDescription: "仰臥抬腿", cellStatus: CellStatus.willplay, actionOrRest: ActionOrRest.action),ActionModel(youtubeTime: 164.0, stopTime: 20.0, restTime: 10.0, timesDescription: 45.0, actionDescription: "側步棒式", cellStatus: CellStatus.willplay, actionOrRest: ActionOrRest.action),ActionModel(youtubeTime: 200.0, stopTime: 20.0, restTime: 10.0, timesDescription: 45.0, actionDescription: "側步棒式", cellStatus: CellStatus.willplay, actionOrRest: ActionOrRest.action),ActionModel(youtubeTime: 164.0, stopTime: 20.0, restTime: 10.0, timesDescription: 45.0, actionDescription: "側步棒式", cellStatus: CellStatus.willplay, actionOrRest: ActionOrRest.action),ActionModel(youtubeTime: 200.0, stopTime: 20.0, restTime: 10.0, timesDescription: 40.0, actionDescription: "12次X卷腹", cellStatus: CellStatus.willplay, actionOrRest: ActionOrRest.action),ActionModel(youtubeTime: 233.0, stopTime: 37.0, restTime: 10.0, timesDescription: 40.0, actionDescription: "10次左側旋轉側棒式", cellStatus: CellStatus.willplay, actionOrRest: ActionOrRest.action),ActionModel(youtubeTime: 200.0, stopTime: 20.0, restTime: 10.0, timesDescription: 40.0, actionDescription: "12次X卷腹", cellStatus: CellStatus.willplay, actionOrRest: ActionOrRest.action),ActionModel(youtubeTime: 233.0, stopTime: 37.0, restTime: 10.0, timesDescription: 40.0, actionDescription: "10次右側旋轉側棒式", cellStatus: CellStatus.willplay, actionOrRest: ActionOrRest.action),ActionModel(youtubeTime: 289.0, stopTime: 23.0, restTime: 10.0, timesDescription: 45.0, actionDescription: "屈體", cellStatus: CellStatus.willplay, actionOrRest: ActionOrRest.action),ActionModel(youtubeTime: 330.0, stopTime: 25.0, restTime: 10.0, timesDescription: 45.0, actionDescription: "固定單車式捲腹", cellStatus: CellStatus.willplay, actionOrRest: ActionOrRest.action)]),
+            ActionModel(youtubeTime: 100, stopTime: 100, restTime: 5, timesDescription: 120, actionDescription: "Alice QQQQQQQ", cellStatus: CellStatus.willplay, actionOrRest: ActionOrRest.action, progressWidth: 0),
+               ActionModel(youtubeTime: 100, stopTime: 100, restTime: 5, timesDescription: 120, actionDescription: "Annie QQQQQQQ", cellStatus: CellStatus.willplay, actionOrRest: ActionOrRest.action, progressWidth: 0),
+                  ActionModel(youtubeTime: 100, stopTime: 100, restTime: 5, timesDescription: 120, actionDescription: "Frank QQQQQQQ", cellStatus: CellStatus.willplay, actionOrRest: ActionOrRest.action, progressWidth: 0),
+                     ActionModel(youtubeTime: 100, stopTime: 100, restTime: 5, timesDescription: 120, actionDescription: "Luke QQQQQQQ", cellStatus: CellStatus.willplay, actionOrRest: ActionOrRest.action, progressWidth: 0),
+                        ActionModel(youtubeTime: 100, stopTime: 100, restTime: 5, timesDescription: 120, actionDescription: "Crystal QQQQQQQ", cellStatus: CellStatus.willplay, actionOrRest: ActionOrRest.action, progressWidth: 0),
+                        ActionModel(youtubeTime: 100, stopTime: 100, restTime: 5, timesDescription: 120, actionDescription: "Alice QQQQQQQ", cellStatus: CellStatus.willplay, actionOrRest: ActionOrRest.action, progressWidth: 0),
+                        ActionModel(youtubeTime: 100, stopTime: 100, restTime: 5, timesDescription: 120, actionDescription: "Annie QQQQQQQ", cellStatus: CellStatus.willplay, actionOrRest: ActionOrRest.action, progressWidth: 0),
+                        ActionModel(youtubeTime: 100, stopTime: 100, restTime: 5, timesDescription: 120, actionDescription: "Frank QQQQQQQ", cellStatus: CellStatus.willplay, actionOrRest: ActionOrRest.action, progressWidth: 0),
+                        ActionModel(youtubeTime: 100, stopTime: 100, restTime: 5, timesDescription: 120, actionDescription: "Luke QQQQQQQ", cellStatus: CellStatus.willplay, actionOrRest: ActionOrRest.action, progressWidth: 0),
+                        ActionModel(youtubeTime: 100, stopTime: 100, restTime: 5, timesDescription: 120, actionDescription: "Crystal QQQQQQQ", cellStatus: CellStatus.willplay, actionOrRest: ActionOrRest.action, progressWidth: 0),
+                        ActionModel(youtubeTime: 100, stopTime: 100, restTime: 5, timesDescription: 120, actionDescription: "Alice QQQQQQQ", cellStatus: CellStatus.willplay, actionOrRest: ActionOrRest.action, progressWidth: 0),
+                        ActionModel(youtubeTime: 100, stopTime: 100, restTime: 5, timesDescription: 120, actionDescription: "Annie QQQQQQQ", cellStatus: CellStatus.willplay, actionOrRest: ActionOrRest.action, progressWidth: 0),
+                        ActionModel(youtubeTime: 100, stopTime: 100, restTime: 5, timesDescription: 120, actionDescription: "Frank QQQQQQQ", cellStatus: CellStatus.willplay, actionOrRest: ActionOrRest.action, progressWidth: 0),
+                        ActionModel(youtubeTime: 100, stopTime: 100, restTime: 5, timesDescription: 120, actionDescription: "Luke QQQQQQQ", cellStatus: CellStatus.willplay, actionOrRest: ActionOrRest.action, progressWidth: 0),
+                        ActionModel(youtubeTime: 100, stopTime: 100, restTime: 5, timesDescription: 120, actionDescription: "Crystal QQQQQQQ", cellStatus: CellStatus.willplay, actionOrRest: ActionOrRest.action, progressWidth: 0),
+                        
+            
+            ]),
         
         ListModel(videoImg: "Abs3", durationLbl: "7", videoTitle: "連續22天的腹肌訓練計畫", videoDescription: "FittingRoomTW", intensity: "入門", videoID: "EIoryEvS2Gc", actionModel:[
-            ActionModel(youtubeTime: 115.0, stopTime: 115.0, restTime: 10.0, timesDescription: 10, actionDescription: "仰臥抬腿", cellStatus: CellStatus.willplay, actionOrRest: ActionOrRest.action),ActionModel(youtubeTime: 164.0, stopTime: 20.0, restTime: 10.0, timesDescription: 10, actionDescription: "側步棒式", cellStatus: CellStatus.willplay, actionOrRest: ActionOrRest.action),ActionModel(youtubeTime: 200.0, stopTime: 20.0, restTime: 10.0, timesDescription: 10, actionDescription: "側步棒式", cellStatus: CellStatus.willplay, actionOrRest: ActionOrRest.action),ActionModel(youtubeTime: 164.0, stopTime: 20.0, restTime: 10.0, timesDescription: 10, actionDescription: "側步棒式", cellStatus: CellStatus.willplay, actionOrRest: ActionOrRest.action),ActionModel(youtubeTime: 200.0, stopTime: 20.0, restTime: 10.0, timesDescription: 10, actionDescription: "12次X卷腹", cellStatus: CellStatus.willplay, actionOrRest: ActionOrRest.action),ActionModel(youtubeTime: 233.0, stopTime: 37.0, restTime: 10.0, timesDescription: 10, actionDescription: "10次左側旋轉側棒式", cellStatus: CellStatus.willplay, actionOrRest: ActionOrRest.action),ActionModel(youtubeTime: 200.0, stopTime: 20.0, restTime: 10.0, timesDescription: 10, actionDescription: "12次X卷腹", cellStatus: CellStatus.willplay, actionOrRest: ActionOrRest.action),ActionModel(youtubeTime: 233.0, stopTime: 37.0, restTime: 10.0, timesDescription: 10, actionDescription: "10次右側旋轉側棒式", cellStatus: CellStatus.willplay, actionOrRest: ActionOrRest.action),ActionModel(youtubeTime: 289.0, stopTime: 23.0, restTime: 10.0, timesDescription: 10, actionDescription: "屈體", cellStatus: CellStatus.willplay, actionOrRest: ActionOrRest.action),ActionModel(youtubeTime: 330.0, stopTime: 25.0, restTime: 10.0, timesDescription: 10, actionDescription: "固定單車式捲腹", cellStatus: CellStatus.willplay, actionOrRest: ActionOrRest.action),])
+            ActionModel(youtubeTime: 100, stopTime: 100, restTime: 5, timesDescription: 5, actionDescription: "Alice QQQQQQQ", cellStatus: CellStatus.willplay, actionOrRest: ActionOrRest.action, progressWidth: 0),
+            ActionModel(youtubeTime: 100, stopTime: 100, restTime: 5, timesDescription: 5, actionDescription: "Annie QQQQQQQ", cellStatus: CellStatus.willplay, actionOrRest: ActionOrRest.action, progressWidth: 0),
+            ActionModel(youtubeTime: 100, stopTime: 100, restTime: 5, timesDescription: 5, actionDescription: "Frank QQQQQQQ", cellStatus: CellStatus.willplay, actionOrRest: ActionOrRest.action, progressWidth: 0),
+            ActionModel(youtubeTime: 100, stopTime: 100, restTime: 5, timesDescription: 5, actionDescription: "Luke QQQQQQQ", cellStatus: CellStatus.willplay, actionOrRest: ActionOrRest.action, progressWidth: 0),
+            ActionModel(youtubeTime: 100, stopTime: 100, restTime: 5, timesDescription: 5, actionDescription: "Crystal QQQQQQQ", cellStatus: CellStatus.willplay, actionOrRest: ActionOrRest.action, progressWidth: 0),
+            
+            
+            ]),
         
-
+        
+        
+        ListModel(videoImg: "Abs3", durationLbl: "7", videoTitle: "連續22天的腹肌訓練計畫", videoDescription: "FittingRoomTW", intensity: "入門", videoID: "EIoryEvS2Gc", actionModel:[
+            ActionModel(youtubeTime: 100, stopTime: 100, restTime: 5, timesDescription: 10, actionDescription: "Alice QQQQQQQ", cellStatus: CellStatus.willplay, actionOrRest: ActionOrRest.action, progressWidth: 0),
+            ActionModel(youtubeTime: 100, stopTime: 100, restTime: 5, timesDescription: 10, actionDescription: "Annie QQQQQQQ", cellStatus: CellStatus.willplay, actionOrRest: ActionOrRest.action, progressWidth: 0),
+            ActionModel(youtubeTime: 100, stopTime: 100, restTime: 5, timesDescription: 10, actionDescription: "Frank QQQQQQQ", cellStatus: CellStatus.willplay, actionOrRest: ActionOrRest.action, progressWidth: 0),
+            ActionModel(youtubeTime: 100, stopTime: 100, restTime: 5, timesDescription: 10, actionDescription: "Luke QQQQQQQ", cellStatus: CellStatus.willplay, actionOrRest: ActionOrRest.action, progressWidth: 0),
+            ActionModel(youtubeTime: 100, stopTime: 100, restTime: 5, timesDescription: 10, actionDescription: "Crystal QQQQQQQ", cellStatus: CellStatus.willplay, actionOrRest: ActionOrRest.action, progressWidth: 0),
+            ActionModel(youtubeTime: 100, stopTime: 100, restTime: 5, timesDescription: 10, actionDescription: "Alice QQQQQQQ", cellStatus: CellStatus.willplay, actionOrRest: ActionOrRest.action, progressWidth: 0),
+            ActionModel(youtubeTime: 100, stopTime: 100, restTime: 5, timesDescription: 10, actionDescription: "Annie QQQQQQQ", cellStatus: CellStatus.willplay, actionOrRest: ActionOrRest.action, progressWidth: 0),
+            ActionModel(youtubeTime: 100, stopTime: 100, restTime: 5, timesDescription: 10, actionDescription: "Frank QQQQQQQ", cellStatus: CellStatus.willplay, actionOrRest: ActionOrRest.action, progressWidth: 0),
+            ActionModel(youtubeTime: 100, stopTime: 100, restTime: 5, timesDescription: 10, actionDescription: "Luke QQQQQQQ", cellStatus: CellStatus.willplay, actionOrRest: ActionOrRest.action, progressWidth: 0),
+            ActionModel(youtubeTime: 100, stopTime: 100, restTime: 5, timesDescription: 10, actionDescription: "Crystal QQQQQQQ", cellStatus: CellStatus.willplay, actionOrRest: ActionOrRest.action, progressWidth: 0),
+            
+            
+            
+            ]),
         ]
     
     private let buttArray = [
-              ListModel(videoImg: "Abs2", durationLbl: "3", videoTitle: "3分鐘的腹部訓練", videoDescription: "FittingRoomTW", intensity: "FittingRoomTW", videoID: "HjP9GUWTft4", actionModel: [ActionModel(youtubeTime: 1, stopTime: 1, restTime: 1, timesDescription: 1, actionDescription: "登山者", cellStatus: CellStatus.willplay, actionOrRest: ActionOrRest.action)]),
+        
+        ListModel(videoImg: "Abs3", durationLbl: "7", videoTitle: "連續22天的腹肌訓練計畫", videoDescription: "FittingRoomTW", intensity: "入門", videoID: "EIoryEvS2Gc", actionModel:[
+            ActionModel(youtubeTime: 100, stopTime: 100, restTime: 5, timesDescription: 10, actionDescription: "Alice QQQQQQQ", cellStatus: CellStatus.willplay, actionOrRest: ActionOrRest.action, progressWidth: 0),
+            ActionModel(youtubeTime: 100, stopTime: 100, restTime: 5, timesDescription: 10, actionDescription: "Annie QQQQQQQ", cellStatus: CellStatus.willplay, actionOrRest: ActionOrRest.action, progressWidth: 0),
+            ActionModel(youtubeTime: 100, stopTime: 100, restTime: 5, timesDescription: 10, actionDescription: "Frank QQQQQQQ", cellStatus: CellStatus.willplay, actionOrRest: ActionOrRest.action, progressWidth: 0),
+            ActionModel(youtubeTime: 100, stopTime: 100, restTime: 5, timesDescription: 10, actionDescription: "Luke QQQQQQQ", cellStatus: CellStatus.willplay, actionOrRest: ActionOrRest.action, progressWidth: 0),
+            ActionModel(youtubeTime: 100, stopTime: 100, restTime: 5, timesDescription: 10, actionDescription: "Crystal QQQQQQQ", cellStatus: CellStatus.willplay, actionOrRest: ActionOrRest.action, progressWidth: 0),
+            
+            
+            ]),
         ]
     
     private let armArray = [
-            ListModel(videoImg: "Abs2", durationLbl: "3", videoTitle: "3分鐘的腹部訓練", videoDescription: "FittingRoomTW", intensity: "FittingRoomTW", videoID: "HjP9GUWTft4", actionModel: [ActionModel(youtubeTime: 1, stopTime: 1, restTime: 1, timesDescription: 1, actionDescription: "登山者", cellStatus: CellStatus.willplay, actionOrRest: ActionOrRest.action)]),
+        ListModel(videoImg: "Abs3", durationLbl: "7", videoTitle: "連續22天的腹肌訓練計畫", videoDescription: "FittingRoomTW", intensity: "入門", videoID: "EIoryEvS2Gc", actionModel:[
+            ActionModel(youtubeTime: 100, stopTime: 100, restTime: 5, timesDescription: 5, actionDescription: "Alice QQQQQQQ", cellStatus: CellStatus.willplay, actionOrRest: ActionOrRest.action, progressWidth: 0),
+            ActionModel(youtubeTime: 100, stopTime: 100, restTime: 5, timesDescription: 5, actionDescription: "Annie QQQQQQQ", cellStatus: CellStatus.willplay, actionOrRest: ActionOrRest.action, progressWidth: 0),
+            ActionModel(youtubeTime: 100, stopTime: 100, restTime: 5, timesDescription: 5, actionDescription: "Frank QQQQQQQ", cellStatus: CellStatus.willplay, actionOrRest: ActionOrRest.action, progressWidth: 0),
+            ActionModel(youtubeTime: 100, stopTime: 100, restTime: 5, timesDescription: 5, actionDescription: "Luke QQQQQQQ", cellStatus: CellStatus.willplay, actionOrRest: ActionOrRest.action, progressWidth: 0),
+            ActionModel(youtubeTime: 100, stopTime: 100, restTime: 5, timesDescription: 5, actionDescription: "Crystal QQQQQQQ", cellStatus: CellStatus.willplay, actionOrRest: ActionOrRest.action, progressWidth: 0),
+            
+            
+            ]),
         ]
     
     private let legArray = [
-       
-        ListModel(videoImg: "Abs2", durationLbl: "3", videoTitle: "3分鐘的腹部訓練", videoDescription: "FittingRoomTW", intensity: "FittingRoomTW", videoID: "HjP9GUWTft4", actionModel: [ActionModel(youtubeTime: 1, stopTime: 1, restTime: 1, timesDescription: 1, actionDescription: "登山者", cellStatus: CellStatus.willplay, actionOrRest: ActionOrRest.action)]),
+        ListModel(videoImg: "Abs3", durationLbl: "7", videoTitle: "連續22天的腹肌訓練計畫", videoDescription: "FittingRoomTW", intensity: "入門", videoID: "EIoryEvS2Gc", actionModel:[
+            ActionModel(youtubeTime: 100, stopTime: 100, restTime: 5, timesDescription: 5, actionDescription: "Alice QQQQQQQ", cellStatus: CellStatus.willplay, actionOrRest: ActionOrRest.action, progressWidth: 0),
+            ActionModel(youtubeTime: 100, stopTime: 100, restTime: 5, timesDescription: 5, actionDescription: "Annie QQQQQQQ", cellStatus: CellStatus.willplay, actionOrRest: ActionOrRest.action, progressWidth: 0),
+            ActionModel(youtubeTime: 100, stopTime: 100, restTime: 5, timesDescription: 5, actionDescription: "Frank QQQQQQQ", cellStatus: CellStatus.willplay, actionOrRest: ActionOrRest.action, progressWidth: 0),
+            ActionModel(youtubeTime: 100, stopTime: 100, restTime: 5, timesDescription: 5, actionDescription: "Luke QQQQQQQ", cellStatus: CellStatus.willplay, actionOrRest: ActionOrRest.action, progressWidth: 0),
+            ActionModel(youtubeTime: 100, stopTime: 100, restTime: 5, timesDescription: 5, actionDescription: "Crystal QQQQQQQ", cellStatus: CellStatus.willplay, actionOrRest: ActionOrRest.action, progressWidth: 0),
+            
+            
+            ]),
         
         ]
     

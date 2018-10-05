@@ -23,6 +23,9 @@ class ActionVC: UIViewController {
     var restAnimatorWidth = UIViewPropertyAnimator()
     var contentInsetNumber = 0
     var timerArray = [Date]()
+    var lists =  [ListModel]()
+    var actionLists = [ActionModel]()
+    var selectSender = 0
     
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var videoView: YouTubePlayerView!
@@ -33,20 +36,16 @@ class ActionVC: UIViewController {
     @IBOutlet weak var durationLbl: UILabel!
     @IBOutlet weak var actionTableView: UITableView!
     
-    var lists =  [ListModel]()
-    var actionLists = [ActionModel]()
-    var selectSender = 0
-    
+    // MARK: - initList
     func initList(category: FitnessCategory) {
         lists = Data.instance.getList(forListTitle: category.secondTitle)
         
     }
     
+    // MARK: - initView
     override func viewDidLoad() {
         
         super.viewDidLoad()
-        
-        
         
         actionTableView.separatorStyle = UITableViewCellSeparatorStyle.none
         print(lists)
@@ -55,10 +54,23 @@ class ActionVC: UIViewController {
         self.videoView.delegate = self
         activityIndicator.isHidden = true
         
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        
+        super.viewWillAppear(true)
+        startBtn.cornerRadius = 38
+        let listIndex = lists[selectSender]
+        videoTitle.text = listIndex.videoTitle
+        videoImg.image = UIImage(named: listIndex.videoImg)
+        intensityLbl.text = listIndex.intensity
+        durationLbl.text = "\(listIndex.durationLbl)min"
         
     }
     
+
     @IBAction func playBtn(_ sender: UIButton) {
+        
         videoView.isHidden = false
         videoView.playerVars = ["playsinline": 1 as AnyObject]
         videoView.loadVideoID(lists[selectSender].videoID)
@@ -66,45 +78,45 @@ class ActionVC: UIViewController {
         activityIndicator.isHidden = false
     }
     
+    
+    // MARK: - CountDown
     @objc func actionCountDown() {
-        
-        print("actionTimer?.timeInterval\(actionTimer?.timeInterval)")
         
         let date = Date()
         timerArray.append(actionTimer?.fireDate ?? date)
-        print("經過的秒數:\(timerArray.count)")
-        print(timerArray)
         
         let passSec = timerArray.count
         
-        
-        
-    
-        
         let indexPath = IndexPath(row: nowIndex, section: 0)
         guard let cell = self.actionTableView.cellForRow(at: indexPath) as? ActionCell  else {return}
-
         
         let actionAllTimeSecInt = Int(actionLists[nowIndex].timesDescription)
         actionSec =  actionAllTimeSecInt - passSec
-        print(actionSec)
-        
         cell.timeDescription.text = "0:\(actionSec)"
         
-        print("timerArray.count\(timerArray.count)actionAllTimeSecInt\(actionAllTimeSecInt)")
+        actionLists[nowIndex].cellStatus = .playing
+        actionLists[nowIndex].actionOrRest = .action
         
         if timerArray.count == actionAllTimeSecInt {
+            //action倒數為0
             actionTimer?.invalidate()
             actionSec = 0
             
-            
             if nowIndex < actionLists.count-1 {
                 timerArray.removeAll()
+                actionViewWidthAnimate()
                 
-                cell.timeDescription.text = "✓勾勾"
+                actionAnimatorWidth.stopAnimation(true)
+                cell.timeDescription.text = "✓"
+                cell.progressView.backgroundColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
+                actionLists[nowIndex].cellStatus = .played
+                
                 nowIndex += 1
+                actionLists[nowIndex].cellStatus = .playing
+                actionLists[nowIndex].actionOrRest = .rest
+                
                 restViewWidthAnimate()
-                print("nowIndex:\(nowIndex),\(actionLists.count-1)")
+            
                 restSec = Int(actionLists[nowIndex].restTime!)
                 self.renewVideo()
                 let indexPath = IndexPath(row: nowIndex, section: 0)
@@ -113,14 +125,11 @@ class ActionVC: UIViewController {
                                                       selector: #selector(self.restCountDown),
                                                       userInfo: nil,
                                                       repeats: true)
-        
                 
                 contentInsetNumber += 60
-                print(contentInsetNumber)
                 actionTableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: CGFloat(contentInsetNumber), right: 0)
-                  self.actionTableView.scrollToRow(at: indexPath, at: UITableViewScrollPosition.top, animated: true)
+                self.actionTableView.scrollToRow(at: indexPath, at: UITableViewScrollPosition.top, animated: true)
                 print("休息時間！")
-                
                 
             } else {
                 videoView.pause()
@@ -137,6 +146,7 @@ class ActionVC: UIViewController {
         cell.timeDescription.text = "0:\(restSec)"
         cell.actionDescription.text = "休息時間"
         if restSec == 0 {
+            
             actionViewWidthAnimate()
             cell.actionDescription.text = actionLists[nowIndex].actionDescription
             restTimer?.invalidate()
@@ -148,6 +158,8 @@ class ActionVC: UIViewController {
         }
     }
     
+    
+    // MARK: - renewVideo
     func renewVideo() {
         let floatYoutubeTime = Float(actionLists[nowIndex].youtubeTime)
         videoView.seekTo(floatYoutubeTime, seekAhead: true)
@@ -160,15 +172,41 @@ class ActionVC: UIViewController {
         }
     }
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let scoreVC = segue.destination as? ScoreVC {
-            scoreVC.lists = lists
-            scoreVC.actionLists = actionLists
-            scoreVC.selectSender = selectSender
-        }
+ 
+    // MARK: - Animate
+    
+    func colorLoopAnimation() {
+        
+        let indexPath = IndexPath(row: nowIndex, section: 0)
+        guard let cell = self.actionTableView.cellForRow(at: indexPath) as? ActionCell  else {return}
+        
+        UIView.animate(withDuration: 1, delay: 0, options: [UIViewAnimationOptions.repeat, UIViewAnimationOptions.autoreverse], animations: {
+            cell.progressView.backgroundColor = #colorLiteral(red: 0.5254901961, green: 0.5607843137, blue: 0.5882352941, alpha: 1)
+            cell.progressView.backgroundColor = #colorLiteral(red: 0.3490196078, green: 0.3803921569, blue: 0.3921568627, alpha: 1)
+        }, completion: nil)
+        
     }
     
-    func restViewWidthAnimate(){
+    
+    func actionViewWidthAnimate(progressViewWidth:Int) {
+        
+        let indexPath = IndexPath(row: nowIndex, section: 0)
+        guard let cell = self.actionTableView.cellForRow(at: indexPath) as? ActionCell  else {return}
+        cell.progressView.isHidden = false
+        
+        cell.progressView.frame = cell.bounds
+        cell.progressView.frame.size.width = 0
+        cell.progressView.backgroundColor = #colorLiteral(red: 0, green: 0.8901960784, blue: 0.3921568627, alpha: 1)
+        
+        actionAnimatorWidth = UIViewPropertyAnimator(duration: actionLists[nowIndex].timesDescription, curve: .easeIn) {
+            cell.progressView.frame.size.width = cell.frame.size.width
+            
+        }
+        
+        actionAnimatorWidth.startAnimation()
+    }
+    
+    func restViewWidthAnimate() {
         
         let indexPath = IndexPath(row: nowIndex, section: 0)
         guard let cell = self.actionTableView.cellForRow(at: indexPath) as? ActionCell  else {return}
@@ -184,107 +222,45 @@ class ActionVC: UIViewController {
         }
         
         restAnimatorWidth.startAnimation()
-       // colorLoopAnimation()
-    }
-    
-    func colorLoopAnimation(){
-
-        let indexPath = IndexPath(row: nowIndex, section: 0)
-        guard let cell = self.actionTableView.cellForRow(at: indexPath) as? ActionCell  else {return}
-
-        UIView.animate(withDuration: 1, delay: 0, options: [UIViewAnimationOptions.repeat, UIViewAnimationOptions.autoreverse], animations: {
-            cell.progressView.backgroundColor = #colorLiteral(red: 0.5254901961, green: 0.5607843137, blue: 0.5882352941, alpha: 1)
-            cell.progressView.backgroundColor = #colorLiteral(red: 0.3490196078, green: 0.3803921569, blue: 0.3921568627, alpha: 1)
-        }, completion: nil)
 
     }
     
+    // MARK: - ToScoreVC
     
-    func actionViewWidthAnimate() {
-        
-        let indexPath = IndexPath(row: nowIndex, section: 0)
-        guard let cell = self.actionTableView.cellForRow(at: indexPath) as? ActionCell  else {return}
-        cell.progressView.isHidden = false
-        print(actionLists[nowIndex].timesDescription)
-        print("cell.frame\(cell.frame),cell.bounds\(cell.bounds)")
-        print("cell.progressView.frame\(cell.progressView.frame)cell.progressView.bounds\(cell.progressView.bounds),cell.progressView.frame.size.width\(cell.progressView.frame.size.width)")
-        
- //       cell.progressView.frame = cell.frame
-
-        cell.progressView.frame = cell.bounds
-        cell.progressView.frame.size.width = 0
-        cell.progressView.backgroundColor = #colorLiteral(red: 0, green: 0.8901960784, blue: 0.3921568627, alpha: 1)
-        
-        actionAnimatorWidth = UIViewPropertyAnimator(duration: actionLists[nowIndex].timesDescription, curve: .easeIn) {
-            cell.progressView.frame.size.width = cell.frame.size.width
-    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let scoreVC = segue.destination as? ScoreVC {
+            scoreVC.lists = lists
+            scoreVC.actionLists = actionLists
+            scoreVC.selectSender = selectSender
         }
-    
-        actionAnimatorWidth.startAnimation()
-
-        /*
-         let cellFrame = cell.frame
-         
-         let progressView = UIView(
-         frame: CGRect(
-         x: cellFrame.origin.x,
-         y: cellFrame.origin.y,
-         width: 0,
-         height: cellFrame.size.height
-         )
-         )
-         
-         actionTableView.insertSubview(progressView, aboveSubview: cell)
-         
-         let animator = UIViewPropertyAnimator(duration: 20, curve: .easeIn) {
-         
-         progressView.frame.size.width = cell.frame.width
-         
-         }
-         
-         animator.startAnimation()
-         */
     }
-
+    
+    
 }
+
+    // MARK: - UITableViewDelegate
 
 extension ActionVC: UITableViewDelegate {
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        print(indexPath)
-    }
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {}
     
-    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        print(indexPath)
-        
-        if indexPath.row <= nowIndex {
-            for lowerIndex in 0...nowIndex{
-                let index = IndexPath(row: lowerIndex, section: 0)
-                let cell = actionTableView.cellForRow(at: index) as? ActionCell
-                cell?.timeDescription.text = "willDisplay完成"
-                print("willDisplay:\(indexPath)")
-                cell?.progressView.frame = cell?.frame ?? CGRect(x: 0, y: 0, width: 375, height: 60)
-                cell?.progressView.backgroundColor = #colorLiteral(red: 0.501960814, green: 0.501960814, blue: 0.501960814, alpha: 1)
-                cell?.progressView.alpha = 0.5
-            }
-        }
-        
-    }
-    
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {}
     
     func tableView(_ tableView: UITableView, didEndDisplaying cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        if indexPath.row < nowIndex {
-            for lowerIndex in 0...nowIndex-1{
-                let index = IndexPath(row: lowerIndex, section: 0)
-                let cell = actionTableView.cellForRow(at: index) as? ActionCell
-               // cell?.timeDescription.text = "didEndDisplaying好囉"
-                 print("didEndDisplaying:\(indexPath)")
-                cell?.backgroundColor = #colorLiteral(red: 0.09411764706, green: 0.09411764706, blue: 0.09411764706, alpha: 1)
-            }
-        }
+        let index = IndexPath(row: nowIndex, section: 0)
+        guard let cell = actionTableView.cellForRow(at: index) as? ActionCell else {return}
+        
+      //  actionLists[nowIndex].progressWidth = Double(cell.progressView.frame.width)
+      // Po cell.progressView.layer.presentation()!.bounds
+        actionLists[nowIndex].progressWidth = Double(cell.progressView.layer.presentation()?.bounds.size.width ?? 0)
+        
+        
+        print("actionLists[nowIndex].progressWidth\(actionLists[nowIndex].progressWidth)")
         
     }
 }
+
+    // MARK: - UITableViewDataSource
 
 extension ActionVC: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -294,74 +270,46 @@ extension ActionVC: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if let cell = actionTableView.dequeueReusableCell(withIdentifier: "ActionCell") as? ActionCell {
+            cell.selectionStyle = .none
             
-            print(nowIndex)
-            print(indexPath.row)
+            let cellStatus = actionLists[indexPath.row].cellStatus
+            let actionOrRest = actionLists[indexPath.row].actionOrRest
             
-            
-            if nowIndex == indexPath.row{
-                //播放之前的第一行
-                cell.timeDescription.text = "0:\(actionSec)"
-                let actionlist = actionLists[indexPath.row]
-                cell.updateView(actionModel: actionlist)
-            }else if nowIndex == indexPath.row && videoView.playerState == .Playing{
-                //播放中的第一行
-                let actionlist = actionLists[indexPath.row]
-                cell.updateView(actionModel: actionlist)
-                cell.timeDescription.text = "0:\(actionSec)"
-            }else if indexPath.row < nowIndex{
-                for lowerIndex in 0...nowIndex{
-                    let index = IndexPath(row: lowerIndex, section: 0)
-                    let cell = actionTableView.cellForRow(at: index) as? ActionCell
-                    cell?.timeDescription.text = "cellForRow加辣"
-                }
-            }else{
-                actionSec = Int(lists[selectSender].actionModel[0].timesDescription)
-                let listIndex = lists[selectSender]
-                startBtn.clipsToBounds = true
-                startBtn.layer.cornerRadius = 38
-                videoTitle.text = listIndex.videoTitle
-                videoImg.image = UIImage(named: listIndex.videoImg)
-                intensityLbl.text = listIndex.intensity
-                durationLbl.text = "\(listIndex.durationLbl)min"
-                let actionlist = actionLists[indexPath.row]
-                cell.updateView(actionModel: actionlist)
-                cell.selectionStyle = .none
+            if cellStatus == .playing  && actionOrRest == .action && videoView.playerState == .Playing {
+                
+            } else if cellStatus == .playing && actionOrRest == .action && videoView.playerState == .Paused {
+                
+                cell.progressView.isHidden = false
+                cell.progressView.backgroundColor = #colorLiteral(red: 0, green: 0.8901960784, blue: 0.3921568627, alpha: 1)
+                cell.progressView.frame.size.width = CGFloat(actionLists[nowIndex].progressWidth)
+                cell.timeDescription.text = "0:\(String(actionSec))"
+                
+            } else if cellStatus == .playing && actionOrRest == .rest && videoView.playerState == .Playing {
+                
+                
+            } else if cellStatus == .playing && actionOrRest == .rest && videoView.playerState == .Paused {
+                
+                cell.progressView.isHidden = false
+                cell.progressView.backgroundColor = #colorLiteral(red: 0.4509803922, green: 0.4509803922, blue: 0.4509803922, alpha: 1)
+                cell.progressView.frame.size.width = CGFloat(actionLists[nowIndex].progressWidth)
+                cell.timeDescription.text = "0:\(String(restSec))"
+                cell.actionDescription.text = "休息時間"
+                
+            } else if cellStatus == .played {
+                
+                
+                cell.timeDescription.text = "✓"
+                cell.progressView.backgroundColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
+                
+            } else if cellStatus == .willplay{
+                
+                let actionlistIndexRow = actionLists[indexPath.row]
+                cell.updateView(actionModel: actionlistIndexRow)
+                
+            } else {
+                
             }
             
-            
-            
-//
-//            if indexPath.row <= nowIndex {
-//                for lowerIndex in 0...nowIndex{
-//                    let index = IndexPath(row: lowerIndex, section: 0)
-//                    let cell = actionTableView.cellForRow(at: index) as? ActionCell
-//                    cell?.timeDescription.text = "cellForRow加辣"
-//                }
-//            }else if nowIndex == indexPath.row && videoView.playerState == .Playing{
-//                cell.timeDescription.text = "0:\(actionSec)"
-//            }else if nowIndex == indexPath.row{
-//                cell.timeDescription.text = "0:\(actionSec)"
-//                let actionlist = actionLists[indexPath.row]
-//                cell.updateView(actionModel: actionlist)
-//            }else{
-//
-//
-//                actionSec = Int(lists[selectSender].actionModel[0].timesDescription)
-//                let listIndex = lists[selectSender]
-//                startBtn.clipsToBounds = true
-//                startBtn.layer.cornerRadius = 38
-//                videoTitle.text = listIndex.videoTitle
-//                videoImg.image = UIImage(named: listIndex.videoImg)
-//                intensityLbl.text = listIndex.intensity
-//                durationLbl.text = "\(listIndex.durationLbl)min"
-//                let actionlist = actionLists[indexPath.row]
-//                cell.updateView(actionModel: actionlist)
-//                cell.selectionStyle = .none
-            
-   //         }
-            
-           
             return cell
             
         } else {
@@ -371,36 +319,36 @@ extension ActionVC: UITableViewDataSource {
     }
 }
 
+// MARK: - YouTubePlayerDelegate
+
 extension ActionVC: YouTubePlayerDelegate {
-    
-    
     
     func playerStateChanged(_ videoPlayer: YouTubePlayerView, playerState: YouTubePlayerState) {
         
-    
-        
         if playerState == .Playing {
             
-            if firstTimeplay == true{
+            if firstTimeplay == true {
                 firstTimePlay()
             }
             
-                if actionTimer?.isValid == false && actionTimerjustStop == true{
-                    actionAnimatorWidth.startAnimation()
-                    actionTimerjustStop = false
-                    self.actionTimer = Timer.scheduledTimer(timeInterval: 1,
-                                                            target: self,
-                                                            selector: #selector(self.actionCountDown),
-                                                            userInfo: nil, repeats: true)
-                }else if restTimer?.isValid == false && restTimerjustStop == true{
-                    restAnimatorWidth.startAnimation()
-                    restTimerjustStop = false
-                    self.restTimer = Timer.scheduledTimer(timeInterval: 1,
-                                                            target: self,
-                                                            selector: #selector(self.restCountDown),
-                                                            userInfo: nil, repeats: true)
-                }else{
-                   
+            if actionTimer?.isValid == false && actionTimerjustStop == true {
+                
+                actionAnimatorWidth.startAnimation()
+                actionTimerjustStop = false
+                self.actionTimer = Timer.scheduledTimer(timeInterval: 1,
+                                                        target: self,
+                                                        selector: #selector(self.actionCountDown),
+                                                        userInfo: nil, repeats: true)
+                
+            } else if restTimer?.isValid == false && restTimerjustStop == true {
+                restAnimatorWidth.startAnimation()
+                restTimerjustStop = false
+                self.restTimer = Timer.scheduledTimer(timeInterval: 1,
+                                                      target: self,
+                                                      selector: #selector(self.restCountDown),
+                                                      userInfo: nil, repeats: true)
+            } else {
+                
             }
         }
         
@@ -409,40 +357,31 @@ extension ActionVC: YouTubePlayerDelegate {
         }
         
         if playerState == .Paused {
-            if actionTimer?.isValid == true{
+            
+            if actionTimer?.isValid == true {
                 actionAnimatorWidth.pauseAnimation()
                 
                 actionTimer?.invalidate()
                 actionTimerjustStop = true
-            }else if restTimer?.isValid == true{
+                
+            } else if restTimer?.isValid == true {
+                
                 restAnimatorWidth.pauseAnimation()
                 
-                  restTimer?.invalidate()
+                restTimer?.invalidate()
                 restTimerjustStop = true
             }
         }
     }
     
+    func playerQualityChanged(_ videoPlayer: YouTubePlayerView, playbackQuality: YouTubePlaybackQuality) {}
     
-    
-    func playerQualityChanged(_ videoPlayer: YouTubePlayerView, playbackQuality: YouTubePlaybackQuality) {
-    }
-    
-    func playerReady(_ videoPlayer: YouTubePlayerView){
-            activityIndicator.isHidden = true
-            let floatYoutubeTime = Float(actionLists[nowIndex].youtubeTime)
-            videoPlayer.seekTo(floatYoutubeTime, seekAhead: true)
-//            self.actionTimer = Timer.scheduledTimer(timeInterval: 1,
-//                                                    target: self,
-//                                                    selector: #selector(self.actionCountDown),
-//                                                    userInfo: nil, repeats: true)
-//
-//            let youtubestopTime = actionLists[nowIndex].stopTime
-//
-//            DispatchQueue.main.asyncAfter(deadline: .now() + youtubestopTime!) {
-//                self.videoView.seekTo(Float(self.actionLists[self.nowIndex].youtubeTime), seekAhead: true)
-//
-//        }
+    func playerReady(_ videoPlayer: YouTubePlayerView) {
+        
+        activityIndicator.isHidden = true
+        let floatYoutubeTime = Float(actionLists[nowIndex].youtubeTime)
+        videoPlayer.seekTo(floatYoutubeTime, seekAhead: true)
+        
     }
     
     func firstTimePlay() {
@@ -452,16 +391,14 @@ extension ActionVC: YouTubePlayerDelegate {
                                                 selector: #selector(self.actionCountDown),
                                                 userInfo: nil, repeats: true)
         
-        
         let youtubestopTime = actionLists[nowIndex].stopTime
         
         DispatchQueue.main.asyncAfter(deadline: .now() + youtubestopTime!) {
             self.videoView.seekTo(Float(self.actionLists[self.nowIndex].youtubeTime), seekAhead: true)
-            
         }
         
         actionViewWidthAnimate()
-        
         firstTimeplay = false
+        
     }
 }

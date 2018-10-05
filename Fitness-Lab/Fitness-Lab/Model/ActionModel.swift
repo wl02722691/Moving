@@ -14,7 +14,8 @@ struct ActionModel {
     private(set) public var actionDescription: String
     private(set) public var restTime: Double?
     public var cellStatus: CellStatus
-    public var actionOrRest: ActionOrRest?
+    public var actionOrRest: ActionOrRest
+    public var progressWidth: Double
     
     init(youtubeTime: Double,
          stopTime: Double,
@@ -22,7 +23,8 @@ struct ActionModel {
          timesDescription: Double,
          actionDescription: String,
          cellStatus: CellStatus,
-         actionOrRest: ActionOrRest) {
+         actionOrRest: ActionOrRest,
+         progressWidth: Double) {
         
         self.youtubeTime = youtubeTime
         self.stopTime = stopTime
@@ -31,6 +33,7 @@ struct ActionModel {
         self.restTime = restTime
         self.cellStatus = cellStatus
         self.actionOrRest = actionOrRest
+        self.progressWidth = progressWidth
         
     }
 }
