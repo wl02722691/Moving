@@ -25,91 +25,86 @@ class Data {
     
     private let coreArray = [
    
-        ListModel(videoImg: "Abs3", durationLbl: "7", videoTitle: "連續22天的腹肌訓練計畫", videoDescription: "FittingRoomTW", intensity: "入門", videoID: "EIoryEvS2Gc", actionModel:[
-            
-            
-            ActionModel(youtubeTime: 100, stopTime: 100, restTime: 15, timesDescription: 15, actionDescription: "Alice cutest", cellStatus: CellStatus.willplay, actionOrRest: ActionOrRest.action, playingOrPause: PlayingOrPause.playing, firstPlayAction: true, firstPlayRest: true, actionCellDidInvisiable: false, restCellDidInvisiable: false),
-            
-            
-            ActionModel(youtubeTime: 100, stopTime: 100, restTime: 15, timesDescription: 15, actionDescription: "Alice cutest", cellStatus: CellStatus.willplay, actionOrRest: ActionOrRest.action, playingOrPause: PlayingOrPause.playing, firstPlayAction: true, firstPlayRest: true, actionCellDidInvisiable: false, restCellDidInvisiable: false),
-            
-            
-            ActionModel(youtubeTime: 100, stopTime: 100, restTime: 15, timesDescription: 15, actionDescription: "Alice cutest", cellStatus: CellStatus.willplay, actionOrRest: ActionOrRest.action, playingOrPause: PlayingOrPause.playing, firstPlayAction: true, firstPlayRest: true, actionCellDidInvisiable: false, restCellDidInvisiable: false),
-            
-            
-            ActionModel(youtubeTime: 100, stopTime: 100, restTime: 15, timesDescription: 15, actionDescription: "Alice cutest", cellStatus: CellStatus.willplay, actionOrRest: ActionOrRest.action, playingOrPause: PlayingOrPause.playing, firstPlayAction: true, firstPlayRest: true, actionCellDidInvisiable: false, restCellDidInvisiable: false),
-            
-            
-            ActionModel(youtubeTime: 100, stopTime: 100, restTime: 15, timesDescription: 15, actionDescription: "Alice cutest", cellStatus: CellStatus.willplay, actionOrRest: ActionOrRest.action, playingOrPause: PlayingOrPause.playing, firstPlayAction: true, firstPlayRest: true, actionCellDidInvisiable: false, restCellDidInvisiable: false),
-            
-            
-            ActionModel(youtubeTime: 100, stopTime: 100, restTime: 15, timesDescription: 15, actionDescription: "Alice cutest", cellStatus: CellStatus.willplay, actionOrRest: ActionOrRest.action, playingOrPause: PlayingOrPause.playing, firstPlayAction: true, firstPlayRest: true, actionCellDidInvisiable: false, restCellDidInvisiable: false),
-            
-            
-            ActionModel(youtubeTime: 100, stopTime: 100, restTime: 15, timesDescription: 15, actionDescription: "Alice cutest", cellStatus: CellStatus.willplay, actionOrRest: ActionOrRest.action, playingOrPause: PlayingOrPause.playing, firstPlayAction: true, firstPlayRest: true, actionCellDidInvisiable: false, restCellDidInvisiable: false),
-            
-            
-            ActionModel(youtubeTime: 100, stopTime: 100, restTime: 15, timesDescription: 15, actionDescription: "Alice cutest", cellStatus: CellStatus.willplay, actionOrRest: ActionOrRest.action, playingOrPause: PlayingOrPause.playing, firstPlayAction: true, firstPlayRest: true, actionCellDidInvisiable: false, restCellDidInvisiable: false),
-            
-            ActionModel(youtubeTime: 100, stopTime: 100, restTime: 15, timesDescription: 15, actionDescription: "Alice cutest", cellStatus: CellStatus.willplay, actionOrRest: ActionOrRest.action, playingOrPause: PlayingOrPause.playing, firstPlayAction: true, firstPlayRest: true, actionCellDidInvisiable: false, restCellDidInvisiable: false),
-            
-            
-            ActionModel(youtubeTime: 100, stopTime: 100, restTime: 15, timesDescription: 15, actionDescription: "Alice cutest", cellStatus: CellStatus.willplay, actionOrRest: ActionOrRest.action, playingOrPause: PlayingOrPause.playing, firstPlayAction: true, firstPlayRest: true, actionCellDidInvisiable: false, restCellDidInvisiable: false),
-            
-            
-            ActionModel(youtubeTime: 100, stopTime: 100, restTime: 15, timesDescription: 15, actionDescription: "Alice cutest", cellStatus: CellStatus.willplay, actionOrRest: ActionOrRest.action, playingOrPause: PlayingOrPause.playing, firstPlayAction: true, firstPlayRest: true, actionCellDidInvisiable: false, restCellDidInvisiable: false),
-            
-            
-            ActionModel(youtubeTime: 100, stopTime: 100, restTime: 15, timesDescription: 15, actionDescription: "Alice cutest", cellStatus: CellStatus.willplay, actionOrRest: ActionOrRest.action, playingOrPause: PlayingOrPause.playing, firstPlayAction: true, firstPlayRest: true, actionCellDidInvisiable: false, restCellDidInvisiable: false),
-            
-            
-            ActionModel(youtubeTime: 100, stopTime: 100, restTime: 15, timesDescription: 15, actionDescription: "Alice cutest", cellStatus: CellStatus.willplay, actionOrRest: ActionOrRest.action, playingOrPause: PlayingOrPause.playing, firstPlayAction: true, firstPlayRest: true, actionCellDidInvisiable: false, restCellDidInvisiable: false),
-            
-            
-            ActionModel(youtubeTime: 100, stopTime: 100, restTime: 15, timesDescription: 15, actionDescription: "Alice cutest", cellStatus: CellStatus.willplay, actionOrRest: ActionOrRest.action, playingOrPause: PlayingOrPause.playing, firstPlayAction: true, firstPlayRest: true, actionCellDidInvisiable: false, restCellDidInvisiable: false),
-            
-            
-            ActionModel(youtubeTime: 100, stopTime: 100, restTime: 15, timesDescription: 15, actionDescription: "Alice cutest", cellStatus: CellStatus.willplay, actionOrRest: ActionOrRest.action, playingOrPause: PlayingOrPause.playing, firstPlayAction: true, firstPlayRest: true, actionCellDidInvisiable: false, restCellDidInvisiable: false),
-            
+        
+        ListModel(videoImg: "Abs3", durationLbl: 3, videoTitle: "threeToNine", videoDescription: "FittingRoomTW", intensity: "入門", videoID: "EIoryEvS2Gc", timeRange: TimeRange.threeToNine, actionModel: [
             
             ActionModel(youtubeTime: 100, stopTime: 100, restTime: 15, timesDescription: 15, actionDescription: "Alice cutest", cellStatus: CellStatus.willplay, actionOrRest: ActionOrRest.action, playingOrPause: PlayingOrPause.playing, firstPlayAction: true, firstPlayRest: true, actionCellDidInvisiable: false, restCellDidInvisiable: false),
             
             ]),
         
         
+        ListModel(videoImg: "Abs3", durationLbl: 3, videoTitle: "max3", videoDescription: "FittingRoomTW", intensity: "入門", videoID: "EIoryEvS2Gc", timeRange: TimeRange.max3, actionModel: [
+            
+            ActionModel(youtubeTime: 100, stopTime: 100, restTime: 15, timesDescription: 15, actionDescription: "Alice cutest", cellStatus: CellStatus.willplay, actionOrRest: ActionOrRest.action, playingOrPause: PlayingOrPause.playing, firstPlayAction: true, firstPlayRest: true, actionCellDidInvisiable: false, restCellDidInvisiable: false),
+            
+            ]),
+        
+        
+        ListModel(videoImg: "Abs3", durationLbl: 3, videoTitle: "min9", videoDescription: "FittingRoomTW", intensity: "入門", videoID: "EIoryEvS2Gc", timeRange: TimeRange.min9, actionModel: [
+            
+            ActionModel(youtubeTime: 100, stopTime: 100, restTime: 15, timesDescription: 15, actionDescription: "Alice cutest", cellStatus: CellStatus.willplay, actionOrRest: ActionOrRest.action, playingOrPause: PlayingOrPause.playing, firstPlayAction: true, firstPlayRest: true, actionCellDidInvisiable: false, restCellDidInvisiable: false),
+            
+            ]),
+        
+        
+        
         ]
+    
+    
+    private let armArray = [
+        ListModel(videoImg: "Abs3", durationLbl: 3, videoTitle: "想睡睡了", videoDescription: "FittingRoomTW", intensity: "入門", videoID: "EIoryEvS2Gc", timeRange: TimeRange.max3, actionModel: [
+            
+            ActionModel(youtubeTime: 100, stopTime: 100, restTime: 15, timesDescription: 15, actionDescription: "Alice cutest", cellStatus: CellStatus.willplay, actionOrRest: ActionOrRest.action, playingOrPause: PlayingOrPause.playing, firstPlayAction: true, firstPlayRest: true, actionCellDidInvisiable: false, restCellDidInvisiable: false),
+            
+            ])
+                   
+        ]
+    
         
     
     private let buttArray = [
         
-        ListModel(videoImg: "Abs3", durationLbl: "7", videoTitle: "連續22天的腹肌訓練計畫", videoDescription: "FittingRoomTW", intensity: "入門", videoID: "EIoryEvS2Gc", actionModel:[
-           
+        ListModel(videoImg: "Abs3", durationLbl: 3, videoTitle: "想睡睡了", videoDescription: "FittingRoomTW", intensity: "入門", videoID: "EIoryEvS2Gc", timeRange: TimeRange.max3, actionModel: [
             
-            ActionModel(youtubeTime: 100, stopTime: 100, restTime: 15, timesDescription: 15, actionDescription: "Alice cutest", cellStatus: CellStatus.willplay, actionOrRest: ActionOrRest.action, playingOrPause: PlayingOrPause.playing, firstPlayAction: true, firstPlayRest: true, actionCellDidInvisiable: false, restCellDidInvisiable: false),
+            ActionModel(youtubeTime: 100, stopTime: 100, restTime: 5, timesDescription: 15, actionDescription: "Alice cutest", cellStatus: CellStatus.willplay, actionOrRest: ActionOrRest.action, playingOrPause: PlayingOrPause.playing, firstPlayAction: true, firstPlayRest: true, actionCellDidInvisiable: false, restCellDidInvisiable: false),
+            
+            ])
+        
+        ]
+    
+
+    private let legArray = [
+        ListModel(videoImg: "Abs3", durationLbl: 3, videoTitle: "想睡睡了", videoDescription: "FittingRoomTW", intensity: "入門", videoID: "EIoryEvS2Gc", timeRange: TimeRange.max3, actionModel: [
+            
+            ActionModel(youtubeTime: 100, stopTime: 100, restTime: 5, timesDescription: 15, actionDescription: "Alice cutest", cellStatus: CellStatus.willplay, actionOrRest: ActionOrRest.action, playingOrPause: PlayingOrPause.playing, firstPlayAction: true, firstPlayRest: true, actionCellDidInvisiable: false, restCellDidInvisiable: false),
+            
+            
+            
+            ActionModel(youtubeTime: 100, stopTime: 100, restTime: 5, timesDescription: 15, actionDescription: "Alice cutest", cellStatus: CellStatus.willplay, actionOrRest: ActionOrRest.action, playingOrPause: PlayingOrPause.playing, firstPlayAction: true, firstPlayRest: true, actionCellDidInvisiable: false, restCellDidInvisiable: false),
+            
+            
+            
+            ActionModel(youtubeTime: 100, stopTime: 100, restTime: 5, timesDescription: 15, actionDescription: "Alice cutest", cellStatus: CellStatus.willplay, actionOrRest: ActionOrRest.action, playingOrPause: PlayingOrPause.playing, firstPlayAction: true, firstPlayRest: true, actionCellDidInvisiable: false, restCellDidInvisiable: false),
+            
+            
+            ActionModel(youtubeTime: 100, stopTime: 100, restTime: 5, timesDescription: 15, actionDescription: "Alice cutest", cellStatus: CellStatus.willplay, actionOrRest: ActionOrRest.action, playingOrPause: PlayingOrPause.playing, firstPlayAction: true, firstPlayRest: true, actionCellDidInvisiable: false, restCellDidInvisiable: false),
+            
+            
+            
+            ActionModel(youtubeTime: 100, stopTime: 100, restTime: 5, timesDescription: 15, actionDescription: "Alice cutest", cellStatus: CellStatus.willplay, actionOrRest: ActionOrRest.action, playingOrPause: PlayingOrPause.playing, firstPlayAction: true, firstPlayRest: true, actionCellDidInvisiable: false, restCellDidInvisiable: false),
+            
+            
+            ActionModel(youtubeTime: 100, stopTime: 100, restTime: 5, timesDescription: 15, actionDescription: "Alice cutest", cellStatus: CellStatus.willplay, actionOrRest: ActionOrRest.action, playingOrPause: PlayingOrPause.playing, firstPlayAction: true, firstPlayRest: true, actionCellDidInvisiable: false, restCellDidInvisiable: false),
+            
+            
+            ActionModel(youtubeTime: 100, stopTime: 100, restTime: 5, timesDescription: 15, actionDescription: "Alice cutest", cellStatus: CellStatus.willplay, actionOrRest: ActionOrRest.action, playingOrPause: PlayingOrPause.playing, firstPlayAction: true, firstPlayRest: true, actionCellDidInvisiable: false, restCellDidInvisiable: false),
+            
+            
+            ActionModel(youtubeTime: 100, stopTime: 100, restTime: 5, timesDescription: 15, actionDescription: "Alice cutest", cellStatus: CellStatus.willplay, actionOrRest: ActionOrRest.action, playingOrPause: PlayingOrPause.playing, firstPlayAction: true, firstPlayRest: true, actionCellDidInvisiable: false, restCellDidInvisiable: false),
             
             
             ])
-        ]
-    
-    private let armArray = [
-        ListModel(videoImg: "Abs3", durationLbl: "7", videoTitle: "連續22天的腹肌訓練計畫", videoDescription: "FittingRoomTW", intensity: "入門", videoID: "EIoryEvS2Gc", actionModel:[
-    
         
-            ActionModel(youtubeTime: 100, stopTime: 100, restTime: 15, timesDescription: 15, actionDescription: "Alice cutest", cellStatus: CellStatus.willplay, actionOrRest: ActionOrRest.action, playingOrPause: PlayingOrPause.playing, firstPlayAction: true, firstPlayRest: true, actionCellDidInvisiable: false, restCellDidInvisiable: false),
-            
-            ]),
-        ]
-    
-    private let legArray = [
-        ListModel(videoImg: "Abs3", durationLbl: "7", videoTitle: "連續22天的腹肌訓練計畫", videoDescription: "FittingRoomTW", intensity: "入門", videoID: "EIoryEvS2Gc", actionModel:[
-            
-            
-            ActionModel(youtubeTime: 100, stopTime: 100, restTime: 15, timesDescription: 15, actionDescription: "Alice cutest", cellStatus: CellStatus.willplay, actionOrRest: ActionOrRest.action, playingOrPause: PlayingOrPause.playing, firstPlayAction: true, firstPlayRest: true, actionCellDidInvisiable: false, restCellDidInvisiable: false),
-            
-            
-            
-            
-            ]),
         
         ]
     

@@ -10,19 +10,21 @@ import Foundation
 
 struct ListModel {
     private(set) public var videoImg: String
-    private(set) public var durationLbl: String
+    private(set) public var durationLbl: Int
     private(set) public var videoTitle: String
     private(set) public var videoDescription: String
     private(set) public var videoID: String
     private(set) public var intensity: String
+    private(set) public var timeRange: TimeRange
     private(set) public var actionModel: [ActionModel]
     
     init(videoImg: String,
-         durationLbl: String,
+         durationLbl: Int,
          videoTitle: String,
          videoDescription: String,
          intensity: String,
          videoID: String,
+         timeRange: TimeRange,
          actionModel: [ActionModel]) {
         self.videoImg = videoImg
         self.durationLbl = durationLbl
@@ -31,5 +33,6 @@ struct ListModel {
         self.intensity = intensity
         self.actionModel = actionModel
         self.videoID = videoID
+        self.timeRange = timeRange
     }
 }

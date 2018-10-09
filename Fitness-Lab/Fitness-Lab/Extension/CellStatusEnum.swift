@@ -26,3 +26,9 @@ enum PlayingOrPause{
     case playing
     case pause
 }
+
+enum TimeRange {
+    case max3
+    case threeToNine
+    case min9
+}

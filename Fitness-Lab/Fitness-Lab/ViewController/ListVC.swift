@@ -10,34 +10,142 @@ import UIKit
 
 class ListVC: UIViewController {
     
+    @IBOutlet var selectTimeBtns: [UIButton]!
+    @IBOutlet weak var okBtn: UIButton!
+    @IBOutlet weak var backgroundDismissBtn: UIButton!
     @IBOutlet weak var planNumberLbl: UILabel!
-    @IBAction func filterBtnWasPressed(_ sender: UIButton) {
-        performSegue(withIdentifier: "showPopover", sender: nil)
-    }
-    
+    @IBOutlet weak var filterView: UIView!
     @IBOutlet weak var listTableView: UITableView!
     private(set) public var lists = [ListModel]()
+    private(set) public var oldlists = [ListModel]()
+
     private(set) public var selectLists = [ListModel]()
     private(set) public var actions = [ActionModel]()
     var selectSender = 0
+    var selectTimeSender = 0
+    
+    @IBAction func slectTimeBtnTapped(_ sender: UIButton) {
+        
+        print(selectTimeBtns[sender.tag])
+        print(sender.tag)
+        
+        for button in selectTimeBtns {
+            if button.tag == sender.tag {
+                
+                selectTimeSender = sender.tag
+                print("selectTimeSender\(selectTimeSender)")
+                
+                button.borderColor = #colorLiteral(red: 0.001363023831, green: 0.6588945239, blue: 0.2931115911, alpha: 1)
+                button.borderWidth = 2
+                button.cornerRadius = 15
+            }else{
+                button.borderColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
+            }
+        }
+    }
+    
+    
+    @IBAction func okBtn(_ sender: UIButton) {
+    
+        if selectTimeSender == 0 {
+            
+            lists = oldlists
+//            filterView.isHidden = true
+//            backgroundDismissBtn.isHidden = true
+//            listTableView.reloadData()
+        }else if selectTimeSender == 1{
+            lists = oldlists
+            lists = lists.filter({ $0.timeRange == TimeRange.max3 })
+//
+//            filterView.isHidden = true
+//            backgroundDismissBtn.isHidden = true
+//            listTableView.reloadData()
+        }else if selectTimeSender == 2{
+            lists = oldlists
+            lists = lists.filter({ $0.timeRange == TimeRange.threeToNine })
+//            filterView.isHidden = true
+//            backgroundDismissBtn.isHidden = true
+//            listTableView.reloadData()
+        }else if selectTimeSender == 3{
+            lists = oldlists
+            lists = lists.filter({ $0.timeRange == TimeRange.min9 })
+//            filterView.isHidden = true
+//            backgroundDismissBtn.isHidden = true
+//            listTableView.reloadData()
+        }
+        
+        filterView.isHidden = true
+        backgroundDismissBtn.isHidden = true
+        listTableView.reloadData()
+        planNumberLbl.text = "\(lists.count) 個運動計畫"
+       
+        
+        
+    }
+    
+    
+    @IBAction func filterBtn(_ sender: UIButton) {
+        if backgroundDismissBtn.isHidden == true{
+        
+            
+            
+            
+            
+            backgroundDismissBtn.isHidden = false
+            filterView.isHidden = false
+          
+            
+//            for button in selectTimeBtns {
+//                if button.tag == sender.tag {
+//
+//
+//                    button.borderColor = #colorLiteral(red: 0.001363023831, green: 0.6588945239, blue: 0.2931115911, alpha: 1)
+//                    button.borderWidth = 2
+//                    button.cornerRadius = 15
+//
+//
+//                }else{
+//                    button.borderColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
+//                }
+//            }
+        } else {
+            
+            backgroundDismissBtn.isHidden = true
+            filterView.isHidden = true
+        }
+    }
+    
+    @IBAction func backgroundDismissBtnWasPress(_ sender: UIButton) {
+        filterView.isHidden = true
+        backgroundDismissBtn.isHidden = true
+        
+    }
+    
     
     override func viewDidLoad() {
+        backgroundDismissBtn.isHidden = true
+        filterView.isHidden = true
         listTableView.separatorStyle = UITableViewCellSeparatorStyle.none
         super.viewDidLoad()
         listTableView.delegate = self
         listTableView.dataSource = self
+     
     }
+    
+    
     
     func initList(category: FitnessCategory) {
         lists = Data.instance.getList(forListTitle: category.secondTitle)
-        
+        oldlists = Data.instance.getList(forListTitle: category.secondTitle)
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         planNumberLbl.text = "\(lists.count) 個運動計畫"
+        filterView.cornerRadius = 10
+        okBtn.cornerRadius = 20
+        
     }
-    
 }
 
 extension ListVC: UITableViewDelegate {

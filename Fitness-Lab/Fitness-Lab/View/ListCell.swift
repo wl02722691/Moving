@@ -9,6 +9,7 @@
 import UIKit
 
 class ListCell: UITableViewCell {
+ 
     @IBOutlet weak var videoImg: UIImageView!
     @IBOutlet weak var videoTitle: UILabel!
     @IBOutlet weak var videoDescription: UILabel!
