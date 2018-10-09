@@ -45,7 +45,7 @@ class ScoreVC: UIViewController {
         for actionlistsAllIndex in 0...actionLists.count-1 {
             time += actionLists[actionlistsAllIndex].timesDescription
             print("time:\(time)")
-            resttime += (actionLists[actionlistsAllIndex].restTime)!
+            resttime += (actionLists[actionlistsAllIndex].restTime)
             resultTime = time + resttime
         }
         

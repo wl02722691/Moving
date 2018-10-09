@@ -21,3 +21,8 @@ enum ActionOrRest{
     case action
     case rest
 }
+
+enum PlayingOrPause{
+    case playing
+    case pause
+}

@@ -9,13 +9,17 @@
 import Foundation
 struct ActionModel {
     private(set) public var youtubeTime: Double
-    private(set) public var stopTime: Double?
+    private(set) public var stopTime: Double
     private(set) public var timesDescription: Double
     private(set) public var actionDescription: String
-    private(set) public var restTime: Double?
-    public var cellStatus: CellStatus
-    public var actionOrRest: ActionOrRest
-    public var progressWidth: Double
+    private(set) public var restTime: Double
+    public var cellStatus: CellStatus = .willplay
+    public var actionOrRest: ActionOrRest = .action
+    public var playingOrPause: PlayingOrPause = .playing
+    public var firstPlayAction: Bool = true
+    public var firstPlayRest: Bool = true
+    public var actionCellDidInvisiable: Bool = false
+    public var restCellDidInvisiable: Bool = false
     
     init(youtubeTime: Double,
          stopTime: Double,
@@ -24,7 +28,11 @@ struct ActionModel {
          actionDescription: String,
          cellStatus: CellStatus,
          actionOrRest: ActionOrRest,
-         progressWidth: Double) {
+         playingOrPause: PlayingOrPause,
+         firstPlayAction: Bool,
+         firstPlayRest: Bool,
+         actionCellDidInvisiable: Bool,
+         restCellDidInvisiable: Bool) {
         
         self.youtubeTime = youtubeTime
         self.stopTime = stopTime
@@ -33,7 +41,10 @@ struct ActionModel {
         self.restTime = restTime
         self.cellStatus = cellStatus
         self.actionOrRest = actionOrRest
-        self.progressWidth = progressWidth
-        
+        self.playingOrPause = playingOrPause
+        self.firstPlayAction = firstPlayAction
+        self.firstPlayRest = firstPlayRest
+        self.actionCellDidInvisiable = actionCellDidInvisiable
+        self.restCellDidInvisiable = restCellDidInvisiable
     }
 }
