@@ -31,6 +31,11 @@
 		696265D821538EA200C68282 /* ListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 696265D721538EA200C68282 /* ListCell.swift */; };
 		696265DA21538FD600C68282 /* ListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 696265D921538FD600C68282 /* ListModel.swift */; };
 		696265DC2154B22600C68282 /* ActionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 696265DB2154B22600C68282 /* ActionModel.swift */; };
+		698C0133216E217D004DC719 /* trophy.json in Resources */ = {isa = PBXBuildFile; fileRef = 698C0132216E217D004DC719 /* trophy.json */; };
+		698C0135216E22FC004DC719 /* empty_box.json in Resources */ = {isa = PBXBuildFile; fileRef = 698C0134216E22FC004DC719 /* empty_box.json */; };
+		698C0138216E2BAE004DC719 /* favourite_app_icon.json in Resources */ = {isa = PBXBuildFile; fileRef = 698C0137216E2BAE004DC719 /* favourite_app_icon.json */; };
+		698C013B216EE67C004DC719 /* GAManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 698C013A216EE67C004DC719 /* GAManager.swift */; };
+		698C013D216EEFE9004DC719 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 698C013C216EEFE9004DC719 /* GoogleService-Info.plist */; };
 		69C50BA52167184B00215B4E /* CellStatusEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69C50BA42167184B00215B4E /* CellStatusEnum.swift */; };
 		69D2000021610AE40086D660 /* SettingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69D2FFFF21610AE40086D660 /* SettingVC.swift */; };
 		69D2000321610B000086D660 /* SettingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69D2000121610B000086D660 /* SettingCell.swift */; };
@@ -44,7 +49,6 @@
 		69D48FC32154F76E00B92B85 /* ActionVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69D48FC22154F76E00B92B85 /* ActionVC.swift */; };
 		69ED2E6F21551EE1003490E7 /* ActionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69ED2E6E21551EE1003490E7 /* ActionCell.swift */; };
 		69EF81D7216227A200AB3591 /* NotificationVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69EF81D6216227A200AB3591 /* NotificationVC.swift */; };
-		69EF81DA21622FEB00AB3591 /* YOYOYO.png in Resources */ = {isa = PBXBuildFile; fileRef = 69EF81D921622FEB00AB3591 /* YOYOYO.png */; };
 		A394FA4E4ED337D183CF9A46 /* Pods_Fitness_Lab.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 74498F6528744DF3D21F14AB /* Pods_Fitness_Lab.framework */; };
 /* End PBXBuildFile section */
 
@@ -73,6 +77,12 @@
 		696265D721538EA200C68282 /* ListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListCell.swift; sourceTree = "<group>"; };
 		696265D921538FD600C68282 /* ListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListModel.swift; sourceTree = "<group>"; };
 		696265DB2154B22600C68282 /* ActionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionModel.swift; sourceTree = "<group>"; };
+		698C0132216E217D004DC719 /* trophy.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = trophy.json; sourceTree = "<group>"; };
+		698C0134216E22FC004DC719 /* empty_box.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = empty_box.json; sourceTree = "<group>"; };
+		698C0137216E2BAE004DC719 /* favourite_app_icon.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = favourite_app_icon.json; sourceTree = "<group>"; };
+		698C0139216EDE94004DC719 /* Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Header.h; sourceTree = "<group>"; };
+		698C013A216EE67C004DC719 /* GAManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GAManager.swift; sourceTree = "<group>"; };
+		698C013C216EEFE9004DC719 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		69C50BA42167184B00215B4E /* CellStatusEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellStatusEnum.swift; sourceTree = "<group>"; };
 		69D2000121610B000086D660 /* SettingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingCell.swift; sourceTree = "<group>"; };
 		69D2000221610B000086D660 /* SettingCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SettingCell.xib; sourceTree = "<group>"; };
@@ -88,8 +98,6 @@
 		69D48FC22154F76E00B92B85 /* ActionVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionVC.swift; sourceTree = "<group>"; };
 		69ED2E6E21551EE1003490E7 /* ActionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionCell.swift; sourceTree = "<group>"; };
 		69EF81D6216227A200AB3591 /* NotificationVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationVC.swift; sourceTree = "<group>"; };
-		69EF81D821622C4300AB3591 /* gong.aif */ = {isa = PBXFileReference; lastKnownFileType = file; path = gong.aif; sourceTree = "<group>"; };
-		69EF81D921622FEB00AB3591 /* YOYOYO.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = YOYOYO.png; sourceTree = "<group>"; };
 		74498F6528744DF3D21F14AB /* Pods_Fitness_Lab.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Fitness_Lab.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A7703E2D316AA4F4017FF90D /* Pods-Fitness-Lab.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Fitness-Lab.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Fitness-Lab/Pods-Fitness-Lab.debug.xcconfig"; sourceTree = "<group>"; };
 		EAFAE02DA516C71654274620 /* Pods-Fitness-Lab.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Fitness-Lab.release.xcconfig"; path = "Pods/Target Support Files/Pods-Fitness-Lab/Pods-Fitness-Lab.release.xcconfig"; sourceTree = "<group>"; };
@@ -133,9 +141,20 @@
 			path = Services;
 			sourceTree = "<group>";
 		};
+		698C0136216E2308004DC719 /* Lottie */ = {
+			isa = PBXGroup;
+			children = (
+				698C0132216E217D004DC719 /* trophy.json */,
+				698C0134216E22FC004DC719 /* empty_box.json */,
+				698C0137216E2BAE004DC719 /* favourite_app_icon.json */,
+			);
+			path = Lottie;
+			sourceTree = "<group>";
+		};
 		69D37DE6215257EC00B8F1F9 = {
 			isa = PBXGroup;
 			children = (
+				698C013C216EEFE9004DC719 /* GoogleService-Info.plist */,
 				69D37DF1215257EC00B8F1F9 /* Fitness-Lab */,
 				69D37DF0215257EC00B8F1F9 /* Products */,
 				CF6FBBC4E87CFDB11387E47E /* Pods */,
@@ -154,6 +173,7 @@
 		69D37DF1215257EC00B8F1F9 /* Fitness-Lab */ = {
 			isa = PBXGroup;
 			children = (
+				698C0136216E2308004DC719 /* Lottie */,
 				6941AF87216364AF00A0D0B8 /* Extension */,
 				6925614E2153753400531F5B /* storyboard */,
 				694776D8215350A400141CB7 /* Services */,
@@ -162,10 +182,10 @@
 				69D37E0621525AF100B8F1F9 /* ViewController */,
 				69D37DF2215257EC00B8F1F9 /* AppDelegate.swift */,
 				69D37DF9215257EE00B8F1F9 /* Assets.xcassets */,
-				69EF81D921622FEB00AB3591 /* YOYOYO.png */,
 				69D37DFB215257EE00B8F1F9 /* LaunchScreen.storyboard */,
 				69D37DFE215257EE00B8F1F9 /* Info.plist */,
-				69EF81D821622C4300AB3591 /* gong.aif */,
+				698C0139216EDE94004DC719 /* Header.h */,
+				698C013A216EE67C004DC719 /* GAManager.swift */,
 			);
 			path = "Fitness-Lab";
 			sourceTree = "<group>";
@@ -249,8 +269,8 @@
 				69D37DEC215257EC00B8F1F9 /* Frameworks */,
 				69D37DED215257EC00B8F1F9 /* Resources */,
 				69D37E042152595600B8F1F9 /* ShellScript */,
-				69D37E052152595C00B8F1F9 /* ShellScript */,
 				B5BAF0ECDF105E76722475D2 /* [CP] Embed Pods Frameworks */,
+				698C013E216EF241004DC719 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -304,9 +324,12 @@
 				69D37DFD215257EE00B8F1F9 /* LaunchScreen.storyboard in Resources */,
 				6917E052215CE8F800C0A743 /* Summary2Cell.xib in Resources */,
 				69D37DFA215257EE00B8F1F9 /* Assets.xcassets in Resources */,
-				69EF81DA21622FEB00AB3591 /* YOYOYO.png in Resources */,
+				698C0135216E22FC004DC719 /* empty_box.json in Resources */,
+				698C0138216E2BAE004DC719 /* favourite_app_icon.json in Resources */,
 				69D2000421610B000086D660 /* SettingCell.xib in Resources */,
+				698C013D216EEFE9004DC719 /* GoogleService-Info.plist in Resources */,
 				69D37DF8215257EC00B8F1F9 /* Main.storyboard in Resources */,
+				698C0133216E217D004DC719 /* trophy.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -331,6 +354,23 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
+		698C013E216EF241004DC719 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n\"${PODS_ROOT}/Fabric/run\" 8805b5b0ebbb5b6a12b12c2b41dab83c47d7e3d4 6e8b64e6225917117f94fd9f70df51609b8370f1faf009995f41b87db322986c\n\n";
+		};
 		69D37E042152595600B8F1F9 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -344,19 +384,6 @@
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/SwiftLint/swiftlint\"\n";
 		};
-		69D37E052152595C00B8F1F9 /* ShellScript */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n";
-		};
 		B5BAF0ECDF105E76722475D2 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -364,17 +391,23 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-Fitness-Lab/Pods-Fitness-Lab-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework",
 				"${BUILT_PRODUCTS_DIR}/IQKeyboardManagerSwift/IQKeyboardManagerSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/Realm/Realm.framework",
 				"${BUILT_PRODUCTS_DIR}/RealmSwift/RealmSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/YouTubePlayer-Swift/YouTubePlayer_Swift.framework",
+				"${BUILT_PRODUCTS_DIR}/lottie-ios/Lottie.framework",
+				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleUtilities.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/IQKeyboardManagerSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Realm.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RealmSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/YouTubePlayer_Swift.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Lottie.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -392,6 +425,7 @@
 				694776D321534CC400141CB7 /* FitnessCell.swift in Sources */,
 				693841F12161D4EF0017D2E9 /* SettingSwitchCell.swift in Sources */,
 				696265DC2154B22600C68282 /* ActionModel.swift in Sources */,
+				698C013B216EE67C004DC719 /* GAManager.swift in Sources */,
 				694776DE2153540E00141CB7 /* Data.swift in Sources */,
 				69D48FC32154F76E00B92B85 /* ActionVC.swift in Sources */,
 				69D37DF5215257EC00B8F1F9 /* FitnessVC.swift in Sources */,
@@ -571,6 +605,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.AliceChang.Fitness-Lab";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				"SWIFT_OBJC_BRIDGING_HEADER[arch=*]" = "/Users/zhangshuhan/Desktop/Fitness/Fitness-Lab/Fitness-Lab/Fitness-Lab/Header.h";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -590,6 +625,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.AliceChang.Fitness-Lab";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				"SWIFT_OBJC_BRIDGING_HEADER[arch=*]" = "/Users/zhangshuhan/Desktop/Fitness/Fitness-Lab/Fitness-Lab/Fitness-Lab/Header.h";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

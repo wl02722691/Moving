@@ -15,6 +15,8 @@ class SettingVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        GAManager.createNormalScreenEventWith("SettingVC")
+        
         tableViewSetting.delegate = self
         tableViewSetting.dataSource = self
         tableViewSetting.register(UINib(nibName: "SettingCell", bundle: nil),

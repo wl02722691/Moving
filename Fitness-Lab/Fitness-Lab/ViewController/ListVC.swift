@@ -18,7 +18,6 @@ class ListVC: UIViewController {
     @IBOutlet weak var listTableView: UITableView!
     private(set) public var lists = [ListModel]()
     private(set) public var oldlists = [ListModel]()
-
     private(set) public var selectLists = [ListModel]()
     private(set) public var actions = [ActionModel]()
     var selectSender = 0
@@ -35,7 +34,7 @@ class ListVC: UIViewController {
                 selectTimeSender = sender.tag
                 print("selectTimeSender\(selectTimeSender)")
                 
-                button.borderColor = #colorLiteral(red: 0.001363023831, green: 0.6588945239, blue: 0.2931115911, alpha: 1)
+                button.borderColor = #colorLiteral(red: 0, green: 0.6980392157, blue: 0.3058823529, alpha: 1)
                 button.borderWidth = 2
                 button.cornerRadius = 15
             }else{
@@ -129,7 +128,7 @@ class ListVC: UIViewController {
         super.viewDidLoad()
         listTableView.delegate = self
         listTableView.dataSource = self
-     
+        GAManager.createNormalScreenEventWith("ListVC")
     }
     
     

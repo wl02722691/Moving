@@ -8,17 +8,32 @@
 
 import UIKit
 import RealmSwift
+import Lottie
+
 class SummaryVC: UIViewController {
     
     var allTime = 0
     var allTimeToMin = 0
     var sectionHeaderTitleArray = ["運動總數", "挑戰"]
     var summaryArray: Results<SummaryModel>!
-    
+    var animationView = LOTAnimationView()
+
+    @IBOutlet weak var firstView: UIView!
     @IBOutlet weak var tableviewSummary: UITableView!
+    @IBOutlet weak var workoutNowBtn: UIButton!
+    @IBOutlet weak var workoutTomorrowBtn: UIButton!
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(true)
+       animationView.stop()
+    }
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        GAManager.createNormalScreenEventWith("SummaryVC")
+        
         tableviewSummary.delegate = self
         tableviewSummary.dataSource = self
         
@@ -27,12 +42,7 @@ class SummaryVC: UIViewController {
         
         let realm = RealmService.shared.realm
         summaryArray = realm?.objects(SummaryModel.self)
-        
-        let editUpdatednotificationName = Notification.Name("toSummaryVC")
-        //NotificationCenter.default.addObserver(self,
-                                       //        selector: #selector(updateRealm(noti:)),
-                                         //      name: editUpdatednotificationName, object: nil)
-        
+
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -43,22 +53,44 @@ class SummaryVC: UIViewController {
         if summaryArray.count - 1 > 0 {
             for summaryArrayIndex in 0 ... summaryArray.count - 1 {
                 allTime += summaryArray[summaryArrayIndex].durationLbl
-                print(summaryArray[summaryArrayIndex].durationLbl)
-                print("allTimeallTimeallTimeallTime\(allTime)")
             }
         }
-        
 
         allTimeToMin = allTime / 60
+
+        if summaryArray.count == 0 {
+            firstView.isHidden = false
+            loadAnimateView()
+            
+        } else {
+            
+            firstView.isHidden = true
+        }
+    }
+    
+    func loadAnimateView(){
         
-        print(allTime)
-        print(allTimeToMin)
+        animationView = LOTAnimationView(name: "empty_box")
+        animationView.frame = CGRect(x: 0, y: 0, width: 200, height: 200)
+        animationView.center = CGPoint(x: self.view.center.x, y: 250)
+        animationView.contentMode = .scaleAspectFit
+        animationView.loopAnimation = true
+        animationView.play()
+        self.view.addSubview(animationView)
         
-        let indexPath = IndexPath(row: 0, section: 0)
-        guard let cell = self.tableviewSummary.cellForRow(at: indexPath) as? Summary1Cell  else {return}
-        //cell.allTimeLbl.text = String(allTime)
+        workoutNowBtn.cornerRadius = 25
+        workoutTomorrowBtn.borderColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
+        workoutTomorrowBtn.borderWidth = 2
+        workoutTomorrowBtn.cornerRadius = 25
         
-        
+    }
+    
+    @IBAction func workoutNowBtn(_ sender: UIButton) {
+        tabBarController?.selectedIndex = 0
+    }
+    
+    @IBAction func workoutTomorrowBtn(_ sender: UIButton) {
+        performSegue(withIdentifier: "toNotification", sender: nil)
     }
     
     @objc func updateRealm(noti: Notification) {

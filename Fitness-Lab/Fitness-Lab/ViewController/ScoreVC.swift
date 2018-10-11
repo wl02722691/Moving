@@ -24,6 +24,9 @@ class ScoreVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        GAManager.createNormalScreenEventWith("ScoreVC")
+        
         scoreCollectionView.delegate = self
         scoreCollectionView.dataSource = self
         

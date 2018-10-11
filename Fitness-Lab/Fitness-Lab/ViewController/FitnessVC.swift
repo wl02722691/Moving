@@ -18,6 +18,7 @@ class FitnessVC: UIViewController {
         fitnessTableview.separatorStyle = UITableViewCellSeparatorStyle.none
         fitnessTableview.delegate = self
         fitnessTableview.dataSource = self
+        GAManager.createNormalScreenEventWith("FitnessVC")
     }
 }
 

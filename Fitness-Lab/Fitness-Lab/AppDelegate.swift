@@ -10,17 +10,23 @@ import UIKit
 import RealmSwift
 import UserNotifications
 import IQKeyboardManagerSwift
+import Firebase
+import Fabric
+import Crashlytics
 
+//swiftlint:disable identifier_name
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
+    static let trackId = "UA-127299416-1"
 
     func application(_ application: UIApplication,
                      didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         UIApplication.shared.statusBarStyle = .lightContent
         print(Realm.Configuration.defaultConfiguration.fileURL)
         
+        //realm測試
         let summary = SummaryModel()
         summary.durationLbl = 600
         summary.scoreTitleLbl = "困難"
@@ -28,12 +34,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         summary.videoImg = "Abs3"
         summary.videoTitle = "連續22天的腹肌訓練計畫"
 
-        do{
+        do {
             let realm = try Realm()
             try realm.write {
                //  realm.add(summary)
             }
-        }catch{
+        } catch {
             print("Error initalisting new realm, \(error)")
         }
 
@@ -43,6 +49,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         
         IQKeyboardManager.shared.enable = true
+        
+        //Google analytics
+        
+        FirebaseApp.configure()
+        
+        guard let gai = GAI.sharedInstance() else {
+            assert(false, "Google Analytics not configured correctly")
+        }
+        gai.tracker(withTrackingId: AppDelegate.trackId)
+    
+        gai.trackUncaughtExceptions = true
+        
+        //Fabric
+        Fabric.with([Crashlytics.self])
         
         return true
     }

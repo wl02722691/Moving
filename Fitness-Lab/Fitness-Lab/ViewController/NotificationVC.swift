@@ -64,6 +64,9 @@ class NotificationVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        GAManager.createNormalScreenEventWith("NotificationVC")
+        
         self.datePicker.datePickerMode = .time
         notificationTextView.delegate = self
         
