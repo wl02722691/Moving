@@ -66,11 +66,17 @@ class ActionVC: UIViewController {
         intensityLbl.text = listIndex.intensity
         durationLbl.text = "\(listIndex.durationLbl)min"
         
+       
     }
+    
+    
     
     @IBAction func playBtn(_ sender: UIButton) {
         
         videoView.isHidden = false
+        
+        videoView.playerVars = ["disablekb": 1 as AnyObject]
+   
         videoView.playerVars = ["playsinline": 1 as AnyObject]
         videoView.loadVideoID(lists[selectSender].videoID)
         activityIndicator.startAnimating()
@@ -306,6 +312,10 @@ class ActionVC: UIViewController {
             scoreVC.selectSender = selectSender
         }
     }
+    
+    
+    
+
 }
 
 // MARK: - UITableViewDelegate
@@ -313,7 +323,6 @@ class ActionVC: UIViewController {
 extension ActionVC: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
         
         guard let cell = actionTableView.cellForRow(at: indexPath) else {return}
         let contentInsetHeight = Int(actionTableView.frame.height - cell.frame.height)
@@ -324,10 +333,14 @@ extension ActionVC: UITableViewDelegate {
         
         if indexPath.row == nowIndex {
             //按正在播放的按鈕
-            if actionLists[nowIndex].playingOrPause == .playing{
+            if actionLists[nowIndex].playingOrPause == .playing {
+                
                 videoView.pause()
-            }else{
+                
+            } else {
+                
                 videoView.play()
+                
             }
         }else if indexPath.row > nowIndex {
             //按之後的按鈕

@@ -59,9 +59,16 @@ extension SettingVC: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         switch indexPath {
         case [0, 0]:
-            performSegue(withIdentifier: "toNotificationVC", sender: nil)
+             print("0, 0!!!")
         case [0, 1]:
-            print("01!!!")
+             print("0, 1!!!")
+        case [0, 2]:
+            print("0, 2!!!")
+        case [0, 3]:
+            performSegue(withIdentifier: "toNotificationVC", sender: nil)
+        case [0, 4]:
+            performSegue(withIdentifier: "toNotificationVC", sender: nil)
+            print("0, 4!!!")
         case [1, 0]:
             print("10!!!")
         case [1, 1]:
@@ -84,8 +91,8 @@ extension SettingVC: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch section {
-        case 0: return 2
-        case 1: return 3
+        case 0: return Data.instance.getSettingArray().count
+        case 1: return Data.instance.getSettingSwitchArray().count
         default: return 0
         }
     }

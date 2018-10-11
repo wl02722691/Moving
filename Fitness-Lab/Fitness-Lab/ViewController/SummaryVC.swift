@@ -19,13 +19,14 @@ class SummaryVC: UIViewController {
     var animationView = LOTAnimationView()
 
     @IBOutlet weak var firstView: UIView!
-    @IBOutlet weak var tableviewSummary: UITableView!
+    @IBOutlet weak var summaryTableview: UITableView!
     @IBOutlet weak var workoutNowBtn: UIButton!
     @IBOutlet weak var workoutTomorrowBtn: UIButton!
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(true)
-       animationView.stop()
+        self.view.willRemoveSubview(animationView)
+         animationView.stop()
     }
     
     
@@ -34,29 +35,36 @@ class SummaryVC: UIViewController {
         
         GAManager.createNormalScreenEventWith("SummaryVC")
         
-        tableviewSummary.delegate = self
-        tableviewSummary.dataSource = self
+        summaryTableview.delegate = self
+        summaryTableview.dataSource = self
         
-        tableviewSummary.register(UINib(nibName: "Summary1Cell", bundle: nil), forCellReuseIdentifier: "Summary1Cell")
-        tableviewSummary.register(UINib(nibName: "Summary2Cell", bundle: nil), forCellReuseIdentifier: "Summary2Cell")
+        summaryTableview.register(UINib(nibName: "Summary1Cell", bundle: nil), forCellReuseIdentifier: "Summary1Cell")
+        summaryTableview.register(UINib(nibName: "Summary2Cell", bundle: nil), forCellReuseIdentifier: "Summary2Cell")
         
         let realm = RealmService.shared.realm
         summaryArray = realm?.objects(SummaryModel.self)
+        
+        let notificationName = Notification.Name("addNewData")
+        NotificationCenter.default.addObserver(self, selector: #selector(updateRealm(noti:)), name: notificationName, object: nil)
 
     }
-    
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         
-        allTime = 0
         
         if summaryArray.count - 1 > 0 {
             for summaryArrayIndex in 0 ... summaryArray.count - 1 {
                 allTime += summaryArray[summaryArrayIndex].durationLbl
             }
+            
+        } else if summaryArray.count == 1 {
+            allTime = summaryArray[0].durationLbl
         }
 
         allTimeToMin = allTime / 60
+        
+        
 
         if summaryArray.count == 0 {
             firstView.isHidden = false
@@ -69,41 +77,56 @@ class SummaryVC: UIViewController {
     }
     
     func loadAnimateView(){
-        
-        animationView = LOTAnimationView(name: "empty_box")
-        animationView.frame = CGRect(x: 0, y: 0, width: 200, height: 200)
-        animationView.center = CGPoint(x: self.view.center.x, y: 250)
-        animationView.contentMode = .scaleAspectFit
-        animationView.loopAnimation = true
-        animationView.play()
-        self.view.addSubview(animationView)
-        
-        workoutNowBtn.cornerRadius = 25
-        workoutTomorrowBtn.borderColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
-        workoutTomorrowBtn.borderWidth = 2
-        workoutTomorrowBtn.cornerRadius = 25
-        
+       
+            animationView = LOTAnimationView(name: "empty_box")
+            animationView.frame = CGRect(x: 0, y: 0, width: 200, height: 200)
+            animationView.center = CGPoint(x: self.view.center.x, y: 250)
+            animationView.contentMode = .scaleAspectFit
+            animationView.loopAnimation = true
+            animationView.play()
+            self.view.addSubview(animationView)
+            
+            workoutNowBtn.cornerRadius = 25
+            workoutTomorrowBtn.borderColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
+            workoutTomorrowBtn.borderWidth = 2
+            workoutTomorrowBtn.cornerRadius = 25
+    
     }
     
     @IBAction func workoutNowBtn(_ sender: UIButton) {
+        
         tabBarController?.selectedIndex = 0
     }
     
     @IBAction func workoutTomorrowBtn(_ sender: UIButton) {
-        performSegue(withIdentifier: "toNotification", sender: nil)
+        
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+
+        guard let settingVC = storyboard.instantiateViewController(withIdentifier: "NotificationVC") as? NotificationVC else {return}
+        
+        self.show(settingVC, sender: nil)
+        
+        
+       // performSegue(withIdentifier: "toNotification", sender: nil)
     }
     
     @objc func updateRealm(noti: Notification) {
-        if summaryArray.count - 1 > 0 {
+        if summaryArray.count - 1 >= 0 {
          
             for summaryArrayIndex in 0 ... summaryArray.count - 1 {
                 
                 allTime += summaryArray[summaryArrayIndex].durationLbl
-                print(summaryArray[summaryArrayIndex].durationLbl)
-                print("allTimeallTimeallTimeallTime\(allTime)")
+                
             }
         }
-        tableviewSummary.reloadData()
+        
+        allTimeToMin = allTime / 60
+        
+        animationView.stop()
+       
+        animationView.removeFromSuperview()
+        
+        summaryTableview.reloadData()
     }
     
 }
@@ -147,13 +170,13 @@ extension SummaryVC: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        tableviewSummary.separatorStyle = UITableViewCellSeparatorStyle.none
+        summaryTableview.separatorStyle = UITableViewCellSeparatorStyle.none
         let index = indexPath.row
         
         switch indexPath.section {
         case 0:
             
-            guard let cell = tableviewSummary.dequeueReusableCell(withIdentifier: "Summary1Cell") as? Summary1Cell
+            guard let cell = summaryTableview.dequeueReusableCell(withIdentifier: "Summary1Cell") as? Summary1Cell
                 else {return Summary1Cell()}
             cell.planNumberLbl.text = String(summaryArray.count)
             cell.allTimeLbl.text = String(allTimeToMin)
@@ -163,7 +186,7 @@ extension SummaryVC: UITableViewDataSource {
             
         case 1:
             
-            guard let cell = tableviewSummary.dequeueReusableCell(withIdentifier: "Summary2Cell") as? Summary2Cell
+            guard let cell = summaryTableview.dequeueReusableCell(withIdentifier: "Summary2Cell") as? Summary2Cell
                 else { return Summary2Cell()}
             
             cell.updateView(summaryModel: summaryArray.reversed()[index])

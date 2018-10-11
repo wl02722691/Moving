@@ -41,7 +41,15 @@ class ScoreVC: UIViewController {
         layout?.itemSize = CGSize(width: cellWidth, height: cellHeigh)
         scoreCollectionView.contentInset = UIEdgeInsets(top: insetY, left: insetX, bottom: insetY, right: insetX)
         
+       
+        
     }
+    
+    func notificationToSummaryVC(){
+        let notificationName = Notification.Name("addNewData")
+        NotificationCenter.default.post(name: notificationName, object: nil, userInfo: ["addNewData":"addNewData"])
+    }
+    
     
     func realmWrite() {
         
@@ -76,7 +84,7 @@ class ScoreVC: UIViewController {
         NotificationCenter.default.post(name: notificationName,
                                         object: nil,
                                         userInfo: ["updateRealm": "updateRealm"])
-        
+        notificationToSummaryVC()
     }
     
 }
