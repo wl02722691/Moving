@@ -22,7 +22,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     static let trackId = "UA-127299416-1"
 
     func application(_ application: UIApplication,
-                     didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+                     didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         UIApplication.shared.statusBarStyle = .lightContent
         print(Realm.Configuration.defaultConfiguration.fileURL)
         
@@ -56,12 +56,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         guard let gai = GAI.sharedInstance() else {
             assert(false, "Google Analytics not configured correctly")
+            return false
         }
         gai.tracker(withTrackingId: AppDelegate.trackId)
     
         gai.trackUncaughtExceptions = true
         
-        //Fabric
+        //Google analytics
         Fabric.with([Crashlytics.self])
         
         return true

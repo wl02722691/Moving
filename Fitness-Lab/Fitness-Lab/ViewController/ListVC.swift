@@ -124,7 +124,7 @@ class ListVC: UIViewController {
     override func viewDidLoad() {
         backgroundDismissBtn.isHidden = true
         filterView.isHidden = true
-        listTableView.separatorStyle = UITableViewCellSeparatorStyle.none
+        listTableView.separatorStyle = UITableViewCell.SeparatorStyle.none
         super.viewDidLoad()
         listTableView.delegate = self
         listTableView.dataSource = self

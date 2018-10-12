@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import MessageUI
 
 class SettingVC: UIViewController {
     @IBOutlet weak var tableViewSetting: UITableView!
@@ -38,16 +39,16 @@ class SettingVC: UIViewController {
     func loadNotificationTime() {
         if let notificationTime = UserDefaults.standard.value(forKey: "notificationtime") as? String {
             print(notificationTime)
-            let indexPath = IndexPath(row: 0, section: 0)
+            let indexPath = IndexPath(row: 3, section: 0)
             guard let cell = self.tableViewSetting.cellForRow(at: indexPath) as? SettingCell  else {return}
             cell.statusLbl.text = notificationTime
-            //tableViewSetting.reloadData()
+    
         }
     }
     
     @objc func notificationUpdate(noti: Notification) {
         let notificationTime = noti.userInfo!["timeString"] as? String
-        let indexPath = IndexPath(row: 0, section: 0)
+        let indexPath = IndexPath(row: 3, section: 0)
         guard let cell = self.tableViewSetting.cellForRow(at: indexPath) as? SettingCell  else {return}
         cell.statusLbl.text = notificationTime
         UserDefaults.standard.set(notificationTime, forKey: "notificationtime")
@@ -61,13 +62,12 @@ extension SettingVC: UITableViewDelegate {
         case [0, 0]:
              print("0, 0!!!")
         case [0, 1]:
-             print("0, 1!!!")
+             sendEmail()
         case [0, 2]:
             print("0, 2!!!")
         case [0, 3]:
             performSegue(withIdentifier: "toNotificationVC", sender: nil)
         case [0, 4]:
-            performSegue(withIdentifier: "toNotificationVC", sender: nil)
             print("0, 4!!!")
         case [1, 0]:
             print("10!!!")
@@ -99,7 +99,7 @@ extension SettingVC: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        tableViewSetting.separatorStyle = UITableViewCellSeparatorStyle.none
+        tableViewSetting.separatorStyle = UITableViewCell.SeparatorStyle.none
         //        let index = indexPath.row
         
         switch indexPath.section {
@@ -109,7 +109,7 @@ extension SettingVC: UITableViewDataSource {
                 as? SettingCell else {return UITableViewCell()}
             
             let settingArray = Data.instance.getSettingArray()[indexPath.row]
-            tableViewSetting.separatorStyle = UITableViewCellSeparatorStyle.none
+            tableViewSetting.separatorStyle = UITableViewCell.SeparatorStyle.none
             cell.selectionStyle = .none
             cell.updateView(settingModel: settingArray)
             
@@ -128,6 +128,41 @@ extension SettingVC: UITableViewDataSource {
             break
         }
         return UITableViewCell()
+    }
+    
+}
+
+
+extension SettingVC: MFMailComposeViewControllerDelegate {
+    
+    func configureMailController() -> MFMailComposeViewController {
+        let mailComposerVC = MFMailComposeViewController()
+        mailComposerVC.mailComposeDelegate = self
+        
+        mailComposerVC.setToRecipients(["wl02722691@gmail.com"])
+        mailComposerVC.setSubject("App意見回饋")
+        
+        return mailComposerVC
+    }
+    
+    func showMailError() {
+        let sendMailErrorAlert = UIAlertController(title: "無法寄送信件", message: "請再試一次", preferredStyle: UIAlertController.Style.alert)
+        let dismiss = UIAlertAction(title: "確認", style: .default, handler: nil)
+        sendMailErrorAlert.addAction(dismiss)
+        self.present(sendMailErrorAlert, animated: true, completion: nil)
+    }
+    
+    func sendEmail() {
+        let mailComposeViewController = configureMailController()
+        if MFMailComposeViewController.canSendMail() {
+            self.present(mailComposeViewController, animated: true, completion: nil)
+        } else {
+            showMailError()
+        }
+    }
+    
+    func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
+        controller.dismiss(animated: true, completion: nil)
     }
     
 }

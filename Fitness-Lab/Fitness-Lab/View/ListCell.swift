@@ -31,6 +31,7 @@ class ListCell: UITableViewCell {
     }
     
     override func awakeFromNib() {
+        
         super.awakeFromNib()
         
        contentView.backgroundColor = #colorLiteral(red: 0.09411764706, green: 0.09411764706, blue: 0.09411764706, alpha: 1)

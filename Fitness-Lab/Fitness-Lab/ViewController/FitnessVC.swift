@@ -15,7 +15,7 @@ class FitnessVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        fitnessTableview.separatorStyle = UITableViewCellSeparatorStyle.none
+        fitnessTableview.separatorStyle = UITableViewCell.SeparatorStyle.none
         fitnessTableview.delegate = self
         fitnessTableview.dataSource = self
         GAManager.createNormalScreenEventWith("FitnessVC")

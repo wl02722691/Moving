@@ -25,11 +25,9 @@ class SummaryVC: UIViewController {
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(true)
-        self.view.willRemoveSubview(animationView)
-         animationView.stop()
+        animationView.removeFromSuperview()
     }
-    
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -52,6 +50,7 @@ class SummaryVC: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         
+        allTime = 0
         
         if summaryArray.count - 1 > 0 {
             for summaryArrayIndex in 0 ... summaryArray.count - 1 {
@@ -106,21 +105,27 @@ class SummaryVC: UIViewController {
         
         self.show(settingVC, sender: nil)
         
-        
-       // performSegue(withIdentifier: "toNotification", sender: nil)
     }
     
     @objc func updateRealm(noti: Notification) {
-        if summaryArray.count - 1 >= 0 {
-         
+        
+        allTime = 0
+        
+        if summaryArray.count - 1 > 0 {
+            
             for summaryArrayIndex in 0 ... summaryArray.count - 1 {
                 
                 allTime += summaryArray[summaryArrayIndex].durationLbl
                 
             }
+            
+        } else if summaryArray.count == 1 {
+            
+            allTime += summaryArray[0].durationLbl
         }
         
         allTimeToMin = allTime / 60
+        
         
         animationView.stop()
        
@@ -170,7 +175,7 @@ extension SummaryVC: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        summaryTableview.separatorStyle = UITableViewCellSeparatorStyle.none
+        summaryTableview.separatorStyle = UITableViewCell.SeparatorStyle.none
         let index = indexPath.row
         
         switch indexPath.section {

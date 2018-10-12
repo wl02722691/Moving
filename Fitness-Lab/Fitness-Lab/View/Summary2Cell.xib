@@ -19,8 +19,9 @@
                 <rect key="frame" x="0.0" y="0.0" width="392" height="151.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ETv-BO-wI1">
+                    <imageView userInteractionEnabled="NO" alpha="0.90000000000000002" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ETv-BO-wI1">
                         <rect key="frame" x="16" y="26" width="100" height="100"/>
+                        <color key="backgroundColor" red="0.1529411765" green="0.1529411765" blue="0.1529411765" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="100" id="Frr-n3-m6s"/>
                             <constraint firstAttribute="width" constant="100" id="aTf-Wt-dLJ"/>
@@ -57,6 +58,10 @@
                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <color key="highlightedColor" red="0.83920373069999998" green="0.89931850930000001" blue="1" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                     </label>
+                    <view alpha="0.5" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Var-Dc-aE2">
+                        <rect key="frame" x="16" y="26" width="100" height="100"/>
+                        <color key="backgroundColor" red="0.1529411765" green="0.1529411765" blue="0.1529411765" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    </view>
                 </subviews>
                 <color key="backgroundColor" red="0.062745098039215685" green="0.062745098039215685" blue="0.062745098039215685" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                 <constraints>
@@ -67,10 +72,14 @@
                     <constraint firstAttribute="bottom" secondItem="FbJ-wH-394" secondAttribute="bottom" id="EKb-jS-FmX"/>
                     <constraint firstItem="ah7-fc-1L7" firstAttribute="leading" secondItem="irL-i7-l5k" secondAttribute="trailing" constant="50" id="GKo-KC-co4"/>
                     <constraint firstAttribute="trailing" secondItem="FbJ-wH-394" secondAttribute="trailing" id="GRe-j3-tFf"/>
+                    <constraint firstItem="Var-Dc-aE2" firstAttribute="centerX" secondItem="ETv-BO-wI1" secondAttribute="centerX" id="HnI-g5-IU6"/>
+                    <constraint firstItem="Var-Dc-aE2" firstAttribute="width" secondItem="ETv-BO-wI1" secondAttribute="width" id="KGj-lj-GvJ"/>
+                    <constraint firstItem="Var-Dc-aE2" firstAttribute="height" secondItem="ETv-BO-wI1" secondAttribute="height" id="L4z-sq-lvL"/>
                     <constraint firstItem="ETv-BO-wI1" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="MFz-oL-ckr"/>
                     <constraint firstItem="uLT-AL-ZJU" firstAttribute="top" secondItem="ZLY-vf-7HB" secondAttribute="bottom" constant="15" id="Mfd-yu-XpW"/>
                     <constraint firstItem="ZLY-vf-7HB" firstAttribute="top" secondItem="ETv-BO-wI1" secondAttribute="top" id="N8j-RK-UGz"/>
                     <constraint firstItem="irL-i7-l5k" firstAttribute="top" secondItem="uLT-AL-ZJU" secondAttribute="bottom" constant="16" id="WrQ-YS-D0i"/>
+                    <constraint firstItem="Var-Dc-aE2" firstAttribute="centerY" secondItem="ETv-BO-wI1" secondAttribute="centerY" id="XHr-is-Vh9"/>
                     <constraint firstItem="ETv-BO-wI1" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="dZy-RP-c3g"/>
                     <constraint firstItem="FbJ-wH-394" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="tB1-Vl-uU7"/>
                 </constraints>

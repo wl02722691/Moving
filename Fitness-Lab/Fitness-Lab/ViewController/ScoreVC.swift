@@ -11,6 +11,7 @@ import RealmSwift
 
 class ScoreVC: UIViewController {
     
+    @IBOutlet weak var finishBtn: UIButton!
     @IBOutlet weak var scoreCollectionView: UICollectionView!
     var lists =  [ListModel]()
     var actionLists = [ActionModel]()
@@ -25,6 +26,7 @@ class ScoreVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        navigationItem.hidesBackButton = true
         GAManager.createNormalScreenEventWith("ScoreVC")
         
         scoreCollectionView.delegate = self
@@ -41,11 +43,13 @@ class ScoreVC: UIViewController {
         layout?.itemSize = CGSize(width: cellWidth, height: cellHeigh)
         scoreCollectionView.contentInset = UIEdgeInsets(top: insetY, left: insetX, bottom: insetY, right: insetX)
         
-       
+        finishBtn.cornerRadius = 25
+        
         
     }
     
     func notificationToSummaryVC(){
+        
         let notificationName = Notification.Name("addNewData")
         NotificationCenter.default.post(name: notificationName, object: nil, userInfo: ["addNewData":"addNewData"])
     }

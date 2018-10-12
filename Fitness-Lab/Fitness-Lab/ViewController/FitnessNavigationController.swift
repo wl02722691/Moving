@@ -17,7 +17,7 @@ class FitnessNavigationController: UINavigationController {
         UINavigationBar.appearance().barTintColor?.withAlphaComponent(1)
         
         UINavigationBar.appearance().tintColor = .white
-        UINavigationBar.appearance().titleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor.white]
+        UINavigationBar.appearance().titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
         UINavigationBar.appearance().isTranslucent = false
     }
 }
