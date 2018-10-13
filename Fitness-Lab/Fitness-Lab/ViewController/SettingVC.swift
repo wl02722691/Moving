@@ -60,7 +60,13 @@ extension SettingVC: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         switch indexPath {
         case [0, 0]:
-             print("0, 0!!!")
+            
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            
+            guard let informationVC = storyboard.instantiateViewController(withIdentifier: "InformationVC") as? InformationVC  else { return }
+            
+            self.show(informationVC, sender: nil)
+            
         case [0, 1]:
              sendEmail()
         case [0, 2]:

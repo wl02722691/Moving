@@ -7,21 +7,21 @@
 	<key>AD_UNIT_ID_FOR_INTERSTITIAL_TEST</key>
 	<string>ca-app-pub-3940256099942544/4411468910</string>
 	<key>CLIENT_ID</key>
-	<string>120904116671-d78dss12a41t37rhdb7pgpdde3fm8lgo.apps.googleusercontent.com</string>
+	<string>706569904579-pu53mh3i9jot5bf2si1o2e7dkbqi6dm9.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.120904116671-d78dss12a41t37rhdb7pgpdde3fm8lgo</string>
+	<string>com.googleusercontent.apps.706569904579-pu53mh3i9jot5bf2si1o2e7dkbqi6dm9</string>
 	<key>API_KEY</key>
-	<string>AIzaSyBRtJOZa1QyVyqWwON1ZJaJ0L_7gTbgyS0</string>
+	<string>AIzaSyDdRAXRdOc6CDFjRD_O8uj3hjN3w2G5Ujo</string>
 	<key>GCM_SENDER_ID</key>
-	<string>120904116671</string>
+	<string>706569904579</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>com.AliceChang.FitnessLab</string>
+	<string>com.AliceChang.Moving</string>
 	<key>PROJECT_ID</key>
-	<string>fitneab</string>
+	<string>moving-47771</string>
 	<key>STORAGE_BUCKET</key>
-	<string>fitneab.appspot.com</string>
+	<string>moving-47771.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
 	<true></true>
 	<key>IS_ANALYTICS_ENABLED</key>
@@ -33,8 +33,8 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:120904116671:ios:b53e694388b13e2a</string>
+	<string>1:706569904579:ios:522cead020b11100</string>
 	<key>DATABASE_URL</key>
-	<string>https://fitneab.firebaseio.com</string>
+	<string>https://moving-47771.firebaseio.com</string>
 </dict>
 </plist>

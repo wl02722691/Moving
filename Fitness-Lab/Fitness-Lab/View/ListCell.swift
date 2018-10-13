@@ -34,7 +34,6 @@ class ListCell: UITableViewCell {
         
         super.awakeFromNib()
         
-       contentView.backgroundColor = #colorLiteral(red: 0.09411764706, green: 0.09411764706, blue: 0.09411764706, alpha: 1)
+       contentView.backgroundColor = #colorLiteral(red: 0.06274509804, green: 0.06274509804, blue: 0.06274509804, alpha: 1)
     }
-
 }

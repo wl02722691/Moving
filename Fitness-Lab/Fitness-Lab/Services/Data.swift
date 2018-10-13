@@ -12,7 +12,7 @@ class Data {
     static let instance = Data()
     
     private let fitCategories = [
-        FitnessCategory(title: "全身運動", imageName: "1", secondTitle: "Core workout"),
+        FitnessCategory(title: "全部運動", imageName: "1", secondTitle: "All workout"),
         FitnessCategory(title: "腹部運動", imageName: "2", secondTitle: "Abs workout"),
         FitnessCategory(title: "臀部運動", imageName: "3", secondTitle: "Butt workout"),
         FitnessCategory(title: "手臂運動", imageName: "4", secondTitle: "Arm workout"),
