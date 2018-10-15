@@ -128,10 +128,8 @@ class ListVC: UIViewController {
         super.viewDidLoad()
         listTableView.delegate = self
         listTableView.dataSource = self
-        GAManager.createNormalScreenEventWith("ListVC")
+        
     }
-    
-    
     
     func initList(category: FitnessCategory) {
         lists = Data.instance.getList(forListTitle: category.secondTitle)
@@ -143,7 +141,7 @@ class ListVC: UIViewController {
         planNumberLbl.text = "\(lists.count) 個運動計畫"
         filterView.cornerRadius = 10
         okBtn.cornerRadius = 20
-        
+        GAManager.createNormalScreenEventWith("ListVC")
     }
 }
 

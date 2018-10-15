@@ -9,6 +9,7 @@
 import UIKit
 
 class SettingSwitchCell: UITableViewCell {
+    
     @IBOutlet weak var titleLbl: UILabel!
     @IBOutlet weak var statusSwitch: UISwitch!
     

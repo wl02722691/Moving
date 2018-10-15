@@ -15,7 +15,9 @@ class NotificationVC: UIViewController {
     @IBOutlet weak var datePicker: UIDatePicker!
     @IBOutlet weak var notificationTextView: UITextView!
     
+    
     @IBAction func okBtn(_ sender: Any) {
+        
         UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge]) { (granted, error) in
             if granted {
                 print("User notifications are allowed.")
@@ -34,13 +36,13 @@ class NotificationVC: UIViewController {
         let minString = dateMMValue.string(from: datePicker.date)
         print(minString)
         
-        if notificationTextView.text == "" || notificationTextView!.text == "你想跟明天該運動的自己說什麼呢✍？"{
-            scheduleNotification(hour: Int(hourString) ?? 0, minute: Int(minString) ?? 0, title: "Alice該運動囉！")
+        if notificationTextView.text == "" || notificationTextView!.text == "你想跟明天的自己說什麼呢✍？"{
+            scheduleNotification(hour: Int(hourString) ?? 0, minute: Int(minString) ?? 0, title: "該運動囉！")
          } else {
             let titleText = notificationTextView.text
             scheduleNotification(hour: Int(hourString) ?? 0,
                                  minute: Int(minString) ?? 0,
-                                 title: titleText ?? "Alice該運動囉！")
+                                 title: titleText ?? "該運動囉！")
         }
         
         let notificationName = Notification.Name("notificationUpdate")
@@ -54,18 +56,19 @@ class NotificationVC: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
-        okBtn.cornerRadius = 20
+        
+        okBtn.cornerRadius = 25
         datePicker.setValue(UIColor.white, forKey: "textColor")
         notificationTextView.layer.borderColor = UIColor.white.cgColor
         notificationTextView.layer.borderWidth = 1
         notificationTextView.clipsToBounds = true
         notificationTextView.layer.cornerRadius = 20
+        
+        GAManager.createNormalScreenEventWith("NotificationVC")
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        GAManager.createNormalScreenEventWith("NotificationVC")
         
         self.datePicker.datePickerMode = .time
         notificationTextView.delegate = self
@@ -76,13 +79,9 @@ class NotificationVC: UIViewController {
         
         let content = UNMutableNotificationContent()
         content.title = title
-        content.subtitle = "胖仔饅頭4ni！"
-        content.body = "該運動囉☺️"
+        content.subtitle = "運動時間到啦🙋‍♀️"
+        content.body = "堅持才能塑造自己的可能性呀"
         content.badge = 1
-        //content.sound = UNNotificationSound(named: "gong")
-        //let imageURL = Bundle.main.url(forResource: "YOYOYO", withExtension: "png")
-        //let attachement = try! UNNotificationAttachment(identifier: "YOYOYO.png", url: imageURL!, options: nil)
-        //content.attachments = [attachement]
         
         var dateComponents = DateComponents()
         dateComponents.hour = hour

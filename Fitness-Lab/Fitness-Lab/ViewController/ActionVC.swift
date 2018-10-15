@@ -10,7 +10,9 @@ import UIKit
 import YouTubePlayer_Swift
 import AVFoundation
 
+//swiftlint:disable force_cast
 class ActionVC: UIViewController {
+    
     var actionTimer: Timer?
     var actionSec = 300
     var restTimer: Timer?
@@ -26,6 +28,9 @@ class ActionVC: UIViewController {
     var lists =  [ListModel]()
     var actionLists = [ActionModel]()
     var selectSender = 0
+    var cueTone: AVAudioPlayer!
+    var cueToneStatus: CueTone = .open
+    var synthesizer = AVSpeechSynthesizer()
     
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var videoView: YouTubePlayerView!
@@ -51,26 +56,45 @@ class ActionVC: UIViewController {
     // MARK: - initView
     override func viewDidLoad() {
         super.viewDidLoad()
-        GAManager.createNormalScreenEventWith("ActionVC")
-        
         actionTableView.separatorStyle = UITableViewCell.SeparatorStyle.none
         print(lists)
         print(actionLists)
         videoView.isHidden = true
         self.videoView.delegate = self
         activityIndicator.isHidden = true
+        initCueTone()
+        
+        let notificationName = Notification.Name("cueTone")
+        NotificationCenter.default.addObserver(self, selector: #selector(cueToneUpdate(noti:)), name: notificationName, object: nil)
+        
+    }
+    
+    @objc func cueToneUpdate(noti: Notification) {
+    
+        guard let status = noti.userInfo!["cueTone"] as? Bool else { return }
+
+        if status == true {
+            cueToneStatus = .open
+        } else {
+            cueToneStatus = .close
+        }
+        
         
     }
     
     override func viewWillAppear(_ animated: Bool) {
         
         super.viewWillAppear(true)
+        GAManager.createNormalScreenEventWith("ActionVC")
         startBtn.cornerRadius = 38
         let listIndex = lists[selectSender]
         videoTitle.text = listIndex.videoTitle
         videoImg.image = UIImage(named: listIndex.videoImg)
         intensityLbl.text = listIndex.intensity
         durationLbl.text = "\(listIndex.durationLbl)min"
+        
+        let index = IndexPath(row: nowIndex, section: 0)
+        actionTableView.reloadRows(at: [index], with: UITableView.RowAnimation.automatic)
         
     }
     
@@ -110,6 +134,9 @@ class ActionVC: UIViewController {
         }
         
         self.actionTableView.scrollToRow(at: indexPath, at: UITableView.ScrollPosition.top, animated: true)
+        if cueToneStatus == CueTone.open {
+            cueTone.play()
+        }
     }
     
     func restCountDownReloadCellView() {
@@ -123,6 +150,10 @@ class ActionVC: UIViewController {
         let indexPath = IndexPath(row: nowIndex, section: 0)
         guard let cell = self.actionTableView.cellForRow(at: indexPath) as? ActionCell  else {return}
         cell.actionDescription.text = actionLists[nowIndex].actionDescription
+        if cueToneStatus == CueTone.open {
+            cueTone.play()
+            sayActionDescription()
+        }
     }
     
     // MARK: - CountDown
@@ -132,11 +163,11 @@ class ActionVC: UIViewController {
         actionLists[nowIndex].cellStatus = .playing
         actionLists[nowIndex].actionOrRest = .action
         
-        actionSec -= 1
-        
         actionCountDownReloadCellView()
         
-        if actionSec == 0 {
+        actionSec -= 1
+        
+        if actionSec <= 0 {
             
             actionTimer?.invalidate()
             
@@ -153,7 +184,6 @@ class ActionVC: UIViewController {
                 
                 actionCountDownToZeroReloadCellView()
                 //改狀態
-                
                 
                 //更新restSec初始值
                 if actionLists[nowIndex].firstPlayRest == true {
@@ -188,9 +218,11 @@ class ActionVC: UIViewController {
         
         restSec -= 1
         
+        print("restSec\(restSec)")
+        
         restCountDownReloadCellView()
         
-        if restSec == 0 {
+        if restSec <= 0 {
             
             if actionLists[nowIndex].firstPlayAction == true {
                 actionSec = Int(actionLists[nowIndex].timesDescription)
@@ -218,14 +250,17 @@ class ActionVC: UIViewController {
         let compareIndex = nowIndex
         print("compareIndex\(compareIndex)nowIndex\(nowIndex)")
         DispatchQueue.main.asyncAfter(deadline: .now() + youtubestopTime) {
-            //沒有換下一個動作就執行seekTo
-            print("compareIndex\(compareIndex)nowIndex\(self.nowIndex)")
             if compareIndex == self.nowIndex {
                 self.videoView.seekTo(Float(self.actionLists[self.nowIndex].youtubeTime), seekAhead: true)
-                if compareIndex == self.nowIndex {
-                    self.videoView.seekTo(Float(self.actionLists[self.nowIndex].youtubeTime), seekAhead: true)
+                DispatchQueue.main.asyncAfter(deadline: .now() + youtubestopTime) {
                     if compareIndex == self.nowIndex {
                         self.videoView.seekTo(Float(self.actionLists[self.nowIndex].youtubeTime), seekAhead: true)
+                        DispatchQueue.main.asyncAfter(deadline: .now() + youtubestopTime) {
+                            if compareIndex == self.nowIndex {
+                                self.videoView.seekTo(Float(self.actionLists[self.nowIndex].youtubeTime), seekAhead: true)
+                                
+                            }
+                        }
                     }
                 }
             }
@@ -317,6 +352,25 @@ class ActionVC: UIViewController {
             scoreVC.selectSender = selectSender
         }
     }
+    
+    // MARK: - CueTone
+    func initCueTone(){
+        let soundPath = Bundle.main.url(forResource: "Wate", withExtension: "wav")
+        do {
+            self.cueTone = try AVAudioPlayer(contentsOf: soundPath!)
+            self.cueTone.prepareToPlay()
+        } catch {
+            print("error")
+        }
+
+    }
+    
+    func sayActionDescription() {
+        
+        let utterance = AVSpeechUtterance(string: actionLists[nowIndex].actionDescription)
+        utterance.voice =  AVSpeechSynthesisVoice(language: "zh-TW")
+        synthesizer.speak(utterance)
+    }
 }
 
 // MARK: - UITableViewDelegate
@@ -378,9 +432,14 @@ extension ActionVC: UITableViewDelegate {
             let compareIndex = nowIndex
             
             DispatchQueue.main.asyncAfter(deadline: .now() + youtubestopTime) {
-                
                 if compareIndex == self.nowIndex {
                     self.videoView.seekTo(Float(self.actionLists[self.nowIndex].youtubeTime), seekAhead: true)
+                    DispatchQueue.main.asyncAfter(deadline: .now() + youtubestopTime) {
+                        if compareIndex == self.nowIndex {
+                            self.videoView.seekTo(Float(self.actionLists[self.nowIndex].youtubeTime), seekAhead: true)
+                            
+                        }
+                    }
                     
                 }
             }
@@ -419,8 +478,21 @@ extension ActionVC: UITableViewDelegate {
             
             let youtubestopTime = actionLists[nowIndex].stopTime
             
+            let compareIndex = nowIndex
+            
             DispatchQueue.main.asyncAfter(deadline: .now() + youtubestopTime) {
-                self.videoView.seekTo(Float(self.actionLists[self.nowIndex].youtubeTime), seekAhead: true)
+                
+                if compareIndex == self.nowIndex {
+                    
+                        self.videoView.seekTo(Float(self.actionLists[self.nowIndex].youtubeTime), seekAhead: true)
+                    
+                    DispatchQueue.main.asyncAfter(deadline: .now() + youtubestopTime) {
+                        if compareIndex == self.nowIndex {
+                            self.videoView.seekTo(Float(self.actionLists[self.nowIndex].youtubeTime), seekAhead: true)
+                            
+                        }
+                    }
+                }
                 
             }
             
@@ -474,9 +546,11 @@ extension ActionVC: UITableViewDataSource {
                                                             selector: #selector(self.actionCountDown),
                                                             userInfo: nil, repeats: true)
                 }
+                
                 actionViewWidthAnimate(cell: nil)
                 cell.timeDescription.text = String(actionSec)
                 cell.actionDescription.textColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
+                cell.actionDescription.text = actionLists[nowIndex].actionDescription
             } else if cellStatus == .playing && actionOrRest == .action && videoView.playerState == .Paused {
                 
                 let actionTimesDescription = actionLists[nowIndex].timesDescription
@@ -664,11 +738,20 @@ extension ActionVC: YouTubePlayerDelegate {
         let youtubestopTime = actionLists[nowIndex].stopTime
         
         let compareIndex = nowIndex
+        
         DispatchQueue.main.asyncAfter(deadline: .now() + youtubestopTime) {
             
             if compareIndex == self.nowIndex {
                 
                 self.videoView.seekTo(Float(self.actionLists[self.nowIndex].youtubeTime), seekAhead: true)
+                
+                DispatchQueue.main.asyncAfter(deadline: .now() + youtubestopTime) {
+                    
+                    if compareIndex == self.nowIndex {
+                        self.videoView.seekTo(Float(self.actionLists[self.nowIndex].youtubeTime), seekAhead: true)
+                        
+                    }
+                }
                 
             } else {
                 

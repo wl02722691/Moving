@@ -26,6 +26,8 @@ class SettingCell: UITableViewCell {
     func updateView(settingModel: SettingModel) {
         titleLbl.text = settingModel.titleLbl
         statusLbl.text = settingModel.statusLbl
+        
+        
     }
     
 }

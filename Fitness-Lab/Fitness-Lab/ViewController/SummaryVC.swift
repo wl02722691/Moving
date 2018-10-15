@@ -31,8 +31,6 @@ class SummaryVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        GAManager.createNormalScreenEventWith("SummaryVC")
-        
         summaryTableview.delegate = self
         summaryTableview.dataSource = self
         
@@ -49,6 +47,8 @@ class SummaryVC: UIViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
+        
+         GAManager.createNormalScreenEventWith("SummaryVC")
         
         allTime = 0
         
@@ -79,7 +79,7 @@ class SummaryVC: UIViewController {
        
             animationView = LOTAnimationView(name: "empty_box")
             animationView.frame = CGRect(x: 0, y: 0, width: 200, height: 200)
-            animationView.center = CGPoint(x: self.view.center.x, y: 250)
+            animationView.center = CGPoint(x: self.view.center.x, y: self.view.center.y-120)
             animationView.contentMode = .scaleAspectFit
             animationView.loopAnimation = true
             animationView.play()

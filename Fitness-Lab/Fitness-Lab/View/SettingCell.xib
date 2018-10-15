@@ -12,7 +12,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell contentMode="scaleToFill" restorationIdentifier="SettingCell" selectionStyle="default" indentationWidth="10" reuseIdentifier="SettingCell" rowHeight="88" id="KGk-i7-Jjw" customClass="SettingCell" customModule="Fitness_Lab" customModuleProvider="target">
+        <tableViewCell contentMode="scaleToFill" restorationIdentifier="SettingCell" selectionStyle="default" indentationWidth="10" reuseIdentifier="SettingCell" rowHeight="88" id="KGk-i7-Jjw" customClass="SettingCell" customModule="Moving" customModuleProvider="target">
             <rect key="frame" x="0.0" y="0.0" width="320" height="88"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
@@ -20,13 +20,13 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mgL-Ro-8u2">
-                        <rect key="frame" x="50" y="32" width="42.5" height="24"/>
+                        <rect key="frame" x="30" y="32" width="42.5" height="24"/>
                         <fontDescription key="fontDescription" name="PingFangTC-Light" family="PingFang TC" pointSize="17"/>
                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rK7-6k-N63">
-                        <rect key="frame" x="250" y="32" width="42" height="24"/>
+                        <rect key="frame" x="248" y="32" width="42" height="24"/>
                         <fontDescription key="fontDescription" name="PingFangTC-Thin" family="PingFang TC" pointSize="17"/>
                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <nil key="highlightedColor"/>
@@ -45,9 +45,9 @@
                     <constraint firstItem="mgL-Ro-8u2" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="B4C-Rp-EYD"/>
                     <constraint firstAttribute="trailing" secondItem="UF3-uJ-tTf" secondAttribute="trailing" id="L1e-ip-AVK"/>
                     <constraint firstAttribute="bottom" secondItem="UF3-uJ-tTf" secondAttribute="bottom" id="LTo-VU-X8c"/>
-                    <constraint firstItem="mgL-Ro-8u2" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="50" id="d8L-QI-lzv"/>
-                    <constraint firstItem="rK7-6k-N63" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="250" id="gW0-l9-BZb"/>
+                    <constraint firstItem="mgL-Ro-8u2" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="30" id="d8L-QI-lzv"/>
                     <constraint firstItem="rK7-6k-N63" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="n3q-os-q6c"/>
+                    <constraint firstAttribute="trailing" secondItem="rK7-6k-N63" secondAttribute="trailing" constant="30" id="ueE-kk-iKV"/>
                     <constraint firstItem="UF3-uJ-tTf" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="y70-0b-AQH"/>
                 </constraints>
             </tableViewCellContentView>

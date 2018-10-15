@@ -18,14 +18,18 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="123" translatesAutoresizingMaskIntoConstraints="NO" id="yXc-yq-L0b">
-                                <rect key="frame" x="-0.5" y="-0.5" width="376" height="668"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="launchScreen" translatesAutoresizingMaskIntoConstraints="NO" id="yXc-yq-L0b">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" red="0.001363023831" green="0.65889452390000003" blue="0.29311159110000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="yXc-yq-L0b" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="4qA-p9-93f"/>
-                            <constraint firstItem="yXc-yq-L0b" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="cAM-U2-9i2"/>
+                            <constraint firstAttribute="trailing" secondItem="yXc-yq-L0b" secondAttribute="trailing" id="JXT-se-7zg"/>
+                            <constraint firstAttribute="bottom" secondItem="yXc-yq-L0b" secondAttribute="bottom" id="cGV-On-iHP"/>
+                            <constraint firstItem="yXc-yq-L0b" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leading" id="cha-qf-3F4"/>
+                            <constraint firstItem="yXc-yq-L0b" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="nDz-uh-dJt"/>
+                            <constraint firstItem="yXc-yq-L0b" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="vLw-Et-sXR"/>
+                            <constraint firstItem="yXc-yq-L0b" firstAttribute="top" secondItem="Ze5-6b-2t3" secondAttribute="top" id="wZW-pm-Ofg"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
@@ -36,6 +40,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="123" width="376" height="668"/>
+        <image name="launchScreen" width="1243" height="2209"/>
     </resources>
 </document>

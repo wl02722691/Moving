@@ -9,12 +9,14 @@
 import Foundation
 
 class GAManager {
-   
+    
     static func createNormalScreenEventWith(_ screenName: String) {
-        let tracker = GAI.sharedInstance().tracker(withTrackingId: AppDelegate.trackId)
-        tracker?.set(screenName, value: screenName)
+        
+        guard let tracker = GAI.sharedInstance().defaultTracker else { return }
+        tracker.set(kGAIScreenName, value: screenName)
+        
         guard let builder = GAIDictionaryBuilder.createScreenView() else { return }
-        tracker?.send(builder.build() as [NSObject: AnyObject])
+        tracker.send(builder.build() as [NSObject : AnyObject])
     }
-
+    
 }

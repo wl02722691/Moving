@@ -46,7 +46,7 @@ class Summary2Cell: UITableViewCell {
         let dateFormatter = DateFormatter()
         dateFormatter.timeZone = TimeZone(abbreviation: "TW")
         dateFormatter.locale = NSLocale.current
-        dateFormatter.dateFormat = "yyyy MM dd HH:mm"
+        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm"
         let strDate = dateFormatter.string(from: date)
         return strDate
         

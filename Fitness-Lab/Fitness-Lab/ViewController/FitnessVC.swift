@@ -8,6 +8,7 @@
 
 import UIKit
 import UserNotifications
+import Firebase
 
 class FitnessVC: UIViewController {
     
@@ -18,6 +19,11 @@ class FitnessVC: UIViewController {
         fitnessTableview.separatorStyle = UITableViewCell.SeparatorStyle.none
         fitnessTableview.delegate = self
         fitnessTableview.dataSource = self
+       
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
         GAManager.createNormalScreenEventWith("FitnessVC")
     }
 }
@@ -41,7 +47,9 @@ extension FitnessVC: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let list = Data.instance.getfitCategories()[indexPath.row]
         print(list)
+        
         performSegue(withIdentifier: "toListVC", sender: list)
+        
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

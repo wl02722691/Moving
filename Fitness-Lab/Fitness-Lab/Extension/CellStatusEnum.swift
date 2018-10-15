@@ -33,4 +33,8 @@ enum TimeRange {
     case min9
 }
 
+enum CueTone{
+    case open
+    case close
+}
 

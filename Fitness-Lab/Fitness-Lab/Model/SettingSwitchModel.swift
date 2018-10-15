@@ -11,7 +11,7 @@ import Foundation
 struct SettingSwitchModel {
     
     private(set) public var titleLbl: String
-    private(set) public var statusSwitch: Bool
+    var statusSwitch: Bool
     
     init(titleLbl: String,
          statusSwitch: Bool) {

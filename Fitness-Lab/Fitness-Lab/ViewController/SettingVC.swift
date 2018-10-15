@@ -10,13 +10,14 @@ import UIKit
 import MessageUI
 
 class SettingVC: UIViewController {
+    
     @IBOutlet weak var tableViewSetting: UITableView!
     var settingArray = [SettingModel(titleLbl: "", statusLbl: "")]
+    var cueToneStatus: CueTone = .open
+    var settingSwitchArray = Data.instance.getSettingSwitchArray()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        GAManager.createNormalScreenEventWith("SettingVC")
         
         tableViewSetting.delegate = self
         tableViewSetting.dataSource = self
@@ -28,17 +29,19 @@ class SettingVC: UIViewController {
         let editUpdatednotificationName = Notification.Name("notificationUpdate")
         NotificationCenter.default.addObserver(self, selector: #selector(notificationUpdate(noti:)),
                                                name: editUpdatednotificationName, object: nil)
-        
+       
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(true)
+    
+        GAManager.createNormalScreenEventWith("SettingVC")
         loadNotificationTime()
+        cueTone()
     }
     
     func loadNotificationTime() {
         if let notificationTime = UserDefaults.standard.value(forKey: "notificationtime") as? String {
-            print(notificationTime)
             let indexPath = IndexPath(row: 3, section: 0)
             guard let cell = self.tableViewSetting.cellForRow(at: indexPath) as? SettingCell  else {return}
             cell.statusLbl.text = notificationTime
@@ -52,6 +55,44 @@ class SettingVC: UIViewController {
         guard let cell = self.tableViewSetting.cellForRow(at: indexPath) as? SettingCell  else {return}
         cell.statusLbl.text = notificationTime
         UserDefaults.standard.set(notificationTime, forKey: "notificationtime")
+    }
+    
+    func cueTone() {
+        
+        let index = IndexPath(row: 0, section: 1)
+        
+        guard let cell = tableViewSetting.cellForRow(at: index) as? SettingSwitchCell else {return}
+    
+        cell.statusSwitch.addTarget(self, action: #selector(switchValueChange(mySwitch:)),
+                                    for: UIControl.Event.valueChanged)
+        
+        if let cueToneStatus = UserDefaults.standard.value(forKey: "cueTone") as? Bool {
+            
+          cell.statusSwitch.setOn(cueToneStatus, animated: true)
+        
+        } else {
+            
+            cell.statusSwitch.setOn(true, animated: true)
+            
+        }
+
+    }
+    
+    @objc func switchValueChange(mySwitch: UISwitch) {
+        
+        if mySwitch.isOn == true {
+            
+            let notificationName = Notification.Name("cueTone")
+            NotificationCenter.default.post(name: notificationName, object: nil, userInfo: ["cueTone":true])
+            UserDefaults.standard.set(true, forKey: "cueTone")
+            
+        } else {
+            
+            let notificationName = Notification.Name("cueTone")
+            NotificationCenter.default.post(name: notificationName, object: nil, userInfo: ["cueTone": false])
+            UserDefaults.standard.set(false, forKey: "cueTone")
+        }
+        
     }
 }
 
@@ -70,9 +111,9 @@ extension SettingVC: UITableViewDelegate {
         case [0, 1]:
              sendEmail()
         case [0, 2]:
-            print("0, 2!!!")
-        case [0, 3]:
             performSegue(withIdentifier: "toNotificationVC", sender: nil)
+        case [0, 3]:
+             print("[0, 3]!!")
         case [0, 4]:
             print("0, 4!!!")
         case [1, 0]:
@@ -85,8 +126,8 @@ extension SettingVC: UITableViewDelegate {
         default:
             print("not anyone")
         }
-        
     }
+    
 }
 
 extension SettingVC: UITableViewDataSource {
@@ -106,7 +147,7 @@ extension SettingVC: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         tableViewSetting.separatorStyle = UITableViewCell.SeparatorStyle.none
-        //        let index = indexPath.row
+        //let index = indexPath.row
         
         switch indexPath.section {
             
@@ -122,12 +163,12 @@ extension SettingVC: UITableViewDataSource {
             return cell
             
         case 1:
-            
+
             guard let cell = tableViewSetting.dequeueReusableCell(withIdentifier: "SettingSwitchCell")
                 as? SettingSwitchCell else {return UITableViewCell()}
-            cell.updateView(settingModel: Data.instance.getSettingSwitchArray()[indexPath.row])
+            cell.updateView(settingModel: settingSwitchArray[indexPath.row])
             cell.selectionStyle = .none
-            
+
             return cell
             
         default:

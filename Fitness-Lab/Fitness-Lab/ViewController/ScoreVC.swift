@@ -8,6 +8,7 @@
 
 import UIKit
 import RealmSwift
+import Firebase
 
 class ScoreVC: UIViewController {
     
@@ -27,7 +28,6 @@ class ScoreVC: UIViewController {
         super.viewDidLoad()
         
         navigationItem.hidesBackButton = true
-        GAManager.createNormalScreenEventWith("ScoreVC")
         
         scoreCollectionView.delegate = self
         scoreCollectionView.dataSource = self
@@ -46,6 +46,11 @@ class ScoreVC: UIViewController {
         finishBtn.cornerRadius = 25
         
         
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        GAManager.createNormalScreenEventWith("ScoreVC")
     }
     
     func notificationToSummaryVC(){
@@ -76,8 +81,11 @@ class ScoreVC: UIViewController {
     }
     
     @IBAction func finishBtn(_ sender: UIButton) {
+        Analytics.logEvent("ScoreVC_finishBtn", parameters: nil)
+        
         
         realmWrite()
+        
         navigationController?.popToRootViewController(animated: true)
         
         let tabController = self.view.window?.rootViewController as? UITabBarController
