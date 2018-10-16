@@ -33,6 +33,8 @@
 		696265D821538EA200C68282 /* ListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 696265D721538EA200C68282 /* ListCell.swift */; };
 		696265DA21538FD600C68282 /* ListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 696265D921538FD600C68282 /* ListModel.swift */; };
 		696265DC2154B22600C68282 /* ActionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 696265DB2154B22600C68282 /* ActionModel.swift */; };
+		696A2B5F217576CE0075EFDE /* green_circle.json in Resources */ = {isa = PBXBuildFile; fileRef = 696A2B5E217576CD0075EFDE /* green_circle.json */; };
+		696A2B62217580120075EFDE /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 696A2B61217580120075EFDE /* Reachability.m */; };
 		698C0135216E22FC004DC719 /* empty_box.json in Resources */ = {isa = PBXBuildFile; fileRef = 698C0134216E22FC004DC719 /* empty_box.json */; };
 		698C013B216EE67C004DC719 /* GAManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 698C013A216EE67C004DC719 /* GAManager.swift */; };
 		69BB972C2170DCAA00B2BDEB /* InformationVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69BB972B2170DCAA00B2BDEB /* InformationVC.swift */; };
@@ -79,6 +81,9 @@
 		696265D721538EA200C68282 /* ListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListCell.swift; sourceTree = "<group>"; };
 		696265D921538FD600C68282 /* ListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListModel.swift; sourceTree = "<group>"; };
 		696265DB2154B22600C68282 /* ActionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionModel.swift; sourceTree = "<group>"; };
+		696A2B5E217576CD0075EFDE /* green_circle.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = green_circle.json; sourceTree = "<group>"; };
+		696A2B60217580120075EFDE /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
+		696A2B61217580120075EFDE /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
 		698C0134216E22FC004DC719 /* empty_box.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = empty_box.json; sourceTree = "<group>"; };
 		698C0139216EDE94004DC719 /* Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Header.h; sourceTree = "<group>"; };
 		698C013A216EE67C004DC719 /* GAManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GAManager.swift; sourceTree = "<group>"; };
@@ -150,9 +155,17 @@
 			path = Services;
 			sourceTree = "<group>";
 		};
+		696A2B59217573A20075EFDE /* Reachability */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Reachability;
+			sourceTree = "<group>";
+		};
 		698C0136216E2308004DC719 /* Lottie */ = {
 			isa = PBXGroup;
 			children = (
+				696A2B5E217576CD0075EFDE /* green_circle.json */,
 				698C0134216E22FC004DC719 /* empty_box.json */,
 			);
 			path = Lottie;
@@ -179,6 +192,7 @@
 		69D37DF1215257EC00B8F1F9 /* Fitness-Lab */ = {
 			isa = PBXGroup;
 			children = (
+				696A2B59217573A20075EFDE /* Reachability */,
 				69255A3321737C47005929AB /* CueTone */,
 				698C0136216E2308004DC719 /* Lottie */,
 				6941AF87216364AF00A0D0B8 /* Extension */,
@@ -192,6 +206,8 @@
 				69D37DFE215257EE00B8F1F9 /* Info.plist */,
 				698C0139216EDE94004DC719 /* Header.h */,
 				698C013A216EE67C004DC719 /* GAManager.swift */,
+				696A2B60217580120075EFDE /* Reachability.h */,
+				696A2B61217580120075EFDE /* Reachability.m */,
 				69BB972D2171C03000B2BDEB /* GoogleService-Info.plist */,
 				69BB97372171CF2A00B2BDEB /* LaunchScreen.storyboard */,
 			);
@@ -303,7 +319,7 @@
 				TargetAttributes = {
 					69D37DEE215257EC00B8F1F9 = {
 						CreatedOnToolsVersion = 9.4.1;
-						LastSwiftMigration = 1010;
+						LastSwiftMigration = 1000;
 					};
 				};
 			};
@@ -334,6 +350,7 @@
 				69255A3521737C57005929AB /* Wate.wav in Resources */,
 				6917E04C215CE6EF00C0A743 /* Summary1Cell.xib in Resources */,
 				6917E052215CE8F800C0A743 /* Summary2Cell.xib in Resources */,
+				696A2B5F217576CE0075EFDE /* green_circle.json in Resources */,
 				69D37DFA215257EE00B8F1F9 /* Assets.xcassets in Resources */,
 				698C0135216E22FC004DC719 /* empty_box.json in Resources */,
 				69D2000421610B000086D660 /* SettingCell.xib in Resources */,
@@ -452,6 +469,7 @@
 				6917E041215BB55400C0A743 /* ScoreModel.swift in Sources */,
 				6917E04B215CE6EF00C0A743 /* Summary1Cell.swift in Sources */,
 				6917E051215CE8F800C0A743 /* Summary2Cell.swift in Sources */,
+				696A2B62217580120075EFDE /* Reachability.m in Sources */,
 				69D2000721610B2F0086D660 /* SettingModel.swift in Sources */,
 				696265D821538EA200C68282 /* ListCell.swift in Sources */,
 				6934D9A22163041B00B48802 /* FitnessCellModel.swift in Sources */,
@@ -595,8 +613,9 @@
 			baseConfigurationReference = 7B0DC18DE223C5FD8DE85563 /* Pods-Moving.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = CHZWYBA9N7;
 				INFOPLIST_FILE = "Fitness-Lab/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -655,7 +674,9 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.AliceChang.Moving;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Fitness-Lab/Reachability/Moving-Bridging-Header.h";
 				"SWIFT_OBJC_BRIDGING_HEADER[arch=*]" = "/Users/zhangshuhan/Desktop/Fitness/Fitness-Lab/Fitness-Lab/Fitness-Lab/Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -666,8 +687,9 @@
 			baseConfigurationReference = 250E0FCBE387D7868E3002C3 /* Pods-Moving.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = CHZWYBA9N7;
 				INFOPLIST_FILE = "Fitness-Lab/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -726,6 +748,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.AliceChang.Moving;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Fitness-Lab/Reachability/Moving-Bridging-Header.h";
 				"SWIFT_OBJC_BRIDGING_HEADER[arch=*]" = "/Users/zhangshuhan/Desktop/Fitness/Fitness-Lab/Fitness-Lab/Fitness-Lab/Header.h";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";

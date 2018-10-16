@@ -8,6 +8,7 @@
 
 import Foundation
 struct ActionModel {
+    
     private(set) public var youtubeTime: Double
     private(set) public var stopTime: Double
     private(set) public var timesDescription: Double

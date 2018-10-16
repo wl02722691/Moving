@@ -9,10 +9,12 @@
 import UIKit
 import YouTubePlayer_Swift
 import AVFoundation
+import Lottie
 
 //swiftlint:disable force_cast
 class ActionVC: UIViewController {
     
+    @IBOutlet weak var reconnectBtn: UIButton!
     var actionTimer: Timer?
     var actionSec = 300
     var restTimer: Timer?
@@ -31,6 +33,9 @@ class ActionVC: UIViewController {
     var cueTone: AVAudioPlayer!
     var cueToneStatus: CueTone = .open
     var synthesizer = AVSpeechSynthesizer()
+    var reachability = Reachability(hostName: "www.apple.com")
+    var animationView = LOTAnimationView()
+    @IBOutlet weak var connectView: UIView!
     
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var videoView: YouTubePlayerView!
@@ -44,6 +49,7 @@ class ActionVC: UIViewController {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(true)
         videoView.pause()
+        animationView.removeFromSuperview()
         
     }
     
@@ -100,11 +106,19 @@ class ActionVC: UIViewController {
     
     @IBAction func playBtn(_ sender: UIButton) {
         
-        videoView.isHidden = false
-        videoView.playerVars = ["playsinline": 1 as AnyObject]
-        videoView.loadVideoID(lists[selectSender].videoID)
-        activityIndicator.startAnimating()
-        activityIndicator.isHidden = false
+        if downloadData() == true {
+            
+            videoView.isHidden = false
+            videoView.playerVars = ["playsinline": 1 as AnyObject]
+            videoView.loadVideoID(lists[selectSender].videoID)
+            activityIndicator.startAnimating()
+            activityIndicator.isHidden = false
+            
+        } else {
+            
+      
+            print(" downloadData() == false ")
+        }
         
     }
     
@@ -371,6 +385,65 @@ class ActionVC: UIViewController {
         utterance.voice =  AVSpeechSynthesisVoice(language: "zh-TW")
         synthesizer.speak(utterance)
     }
+    
+    
+    //checkInternetFunction downloadData
+    
+    func checkInternetFunction() -> Bool {
+        if reachability?.currentReachabilityStatus().rawValue == 0 {
+            print("no internet connected.")
+            return false
+        }else {
+            print("internet connected successfully.")
+            return true
+        }
+    }
+    
+    func downloadData() -> Bool{
+        
+        if checkInternetFunction() == true {
+            downloadDataViewTrue()
+            
+            return true
+            
+        }else {
+            
+            print("checkInternetFunction() == false")
+            downloadDataViewFalse()
+            
+            return false
+        }
+    }
+    
+    func downloadDataViewTrue(){
+        
+        connectView.isHidden = true
+        
+ 
+    }
+    
+    func downloadDataViewFalse() {
+        
+        connectView.isHidden = false
+        animationView = LOTAnimationView(name: "green_circle")
+        reconnectBtn.cornerRadius = 25
+        animationView.frame = CGRect(x: 0, y: 0, width: 200, height: 200)
+        animationView.center = CGPoint(x: self.view.center.x, y: self.view.center.y-120)
+        animationView.contentMode = .scaleAspectFit
+        animationView.loopAnimation = true
+        animationView.play()
+        
+        if self.connectView.subviews.count == 3 {
+            self.connectView.addSubview(animationView)
+        }
+    }
+    
+    
+    
+    @IBAction func reconnectBtnWasPressed(_ sender: UIButton) {
+        downloadData()
+    }
+    
 }
 
 // MARK: - UITableViewDelegate
@@ -521,6 +594,7 @@ extension ActionVC: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didEndDisplaying cell: UITableViewCell, forRowAt indexPath: IndexPath) {
     }
+    
 }
 
 // MARK: - UITableViewDataSource

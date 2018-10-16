@@ -43,10 +43,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             print("Error initalisting new realm, \(error)")
         }
 
-        let notificationCenter = UNUserNotificationCenter.current()
-        notificationCenter.requestAuthorization(options: [.alert, .badge, .sound]) { (granted, error) in
-
-        }
+//        let notificationCenter = UNUserNotificationCenter.current()
+//        notificationCenter.requestAuthorization(options: [.alert, .badge, .sound]) { (granted, error) in
+//
+//        }
         
         IQKeyboardManager.shared.enable = true
         

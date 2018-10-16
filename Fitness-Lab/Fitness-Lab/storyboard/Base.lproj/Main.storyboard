@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.15" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="9we-RV-zYN">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="9we-RV-zYN">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.9"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -498,6 +498,47 @@
                             <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" misplaced="YES" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="8zU-5L-b4G">
                                 <rect key="frame" x="177.5" y="128.5" width="20" height="20"/>
                             </activityIndicatorView>
+                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yhV-I4-aPL">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="554"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3J9-tB-Aan" userLabel="確認">
+                                        <rect key="frame" x="112.5" y="444" width="150" height="50"/>
+                                        <color key="backgroundColor" red="0.001363023831" green="0.65889452390000003" blue="0.29311159110000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="150" id="XJX-Zq-liq"/>
+                                            <constraint firstAttribute="height" constant="50" id="tDM-rL-aDJ"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="PingFangTC-Semibold" family="PingFang TC" pointSize="17"/>
+                                        <state key="normal" title="再試一次">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="reconnectBtnWasPressed:" destination="boQ-Rv-IUi" eventType="touchUpInside" id="55j-K8-pfA"/>
+                                        </connections>
+                                    </button>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="離線狀態無法使用運動功能，請重新連線。" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HvO-2g-NbM">
+                                        <rect key="frame" x="20" y="74" width="285" height="21"/>
+                                        <fontDescription key="fontDescription" name="PingFangTC-Light" family="PingFang TC" pointSize="15"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="你目前為離線狀態" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="x2A-cZ-qOg">
+                                        <rect key="frame" x="20" y="30" width="136" height="24"/>
+                                        <fontDescription key="fontDescription" name="PingFangTC-Semibold" family="PingFang TC" pointSize="17"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" red="0.062745098040000002" green="0.062745098040000002" blue="0.062745098040000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="3J9-tB-Aan" secondAttribute="bottom" constant="60" id="4Wa-DJ-R0o"/>
+                                    <constraint firstItem="HvO-2g-NbM" firstAttribute="top" secondItem="x2A-cZ-qOg" secondAttribute="bottom" constant="20" id="TJi-ik-GXG"/>
+                                    <constraint firstItem="x2A-cZ-qOg" firstAttribute="leading" secondItem="yhV-I4-aPL" secondAttribute="leading" constant="20" id="WjD-vK-B6y"/>
+                                    <constraint firstItem="x2A-cZ-qOg" firstAttribute="leading" secondItem="HvO-2g-NbM" secondAttribute="leading" id="tbD-uy-RGm"/>
+                                    <constraint firstItem="x2A-cZ-qOg" firstAttribute="top" secondItem="yhV-I4-aPL" secondAttribute="top" constant="30" id="uEK-Bi-gf4"/>
+                                    <constraint firstItem="3J9-tB-Aan" firstAttribute="centerX" secondItem="yhV-I4-aPL" secondAttribute="centerX" id="vUU-Li-SKp"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" red="0.062745098039215685" green="0.062745098039215685" blue="0.062745098039215685" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
@@ -510,6 +551,7 @@
                             <constraint firstItem="xef-62-alh" firstAttribute="height" secondItem="Fzg-Zi-12d" secondAttribute="height" id="LGl-jV-qc5"/>
                             <constraint firstItem="No0-W7-fJU" firstAttribute="centerY" secondItem="Fzg-Zi-12d" secondAttribute="centerY" id="MwC-JG-AiZ"/>
                             <constraint firstItem="gxv-aS-h6j" firstAttribute="width" secondItem="Fzg-Zi-12d" secondAttribute="width" id="RYF-mm-e98"/>
+                            <constraint firstItem="xOy-eM-H3i" firstAttribute="bottom" secondItem="yhV-I4-aPL" secondAttribute="bottom" id="Rjc-ZP-e2X"/>
                             <constraint firstItem="r2w-sd-IKn" firstAttribute="top" secondItem="Fzg-Zi-12d" secondAttribute="bottom" id="VSU-7c-bVG"/>
                             <constraint firstItem="No0-W7-fJU" firstAttribute="leading" secondItem="a9o-Ut-jUz" secondAttribute="trailing" constant="30" id="VaH-zE-t28"/>
                             <constraint firstAttribute="bottom" secondItem="r2w-sd-IKn" secondAttribute="bottom" id="X9h-4o-jT4"/>
@@ -517,9 +559,12 @@
                             <constraint firstItem="a9o-Ut-jUz" firstAttribute="centerY" secondItem="No0-W7-fJU" secondAttribute="centerY" id="aEK-BV-OQ7"/>
                             <constraint firstItem="xef-62-alh" firstAttribute="width" secondItem="Fzg-Zi-12d" secondAttribute="width" id="aId-GD-lzZ"/>
                             <constraint firstItem="No0-W7-fJU" firstAttribute="centerX" secondItem="Fzg-Zi-12d" secondAttribute="centerX" id="ePE-nv-wa1"/>
+                            <constraint firstItem="xOy-eM-H3i" firstAttribute="trailing" secondItem="yhV-I4-aPL" secondAttribute="trailing" id="f8d-EK-vbr"/>
                             <constraint firstItem="EC7-u1-bg0" firstAttribute="centerX" secondItem="Rzl-g9-AFS" secondAttribute="centerX" id="gVf-Iq-dq7"/>
                             <constraint firstItem="xef-62-alh" firstAttribute="centerX" secondItem="Fzg-Zi-12d" secondAttribute="centerX" id="ijR-8q-fRt"/>
                             <constraint firstItem="gxv-aS-h6j" firstAttribute="centerY" secondItem="Fzg-Zi-12d" secondAttribute="centerY" id="jzo-Bh-Bcx"/>
+                            <constraint firstItem="yhV-I4-aPL" firstAttribute="top" secondItem="xOy-eM-H3i" secondAttribute="top" id="kBL-uZ-96N"/>
+                            <constraint firstItem="yhV-I4-aPL" firstAttribute="leading" secondItem="xOy-eM-H3i" secondAttribute="leading" id="mnB-mh-LaC"/>
                             <constraint firstItem="No0-W7-fJU" firstAttribute="top" secondItem="EC7-u1-bg0" secondAttribute="bottom" constant="15" id="o5A-yE-AMO"/>
                             <constraint firstItem="8zU-5L-b4G" firstAttribute="centerX" secondItem="Fzg-Zi-12d" secondAttribute="centerX" id="oRe-So-MQL"/>
                             <constraint firstItem="Fzg-Zi-12d" firstAttribute="top" secondItem="xOy-eM-H3i" secondAttribute="top" id="rwH-gz-hFU"/>
@@ -532,8 +577,10 @@
                     <connections>
                         <outlet property="actionTableView" destination="r2w-sd-IKn" id="Ghi-T6-U5d"/>
                         <outlet property="activityIndicator" destination="8zU-5L-b4G" id="IjB-0M-pvJ"/>
+                        <outlet property="connectView" destination="yhV-I4-aPL" id="1Ph-HP-07E"/>
                         <outlet property="durationLbl" destination="a9o-Ut-jUz" id="2lj-B4-ql6"/>
                         <outlet property="intensityLbl" destination="GOx-P6-ghi" id="AQM-7G-A0R"/>
+                        <outlet property="reconnectBtn" destination="3J9-tB-Aan" id="wkW-Mp-IAo"/>
                         <outlet property="startBtn" destination="No0-W7-fJU" id="Iho-qA-wHW"/>
                         <outlet property="videoImg" destination="Fzg-Zi-12d" id="Wd2-6u-zen"/>
                         <outlet property="videoTitle" destination="EC7-u1-bg0" id="Ida-Ca-iYQ"/>

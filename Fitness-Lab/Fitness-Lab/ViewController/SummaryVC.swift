@@ -48,6 +48,8 @@ class SummaryVC: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         
+        animationView.play()
+        
          GAManager.createNormalScreenEventWith("SummaryVC")
         
         allTime = 0
@@ -84,7 +86,8 @@ class SummaryVC: UIViewController {
             animationView.loopAnimation = true
             animationView.play()
             self.view.addSubview(animationView)
-            
+        
+        
             workoutNowBtn.cornerRadius = 25
             workoutTomorrowBtn.borderColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
             workoutTomorrowBtn.borderWidth = 2
