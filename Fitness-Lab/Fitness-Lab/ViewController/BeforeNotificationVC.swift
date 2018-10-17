@@ -10,7 +10,10 @@ import UIKit
 import UserNotifications
 
 class BeforeNotificationVC: UIViewController {
-    
+
+    @IBAction func closeBtn(_ sender: UIButton) {
+        navigationController?.popToRootViewController(animated: true)
+    }
     @IBOutlet weak var okBtn: UIButton!
     
     override func viewDidLoad() {
@@ -18,10 +21,26 @@ class BeforeNotificationVC: UIViewController {
         
         // Do any additional setup after loading the view.
     }
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         okBtn.cornerRadius = 25
+        self.navigationController?.setNavigationBarHidden(true, animated: animated)
+        self.tabBarController?.tabBar.isHidden = true
+        viewWillLayoutSubviews()
+
+    
     }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(true)
+        self.navigationController?.setNavigationBarHidden(false, animated: animated)
+        self.tabBarController?.tabBar.isHidden = false
+        
+    }
+    
+  
+
     
     @IBAction func okBtn(_ sender: UIButton) {
         
@@ -30,7 +49,7 @@ class BeforeNotificationVC: UIViewController {
                                                                     if granted {
                                                                         DispatchQueue.main.async {
                                                                             
-                                                                            self.performSegue(withIdentifier: "backToNotificationVC", sender: nil)
+                                                    self.performSegue(withIdentifier: "backToNotificationVC", sender: nil)
                                                                             UserDefaults.standard.set(false, forKey: "firstNotification")
                                                                             
                                                                         }
@@ -44,7 +63,11 @@ class BeforeNotificationVC: UIViewController {
                                                                             DispatchQueue.main.async {
                                                                                 UIApplication.shared.open(URL.init(string: UIApplication.openSettingsURLString)!,
                                                                                                           options: [:], completionHandler: nil)
-                                                                                self.okBtn.titleLabel?.text = "連好了嗎～"
+                                                                                
+                                                                                
+                                                        
+                                                        
+                                                                               
                                                                             }
                                                                             
                                                                         } else {

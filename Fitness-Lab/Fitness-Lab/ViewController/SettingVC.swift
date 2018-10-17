@@ -12,7 +12,7 @@ import UserNotifications
 
 class SettingVC: UIViewController {
     
-    @IBOutlet weak var tableViewSetting: UITableView!
+    @IBOutlet weak var settingTableView: UITableView!
     var settingArray = [SettingModel(titleLbl: "", statusLbl: "")]
     var cueToneStatus: CueTone = .open
     var settingSwitchArray = Data.instance.getSettingSwitchArray()
@@ -20,17 +20,23 @@ class SettingVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        tableViewSetting.delegate = self
-        tableViewSetting.dataSource = self
-        tableViewSetting.register(UINib(nibName: "SettingCell", bundle: nil),
+        settingTableView.bounces = false
+        settingTableView.delegate = self
+        settingTableView.dataSource = self
+        settingTableView.register(UINib(nibName: "SettingCell", bundle: nil),
                                   forCellReuseIdentifier: "SettingCell")
-        tableViewSetting.register(UINib(nibName: "SettingSwitchCell", bundle: nil),
+        settingTableView.register(UINib(nibName: "SettingSwitchCell", bundle: nil),
                                   forCellReuseIdentifier: "SettingSwitchCell")
         
         let editUpdatednotificationName = Notification.Name("notificationUpdate")
         NotificationCenter.default.addObserver(self, selector: #selector(notificationUpdate(noti:)),
                                                name: editUpdatednotificationName, object: nil)
+
        
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -44,7 +50,7 @@ class SettingVC: UIViewController {
     func loadNotificationTime() {
         if let notificationTime = UserDefaults.standard.value(forKey: "notificationtime") as? String {
             let indexPath = IndexPath(row: 3, section: 0)
-            guard let cell = self.tableViewSetting.cellForRow(at: indexPath) as? SettingCell  else {return}
+            guard let cell = self.settingTableView.cellForRow(at: indexPath) as? SettingCell  else {return}
             cell.statusLbl.text = notificationTime
     
         }
@@ -53,7 +59,7 @@ class SettingVC: UIViewController {
     @objc func notificationUpdate(noti: Notification) {
         let notificationTime = noti.userInfo!["timeString"] as? String
         let indexPath = IndexPath(row: 2, section: 0)
-        guard let cell = self.tableViewSetting.cellForRow(at: indexPath) as? SettingCell  else {return}
+        guard let cell = self.settingTableView.cellForRow(at: indexPath) as? SettingCell  else {return}
         cell.statusLbl.text = notificationTime
         UserDefaults.standard.set(notificationTime, forKey: "notificationtime")
     }
@@ -62,18 +68,18 @@ class SettingVC: UIViewController {
         
         let index = IndexPath(row: 0, section: 1)
         
-        guard let cell = tableViewSetting.cellForRow(at: index) as? SettingSwitchCell else {return}
+        guard let cell = settingTableView.cellForRow(at: index) as? SettingSwitchCell else {return}
     
         cell.statusSwitch.addTarget(self, action: #selector(switchValueChange(mySwitch:)),
                                     for: UIControl.Event.valueChanged)
         
         if let cueToneStatus = UserDefaults.standard.value(forKey: "cueTone") as? Bool {
             
-          cell.statusSwitch.setOn(cueToneStatus, animated: true)
+           cell.statusSwitch.setOn(cueToneStatus, animated: false)
         
         } else {
             
-            cell.statusSwitch.setOn(true, animated: true)
+            cell.statusSwitch.setOn(true, animated: false)
             
         }
 
@@ -165,17 +171,17 @@ extension SettingVC: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        tableViewSetting.separatorStyle = UITableViewCell.SeparatorStyle.none
+        settingTableView.separatorStyle = UITableViewCell.SeparatorStyle.none
         //let index = indexPath.row
         
         switch indexPath.section {
             
         case 0:
-            guard let cell = tableViewSetting.dequeueReusableCell(withIdentifier: "SettingCell")
+            guard let cell = settingTableView.dequeueReusableCell(withIdentifier: "SettingCell")
                 as? SettingCell else {return UITableViewCell()}
             
             let settingArray = Data.instance.getSettingArray()[indexPath.row]
-            tableViewSetting.separatorStyle = UITableViewCell.SeparatorStyle.none
+            settingTableView.separatorStyle = UITableViewCell.SeparatorStyle.none
             cell.selectionStyle = .none
             cell.updateView(settingModel: settingArray)
             
@@ -183,7 +189,7 @@ extension SettingVC: UITableViewDataSource {
             
         case 1:
 
-            guard let cell = tableViewSetting.dequeueReusableCell(withIdentifier: "SettingSwitchCell")
+            guard let cell = settingTableView.dequeueReusableCell(withIdentifier: "SettingSwitchCell")
                 as? SettingSwitchCell else {return UITableViewCell()}
             cell.updateView(settingModel: settingSwitchArray[indexPath.row])
             cell.selectionStyle = .none

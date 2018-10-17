@@ -48,6 +48,7 @@ class ActionVC: UIViewController {
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(true)
+       
         videoView.pause()
         animationView.removeFromSuperview()
         
@@ -318,7 +319,6 @@ class ActionVC: UIViewController {
         
         actionAnimatorWidth.startAnimation()
         
-        
     }
     
     func restViewWidthAnimate(cell: ActionCell?) {
@@ -438,8 +438,6 @@ class ActionVC: UIViewController {
         }
     }
     
-    
-    
     @IBAction func reconnectBtnWasPressed(_ sender: UIButton) {
         downloadData()
     }
@@ -452,11 +450,15 @@ extension ActionVC: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
+        let this = actionLists.count - nowIndex
         guard let cell = actionTableView.cellForRow(at: indexPath) else {return}
-        let contentInsetHeight = Int(actionTableView.frame.height - cell.frame.height)
-        if contentInsetNumber < contentInsetHeight && videoView.ready == true {
-            contentInsetNumber += contentInsetHeight
-            actionTableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: CGFloat(contentInsetNumber), right: 0)
+        let mostContentInsetHeight = Int(actionTableView.frame.height - cell.frame.height)
+        var eachContentInsetHeight = 0
+        
+        if Int(actionTableView.frame.height) > this * Int(cell.frame.height) {
+            
+            eachContentInsetHeight = Int(actionTableView.frame.height) - this * Int(cell.frame.height)
+            
         }
         
         if indexPath.row == nowIndex {
@@ -574,6 +576,13 @@ extension ActionVC: UITableViewDelegate {
             actionViewWidthAnimate(cell: nil)
             
         }
+        
+        if contentInsetNumber < mostContentInsetHeight && videoView.playerState == .Playing  {
+            contentInsetNumber += eachContentInsetHeight
+            actionTableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: CGFloat(contentInsetNumber), right: 0)
+            print("nowIndex\(nowIndex)eachContentInsetHeight\(eachContentInsetHeight)this\(this)")
+        }
+        
         
     }
     

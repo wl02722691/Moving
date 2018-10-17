@@ -11,9 +11,55 @@ import UserNotifications
 import IQKeyboardManagerSwift
 
 class NotificationVC: UIViewController {
+    @IBOutlet weak var removeNotificationBtn: UIButton!
     @IBOutlet weak var okBtn: UIButton!
     @IBOutlet weak var datePicker: UIDatePicker!
     @IBOutlet weak var notificationTextView: UITextView!
+    
+    
+    
+    
+    
+    @IBAction func removeNotificationBtnWasPressed(_ sender: UIButton) {
+        
+        
+        if UIApplication.shared.scheduledLocalNotifications?.count == 0 {
+            navigationController?.popToRootViewController(animated: true)
+        }
+        
+        UIApplication.shared.cancelAllLocalNotifications()
+        removeNotificationBtn.setTitle("已關閉推播", for: .normal)
+        
+        let notificationName = Notification.Name("notificationUpdate")
+        NotificationCenter.default.post(name: notificationName,
+                                        object: nil,
+                                        userInfo: ["timeString": "尚未設定推播"])
+        
+    }
+    
+    
+    func showRemoveNotificationBtn() {
+        
+        UNUserNotificationCenter.current().getNotificationSettings { (settings) in
+            DispatchQueue.main.async {
+                
+                if UIApplication.shared.scheduledLocalNotifications?.count != 0 {
+                    
+                    self.removeNotificationBtn.borderWidth = 2
+                    self.removeNotificationBtn.borderColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
+                    self.removeNotificationBtn.cornerRadius = 25
+                    self.removeNotificationBtn.isHidden = false
+                    
+                    
+                } else {
+                    
+                    self.removeNotificationBtn.isHidden = true
+                    
+                    
+                }
+            }
+        }
+    }
     
     
     @IBAction func okBtn(_ sender: Any) {
@@ -35,6 +81,8 @@ class NotificationVC: UIViewController {
             scheduleNotification(hour: Int(hourString) ?? 0,
                                  minute: Int(minString) ?? 0,
                                  title: titleText ?? "該運動囉！")
+            
+            
         }
         
         let notificationName = Notification.Name("notificationUpdate")
@@ -57,6 +105,9 @@ class NotificationVC: UIViewController {
         notificationTextView.layer.cornerRadius = 20
         
         GAManager.createNormalScreenEventWith("NotificationVC")
+        
+        showRemoveNotificationBtn()
+        
     }
     
     override func viewDidLoad() {
