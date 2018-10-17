@@ -746,7 +746,7 @@
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Youtube公開API" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wBE-R6-9ih">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Youtube 公開 API" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wBE-R6-9ih">
                                 <rect key="frame" x="0.0" y="425" width="375" height="24"/>
                                 <fontDescription key="fontDescription" name="PingFangTC-Light" family="PingFang TC" pointSize="17"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -788,6 +788,95 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pTs-ZZ-cE2" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2637.5999999999999" y="2341.9790104947529"/>
+        </scene>
+        <!--Before NotificationVC-->
+        <scene sceneID="PjQ-Bn-kvG">
+            <objects>
+                <viewController id="a4W-Zt-Xtf" customClass="BeforeNotificationVC" customModule="Moving" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="0K5-zZ-ac2">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="618"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="抓住每一個運動的時機" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3QW-ZX-OIb">
+                                <rect key="frame" x="61" y="114" width="253.5" height="30"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="25"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EHr-lC-DXN">
+                                <rect key="frame" x="112.5" y="468" width="150" height="50"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="5Rz-Rc-OQ1"/>
+                                    <constraint firstAttribute="width" constant="150" id="xJz-Hd-yqg"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="PingFangTC-Semibold" family="PingFang TC" pointSize="17"/>
+                                <state key="normal" title="開放推播權限">
+                                    <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="okBtn:" destination="a4W-Zt-Xtf" eventType="touchUpInside" id="1Xj-lb-G3X"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="我們將提供專屬的運動通知" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FGN-fv-BHM">
+                                <rect key="frame" x="89.5" y="164" width="196" height="19.5"/>
+                                <fontDescription key="fontDescription" type="system" weight="thin" pointSize="16"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="給追求卓越的你" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rCr-Of-Lfm">
+                                <rect key="frame" x="89.5" y="191" width="114.5" height="19.5"/>
+                                <fontDescription key="fontDescription" type="system" weight="thin" pointSize="16"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="28" translatesAutoresizingMaskIntoConstraints="NO" id="qmT-9k-AqV">
+                                <rect key="frame" x="89.5" y="240.5" width="150.5" height="117.5"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1.點選開放推播權限" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Fkg-Sf-jLr">
+                                        <rect key="frame" x="0.0" y="0.0" width="150.5" height="20.5"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2.點選通知" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6Gt-yU-dUG">
+                                        <rect key="frame" x="0.0" y="48.5" width="84" height="20.5"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="3.允許推播" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Q7c-B3-qwK">
+                                        <rect key="frame" x="0.0" y="97" width="84" height="20.5"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                        <color key="backgroundColor" red="0.062745098039215685" green="0.062745098039215685" blue="0.062745098039215685" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="FGN-fv-BHM" firstAttribute="centerX" secondItem="0K5-zZ-ac2" secondAttribute="centerX" id="2If-mb-V0Y"/>
+                            <constraint firstItem="FGN-fv-BHM" firstAttribute="top" secondItem="3QW-ZX-OIb" secondAttribute="bottom" constant="20" id="36W-0L-CPa"/>
+                            <constraint firstItem="rBs-Go-BQr" firstAttribute="bottom" secondItem="EHr-lC-DXN" secondAttribute="bottom" constant="100" id="PGC-iQ-Eyb"/>
+                            <constraint firstItem="Fkg-Sf-jLr" firstAttribute="leading" secondItem="rCr-Of-Lfm" secondAttribute="leading" id="c9H-Ac-kCj"/>
+                            <constraint firstItem="3QW-ZX-OIb" firstAttribute="top" secondItem="rBs-Go-BQr" secondAttribute="top" constant="50" id="d6O-Cx-yI7"/>
+                            <constraint firstItem="qmT-9k-AqV" firstAttribute="top" secondItem="rCr-Of-Lfm" secondAttribute="bottom" constant="30" id="gxk-ce-IaY"/>
+                            <constraint firstItem="3QW-ZX-OIb" firstAttribute="centerX" secondItem="0K5-zZ-ac2" secondAttribute="centerX" id="kqU-QK-DL2"/>
+                            <constraint firstItem="rCr-Of-Lfm" firstAttribute="top" secondItem="FGN-fv-BHM" secondAttribute="bottom" constant="7.5" id="lN1-L4-CCf"/>
+                            <constraint firstItem="EHr-lC-DXN" firstAttribute="centerX" secondItem="0K5-zZ-ac2" secondAttribute="centerX" id="ugj-BG-Uqf"/>
+                            <constraint firstItem="rCr-Of-Lfm" firstAttribute="leading" secondItem="FGN-fv-BHM" secondAttribute="leading" id="xDT-DE-8Rc"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="rBs-Go-BQr"/>
+                    </view>
+                    <connections>
+                        <outlet property="okBtn" destination="EHr-lC-DXN" id="GZE-zY-T5C"/>
+                        <segue destination="Cmc-xH-dwz" kind="show" identifier="backToNotificationVC" id="O0i-nf-hgl"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="jig-AH-eqO" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3446" y="1272"/>
         </scene>
         <!--紀錄-->
         <scene sceneID="3CK-Ja-ghT">
@@ -904,6 +993,7 @@
                     <connections>
                         <outlet property="tableViewSetting" destination="tRd-Af-xcf" id="NPd-Wr-syu"/>
                         <segue destination="Cmc-xH-dwz" kind="show" identifier="toNotificationVC" id="fjH-cM-iME"/>
+                        <segue destination="a4W-Zt-Xtf" kind="show" identifier="toBeforeNotificationVC" id="p06-xH-bvx"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YHD-GR-CqW" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -971,7 +1061,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="axb-7y-PJQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2607" y="1561"/>
+            <point key="canvasLocation" x="2500" y="1273"/>
         </scene>
         <!--Tab BarVC-->
         <scene sceneID="2Cn-D4-gy0">
@@ -1079,4 +1169,7 @@
         <image name="tab_settings" width="21" height="21"/>
         <image name="tab_stopwatch" width="21" height="21"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="O0i-nf-hgl"/>
+    </inferredMetricsTieBreakers>
 </document>

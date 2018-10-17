@@ -18,14 +18,6 @@ class NotificationVC: UIViewController {
     
     @IBAction func okBtn(_ sender: Any) {
         
-        UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge]) { (granted, error) in
-            if granted {
-                print("User notifications are allowed.")
-            } else {
-                print("User notifications are not allowed.\(String(describing: error))")
-            }
-        }
-        
         let dateHHValue = DateFormatter()
         dateHHValue.dateFormat = "HH"
         let hourString = dateHHValue.string(from: datePicker.date)

@@ -77,7 +77,7 @@ class SummaryVC: UIViewController {
         }
     }
     
-    func loadAnimateView(){
+    func loadAnimateView() {
        
             animationView = LOTAnimationView(name: "empty_box")
             animationView.frame = CGRect(x: 0, y: 0, width: 200, height: 200)
@@ -86,7 +86,6 @@ class SummaryVC: UIViewController {
             animationView.loopAnimation = true
             animationView.play()
             self.view.addSubview(animationView)
-        
         
             workoutNowBtn.cornerRadius = 25
             workoutTomorrowBtn.borderColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)

@@ -51,7 +51,15 @@ class ScoreVC: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         GAManager.createNormalScreenEventWith("ScoreVC")
+        navigationController?.navigationBar.isHidden = true
     }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(true)
+        navigationController?.navigationBar.isHidden = false
+    }
+    
+    
     
     func notificationToSummaryVC(){
         

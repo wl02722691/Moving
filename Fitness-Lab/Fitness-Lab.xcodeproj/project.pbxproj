@@ -35,6 +35,7 @@
 		696265DC2154B22600C68282 /* ActionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 696265DB2154B22600C68282 /* ActionModel.swift */; };
 		696A2B5F217576CE0075EFDE /* green_circle.json in Resources */ = {isa = PBXBuildFile; fileRef = 696A2B5E217576CD0075EFDE /* green_circle.json */; };
 		696A2B62217580120075EFDE /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 696A2B61217580120075EFDE /* Reachability.m */; };
+		696A2B652175DBEA0075EFDE /* BeforeNotificationVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 696A2B642175DBEA0075EFDE /* BeforeNotificationVC.swift */; };
 		698C0135216E22FC004DC719 /* empty_box.json in Resources */ = {isa = PBXBuildFile; fileRef = 698C0134216E22FC004DC719 /* empty_box.json */; };
 		698C013B216EE67C004DC719 /* GAManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 698C013A216EE67C004DC719 /* GAManager.swift */; };
 		69BB972C2170DCAA00B2BDEB /* InformationVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69BB972B2170DCAA00B2BDEB /* InformationVC.swift */; };
@@ -84,6 +85,7 @@
 		696A2B5E217576CD0075EFDE /* green_circle.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = green_circle.json; sourceTree = "<group>"; };
 		696A2B60217580120075EFDE /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
 		696A2B61217580120075EFDE /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
+		696A2B642175DBEA0075EFDE /* BeforeNotificationVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeforeNotificationVC.swift; sourceTree = "<group>"; };
 		698C0134216E22FC004DC719 /* empty_box.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = empty_box.json; sourceTree = "<group>"; };
 		698C0139216EDE94004DC719 /* Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Header.h; sourceTree = "<group>"; };
 		698C013A216EE67C004DC719 /* GAManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GAManager.swift; sourceTree = "<group>"; };
@@ -227,6 +229,7 @@
 				695E1F02215DFD70003B297E /* FitnessNavigationController.swift */,
 				69EF81D6216227A200AB3591 /* NotificationVC.swift */,
 				69BB972B2170DCAA00B2BDEB /* InformationVC.swift */,
+				696A2B642175DBEA0075EFDE /* BeforeNotificationVC.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -387,6 +390,7 @@
 			files = (
 			);
 			inputPaths = (
+				"$(BUILT_PRODUCTS_DIR)/$(INFOPLIST_PATH)",
 			);
 			outputPaths = (
 			);
@@ -454,6 +458,7 @@
 				69D37DF5215257EC00B8F1F9 /* FitnessVC.swift in Sources */,
 				6917E037215B826C00C0A743 /* SummaryVC.swift in Sources */,
 				69D2000021610AE40086D660 /* SettingVC.swift in Sources */,
+				696A2B652175DBEA0075EFDE /* BeforeNotificationVC.swift in Sources */,
 				6917E044215C837C00C0A743 /* SummaryModel.swift in Sources */,
 				69D37DF3215257EC00B8F1F9 /* AppDelegate.swift in Sources */,
 				69ED2E6F21551EE1003490E7 /* ActionCell.swift in Sources */,
@@ -615,7 +620,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = CHZWYBA9N7;
 				INFOPLIST_FILE = "Fitness-Lab/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -689,7 +694,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = CHZWYBA9N7;
 				INFOPLIST_FILE = "Fitness-Lab/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
