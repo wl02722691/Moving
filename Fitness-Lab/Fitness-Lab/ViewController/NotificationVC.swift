@@ -16,12 +16,7 @@ class NotificationVC: UIViewController {
     @IBOutlet weak var datePicker: UIDatePicker!
     @IBOutlet weak var notificationTextView: UITextView!
     
-    
-    
-    
-    
     @IBAction func removeNotificationBtnWasPressed(_ sender: UIButton) {
-        
         
         if UIApplication.shared.scheduledLocalNotifications?.count == 0 {
             navigationController?.popToRootViewController(animated: true)
@@ -115,7 +110,7 @@ class NotificationVC: UIViewController {
         
         self.datePicker.datePickerMode = .time
         notificationTextView.delegate = self
-        
+        //viewWillLayoutSubviews()
     }
     
     func scheduleNotification(hour: Int, minute: Int, title: String) {
@@ -123,7 +118,7 @@ class NotificationVC: UIViewController {
         let content = UNMutableNotificationContent()
         content.title = title
         content.subtitle = "運動時間到啦🙋‍♀️"
-        content.body = "堅持才能塑造自己的可能性呀"
+        content.body = "堅持才能塑造自己的可能性"
         content.badge = 1
         
         var dateComponents = DateComponents()
@@ -138,6 +133,8 @@ class NotificationVC: UIViewController {
         notificationCenter.add(request, withCompletionHandler: nil)
         
     }
+    
+    
 }
 
 extension NotificationVC: UITextViewDelegate {

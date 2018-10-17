@@ -26,7 +26,6 @@ class Data {
         
         ListModel(videoImg: "Arm2", durationLbl: 5, videoTitle: "瘦手臂運動無工具坐著完成", videoDescription: "周六野Zoey", intensity: "入門", videoID: "Guq_bB4otbU", timeRange: TimeRange.threeToNine, actionModel: [
             
-            
             ActionModel(youtubeTime: 61, stopTime: 40, restTime: 3, timesDescription: 30, actionDescription: "參拜將軍", cellStatus: CellStatus.willplay, actionOrRest: ActionOrRest.action, playingOrPause: PlayingOrPause.playing, firstPlayAction: true, firstPlayRest: true, actionCellDidInvisiable: false, restCellDidInvisiable: false),
             
             ActionModel(youtubeTime: 102, stopTime: 40, restTime: 3, timesDescription: 30, actionDescription: "參拜大人", cellStatus: CellStatus.willplay, actionOrRest: ActionOrRest.action, playingOrPause: PlayingOrPause.playing, firstPlayAction: true, firstPlayRest: true, actionCellDidInvisiable: false, restCellDidInvisiable: false),
@@ -261,9 +260,9 @@ class Data {
     
     private let settingArray = [
         
-        SettingModel(titleLbl: "關於 FitnessLab", statusLbl: ""),
+        SettingModel(titleLbl: "關於 Moving", statusLbl: ""),
         SettingModel(titleLbl: "意見回饋", statusLbl: ""),
-      //  SettingModel(titleLbl: "評分鼓勵", statusLbl: ""),
+        SettingModel(titleLbl: "評分鼓勵", statusLbl: ""),
         SettingModel(titleLbl: "每日運動推播", statusLbl: "20:30"),
       //  SettingModel(titleLbl: "語言設定", statusLbl: "繁體中文"),
       
