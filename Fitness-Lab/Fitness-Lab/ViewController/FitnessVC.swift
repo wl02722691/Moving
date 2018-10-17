@@ -19,29 +19,23 @@ class FitnessVC: UIViewController {
         fitnessTableview.separatorStyle = UITableViewCell.SeparatorStyle.none
         fitnessTableview.delegate = self
         fitnessTableview.dataSource = self
+       navigationController?.navigationBar.isHidden = false
        
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         GAManager.createNormalScreenEventWith("FitnessVC")
+        viewWillLayoutSubviews()
     }
 }
 
 //swiftlint:disable force_cast
 
 extension FitnessVC: UITableViewDelegate {
-    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        //1. set the initaial state of the cell
-        cell.alpha = 0
-        let transform = CATransform3DTranslate(CATransform3DIdentity, -250, 20, 0)
-        cell.layer.transform = transform
-        
-        //2. UIView animation method to chang to the final state of the cell
-        UIView.animate(withDuration: 0.4) {
-            cell.alpha = 1.0
-            cell.layer.transform = CATransform3DIdentity
-        }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return fitnessTableview.frame.size.height / 4
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -70,7 +64,9 @@ extension FitnessVC: UITableViewDataSource {
             let category = Data.instance.getfitCategories()[indexPath.row]
             cell.updataViews(fitnessCategory: FitnessCellModel(category: category))
             cell.selectionStyle = .none
+            cell.frame.size.height = fitnessTableview.frame.height / 4
             return cell
+            
             
         } else {
             

@@ -9,6 +9,7 @@
 import UIKit
 import MessageUI
 import UserNotifications
+import StoreKit
 
 class SettingVC: UIViewController {
     
@@ -58,7 +59,7 @@ class SettingVC: UIViewController {
     
     @objc func notificationUpdate(noti: Notification) {
         let notificationTime = noti.userInfo!["timeString"] as? String
-        let indexPath = IndexPath(row: 2, section: 0)
+        let indexPath = IndexPath(row: 3, section: 0)
         guard let cell = self.settingTableView.cellForRow(at: indexPath) as? SettingCell  else {return}
         cell.statusLbl.text = notificationTime
         UserDefaults.standard.set(notificationTime, forKey: "notificationtime")
@@ -118,27 +119,11 @@ extension SettingVC: UITableViewDelegate {
         case [0, 1]:
              sendEmail()
         case [0, 2]:
-        
-        
-                UNUserNotificationCenter.current().getNotificationSettings { (settings) in
-                        DispatchQueue.main.async {
-                            
-                    if(settings.authorizationStatus == .authorized) {
-                        
-                        self.performSegue(withIdentifier: "toNotificationVC", sender: nil)
-                        
-                    } else {
-                        
-                        self.performSegue(withIdentifier: "toBeforeNotificationVC", sender: nil)
-                        
-                        }
-                    }
-                }
-            
-    
-            
+            if #available( iOS 10.3,*){
+                SKStoreReviewController.requestReview()
+            }
         case [0, 3]:
-             print("[0, 3]!!")
+             localNotification()
         case [0, 4]:
             print("0, 4!!!")
         case [1, 0]:
@@ -153,6 +138,24 @@ extension SettingVC: UITableViewDelegate {
         }
     }
     
+    
+    func localNotification() {
+        
+        UNUserNotificationCenter.current().getNotificationSettings { (settings) in
+            DispatchQueue.main.async {
+                
+                if(settings.authorizationStatus == .authorized) {
+                    
+                    self.performSegue(withIdentifier: "toNotificationVC", sender: nil)
+                    
+                } else {
+                    
+                    self.performSegue(withIdentifier: "toBeforeNotificationVC", sender: nil)
+                    
+                }
+            }
+        }
+    }
 }
 
 extension SettingVC: UITableViewDataSource {

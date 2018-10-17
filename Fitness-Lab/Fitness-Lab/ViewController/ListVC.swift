@@ -13,7 +13,6 @@ class ListVC: UIViewController {
     @IBOutlet var selectTimeBtns: [UIButton]!
     @IBOutlet weak var okBtn: UIButton!
     @IBOutlet weak var backgroundDismissBtn: UIButton!
-    @IBOutlet weak var planNumberLbl: UILabel!
     @IBOutlet weak var filterView: UIView!
     @IBOutlet weak var listTableView: UITableView!
     private(set) public var lists = [ListModel]()
@@ -37,46 +36,37 @@ class ListVC: UIViewController {
                 button.borderColor = #colorLiteral(red: 0, green: 0.6980392157, blue: 0.3058823529, alpha: 1)
                 button.borderWidth = 2
                 button.cornerRadius = 15
-            }else{
+            } else {
                 button.borderColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
             }
         }
     }
-    
     
     @IBAction func okBtn(_ sender: UIButton) {
     
         if selectTimeSender == 0 {
             
             lists = oldlists
-//            filterView.isHidden = true
-//            backgroundDismissBtn.isHidden = true
-//            listTableView.reloadData()
-        }else if selectTimeSender == 1{
+            
+        } else if selectTimeSender == 1 {
             lists = oldlists
             lists = lists.filter({ $0.timeRange == TimeRange.max3 })
-//
-//            filterView.isHidden = true
-//            backgroundDismissBtn.isHidden = true
-//            listTableView.reloadData()
-        }else if selectTimeSender == 2{
+
+            
+        } else if selectTimeSender == 2 {
             lists = oldlists
             lists = lists.filter({ $0.timeRange == TimeRange.threeToNine })
-//            filterView.isHidden = true
-//            backgroundDismissBtn.isHidden = true
-//            listTableView.reloadData()
-        }else if selectTimeSender == 3{
+
+        } else if selectTimeSender == 3 {
             lists = oldlists
             lists = lists.filter({ $0.timeRange == TimeRange.min9 })
-//            filterView.isHidden = true
-//            backgroundDismissBtn.isHidden = true
-//            listTableView.reloadData()
+
         }
         
         filterView.isHidden = true
         backgroundDismissBtn.isHidden = true
         listTableView.reloadData()
-        planNumberLbl.text = "\(lists.count) 個運動計畫"
+        self.navigationItem.title = "\(lists.count) 個運動計畫"
        
         
         
@@ -85,28 +75,10 @@ class ListVC: UIViewController {
     
     @IBAction func filterBtn(_ sender: UIButton) {
         if backgroundDismissBtn.isHidden == true{
-        
-            
-            
-            
             
             backgroundDismissBtn.isHidden = false
             filterView.isHidden = false
-          
-            
-//            for button in selectTimeBtns {
-//                if button.tag == sender.tag {
-//
-//
-//                    button.borderColor = #colorLiteral(red: 0.001363023831, green: 0.6588945239, blue: 0.2931115911, alpha: 1)
-//                    button.borderWidth = 2
-//                    button.cornerRadius = 15
-//
-//
-//                }else{
-//                    button.borderColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
-//                }
-//            }
+      
         } else {
             
             backgroundDismissBtn.isHidden = true
@@ -138,10 +110,27 @@ class ListVC: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
-        planNumberLbl.text = "\(lists.count) 個運動計畫"
         filterView.cornerRadius = 10
         okBtn.cornerRadius = 20
         GAManager.createNormalScreenEventWith("ListVC")
+        self.navigationItem.title = "\(lists.count) 個運動計畫"
+        let rightBarButtonItem = UIBarButtonItem.init(image: UIImage(named: "filter_Btn"), style: .done, target: self, action: #selector(filterBtnWasPressed))
+        
+        self.navigationItem.rightBarButtonItem = rightBarButtonItem
+        
+    }
+    
+    @objc func filterBtnWasPressed() {
+        if backgroundDismissBtn.isHidden == true{
+            
+            backgroundDismissBtn.isHidden = false
+            filterView.isHidden = false
+            
+        } else {
+            
+            backgroundDismissBtn.isHidden = true
+            filterView.isHidden = true
+        }
     }
 }
 

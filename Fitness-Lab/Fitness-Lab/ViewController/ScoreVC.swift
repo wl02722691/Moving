@@ -52,14 +52,8 @@ class ScoreVC: UIViewController {
         super.viewWillAppear(true)
         GAManager.createNormalScreenEventWith("ScoreVC")
         navigationController?.navigationBar.isHidden = true
+        
     }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(true)
-        navigationController?.navigationBar.isHidden = false
-    }
-    
-    
     
     func notificationToSummaryVC(){
         
@@ -89,8 +83,10 @@ class ScoreVC: UIViewController {
     }
     
     @IBAction func finishBtn(_ sender: UIButton) {
-        Analytics.logEvent("ScoreVC_finishBtn", parameters: nil)
         
+        navigationController?.navigationBar.isHidden = false
+        
+        Analytics.logEvent("ScoreVC_finishBtn", parameters: nil)
         
         realmWrite()
         
@@ -98,12 +94,14 @@ class ScoreVC: UIViewController {
         
         let tabController = self.view.window?.rootViewController as? UITabBarController
         tabController?.dismiss(animated: true, completion: nil)
+
         tabController?.selectedIndex = 1
         
         let notificationName = Notification.Name("toSummaryVC")
         NotificationCenter.default.post(name: notificationName,
                                         object: nil,
                                         userInfo: ["updateRealm": "updateRealm"])
+        
         notificationToSummaryVC()
     }
     

@@ -449,18 +449,20 @@ class ActionVC: UIViewController {
 extension ActionVC: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
-        let this = actionLists.count - nowIndex
-        guard let cell = actionTableView.cellForRow(at: indexPath) else {return}
-        let mostContentInsetHeight = Int(actionTableView.frame.height - cell.frame.height)
-        var eachContentInsetHeight = 0
-        
-        if Int(actionTableView.frame.height) > this * Int(cell.frame.height) {
-            
-            eachContentInsetHeight = Int(actionTableView.frame.height) - this * Int(cell.frame.height)
-            
-        }
-        
+//
+//        let this = actionLists.count - nowIndex
+//        guard let cell = actionTableView.cellForRow(at: indexPath) else {return}
+//        let mostContentInsetHeight = Int(actionTableView.frame.height - cell.frame.height)
+//        var eachContentInsetHeight = 0
+//
+//        if Int(actionTableView.frame.height) > this * Int(cell.frame.height) {
+//
+//            eachContentInsetHeight = Int(actionTableView.frame.height) - this * Int(cell.frame.height)
+//
+//        }
+
+        actionCountDownToZeroReloadCellView()
+
         if indexPath.row == nowIndex {
             //按正在播放的按鈕
             if actionLists[nowIndex].playingOrPause == .playing {
@@ -577,11 +579,11 @@ extension ActionVC: UITableViewDelegate {
             
         }
         
-        if contentInsetNumber < mostContentInsetHeight && videoView.playerState == .Playing  {
-            contentInsetNumber += eachContentInsetHeight
-            actionTableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: CGFloat(contentInsetNumber), right: 0)
-            print("nowIndex\(nowIndex)eachContentInsetHeight\(eachContentInsetHeight)this\(this)")
-        }
+//        if contentInsetNumber < mostContentInsetHeight && videoView.playerState == .Playing  {
+//            contentInsetNumber += eachContentInsetHeight
+//            actionTableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: CGFloat(contentInsetNumber), right: 0)
+//            print("nowIndex\(nowIndex)eachContentInsetHeight\(eachContentInsetHeight)this\(this)")
+//        }
         
         
     }
@@ -602,7 +604,10 @@ extension ActionVC: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, didEndDisplaying cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        
     }
+    
+    
     
 }
 
