@@ -10,6 +10,8 @@ import UIKit
 
 class ListVC: UIViewController {
     
+    @IBOutlet weak var listTableviewTop: NSLayoutConstraint!
+    @IBOutlet weak var listTableviewDown: NSLayoutConstraint!
     @IBOutlet var selectTimeBtns: [UIButton]!
     @IBOutlet weak var okBtn: UIButton!
     @IBOutlet weak var backgroundDismissBtn: UIButton!
@@ -21,6 +23,8 @@ class ListVC: UIViewController {
     private(set) public var actions = [ActionModel]()
     var selectSender = 0
     var selectTimeSender = 0
+    var listTableViewFirstFlag = true
+    var lastContentOffset: CGFloat = 0
     
     @IBAction func slectTimeBtnTapped(_ sender: UIButton) {
         
@@ -51,7 +55,6 @@ class ListVC: UIViewController {
         } else if selectTimeSender == 1 {
             lists = oldlists
             lists = lists.filter({ $0.timeRange == TimeRange.max3 })
-
             
         } else if selectTimeSender == 2 {
             lists = oldlists
@@ -67,14 +70,11 @@ class ListVC: UIViewController {
         backgroundDismissBtn.isHidden = true
         listTableView.reloadData()
         self.navigationItem.title = "\(lists.count) 個運動計畫"
-       
-        
         
     }
     
-    
     @IBAction func filterBtn(_ sender: UIButton) {
-        if backgroundDismissBtn.isHidden == true{
+        if backgroundDismissBtn.isHidden == true {
             
             backgroundDismissBtn.isHidden = false
             filterView.isHidden = false
@@ -92,7 +92,6 @@ class ListVC: UIViewController {
         
     }
     
-    
     override func viewDidLoad() {
         backgroundDismissBtn.isHidden = true
         filterView.isHidden = true
@@ -100,6 +99,12 @@ class ListVC: UIViewController {
         super.viewDidLoad()
         listTableView.delegate = self
         listTableView.dataSource = self
+  
+        let swipeRight = UISwipeGestureRecognizer(target: self, action: #selector(self.respondToSwipeGesture))
+        swipeRight.direction = UISwipeGestureRecognizer.Direction.right
+        self.view.addGestureRecognizer(swipeRight)
+        
+        view.backgroundColor = UIColor.red
         
     }
     
@@ -114,14 +119,24 @@ class ListVC: UIViewController {
         okBtn.cornerRadius = 20
         GAManager.createNormalScreenEventWith("ListVC")
         self.navigationItem.title = "\(lists.count) 個運動計畫"
-        let rightBarButtonItem = UIBarButtonItem.init(image: UIImage(named: "filter_Btn"), style: .done, target: self, action: #selector(filterBtnWasPressed))
+        let rightBarButtonItem = UIBarButtonItem.init(image: UIImage(named: "filter_Btn"),
+                                                      style: .done, target: self,
+                                                      action: #selector(filterBtnWasPressed))
         
         self.navigationItem.rightBarButtonItem = rightBarButtonItem
         
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(true)
+        var frame = self.tabBarController?.tabBar.frame
+        frame?.origin.y = UIScreen.main.bounds.height - (self.tabBarController?.tabBar.frame.size.height)!
+        self.tabBarController?.tabBar.frame = frame!
+     
+    }
+    
     @objc func filterBtnWasPressed() {
-        if backgroundDismissBtn.isHidden == true{
+        if backgroundDismissBtn.isHidden == true {
             
             backgroundDismissBtn.isHidden = false
             filterView.isHidden = false
@@ -132,7 +147,76 @@ class ListVC: UIViewController {
             filterView.isHidden = true
         }
     }
-}
+
+    func hideBar(panGestureY: CGFloat) {
+        
+        if listTableViewFirstFlag == true {
+            self.listTableView.frame.size.height += (self.tabBarController?.tabBar.frame.size.height)!
+            listTableViewFirstFlag = false
+
+        }
+        
+        guard var tabBarframe = self.tabBarController?.tabBar.frame else {return}
+        tabBarframe.origin.y -= panGestureY/10
+        
+        guard var navframe = self.navigationController?.navigationBar.frame else {return}
+        navframe.origin.y +=  panGestureY/10
+        
+        self.tabBarController?.tabBar.frame = tabBarframe
+        self.navigationController?.navigationBar.frame = navframe
+        
+        
+        let frameMinY = view.frame.minY
+        let frameWidth = view.frame.width
+        let frameHeight = UIScreen.main.bounds.height + UIApplication.shared.statusBarFrame.size.height
+        
+        if frameMinY > 0 {
+        view.frame = CGRect(x: 0, y: frameMinY+panGestureY, width: frameWidth, height: frameHeight)
+        }
+    
+
+    }
+    
+    func showBar(panGestureY: CGFloat) {
+        
+        if listTableViewFirstFlag == true {
+//            self.listTableView.frame.size.height += (self.tabBarController?.tabBar.frame.size.height)!
+//            self.listTableView.frame.size.height += (navigationController?.navigationBar.frame.height)!
+            
+        }
+        
+        var tabBarframe = self.tabBarController?.tabBar.frame
+        tabBarframe?.origin.y = UIScreen.main.bounds.height - (self.tabBarController?.tabBar.frame.size.height)!
+        
+        var navframe = self.navigationController?.navigationBar.frame
+        navframe?.origin.y =  20
+        
+            self.tabBarController?.tabBar.frame = tabBarframe!
+            self.navigationController?.navigationBar.frame = navframe!
+        
+        
+        if listTableView.isCellVisible(indexSection: 0, indexRow: 0) == true {
+            
+            var frameY = self.view.frame.minY
+            
+            if frameY < (navigationController?.navigationBar.frame.height)! {
+                frameY += panGestureY/10
+                
+            }else if frameY > (navigationController?.navigationBar.frame.height)!{
+                frameY = (navigationController?.navigationBar.frame.height)! + UIApplication.shared.statusBarFrame.size.height
+            }
+                
+                print("frameY\(frameY)navigationController?.navigationBar.frame.height\(navigationController?.navigationBar.frame.height)")
+            
+            view.frame = CGRect(x: 0,
+                                y: frameY,
+                                width: UIScreen.main.bounds.width,
+                                height: UIScreen.main.bounds.height)
+        }
+    }
+    
+    }
+
 
 extension ListVC: UITableViewDelegate {
     
@@ -154,6 +238,34 @@ extension ListVC: UITableViewDelegate {
             
         }
     }
+    
+    public func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        
+        let panGestureY = scrollView.panGestureRecognizer.translation(in: scrollView.superview).y
+        
+        if(scrollView.panGestureRecognizer.translation(in: scrollView.superview).y > 0) {
+
+            showBar(panGestureY: panGestureY)
+        } else {
+            print("down")
+            hideBar(panGestureY: panGestureY)
+        }
+    }
+    
+    
+
+    
+//
+//    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+//
+//        if lastContentOffset > scrollView.contentOffset.y {
+//            showBar()
+//        } else {
+//            hideBar()
+//        }
+//
+//        self.lastContentOffset = scrollView.contentOffset.y
+//    }
 }
 
 extension ListVC: UITableViewDataSource {

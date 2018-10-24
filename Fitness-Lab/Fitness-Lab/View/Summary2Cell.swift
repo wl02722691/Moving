@@ -10,6 +10,7 @@ import UIKit
 
 class Summary2Cell: UITableViewCell {
     
+  
     @IBOutlet weak var scoreTitleLbl: UILabel!
     @IBOutlet weak var durationLbl: UILabel!
     @IBOutlet weak var videoTitle: UILabel!
@@ -46,7 +47,7 @@ class Summary2Cell: UITableViewCell {
         let dateFormatter = DateFormatter()
         dateFormatter.timeZone = TimeZone(abbreviation: "TW")
         dateFormatter.locale = NSLocale.current
-        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm"
+        dateFormatter.dateFormat = "MM月 dd日   HH:mm"
         let strDate = dateFormatter.string(from: date)
         return strDate
         

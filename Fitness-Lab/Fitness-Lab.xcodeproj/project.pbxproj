@@ -38,6 +38,9 @@
 		696A2B652175DBEA0075EFDE /* BeforeNotificationVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 696A2B642175DBEA0075EFDE /* BeforeNotificationVC.swift */; };
 		698C0135216E22FC004DC719 /* empty_box.json in Resources */ = {isa = PBXBuildFile; fileRef = 698C0134216E22FC004DC719 /* empty_box.json */; };
 		698C013B216EE67C004DC719 /* GAManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 698C013A216EE67C004DC719 /* GAManager.swift */; };
+		699660D32179B54E00A5E457 /* HealthKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 699660D22179B54E00A5E457 /* HealthKit.framework */; };
+		69A47953217F09EE00B96208 /* ViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69A47952217F09EE00B96208 /* ViewController+Extension.swift */; };
+		69A47955218072D700B96208 /* UITableVie+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69A47954218072D700B96208 /* UITableVie+extension.swift */; };
 		69BB972C2170DCAA00B2BDEB /* InformationVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69BB972B2170DCAA00B2BDEB /* InformationVC.swift */; };
 		69BB97382171CF2B00B2BDEB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 69BB97372171CF2A00B2BDEB /* LaunchScreen.storyboard */; };
 		69C50BA52167184B00215B4E /* CellStatusEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69C50BA42167184B00215B4E /* CellStatusEnum.swift */; };
@@ -74,6 +77,7 @@
 		693841EF2161D4EF0017D2E9 /* SettingSwitchCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingSwitchCell.swift; sourceTree = "<group>"; };
 		693841F02161D4EF0017D2E9 /* SettingSwitchCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SettingSwitchCell.xib; sourceTree = "<group>"; };
 		693841F32161D7FD0017D2E9 /* SettingSwitchModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingSwitchModel.swift; sourceTree = "<group>"; };
+		693F3923217894F000429019 /* Moving.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Moving.entitlements; sourceTree = "<group>"; };
 		6941AF88216364C700A0D0B8 /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
 		694776D221534CC400141CB7 /* FitnessCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FitnessCell.swift; sourceTree = "<group>"; };
 		694776DB2153519B00141CB7 /* FitnessCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FitnessCategory.swift; sourceTree = "<group>"; };
@@ -89,6 +93,9 @@
 		698C0134216E22FC004DC719 /* empty_box.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = empty_box.json; sourceTree = "<group>"; };
 		698C0139216EDE94004DC719 /* Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Header.h; sourceTree = "<group>"; };
 		698C013A216EE67C004DC719 /* GAManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GAManager.swift; sourceTree = "<group>"; };
+		699660D22179B54E00A5E457 /* HealthKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HealthKit.framework; path = System/Library/Frameworks/HealthKit.framework; sourceTree = SDKROOT; };
+		69A47952217F09EE00B96208 /* ViewController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ViewController+Extension.swift"; sourceTree = "<group>"; };
+		69A47954218072D700B96208 /* UITableVie+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableVie+extension.swift"; sourceTree = "<group>"; };
 		69BB972B2170DCAA00B2BDEB /* InformationVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InformationVC.swift; sourceTree = "<group>"; };
 		69BB972D2171C03000B2BDEB /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		69BB97372171CF2A00B2BDEB /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -117,6 +124,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4B656C8ACFDE34B6EEDB5562 /* Pods_Moving.framework in Frameworks */,
+				699660D32179B54E00A5E457 /* HealthKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -144,6 +152,8 @@
 			children = (
 				6941AF88216364C700A0D0B8 /* UIView+Extension.swift */,
 				69C50BA42167184B00215B4E /* CellStatusEnum.swift */,
+				69A47952217F09EE00B96208 /* ViewController+Extension.swift */,
+				69A47954218072D700B96208 /* UITableVie+extension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -176,6 +186,7 @@
 		69D37DE6215257EC00B8F1F9 = {
 			isa = PBXGroup;
 			children = (
+				693F3923217894F000429019 /* Moving.entitlements */,
 				69D37DF1215257EC00B8F1F9 /* Fitness-Lab */,
 				69D37DF0215257EC00B8F1F9 /* Products */,
 				CF6FBBC4E87CFDB11387E47E /* Pods */,
@@ -271,6 +282,7 @@
 		C17F3573511760EFA1D4FEF7 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				699660D22179B54E00A5E457 /* HealthKit.framework */,
 				74498F6528744DF3D21F14AB /* Pods_Fitness_Lab.framework */,
 				8E5BC472D30D6D78E02FEA2A /* Pods_Moving.framework */,
 			);
@@ -323,6 +335,11 @@
 					69D37DEE215257EC00B8F1F9 = {
 						CreatedOnToolsVersion = 9.4.1;
 						LastSwiftMigration = 1000;
+						SystemCapabilities = {
+							com.apple.HealthKit = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};
@@ -451,6 +468,8 @@
 				69256152215375B800531F5B /* ListVC.swift in Sources */,
 				694776D321534CC400141CB7 /* FitnessCell.swift in Sources */,
 				693841F12161D4EF0017D2E9 /* SettingSwitchCell.swift in Sources */,
+				69A47955218072D700B96208 /* UITableVie+extension.swift in Sources */,
+				69A47953217F09EE00B96208 /* ViewController+Extension.swift in Sources */,
 				696265DC2154B22600C68282 /* ActionModel.swift in Sources */,
 				698C013B216EE67C004DC719 /* GAManager.swift in Sources */,
 				694776DE2153540E00141CB7 /* Data.swift in Sources */,
@@ -619,8 +638,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = Moving.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = CHZWYBA9N7;
 				INFOPLIST_FILE = "Fitness-Lab/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -693,8 +713,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = Moving.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = CHZWYBA9N7;
 				INFOPLIST_FILE = "Fitness-Lab/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (

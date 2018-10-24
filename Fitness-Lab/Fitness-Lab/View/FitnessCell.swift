@@ -32,17 +32,12 @@ class FitnessCell: UITableViewCell {
         fitnessImg.layer.cornerRadius = 15
         
         backgroundCardView.backgroundColor = UIColor.blue
-        
         backgroundCardView.clipsToBounds = true
-        
         backgroundCardView.layer.masksToBounds = false
-        
         backgroundCardView.layer.cornerRadius = 15
         
         backgroundCardView.layer.shadowColor = UIColor.black.withAlphaComponent(0.2).cgColor
-        
         backgroundCardView.layer.shadowOffset = CGSize.zero
-        
         backgroundCardView.layer.shadowOpacity = 0.4
         
         contentView.backgroundColor = #colorLiteral(red: 0.09411764706, green: 0.09411764706, blue: 0.09411764706, alpha: 1)

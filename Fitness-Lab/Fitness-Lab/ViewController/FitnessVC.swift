@@ -20,7 +20,7 @@ class FitnessVC: UIViewController {
         fitnessTableview.delegate = self
         fitnessTableview.dataSource = self
        navigationController?.navigationBar.isHidden = false
-       
+    
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -30,8 +30,6 @@ class FitnessVC: UIViewController {
     }
 }
 
-//swiftlint:disable force_cast
-
 extension FitnessVC: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -39,21 +37,24 @@ extension FitnessVC: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let list = Data.instance.getfitCategories()[indexPath.row]
-        print(list)
         
+        let list = Data.instance.getfitCategories()[indexPath.row]
         performSegue(withIdentifier: "toListVC", sender: list)
         
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
         if let listVC = segue.destination as? ListVC {
-            listVC.initList(category: sender as! FitnessCategory)
+            
+            listVC.initList(category: (sender as? FitnessCategory)!)
+            
         }
     }
 }
 
 extension FitnessVC: UITableViewDataSource {
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return Data.instance.getfitCategories().count
         
@@ -66,7 +67,6 @@ extension FitnessVC: UITableViewDataSource {
             cell.selectionStyle = .none
             cell.frame.size.height = fitnessTableview.frame.height / 4
             return cell
-            
             
         } else {
             

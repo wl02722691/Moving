@@ -138,7 +138,17 @@ class SummaryVC: UIViewController {
     
 }
 
-extension SummaryVC: UITableViewDelegate {}
+extension SummaryVC: UITableViewDelegate {
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        if indexPath.section == 0 {
+            return 160
+        } else {
+            return 150
+        }
+    }
+    
+}
 
 extension SummaryVC: UITableViewDataSource {
     

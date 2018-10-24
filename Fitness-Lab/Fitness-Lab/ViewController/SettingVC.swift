@@ -10,6 +10,9 @@ import UIKit
 import MessageUI
 import UserNotifications
 import StoreKit
+import HealthKit
+
+
 
 class SettingVC: UIViewController {
     
@@ -17,6 +20,7 @@ class SettingVC: UIViewController {
     var settingArray = [SettingModel(titleLbl: "", statusLbl: "")]
     var cueToneStatus: CueTone = .open
     var settingSwitchArray = Data.instance.getSettingSwitchArray()
+    let healthStore: HKHealthStore = HKHealthStore()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,7 +37,6 @@ class SettingVC: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(notificationUpdate(noti:)),
                                                name: editUpdatednotificationName, object: nil)
 
-       
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -46,6 +49,8 @@ class SettingVC: UIViewController {
         GAManager.createNormalScreenEventWith("SettingVC")
         loadNotificationTime()
         cueTone()
+        appleHealth()
+        
     }
     
     func loadNotificationTime() {
@@ -71,7 +76,7 @@ class SettingVC: UIViewController {
         
         guard let cell = settingTableView.cellForRow(at: index) as? SettingSwitchCell else {return}
     
-        cell.statusSwitch.addTarget(self, action: #selector(switchValueChange(mySwitch:)),
+        cell.statusSwitch.addTarget(self, action: #selector(cueToneSwitchValueChange(mySwitch:)),
                                     for: UIControl.Event.valueChanged)
         
         if let cueToneStatus = UserDefaults.standard.value(forKey: "cueTone") as? Bool {
@@ -86,7 +91,7 @@ class SettingVC: UIViewController {
 
     }
     
-    @objc func switchValueChange(mySwitch: UISwitch) {
+    @objc func cueToneSwitchValueChange(mySwitch: UISwitch) {
         
         if mySwitch.isOn == true {
             
@@ -101,6 +106,72 @@ class SettingVC: UIViewController {
             UserDefaults.standard.set(false, forKey: "cueTone")
         }
         
+    }
+    
+    func appleHealth() {
+        
+        let index = IndexPath(row: 1, section: 1)
+        
+        guard let cell = settingTableView.cellForRow(at: index) as? SettingSwitchCell else {return}
+        
+        if let appleHealth = UserDefaults.standard.value(forKey: "appleHealth") as? Bool {
+            
+            cell.statusSwitch.setOn(appleHealth, animated: false)
+            
+        } else {
+            
+            cell.statusSwitch.setOn(false, animated: false)
+            
+        }
+        
+        
+        cell.statusSwitch.addTarget(self, action: #selector(applehealthSwitchValueChange(mySwitch:)),
+                                    for: UIControl.Event.valueChanged)
+        
+    }
+    
+    @objc func applehealthSwitchValueChange(mySwitch: UISwitch) {
+        
+        if mySwitch.isOn == true {
+            
+            if auth() == true {
+                
+                UserDefaults.standard.set(true, forKey: "appleHealth")
+                
+            }
+            
+            
+        } else {
+            
+            UserDefaults.standard.set(false, forKey: "appleHealth")
+        }
+        
+    }
+    
+    func auth()-> Bool {
+        
+        let healthKitTypeToWrite: Set<HKSampleType> = [
+            
+            HKObjectType.workoutType()
+            
+        ]
+        
+        let healthKitTypeToRead: Set<HKObjectType> = []
+        
+        healthStore.requestAuthorization(toShare: healthKitTypeToWrite, read: healthKitTypeToRead) { (success, error) in
+            
+            return success
+        }
+        
+        if !HKHealthStore.isHealthDataAvailable() {
+            
+            print("Error occured")
+            return false
+            
+            
+        }
+        
+        return true
     }
 }
 
@@ -138,7 +209,6 @@ extension SettingVC: UITableViewDelegate {
         }
     }
     
-    
     func localNotification() {
         
         UNUserNotificationCenter.current().getNotificationSettings { (settings) in
@@ -166,9 +236,11 @@ extension SettingVC: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch section {
+            
         case 0: return Data.instance.getSettingArray().count
         case 1: return Data.instance.getSettingSwitchArray().count
         default: return 0
+            
         }
     }
     
