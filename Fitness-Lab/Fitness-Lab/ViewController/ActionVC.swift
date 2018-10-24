@@ -11,51 +11,48 @@ import YouTubePlayer_Swift
 import AVFoundation
 import Lottie
 
-//swiftlint:disable force_cast
 class ActionVC: UIViewController {
     
-    @IBOutlet weak var reconnectBtn: UIButton!
     var actionTimer: Timer?
-    var actionSec = 300
+    var actionSec = 0
     var restTimer: Timer?
-    var restSec = 100
+    var restSec = 0
+    
+    var selectSender = 0
     var nowIndex = 0
+    var contentInsetNumber = 0
+    
     var firstTimeplay = true
     var actionTimerjustStop = false
     var restTimerjustStop = false
+    
     var actionAnimatorWidth = UIViewPropertyAnimator()
     var restAnimatorWidth = UIViewPropertyAnimator()
-    var contentInsetNumber = 0
-    var timerArray = [Date]()
+    
     var lists =  [ListModel]()
     var actionLists = [ActionModel]()
-    var selectSender = 0
+    
     var cueTone: AVAudioPlayer!
     var cueToneStatus: CueTone = .open
+    
     var synthesizer = AVSpeechSynthesizer()
-    var reachability = Reachability(hostName: "www.apple.com")
     var animationView = LOTAnimationView()
-    @IBOutlet weak var connectView: UIView!
+    var reachability = Reachability(hostName: "www.apple.com")
     
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var videoView: YouTubePlayerView!
+    @IBOutlet weak var connectView: UIView!
     @IBOutlet weak var startBtn: UIButton!
     @IBOutlet weak var videoTitle: UILabel!
     @IBOutlet weak var videoImg: UIImageView!
     @IBOutlet weak var intensityLbl: UILabel!
     @IBOutlet weak var durationLbl: UILabel!
     @IBOutlet weak var actionTableView: UITableView!
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(true)
-       
-        videoView.pause()
-        animationView.removeFromSuperview()
-        
-    }
+    @IBOutlet weak var reconnectBtn: UIButton!
     
     // MARK: - initList
     func initList(category: FitnessCategory) {
+        
         lists = Data.instance.getList(forListTitle: category.secondTitle)
         
     }
@@ -63,36 +60,43 @@ class ActionVC: UIViewController {
     // MARK: - initView
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        initView()
+        
+        let swipeRight = UISwipeGestureRecognizer(target: self, action: #selector(self.respondToSwipeGesture))
+        swipeRight.direction = UISwipeGestureRecognizer.Direction.right
+        self.view.addGestureRecognizer(swipeRight)
+        
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        
+        GAManager.createNormalScreenEventWith("ActionVC")
+        actionTableView.reloadData()
+        
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(true)
+    
+        videoView.pause()
+        animationView.removeFromSuperview()
+        
+    }
+    
+    func initView() {
+        super.viewWillAppear(true)
+        
         actionTableView.separatorStyle = UITableViewCell.SeparatorStyle.none
-        print(lists)
-        print(actionLists)
         videoView.isHidden = true
         self.videoView.delegate = self
         activityIndicator.isHidden = true
         initCueTone()
         
-        let notificationName = Notification.Name("cueTone")
-        NotificationCenter.default.addObserver(self, selector: #selector(cueToneUpdate(noti:)), name: notificationName, object: nil)
+        actionTimer?.invalidate()
+        restTimer?.invalidate()
         
-    }
-    
-    @objc func cueToneUpdate(noti: Notification) {
-    
-        guard let status = noti.userInfo!["cueTone"] as? Bool else { return }
-
-        if status == true {
-            cueToneStatus = .open
-        } else {
-            cueToneStatus = .close
-        }
-        
-        
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        
-        super.viewWillAppear(true)
-        GAManager.createNormalScreenEventWith("ActionVC")
         startBtn.cornerRadius = 38
         let listIndex = lists[selectSender]
         videoTitle.text = listIndex.videoTitle
@@ -103,7 +107,11 @@ class ActionVC: UIViewController {
         let index = IndexPath(row: nowIndex, section: 0)
         actionTableView.reloadRows(at: [index], with: UITableView.RowAnimation.automatic)
         
+        cueToneSetting()
+        
     }
+    
+    // MARK: - playBtn
     
     @IBAction func playBtn(_ sender: UIButton) {
         
@@ -117,19 +125,60 @@ class ActionVC: UIViewController {
             
         } else {
             
-      
             print(" downloadData() == false ")
+            
         }
+    }
+    
+    // MARK: - CueTone
+    
+    func cueToneSetting() {
+        
+        if let cueToneSetting = UserDefaults.standard.value(forKey: "cueTone") as? Bool {
+            
+            if cueToneSetting == true {
+                
+                cueToneStatus = .open
+                
+            } else {
+                
+                cueToneStatus = .close
+                
+            }
+        }
+    }
+    
+    func initCueTone() {
+        
+        let soundPath = Bundle.main.url(forResource: "Wate", withExtension: "wav")
+        
+        do {
+            
+            self.cueTone = try AVAudioPlayer(contentsOf: soundPath!)
+            self.cueTone.prepareToPlay()
+            
+        } catch {
+            
+            print("initCueTone error")
+            
+        }
+    }
+    
+    func sayActionDescription() {
+        
+        let utterance = AVSpeechUtterance(string: actionLists[nowIndex].actionDescription)
+        utterance.voice =  AVSpeechSynthesisVoice(language: "zh-TW")
+        synthesizer.speak(utterance)
         
     }
     
     // MARK: - CountDownReloadView
     
     func actionCountDownReloadCellView() {
+        
         let indexPath = IndexPath(row: nowIndex, section: 0)
         guard let cell = self.actionTableView.cellForRow(at: indexPath) as? ActionCell  else {return}
         cell.timeDescription.text = "\(actionSec)"
-        print("actionSec\(actionSec)")
         cell.progressView.backgroundColor = #colorLiteral(red: 0, green: 0.6980392157, blue: 0.3058823529, alpha: 1)
         
     }
@@ -142,38 +191,48 @@ class ActionVC: UIViewController {
         cell.progressView.backgroundColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
         
         let contentInsetHeight = Int(actionTableView.frame.height - cell.frame.height)
+        
         if contentInsetNumber < contentInsetHeight {
+            
             contentInsetNumber += contentInsetHeight
             actionTableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: CGFloat(contentInsetNumber), right: 0)
-            print("contentInsetNumber\(contentInsetNumber)")
+            
         }
         
         self.actionTableView.scrollToRow(at: indexPath, at: UITableView.ScrollPosition.top, animated: true)
+        
         if cueToneStatus == CueTone.open {
+            
             cueTone.play()
+            
         }
     }
     
     func restCountDownReloadCellView() {
+        
         let indexPath = IndexPath(row: nowIndex, section: 0)
         guard let cell = self.actionTableView.cellForRow(at: indexPath) as? ActionCell  else {return}
         cell.timeDescription.text = "\(restSec)"
         cell.actionDescription.text = "休息時間"
+        
     }
     
     func restCountDownToZeroReloadCellView() {
+        
         let indexPath = IndexPath(row: nowIndex, section: 0)
         guard let cell = self.actionTableView.cellForRow(at: indexPath) as? ActionCell  else {return}
         cell.actionDescription.text = actionLists[nowIndex].actionDescription
-        if cueToneStatus == CueTone.open {
+        
+        if cueToneStatus == .open {
+            
             cueTone.play()
             sayActionDescription()
+            
         }
     }
     
     // MARK: - CountDown
     @objc func actionCountDown() {
-        //第一次play要renew秒數
         
         actionLists[nowIndex].cellStatus = .playing
         actionLists[nowIndex].actionOrRest = .action
@@ -198,19 +257,16 @@ class ActionVC: UIViewController {
                 actionLists[nowIndex].actionOrRest = .rest
                 
                 actionCountDownToZeroReloadCellView()
-                //改狀態
-                
-                //更新restSec初始值
+       
                 if actionLists[nowIndex].firstPlayRest == true {
+                    
                     restSec = Int(actionLists[nowIndex].restTime)
                     actionLists[nowIndex].firstPlayRest = false
-                    print(restSec)
+                    
                 }
-                
-                //更新restSec的View
+
                 restViewWidthAnimate(cell: nil)
                 
-                //換下一個動作
                 self.renewVideo()
                 
                 self.restTimer = Timer.scheduledTimer(timeInterval: 1,
@@ -219,12 +275,11 @@ class ActionVC: UIViewController {
                                                       userInfo: nil,
                                                       repeats: true)
                 
-                print("休息時間！")
-                
             } else {
+                
                 videoView.pause()
-                print("做完囉要去下一頁了")
                 performSegue(withIdentifier: "toScoreVC", sender: nil)
+                
             }
         }
     }
@@ -233,16 +288,15 @@ class ActionVC: UIViewController {
         
         restSec -= 1
         
-        print("restSec\(restSec)")
-        
         restCountDownReloadCellView()
         
         if restSec <= 0 {
             
             if actionLists[nowIndex].firstPlayAction == true {
-                actionSec = Int(actionLists[nowIndex].timesDescription)
                 
+                actionSec = Int(actionLists[nowIndex].timesDescription)
                 actionLists[nowIndex].firstPlayAction = false
+                
             }
             
             actionViewWidthAnimate(cell: nil)
@@ -256,14 +310,15 @@ class ActionVC: UIViewController {
         }
     }
     
-    // MARK: - renewVideo
+// MARK: - renewVideo
+    
     func renewVideo() {
+        
         let floatYoutubeTime = Float(actionLists[nowIndex].youtubeTime)
         videoView.seekTo(floatYoutubeTime, seekAhead: true)
         let youtubestopTime = actionLists[nowIndex].stopTime
-        
         let compareIndex = nowIndex
-        print("compareIndex\(compareIndex)nowIndex\(nowIndex)")
+        
         DispatchQueue.main.asyncAfter(deadline: .now() + youtubestopTime) {
             if compareIndex == self.nowIndex {
                 self.videoView.seekTo(Float(self.actionLists[self.nowIndex].youtubeTime), seekAhead: true)
@@ -282,22 +337,22 @@ class ActionVC: UIViewController {
         }
     }
     
-    // MARK: - Animate
+// MARK: - Animate
     
     func actionViewWidthAnimate(cell: ActionCell?) {
         
         if Int(actionLists[nowIndex].timesDescription) == actionSec {
-            //總秒數=現在的秒數，
+
             let indexPath = IndexPath(row: nowIndex, section: 0)
             guard let cell = self.actionTableView.cellForRow(at: indexPath) as? ActionCell  else {return}
             cell.progressView.isHidden = false
             cell.progressView.backgroundColor = #colorLiteral(red: 0, green: 0.6980392157, blue: 0.3058823529, alpha: 1)
             cell.progressView.frame = cell.bounds
             cell.progressView.frame.size.width = 0
-            actionAnimatorWidth = UIViewPropertyAnimator(duration:actionLists[nowIndex].timesDescription,
+            
+            actionAnimatorWidth = UIViewPropertyAnimator(duration: actionLists[nowIndex].timesDescription,
                                                          curve: .easeIn) {
-                                                            cell.progressView.frame.size.width = cell.frame.size.width
-            }
+                                                            cell.progressView.frame.size.width = cell.frame.size.width}
             
         } else {
             
@@ -314,6 +369,7 @@ class ActionVC: UIViewController {
             cell.progressView.frame.size.width = CGFloat(progressViewWidthProportion)
             actionAnimatorWidth = UIViewPropertyAnimator(duration: TimeInterval(actionSec), curve: .easeIn) {
                 cell.progressView.frame.size.width = cell.frame.size.width
+                
             }
         }
         
@@ -324,6 +380,7 @@ class ActionVC: UIViewController {
     func restViewWidthAnimate(cell: ActionCell?) {
         
         if Int(actionLists[nowIndex].restTime) == restSec {
+            
             let indexPath = IndexPath(row: nowIndex, section: 0)
             guard let cell = self.actionTableView.cellForRow(at: indexPath) as? ActionCell  else {return}
             cell.progressView.isHidden = false
@@ -333,9 +390,13 @@ class ActionVC: UIViewController {
             cell.progressView.backgroundColor = #colorLiteral(red: 0.501960814, green: 0.501960814, blue: 0.501960814, alpha: 1)
             
             restAnimatorWidth = UIViewPropertyAnimator(duration: actionLists[nowIndex].restTime, curve: .easeIn) {
+                
                 cell.progressView.frame.size.width = cell.frame.size.width
+                
             }
+            
         } else {
+            
             guard let cell = cell  else {return}
             cell.progressView.isHidden = false
             cell.progressView.backgroundColor = #colorLiteral(red: 0.501960814, green: 0.501960814, blue: 0.501960814, alpha: 1)
@@ -349,7 +410,9 @@ class ActionVC: UIViewController {
             
             cell.progressView.frame.size.width = CGFloat(progressViewWidthProportion)
             restAnimatorWidth = UIViewPropertyAnimator(duration: TimeInterval(restSec), curve: .easeIn) {
+                
                 cell.progressView.frame.size.width = cell.frame.size.width
+                
             }
         }
         
@@ -357,7 +420,7 @@ class ActionVC: UIViewController {
         
     }
     
-    // MARK: - ToScoreVC
+// MARK: - ToScoreVC
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let scoreVC = segue.destination as? ScoreVC {
@@ -367,59 +430,36 @@ class ActionVC: UIViewController {
         }
     }
     
-    // MARK: - CueTone
-    func initCueTone(){
-        let soundPath = Bundle.main.url(forResource: "Wate", withExtension: "wav")
-        do {
-            self.cueTone = try AVAudioPlayer(contentsOf: soundPath!)
-            self.cueTone.prepareToPlay()
-        } catch {
-            print("error")
-        }
-
-    }
-    
-    func sayActionDescription() {
-        
-        let utterance = AVSpeechUtterance(string: actionLists[nowIndex].actionDescription)
-        utterance.voice =  AVSpeechSynthesisVoice(language: "zh-TW")
-        synthesizer.speak(utterance)
-    }
-    
-    
-    //checkInternetFunction downloadData
+// MARK: - ToScoreVC downloadData
     
     func checkInternetFunction() -> Bool {
+        
         if reachability?.currentReachabilityStatus().rawValue == 0 {
+            
             print("no internet connected.")
             return false
-        }else {
+            
+        } else {
+            
             print("internet connected successfully.")
             return true
+            
         }
     }
     
-    func downloadData() -> Bool{
+    func downloadData() -> Bool {
         
         if checkInternetFunction() == true {
-            downloadDataViewTrue()
             
+            connectView.isHidden = true
             return true
             
-        }else {
+        } else {
             
-            print("checkInternetFunction() == false")
             downloadDataViewFalse()
-            
             return false
+            
         }
-    }
-    
-    func downloadDataViewTrue(){
-        
-        connectView.isHidden = true
-        
- 
     }
     
     func downloadDataViewFalse() {
@@ -439,9 +479,10 @@ class ActionVC: UIViewController {
     }
     
     @IBAction func reconnectBtnWasPressed(_ sender: UIButton) {
+        
         downloadData()
+        
     }
-    
 }
 
 // MARK: - UITableViewDelegate
@@ -449,43 +490,34 @@ class ActionVC: UIViewController {
 extension ActionVC: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//
-//        let this = actionLists.count - nowIndex
-//        guard let cell = actionTableView.cellForRow(at: indexPath) else {return}
-//        let mostContentInsetHeight = Int(actionTableView.frame.height - cell.frame.height)
-//        var eachContentInsetHeight = 0
-//
-//        if Int(actionTableView.frame.height) > this * Int(cell.frame.height) {
-//
-//            eachContentInsetHeight = Int(actionTableView.frame.height) - this * Int(cell.frame.height)
-//
-//        }
-
+        
         actionCountDownToZeroReloadCellView()
-
+        
         if indexPath.row == nowIndex {
-            //按正在播放的按鈕
+            
             if actionLists[nowIndex].playingOrPause == .playing {
                 
                 videoView.pause()
-                actionTableView.reloadData()
                 
             } else {
                 
                 videoView.play()
-                actionTableView.reloadData()
                 
             }
+            
         } else if indexPath.row > nowIndex {
-            //按之後的按鈕
+
             guard videoView.playerState == .Playing else {return}
+            
             for cell in 0 ..< indexPath.row {
+                
                 actionLists[cell].cellStatus = .played
+                
             }
             
-            self.actionTableView.scrollToRow(at: indexPath, at: UITableView.ScrollPosition.top, animated: true)
-            
             nowIndex = indexPath.row
+            
+            self.actionTableView.scrollToRow(at: indexPath, at: UITableView.ScrollPosition.top, animated: true)
             
             actionSec = Int(actionLists[nowIndex].timesDescription)
             
@@ -526,16 +558,21 @@ extension ActionVC: UITableViewDelegate {
         } else if indexPath.row < nowIndex {
             
             guard videoView.playerState == .Playing else {return}
-            //把indexPath.row 到 nowIndex 中間的變成willplay
             for cell in indexPath.row ... nowIndex {
+                
                 actionLists[cell].cellStatus = .willplay
+                
             }
+            
             actionLists[nowIndex].firstPlayRest = true
             actionLists[nowIndex].firstPlayAction = true
             actionLists[nowIndex].actionCellDidInvisiable = false
             actionLists[nowIndex].restCellDidInvisiable = false
             
             nowIndex = indexPath.row
+            
+            self.actionTableView.scrollToRow(at: indexPath, at: UITableView.ScrollPosition.top, animated: true)
+            
             actionTableView.reloadData()
             
             if actionTimer != nil {
@@ -561,7 +598,7 @@ extension ActionVC: UITableViewDelegate {
                 
                 if compareIndex == self.nowIndex {
                     
-                        self.videoView.seekTo(Float(self.actionLists[self.nowIndex].youtubeTime), seekAhead: true)
+                    self.videoView.seekTo(Float(self.actionLists[self.nowIndex].youtubeTime), seekAhead: true)
                     
                     DispatchQueue.main.asyncAfter(deadline: .now() + youtubestopTime) {
                         if compareIndex == self.nowIndex {
@@ -570,7 +607,6 @@ extension ActionVC: UITableViewDelegate {
                         }
                     }
                 }
-                
             }
             
             actionSec = Int(actionLists[nowIndex].timesDescription)
@@ -578,14 +614,6 @@ extension ActionVC: UITableViewDelegate {
             actionViewWidthAnimate(cell: nil)
             
         }
-        
-//        if contentInsetNumber < mostContentInsetHeight && videoView.playerState == .Playing  {
-//            contentInsetNumber += eachContentInsetHeight
-//            actionTableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: CGFloat(contentInsetNumber), right: 0)
-//            print("nowIndex\(nowIndex)eachContentInsetHeight\(eachContentInsetHeight)this\(this)")
-//        }
-        
-        
     }
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
@@ -596,19 +624,15 @@ extension ActionVC: UITableViewDelegate {
         guard let playingCell = cell as? ActionCell else {return}
         
         if cellStatus == .playing  && actionOrRest == .action && videoView.playerState == .Playing {
+            
             actionViewWidthAnimate(cell: playingCell)
             
         } else if cellStatus == .playing && actionOrRest == .rest && videoView.playerState == .Playing {
+            
             restViewWidthAnimate(cell: playingCell)
+            
         }
     }
-    
-    func tableView(_ tableView: UITableView, didEndDisplaying cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        
-    }
-    
-    
-    
 }
 
 // MARK: - UITableViewDataSource
@@ -619,9 +643,10 @@ extension ActionVC: UITableViewDataSource {
         return actionLists.count
     }
     
-    func tableView(_ tableView: UITableView,
-                   cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
         if let cell = actionTableView.dequeueReusableCell(withIdentifier: "ActionCell") as? ActionCell {
+            
             cell.selectionStyle = .none
             
             let cellStatus = actionLists[indexPath.row].cellStatus
@@ -639,6 +664,7 @@ extension ActionVC: UITableViewDataSource {
                 cell.timeDescription.text = String(actionSec)
                 cell.actionDescription.textColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
                 cell.actionDescription.text = actionLists[nowIndex].actionDescription
+                
             } else if cellStatus == .playing && actionOrRest == .action && videoView.playerState == .Paused {
                 
                 let actionTimesDescription = actionLists[nowIndex].timesDescription
@@ -653,6 +679,7 @@ extension ActionVC: UITableViewDataSource {
                 cell.actionDescription.textColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
                 
             } else if cellStatus == .playing && actionOrRest == .rest && videoView.playerState == .Playing {
+                
                 cell.timeDescription.text = String(restSec)
                 cell.actionDescription.textColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
                 
@@ -701,22 +728,18 @@ extension ActionVC: UITableViewDataSource {
 
 extension ActionVC: YouTubePlayerDelegate {
     
-    func playerStateChanged(_ videoPlayer: YouTubePlayerView,
-                            playerState: YouTubePlayerState) {
-        
-        let indexPath = IndexPath(row: nowIndex, section: 0)
-        
-        guard let cell = actionTableView.cellForRow(at: indexPath) as? ActionCell else {return}
+    func playerStateChanged(_ videoPlayer: YouTubePlayerView, playerState: YouTubePlayerState) {
         
         if playerState == .Playing {
+            
+            let indexPath = IndexPath(row: nowIndex, section: 0)
+            let cell = actionTableView.cellForRow(at: indexPath) as? ActionCell
             
             actionLists[nowIndex].playingOrPause = .playing
             
             if firstTimeplay == true {
-                let indexPath = IndexPath(row: nowIndex, section: 0)
-                self.actionTableView.scrollToRow(at: indexPath, at: UITableView.ScrollPosition.top, animated: true)
-                firstTimePlay()
                 
+                firstTimePlay()
             }
             
             if actionTimer?.isValid == false && actionTimerjustStop == true {

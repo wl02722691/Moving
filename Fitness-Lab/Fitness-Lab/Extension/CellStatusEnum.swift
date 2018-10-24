@@ -8,7 +8,7 @@
 
 import Foundation
 
-enum CellStatus{
+enum CellStatus {
     
     case played
     case playing
@@ -16,13 +16,13 @@ enum CellStatus{
     
 }
 
-enum ActionOrRest{
+enum ActionOrRest {
     
     case action
     case rest
 }
 
-enum PlayingOrPause{
+enum PlayingOrPause {
     case playing
     case pause
 }
@@ -33,8 +33,7 @@ enum TimeRange {
     case min9
 }
 
-enum CueTone{
+enum CueTone {
     case open
     case close
 }
-
