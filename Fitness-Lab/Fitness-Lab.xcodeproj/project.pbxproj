@@ -217,12 +217,12 @@
 				69D37DF2215257EC00B8F1F9 /* AppDelegate.swift */,
 				69D37DF9215257EE00B8F1F9 /* Assets.xcassets */,
 				69D37DFE215257EE00B8F1F9 /* Info.plist */,
-				698C0139216EDE94004DC719 /* Header.h */,
 				698C013A216EE67C004DC719 /* GAManager.swift */,
-				696A2B60217580120075EFDE /* Reachability.h */,
-				696A2B61217580120075EFDE /* Reachability.m */,
 				69BB972D2171C03000B2BDEB /* GoogleService-Info.plist */,
 				69BB97372171CF2A00B2BDEB /* LaunchScreen.storyboard */,
+				696A2B60217580120075EFDE /* Reachability.h */,
+				696A2B61217580120075EFDE /* Reachability.m */,
+				698C0139216EDE94004DC719 /* Header.h */,
 			);
 			path = "Fitness-Lab";
 			sourceTree = "<group>";

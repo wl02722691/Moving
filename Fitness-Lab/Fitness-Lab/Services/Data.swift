@@ -19,7 +19,6 @@ class Data {
         FitnessCategory(title: "腿部運動", imageName: "5", secondTitle: "Leg Workout")
     ]
     
-    //swiftlint:disable colon
     //swiftlint:disable comma
     //swiftlint:disable line_length
     

@@ -47,7 +47,7 @@ class ListVC: UIViewController {
     }
     
     @IBAction func okBtn(_ sender: UIButton) {
-    
+        
         if selectTimeSender == 0 {
             
             lists = oldlists
@@ -59,11 +59,11 @@ class ListVC: UIViewController {
         } else if selectTimeSender == 2 {
             lists = oldlists
             lists = lists.filter({ $0.timeRange == TimeRange.threeToNine })
-
+            
         } else if selectTimeSender == 3 {
             lists = oldlists
             lists = lists.filter({ $0.timeRange == TimeRange.min9 })
-
+            
         }
         
         filterView.isHidden = true
@@ -78,7 +78,7 @@ class ListVC: UIViewController {
             
             backgroundDismissBtn.isHidden = false
             filterView.isHidden = false
-      
+            
         } else {
             
             backgroundDismissBtn.isHidden = true
@@ -93,13 +93,14 @@ class ListVC: UIViewController {
     }
     
     override func viewDidLoad() {
+        
         backgroundDismissBtn.isHidden = true
         filterView.isHidden = true
         listTableView.separatorStyle = UITableViewCell.SeparatorStyle.none
         super.viewDidLoad()
         listTableView.delegate = self
         listTableView.dataSource = self
-  
+        
         let swipeRight = UISwipeGestureRecognizer(target: self, action: #selector(self.respondToSwipeGesture))
         swipeRight.direction = UISwipeGestureRecognizer.Direction.right
         self.view.addGestureRecognizer(swipeRight)
@@ -132,7 +133,6 @@ class ListVC: UIViewController {
         var frame = self.tabBarController?.tabBar.frame
         frame?.origin.y = UIScreen.main.bounds.height - (self.tabBarController?.tabBar.frame.size.height)!
         self.tabBarController?.tabBar.frame = frame!
-     
     }
     
     @objc func filterBtnWasPressed() {
@@ -147,20 +147,35 @@ class ListVC: UIViewController {
             filterView.isHidden = true
         }
     }
-
+    
     func hideBar(panGestureY: CGFloat) {
         
         if listTableViewFirstFlag == true {
             self.listTableView.frame.size.height += (self.tabBarController?.tabBar.frame.size.height)!
             listTableViewFirstFlag = false
-
+            
         }
+        
+       
+        UIApplication.shared.isStatusBarHidden = true
+
         
         guard var tabBarframe = self.tabBarController?.tabBar.frame else {return}
         tabBarframe.origin.y -= panGestureY/10
         
+        if tabBarframe.origin.y > self.view.frame.height {
+           // tabBarframe.origin.y = self.view.frame.height
+            
+        }
+        
         guard var navframe = self.navigationController?.navigationBar.frame else {return}
         navframe.origin.y +=  panGestureY/10
+        
+        if  navframe.origin.y < 0 - (navigationController?.navigationBar.frame.height)! {
+          //   navframe.origin.y = 0 - (navigationController?.navigationBar.frame.height)!
+        }
+        
+    
         
         self.tabBarController?.tabBar.frame = tabBarframe
         self.navigationController?.navigationBar.frame = navframe
@@ -171,51 +186,54 @@ class ListVC: UIViewController {
         let frameHeight = UIScreen.main.bounds.height + UIApplication.shared.statusBarFrame.size.height
         
         if frameMinY > 0 {
-        view.frame = CGRect(x: 0, y: frameMinY+panGestureY, width: frameWidth, height: frameHeight)
+            view.frame = CGRect(x: 0, y: frameMinY+panGestureY/10, width: frameWidth, height: frameHeight)
+        }else if frameMinY < 0 {
+            view.frame = CGRect(x: 0, y: 0, width: frameWidth, height: frameHeight)
         }
-    
-
     }
     
     func showBar(panGestureY: CGFloat) {
         
-        if listTableViewFirstFlag == true {
-//            self.listTableView.frame.size.height += (self.tabBarController?.tabBar.frame.size.height)!
-//            self.listTableView.frame.size.height += (navigationController?.navigationBar.frame.height)!
-            
+        UIApplication.shared.isStatusBarHidden = false
+        
+        guard var navframe = self.navigationController?.navigationBar.frame else {return}
+        
+        guard var tabBarframe = self.tabBarController?.tabBar.frame else {return}
+        
+        navframe.origin.y +=  panGestureY/10
+        tabBarframe.origin.y -= panGestureY/10
+        
+        if navframe.origin.y >= UIApplication.shared.statusBarFrame.height{
+           navframe.origin.y = UIApplication.shared.statusBarFrame.height
+            listTableViewFirstFlag = true
         }
         
-        var tabBarframe = self.tabBarController?.tabBar.frame
-        tabBarframe?.origin.y = UIScreen.main.bounds.height - (self.tabBarController?.tabBar.frame.size.height)!
+        if tabBarframe.origin.y <= UIScreen.main.bounds.height - (self.tabBarController?.tabBar.frame.size.height)!{
+            tabBarframe.origin.y = UIScreen.main.bounds.height - (self.tabBarController?.tabBar.frame.size.height)!
+            listTableViewFirstFlag = true
+        }
         
-        var navframe = self.navigationController?.navigationBar.frame
-        navframe?.origin.y =  20
+        self.tabBarController?.tabBar.frame = tabBarframe
+        self.navigationController?.navigationBar.frame = navframe
         
-            self.tabBarController?.tabBar.frame = tabBarframe!
-            self.navigationController?.navigationBar.frame = navframe!
-        
-        
-        if listTableView.isCellVisible(indexSection: 0, indexRow: 0) == true {
-            
             var frameY = self.view.frame.minY
             
             if frameY < (navigationController?.navigationBar.frame.height)! {
                 frameY += panGestureY/10
                 
             }else if frameY > (navigationController?.navigationBar.frame.height)!{
-                frameY = (navigationController?.navigationBar.frame.height)! + UIApplication.shared.statusBarFrame.size.height
+                frameY = (navigationController?.navigationBar.frame.height)!
             }
-                
-                print("frameY\(frameY)navigationController?.navigationBar.frame.height\(navigationController?.navigationBar.frame.height)")
             
             view.frame = CGRect(x: 0,
                                 y: frameY,
                                 width: UIScreen.main.bounds.width,
                                 height: UIScreen.main.bounds.height)
-        }
-    }
     
     }
+    
+    
+}
 
 
 extension ListVC: UITableViewDelegate {
@@ -244,28 +262,13 @@ extension ListVC: UITableViewDelegate {
         let panGestureY = scrollView.panGestureRecognizer.translation(in: scrollView.superview).y
         
         if(scrollView.panGestureRecognizer.translation(in: scrollView.superview).y > 0) {
-
-            showBar(panGestureY: panGestureY)
+            
+           // showBar(panGestureY: panGestureY)
         } else {
             print("down")
-            hideBar(panGestureY: panGestureY)
+           // hideBar(panGestureY: panGestureY)
         }
     }
-    
-    
-
-    
-//
-//    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
-//
-//        if lastContentOffset > scrollView.contentOffset.y {
-//            showBar()
-//        } else {
-//            hideBar()
-//        }
-//
-//        self.lastContentOffset = scrollView.contentOffset.y
-//    }
 }
 
 extension ListVC: UITableViewDataSource {
