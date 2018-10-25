@@ -10,7 +10,7 @@ import Foundation
 
 extension UITableView {
     
-    func isCellVisible(indexSection:Int, indexRow: Int) -> Bool {
+    func isCellVisible(indexSection: Int, indexRow: Int) -> Bool {
         guard let indexes = self.indexPathsForVisibleRows else {
             return false
         }

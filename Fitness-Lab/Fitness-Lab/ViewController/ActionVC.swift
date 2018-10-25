@@ -62,10 +62,10 @@ class ActionVC: UIViewController {
         super.viewDidLoad()
         
         initView()
-        
         let swipeRight = UISwipeGestureRecognizer(target: self, action: #selector(self.respondToSwipeGesture))
         swipeRight.direction = UISwipeGestureRecognizer.Direction.right
         self.view.addGestureRecognizer(swipeRight)
+        
         
     }
     
@@ -190,16 +190,7 @@ class ActionVC: UIViewController {
         cell.progressView.frame.size.width = cell.frame.size.width
         cell.progressView.backgroundColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
         
-        let contentInsetHeight = Int(actionTableView.frame.height - cell.frame.height)
-        
-        if contentInsetNumber < contentInsetHeight {
-            
-            contentInsetNumber += contentInsetHeight
-            actionTableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: CGFloat(contentInsetNumber), right: 0)
-            
-        }
-        
-        self.actionTableView.scrollToRow(at: indexPath, at: UITableView.ScrollPosition.top, animated: true)
+        contentHeightChang()
         
         if cueToneStatus == CueTone.open {
             
@@ -483,6 +474,23 @@ class ActionVC: UIViewController {
         downloadData()
         
     }
+    
+    func contentHeightChang() {
+        
+        let indexPath = IndexPath(row: nowIndex, section: 0)
+        guard let cell = self.actionTableView.cellForRow(at: indexPath) as? ActionCell  else {return}
+        let contentInsetHeight = Int(actionTableView.frame.height - cell.frame.height)
+        if contentInsetNumber < contentInsetHeight {
+            
+            contentInsetNumber += contentInsetHeight
+            actionTableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: CGFloat(contentInsetNumber), right: 0)
+            
+        }
+        
+        self.actionTableView.scrollToRow(at: indexPath, at: UITableView.ScrollPosition.top, animated: true)
+    }
+    
+ 
 }
 
 // MARK: - UITableViewDelegate
@@ -490,8 +498,6 @@ class ActionVC: UIViewController {
 extension ActionVC: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
-        actionCountDownToZeroReloadCellView()
         
         if indexPath.row == nowIndex {
             
@@ -553,6 +559,7 @@ extension ActionVC: UITableViewDelegate {
                 }
             }
             
+            contentHeightChang()
             actionViewWidthAnimate(cell: nil)
             
         } else if indexPath.row < nowIndex {
@@ -610,7 +617,7 @@ extension ActionVC: UITableViewDelegate {
             }
             
             actionSec = Int(actionLists[nowIndex].timesDescription)
-            
+            contentHeightChang()
             actionViewWidthAnimate(cell: nil)
             
         }
