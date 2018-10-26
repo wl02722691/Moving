@@ -23,10 +23,7 @@ class SummaryVC: UIViewController {
     @IBOutlet weak var workoutNowBtn: UIButton!
     @IBOutlet weak var workoutTomorrowBtn: UIButton!
     
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(true)
-        animationView.removeFromSuperview()
-    }
+// MARK: - initView
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -41,33 +38,38 @@ class SummaryVC: UIViewController {
         summaryArray = realm?.objects(SummaryModel.self)
         
         let notificationName = Notification.Name("addNewData")
-        NotificationCenter.default.addObserver(self, selector: #selector(updateRealm(noti:)), name: notificationName, object: nil)
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(updateRealm(noti:)),
+                                               name: notificationName,
+                                               object: nil)
 
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         
-        animationView.play()
+        GAManager.createNormalScreenEventWith("SummaryVC")
         
-         GAManager.createNormalScreenEventWith("SummaryVC")
+        animationView.play()
         
         allTime = 0
         
         if summaryArray.count - 1 > 0 {
+            
             for summaryArrayIndex in 0 ... summaryArray.count - 1 {
                 allTime += summaryArray[summaryArrayIndex].durationLbl
             }
             
         } else if summaryArray.count == 1 {
+            
             allTime = summaryArray[0].durationLbl
+            
         }
 
         allTimeToMin = allTime / 60
-        
-        
 
         if summaryArray.count == 0 {
+            
             firstView.isHidden = false
             loadAnimateView()
             
@@ -76,6 +78,15 @@ class SummaryVC: UIViewController {
             firstView.isHidden = true
         }
     }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(true)
+        
+        animationView.removeFromSuperview()
+        
+    }
+ 
+// MARK: - LOTAnimationView
     
     func loadAnimateView() {
        
@@ -97,17 +108,21 @@ class SummaryVC: UIViewController {
     @IBAction func workoutNowBtn(_ sender: UIButton) {
         
         tabBarController?.selectedIndex = 0
+        
     }
     
     @IBAction func workoutTomorrowBtn(_ sender: UIButton) {
         
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
 
-        guard let settingVC = storyboard.instantiateViewController(withIdentifier: "NotificationVC") as? NotificationVC else {return}
+        guard let settingVC = storyboard.instantiateViewController(
+            withIdentifier: "NotificationVC") as? NotificationVC else {return}
         
         self.show(settingVC, sender: nil)
         
     }
+    
+// MARK: - realm
     
     @objc func updateRealm(noti: Notification) {
         
@@ -128,7 +143,6 @@ class SummaryVC: UIViewController {
         
         allTimeToMin = allTime / 60
         
-        
         animationView.stop()
        
         animationView.removeFromSuperview()
@@ -141,39 +155,56 @@ class SummaryVC: UIViewController {
 extension SummaryVC: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        
         if indexPath.section == 0 {
+            
             return 160
+        
         } else {
+        
             return 150
+        
         }
     }
-    
+
 }
+
+// MARK: - UITableViewDataSource
 
 extension SummaryVC: UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
+        
         return 2
+    
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        
         switch section {
+            
         case 0: return 1
         case 1: return summaryArray.count
         default: return 0
+        
         }
+        
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        
         switch section {
             
         case 0: return "運動總數"
         case 1: return "挑戰"
         default: return "挑戰"
+            
         }
+        
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        
         let returnedView = UIView(frame: CGRect(x: 0, y: 0, width: view.frame.size.width, height: 25))
         returnedView.backgroundColor = .black
         
@@ -183,6 +214,7 @@ extension SummaryVC: UITableViewDataSource {
         returnedView.addSubview(label)
         
         return returnedView
+    
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -191,6 +223,7 @@ extension SummaryVC: UITableViewDataSource {
         let index = indexPath.row
         
         switch indexPath.section {
+            
         case 0:
             
             guard let cell = summaryTableview.dequeueReusableCell(withIdentifier: "Summary1Cell") as? Summary1Cell

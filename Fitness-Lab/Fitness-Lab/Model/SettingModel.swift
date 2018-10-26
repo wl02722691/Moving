@@ -9,6 +9,7 @@
 import Foundation
 
 struct SettingModel {
+    
     private(set) public var titleLbl: String
     private(set) public var statusLbl: String
 
@@ -19,4 +20,5 @@ struct SettingModel {
         self.statusLbl = statusLbl
         
     }
+    
 }

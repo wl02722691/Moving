@@ -9,13 +9,13 @@
 import UIKit
 
 class ActionCell: UITableViewCell {
-
-
+    
     @IBOutlet weak var progressView: UIView!
     @IBOutlet weak var timeDescription: UILabel!
     @IBOutlet weak var actionDescription: UILabel!
     
     func updateView(actionModel: ActionModel) {
+        
         progressView.isHidden = true
         timeDescription.text = String("\(Int(actionModel.timesDescription))秒")
         actionDescription.text = actionModel.actionDescription

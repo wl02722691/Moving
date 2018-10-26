@@ -13,27 +13,37 @@ import Firebase
 class FitnessVC: UIViewController {
     
     @IBOutlet weak var fitnessTableview: UITableView!
+
+// MARK: - initView
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         fitnessTableview.separatorStyle = UITableViewCell.SeparatorStyle.none
         fitnessTableview.delegate = self
         fitnessTableview.dataSource = self
-       navigationController?.navigationBar.isHidden = false
-    
+        
+        navigationController?.navigationBar.isHidden = false
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
+        
         GAManager.createNormalScreenEventWith("FitnessVC")
         viewWillLayoutSubviews()
+        
     }
 }
+
+// MARK: - Table view delegate
 
 extension FitnessVC: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        
         return fitnessTableview.frame.size.height / 4
+    
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -51,17 +61,22 @@ extension FitnessVC: UITableViewDelegate {
             
         }
     }
+    
 }
+// MARK: - Table view data source
 
 extension FitnessVC: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        
         return Data.instance.getfitCategories().count
         
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
         if let cell = fitnessTableview.dequeueReusableCell(withIdentifier: "FitnessCell") as? FitnessCell {
+            
             let category = Data.instance.getfitCategories()[indexPath.row]
             cell.updataViews(fitnessCategory: FitnessCellModel(category: category))
             cell.selectionStyle = .none
@@ -73,4 +88,5 @@ extension FitnessVC: UITableViewDataSource {
             return FitnessCell()
         }
     }
+    
 }

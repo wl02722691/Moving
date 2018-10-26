@@ -9,7 +9,7 @@
 import UIKit
 
 class ListCell: UITableViewCell {
- 
+    
     @IBOutlet weak var videoImg: UIImageView!
     @IBOutlet weak var videoTitle: UILabel!
     @IBOutlet weak var videoDescription: UILabel!
@@ -19,7 +19,7 @@ class ListCell: UITableViewCell {
     func updateView(listModel: ListModel) {
         
         videoImg.image = UIImage(named: listModel.videoImg)
-        
+
         videoTitle.text = listModel.videoTitle
         
         videoDescription.text = listModel.videoDescription
@@ -31,9 +31,10 @@ class ListCell: UITableViewCell {
     }
     
     override func awakeFromNib() {
-        
         super.awakeFromNib()
         
-       contentView.backgroundColor = #colorLiteral(red: 0.06274509804, green: 0.06274509804, blue: 0.06274509804, alpha: 1)
+        contentView.backgroundColor = #colorLiteral(red: 0.06274509804, green: 0.06274509804, blue: 0.06274509804, alpha: 1)
+        
     }
+    
 }

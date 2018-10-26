@@ -12,15 +12,16 @@ import UserNotifications
 import StoreKit
 import HealthKit
 
-
-
 class SettingVC: UIViewController {
     
-    @IBOutlet weak var settingTableView: UITableView!
     var settingArray = [SettingModel(titleLbl: "", statusLbl: "")]
     var cueToneStatus: CueTone = .open
     var settingSwitchArray = Data.instance.getSettingSwitchArray()
     let healthStore: HKHealthStore = HKHealthStore()
+    
+    @IBOutlet weak var settingTableView: UITableView!
+
+// MARK: - initView
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,10 +40,6 @@ class SettingVC: UIViewController {
 
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(true)
-    }
-    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(true)
     
@@ -53,22 +50,31 @@ class SettingVC: UIViewController {
         
     }
     
+// MARK: - Local Notification
+    
     func loadNotificationTime() {
+        
         if let notificationTime = UserDefaults.standard.value(forKey: "notificationtime") as? String {
+            
             let indexPath = IndexPath(row: 3, section: 0)
             guard let cell = self.settingTableView.cellForRow(at: indexPath) as? SettingCell  else {return}
             cell.statusLbl.text = notificationTime
     
         }
+        
     }
     
     @objc func notificationUpdate(noti: Notification) {
+        
         let notificationTime = noti.userInfo!["timeString"] as? String
         let indexPath = IndexPath(row: 3, section: 0)
         guard let cell = self.settingTableView.cellForRow(at: indexPath) as? SettingCell  else {return}
         cell.statusLbl.text = notificationTime
         UserDefaults.standard.set(notificationTime, forKey: "notificationtime")
+        
     }
+    
+// MARK: - CueTone
     
     func cueTone() {
         
@@ -96,7 +102,7 @@ class SettingVC: UIViewController {
         if mySwitch.isOn == true {
             
             let notificationName = Notification.Name("cueTone")
-            NotificationCenter.default.post(name: notificationName, object: nil, userInfo: ["cueTone":true])
+            NotificationCenter.default.post(name: notificationName, object: nil, userInfo: ["cueTone": true])
             UserDefaults.standard.set(true, forKey: "cueTone")
             
         } else {
@@ -107,6 +113,8 @@ class SettingVC: UIViewController {
         }
         
     }
+    
+// MARK: - appleHealth
     
     func appleHealth() {
         
@@ -124,7 +132,6 @@ class SettingVC: UIViewController {
             
         }
         
-        
         cell.statusSwitch.addTarget(self, action: #selector(applehealthSwitchValueChange(mySwitch:)),
                                     for: UIControl.Event.valueChanged)
         
@@ -140,7 +147,6 @@ class SettingVC: UIViewController {
                 
             }
             
-            
         } else {
             
             UserDefaults.standard.set(false, forKey: "appleHealth")
@@ -148,7 +154,7 @@ class SettingVC: UIViewController {
         
     }
     
-    func auth()-> Bool {
+    func auth() -> Bool {
         
         let healthKitTypeToWrite: Set<HKSampleType> = [
             
@@ -160,7 +166,8 @@ class SettingVC: UIViewController {
         
         healthStore.requestAuthorization(toShare: healthKitTypeToWrite, read: healthKitTypeToRead) { (success, error) in
             
-            return success
+            print("auth success\(success) OR error\(String(describing: error))")
+            
         }
         
         if !HKHealthStore.isHealthDataAvailable() {
@@ -168,45 +175,9 @@ class SettingVC: UIViewController {
             print("Error occured")
             return false
             
-            
         }
         
         return true
-    }
-}
-
-extension SettingVC: UITableViewDelegate {
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        switch indexPath {
-        case [0, 0]:
-            
-            let storyboard = UIStoryboard(name: "Main", bundle: nil)
-            
-            guard let informationVC = storyboard.instantiateViewController(withIdentifier: "InformationVC") as? InformationVC  else { return }
-            
-            self.show(informationVC, sender: nil)
-            
-        case [0, 1]:
-             sendEmail()
-        case [0, 2]:
-            if #available( iOS 10.3,*){
-                SKStoreReviewController.requestReview()
-            }
-        case [0, 3]:
-             localNotification()
-        case [0, 4]:
-            print("0, 4!!!")
-        case [1, 0]:
-            print("10!!!")
-        case [1, 1]:
-            print("11!!!")
-        case [1, 2]:
-            print("12!!!")
-            
-        default:
-            print("not anyone")
-        }
     }
     
     func localNotification() {
@@ -214,7 +185,7 @@ extension SettingVC: UITableViewDelegate {
         UNUserNotificationCenter.current().getNotificationSettings { (settings) in
             DispatchQueue.main.async {
                 
-                if(settings.authorizationStatus == .authorized) {
+                if settings.authorizationStatus == .authorized {
                     
                     self.performSegue(withIdentifier: "toNotificationVC", sender: nil)
                     
@@ -226,15 +197,56 @@ extension SettingVC: UITableViewDelegate {
             }
         }
     }
+    
+}
+
+// MARK: - UITableViewDelegate
+
+extension SettingVC: UITableViewDelegate {
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        switch indexPath {
+            
+        case [0, 0]:
+            
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            
+            guard let informationVC = storyboard.instantiateViewController(withIdentifier:
+                "InformationVC") as? InformationVC  else { return }
+            
+            self.show(informationVC, sender: nil)
+            
+        case [0, 1]:
+            
+             sendEmail()
+        
+        case [0, 2]:
+            
+            if #available( iOS 10.3, *) {SKStoreReviewController.requestReview()}
+            
+        case [0, 3]:
+            
+             localNotification()
+            
+        default:
+         
+            print("not anyone")
+        
+        }
+    }
 }
 
 extension SettingVC: UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
+        
         return 2
+    
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    
         switch section {
             
         case 0: return Data.instance.getSettingArray().count
@@ -242,13 +254,13 @@ extension SettingVC: UITableViewDataSource {
         default: return 0
             
         }
+    
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         settingTableView.separatorStyle = UITableViewCell.SeparatorStyle.none
-        //let index = indexPath.row
-        
+ 
         switch indexPath.section {
             
         case 0:
@@ -263,7 +275,6 @@ extension SettingVC: UITableViewDataSource {
             return cell
             
         case 1:
-
             guard let cell = settingTableView.dequeueReusableCell(withIdentifier: "SettingSwitchCell")
                 as? SettingSwitchCell else {return UITableViewCell()}
             cell.updateView(settingModel: settingSwitchArray[indexPath.row])
@@ -274,42 +285,46 @@ extension SettingVC: UITableViewDataSource {
         default:
             break
         }
+        
         return UITableViewCell()
     }
     
 }
 
-
 extension SettingVC: MFMailComposeViewControllerDelegate {
     
     func configureMailController() -> MFMailComposeViewController {
+        
         let mailComposerVC = MFMailComposeViewController()
         mailComposerVC.mailComposeDelegate = self
         
+        mailComposerVC.navigationBar.barTintColor = #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)
         mailComposerVC.setToRecipients(["wl02722691@gmail.com"])
         mailComposerVC.setSubject("App意見回饋")
+        mailComposerVC.title = "意見回饋"
         
         return mailComposerVC
-    }
-    
-    func showMailError() {
-        let sendMailErrorAlert = UIAlertController(title: "無法寄送信件", message: "請再試一次", preferredStyle: UIAlertController.Style.alert)
-        let dismiss = UIAlertAction(title: "確認", style: .default, handler: nil)
-        sendMailErrorAlert.addAction(dismiss)
-        self.present(sendMailErrorAlert, animated: true, completion: nil)
+        
     }
     
     func sendEmail() {
+        
         let mailComposeViewController = configureMailController()
+        
         if MFMailComposeViewController.canSendMail() {
+            
             self.present(mailComposeViewController, animated: true, completion: nil)
-        } else {
         
         }
+        
     }
     
-    func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
+    func mailComposeController(_ controller: MFMailComposeViewController,
+                               didFinishWith result: MFMailComposeResult,
+                               error: Error?) {
+        
         controller.dismiss(animated: true, completion: nil)
+    
     }
     
 }

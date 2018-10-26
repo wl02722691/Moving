@@ -27,6 +27,8 @@ class ScoreVC: UIViewController {
     var healthkitConnect = true
     let healthStore: HKHealthStore = HKHealthStore()
     
+// MARK: - initView
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -52,6 +54,7 @@ class ScoreVC: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
+        
         GAManager.createNormalScreenEventWith("ScoreVC")
         navigationController?.navigationBar.isHidden = true
         
@@ -63,6 +66,8 @@ class ScoreVC: UIViewController {
         NotificationCenter.default.post(name: notificationName, object: nil, userInfo: ["addNewData":"addNewData"])
         
     }
+    
+// MARK: - realm
     
     func realmWrite() {
         
@@ -84,11 +89,54 @@ class ScoreVC: UIViewController {
         
     }
     
+// MARK: - healthKit
+    
+    func writeToKit() {
+        
+        let today = Date()
+        
+        let energyBurned = HKQuantity(unit: HKUnit.kilocalorie(),
+                                      doubleValue: 425.0)
+        
+        let distance = HKQuantity(unit: HKUnit.mile(),
+                                  doubleValue: 3.2)
+        
+        let workout = HKWorkout(activityType: HKWorkoutActivityType.traditionalStrengthTraining,
+                                start: today as Date, end: today as Date, duration: resultTime,
+                                totalEnergyBurned: energyBurned, totalDistance: distance, metadata: nil)
+        
+        healthStore.save(workout) { (success, error) -> Void in
+            guard success else {
+                
+                print("*** An error occurred while saving")
+                
+                return
+                
+            }
+            
+            print("healthkit success \(success)")
+        }
+        
+    }
+    
+    func loadAppleHealth() {
+        
+        if let appleHealthStatus = UserDefaults.standard.value(forKey: "appleHealth") as? Bool {
+            
+            if appleHealthStatus == true {
+                
+                writeToKit()
+                
+            }
+        }
+        
+    }
+    
     @IBAction func finishBtn(_ sender: UIButton) {
         
-        navigationController?.navigationBar.isHidden = false
-        
         Analytics.logEvent("ScoreVC_finishBtn", parameters: nil)
+        
+        navigationController?.navigationBar.isHidden = false
         
         realmWrite()
         
@@ -108,55 +156,12 @@ class ScoreVC: UIViewController {
                                         userInfo: ["updateRealm": "updateRealm"])
         
         notificationToSummaryVC()
+        
     }
     
-
-    func writeToKit() {
-        
-        let today = Date()
-        
-        let energyBurned = HKQuantity(unit: HKUnit.kilocalorie(),
-                                      doubleValue: 425.0)
-        
-        let distance = HKQuantity(unit: HKUnit.mile(),
-                                  doubleValue: 3.2)
-        
-        
-        //let distance = HKQuantity(unit: HKUnit.mile(),
-        //                        doubleValue: 3.2)
-        
-        // Provide summary information when creating the workout.
-        let workout = HKWorkout(activityType: HKWorkoutActivityType.traditionalStrengthTraining,
-                                start: today as Date, end: today as Date, duration: resultTime,
-                                totalEnergyBurned: energyBurned, totalDistance: distance, metadata: nil)
-        
-        // Save the workout before adding detailed samples.
-        healthStore.save(workout) { (success, error) -> Void in
-            guard success else {
-                
-                // Perform proper error handling here...
-                fatalError("*** An error occurred while saving the " +
-                    "workout: \(error?.localizedDescription)")
-                
-            }
-            
-            print("healthkit success \(success)")
-        }
-    }
-    
-    func loadAppleHealth() {
-        
-        if let appleHealthStatus = UserDefaults.standard.value(forKey: "appleHealth") as? Bool {
-            
-            if appleHealthStatus == true {
-                
-                writeToKit()
-                
-            }
-        }
-        
-    }
 }
+
+// MARK: - UICollectionViewDataSource
 
 extension ScoreVC: UICollectionViewDataSource {
     
@@ -190,14 +195,15 @@ extension ScoreVC: UICollectionViewDataSource {
     }
 }
 
-//swiftlint:disable force_cast
+// MARK: - UICollectionViewDataSource
+
 extension ScoreVC: UICollectionViewDelegate, UIScrollViewDelegate {
     
     func scrollViewWillEndDragging(_ scrollView: UIScrollView,
                                    withVelocity velocity: CGPoint,
                                    targetContentOffset: UnsafeMutablePointer<CGPoint>) {
         
-        let layout = self.scoreCollectionView.collectionViewLayout as! UICollectionViewFlowLayout
+        guard let layout = self.scoreCollectionView.collectionViewLayout as? UICollectionViewFlowLayout else { return }
         let cellWidthncludingSpacing = layout.itemSize.width + layout.minimumLineSpacing
         
         var offset = targetContentOffset.pointee

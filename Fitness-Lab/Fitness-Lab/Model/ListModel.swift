@@ -9,6 +9,7 @@
 import Foundation
 
 struct ListModel {
+    
     private(set) public var videoImg: String
     private(set) public var durationLbl: Int
     private(set) public var videoTitle: String
@@ -35,4 +36,5 @@ struct ListModel {
         self.videoID = videoID
         self.timeRange = timeRange
     }
+    
 }

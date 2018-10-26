@@ -10,7 +10,7 @@ import UIKit
 import UserNotifications
 
 class BeforeNotificationVC: UIViewController {
-
+    
     @IBAction func closeBtn(_ sender: UIButton) {
         navigationController?.popToRootViewController(animated: true)
     }
@@ -19,7 +19,6 @@ class BeforeNotificationVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // Do any additional setup after loading the view.
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -28,8 +27,7 @@ class BeforeNotificationVC: UIViewController {
         self.navigationController?.setNavigationBarHidden(true, animated: animated)
         self.tabBarController?.tabBar.isHidden = true
         viewWillLayoutSubviews()
-
-    
+        
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -39,46 +37,46 @@ class BeforeNotificationVC: UIViewController {
         
     }
     
-  
-
-    
     @IBAction func okBtn(_ sender: UIButton) {
         
-        UNUserNotificationCenter.current().requestAuthorization(options: [.alert,.sound,.badge, .carPlay],
-                                                                completionHandler: { (granted, error) in
+        UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge, .carPlay],
+                                                                completionHandler: { (granted, _ ) in
+ 
                                                                     if granted {
                                                                         DispatchQueue.main.async {
                                                                             
-                                                    self.performSegue(withIdentifier: "backToNotificationVC", sender: nil)
-                                                                            UserDefaults.standard.set(false, forKey: "firstNotification")
+                                                                            self.performSegue(withIdentifier: "backToNotificationVC",
+                                                                                              sender: nil)
                                                                             
+                                                                            UserDefaults.standard.set(false,
+                                                                                                      forKey: "firstNotification")
                                                                         }
                                                                         
                                                                     } else {
                                                                         
-                                                                        let firstNotification = UserDefaults.standard.value(forKey: "firstNotification") as? Bool
+                                                                        let firstNotification = UserDefaults.standard.value(forKey:
+                                                                            "firstNotification") as? Bool
                                                                         
                                                                         if firstNotification != nil {
                                                                             
                                                                             DispatchQueue.main.async {
-                                                                                UIApplication.shared.open(URL.init(string: UIApplication.openSettingsURLString)!,
-                                                                                                          options: [:], completionHandler: nil)
+                                                                                UIApplication.shared.open(URL.init(string:UIApplication.openSettingsURLString)!,
+                                                                                                          options: [:],
+                                                                                                          completionHandler: nil)
                                                                                 
-                                                                                
-                                                        
-                                                        
-                                                                               
                                                                             }
                                                                             
                                                                         } else {
+                                                                            
                                                                             DispatchQueue.main.async {
+                                                                                
                                                                                 self.navigationController?.popToRootViewController(animated: true)
                                                                                 UserDefaults.standard.set(false, forKey: "firstNotification")
+                                                                                
                                                                             }
                                                                         }
+                                                                        
                                                                     }
-        }
-        )
-        
+        })
     }
 }

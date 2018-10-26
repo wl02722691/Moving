@@ -9,6 +9,7 @@
 import Foundation
 
 struct FitnessCategory {
+    
     private(set) public var secondTitle: String!
     private(set) public var title: String!
     private(set) public var imageName: String!
@@ -20,10 +21,5 @@ struct FitnessCategory {
         self.secondTitle = secondTitle
         
     }
-
-    init() {
-        
-        self.init(title: "", imageName: "", secondTitle: "")
     
-    }
 }
