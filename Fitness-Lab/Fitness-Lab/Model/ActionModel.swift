@@ -48,4 +48,5 @@ struct ActionModel {
         self.actionCellDidInvisiable = actionCellDidInvisiable
         self.restCellDidInvisiable = restCellDidInvisiable
     }
+    
 }

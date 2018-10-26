@@ -14,7 +14,9 @@ extension UIViewController {
     @objc func respondToSwipeGesture(gesture: UIGestureRecognizer) {
         
         if let swipeGesture = gesture as? UISwipeGestureRecognizer {
+            
             switch swipeGesture.direction {
+                
             case UISwipeGestureRecognizer.Direction.right:
                 print("Swiped right")
                 dismiss(animated: true, completion: nil)
@@ -24,6 +26,7 @@ extension UIViewController {
                 print("Swiped left")
             case UISwipeGestureRecognizer.Direction.up:
                 print("Swiped up")
+                
             default:
                 break
             }

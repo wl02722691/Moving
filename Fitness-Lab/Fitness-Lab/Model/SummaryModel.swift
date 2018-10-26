@@ -26,4 +26,5 @@ class SummaryModel: Object {
         self.scoreTitleLbl = scoreTitleLbl
         self.workoutDate = workoutDate
     }
+    
 }

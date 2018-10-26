@@ -5,6 +5,11 @@
 //  Created by 張書涵 on 2018/9/20.
 //  Copyright © 2018年 AliceChang. All rights reserved.
 //
+//swiftlint:disable comma
+//swiftlint:disable line_length
+//swiftlint:trailing_comma
+//swiftlint:vertical_whitespace
+//swiftlint:trailing_comma
 
 import Foundation
 class Data {
@@ -18,9 +23,6 @@ class Data {
         FitnessCategory(title: "手臂運動", imageName: "4", secondTitle: "Arm Workout"),
         FitnessCategory(title: "腿部運動", imageName: "5", secondTitle: "Leg Workout")
     ]
-    
-    //swiftlint:disable comma
-    //swiftlint:disable line_length
     
     private let coreArray = [
         
@@ -46,7 +48,6 @@ class Data {
             
             ActionModel(youtubeTime: 487, stopTime: 40, restTime: 3, timesDescription: 30, actionDescription: "不知道叫什麼了", cellStatus: CellStatus.willplay, actionOrRest: ActionOrRest.action, playingOrPause: PlayingOrPause.playing, firstPlayAction: true, firstPlayRest: true, actionCellDidInvisiable: false, restCellDidInvisiable: false),
             
-            
             ]),
         
         
@@ -66,7 +67,6 @@ class Data {
             
             ]),
         
-        
         ListModel(videoImg: "Leg2", durationLbl: 5, videoTitle: "5分鐘在家提臀瘦大腿運動", videoDescription: "周六野 Zoey", intensity: "入門", videoID: "P2MI5A3mo1c", timeRange: TimeRange.threeToNine, actionModel: [
             
             ActionModel(youtubeTime: 70, stopTime: 40, restTime: 3, timesDescription: 30, actionDescription: "15下動作1", cellStatus: CellStatus.willplay, actionOrRest: ActionOrRest.action, playingOrPause: PlayingOrPause.playing, firstPlayAction: true, firstPlayRest: true, actionCellDidInvisiable: false, restCellDidInvisiable: false),
@@ -79,8 +79,6 @@ class Data {
             
             ActionModel(youtubeTime: 323, stopTime: 93, restTime: 3, timesDescription: 90, actionDescription: "左右各15下動作5", cellStatus: CellStatus.willplay, actionOrRest: ActionOrRest.action, playingOrPause: PlayingOrPause.playing, firstPlayAction: true, firstPlayRest: true, actionCellDidInvisiable: false, restCellDidInvisiable: false)
             
-            
-            
             ]),
         
         ListModel(videoImg: "Abs2", durationLbl: 2, videoTitle: "練腹肌人魚線 每天100秒", videoDescription: "洪宏星", intensity: "入門", videoID: "C2dNl_xI7TU", timeRange: TimeRange.max3, actionModel: [
@@ -92,9 +90,6 @@ class Data {
             ActionModel(youtubeTime: 70, stopTime: 35, restTime: 3, timesDescription: 35, actionDescription: "動作3", cellStatus: CellStatus.willplay, actionOrRest: ActionOrRest.action, playingOrPause: PlayingOrPause.playing, firstPlayAction: true, firstPlayRest: true, actionCellDidInvisiable: false, restCellDidInvisiable: false)
             
             ]),
-        
-        
-        
         
         ListModel(videoImg: "Arm1", durationLbl: 6, videoTitle: "快速瘦手臂操收拜拜肉", videoDescription: "Coffee林芊妤", intensity: "入門", videoID: "C8oSs8qf_7g", timeRange: TimeRange.threeToNine, actionModel: [
             
@@ -353,7 +348,6 @@ class Data {
         }
     }
 
-    
     func getCore() -> [ListModel] {
         return coreArray
     }

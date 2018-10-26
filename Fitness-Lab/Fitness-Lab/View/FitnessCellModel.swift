@@ -11,9 +11,7 @@ import Foundation
 struct FitnessCellModel {
     
     let imageName: String
-    
     let title: String
-    
     let subTitle: String
     
     init(category: FitnessCategory) {
@@ -24,4 +22,5 @@ struct FitnessCellModel {
         
         self.subTitle = category.secondTitle
     }
+    
 }

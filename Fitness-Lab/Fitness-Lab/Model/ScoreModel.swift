@@ -8,6 +8,7 @@
 
 import Foundation
 struct ScoreModel {
+    
     private(set) public var scoreImg: String
     private(set) public var titleLbl: String
     
@@ -17,4 +18,5 @@ struct ScoreModel {
         self.scoreImg = scoreImg
         self.titleLbl = titleLbl
     }
+    
 }

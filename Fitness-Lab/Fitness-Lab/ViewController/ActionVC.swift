@@ -50,14 +50,8 @@ class ActionVC: UIViewController {
     @IBOutlet weak var actionTableView: UITableView!
     @IBOutlet weak var reconnectBtn: UIButton!
     
-    // MARK: - initList
-    func initList(category: FitnessCategory) {
-        
-        lists = Data.instance.getList(forListTitle: category.secondTitle)
-        
-    }
-    
-    // MARK: - initView
+// MARK: - initView
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -65,7 +59,6 @@ class ActionVC: UIViewController {
         let swipeRight = UISwipeGestureRecognizer(target: self, action: #selector(self.respondToSwipeGesture))
         swipeRight.direction = UISwipeGestureRecognizer.Direction.right
         self.view.addGestureRecognizer(swipeRight)
-        
         
     }
     
@@ -79,7 +72,7 @@ class ActionVC: UIViewController {
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(true)
-    
+        
         videoView.pause()
         animationView.removeFromSuperview()
         
@@ -108,6 +101,12 @@ class ActionVC: UIViewController {
         actionTableView.reloadRows(at: [index], with: UITableView.RowAnimation.automatic)
         
         cueToneSetting()
+        
+    }
+    
+    func initList(category: FitnessCategory) {
+        
+        lists = Data.instance.getList(forListTitle: category.secondTitle)
         
     }
     
@@ -248,14 +247,14 @@ class ActionVC: UIViewController {
                 actionLists[nowIndex].actionOrRest = .rest
                 
                 actionCountDownToZeroReloadCellView()
-       
+                
                 if actionLists[nowIndex].firstPlayRest == true {
                     
                     restSec = Int(actionLists[nowIndex].restTime)
                     actionLists[nowIndex].firstPlayRest = false
                     
                 }
-
+                
                 restViewWidthAnimate(cell: nil)
                 
                 self.renewVideo()
@@ -301,7 +300,7 @@ class ActionVC: UIViewController {
         }
     }
     
-// MARK: - renewVideo
+    // MARK: - renewVideo
     
     func renewVideo() {
         
@@ -316,24 +315,18 @@ class ActionVC: UIViewController {
                 DispatchQueue.main.asyncAfter(deadline: .now() + youtubestopTime) {
                     if compareIndex == self.nowIndex {
                         self.videoView.seekTo(Float(self.actionLists[self.nowIndex].youtubeTime), seekAhead: true)
-                        DispatchQueue.main.asyncAfter(deadline: .now() + youtubestopTime) {
-                            if compareIndex == self.nowIndex {
-                                self.videoView.seekTo(Float(self.actionLists[self.nowIndex].youtubeTime), seekAhead: true)
-                                
-                            }
-                        }
                     }
                 }
             }
         }
     }
     
-// MARK: - Animate
+    // MARK: - Animate
     
     func actionViewWidthAnimate(cell: ActionCell?) {
         
         if Int(actionLists[nowIndex].timesDescription) == actionSec {
-
+            
             let indexPath = IndexPath(row: nowIndex, section: 0)
             guard let cell = self.actionTableView.cellForRow(at: indexPath) as? ActionCell  else {return}
             cell.progressView.isHidden = false
@@ -411,17 +404,19 @@ class ActionVC: UIViewController {
         
     }
     
-// MARK: - ToScoreVC
+    // MARK: - ToScoreVC
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
         if let scoreVC = segue.destination as? ScoreVC {
             scoreVC.lists = lists
             scoreVC.actionLists = actionLists
             scoreVC.selectSender = selectSender
         }
+        
     }
     
-// MARK: - ToScoreVC downloadData
+    // MARK: - ToScoreVC downloadData
     
     func checkInternetFunction() -> Bool {
         
@@ -451,6 +446,7 @@ class ActionVC: UIViewController {
             return false
             
         }
+        
     }
     
     func downloadDataViewFalse() {
@@ -465,8 +461,11 @@ class ActionVC: UIViewController {
         animationView.play()
         
         if self.connectView.subviews.count == 3 {
+            
             self.connectView.addSubview(animationView)
+            
         }
+        
     }
     
     @IBAction func reconnectBtnWasPressed(_ sender: UIButton) {
@@ -488,9 +487,124 @@ class ActionVC: UIViewController {
         }
         
         self.actionTableView.scrollToRow(at: indexPath, at: UITableView.ScrollPosition.top, animated: true)
+        
     }
     
- 
+// MARK: - moreThanNowIndex and lessThanNowIndex 
+    
+    func moreThanNowIndex(indexPath: IndexPath) {
+        
+        guard videoView.playerState == .Playing else {return}
+        
+        for cell in 0 ..< indexPath.row {
+            
+            actionLists[cell].cellStatus = .played
+            
+        }
+        
+        nowIndex = indexPath.row
+        
+        self.actionTableView.scrollToRow(at: indexPath, at: UITableView.ScrollPosition.top, animated: true)
+        
+        actionSec = Int(actionLists[nowIndex].timesDescription)
+        
+        if actionTimer != nil {
+            actionTimer?.invalidate()
+        }
+        
+        if actionTimer != nil {
+            restTimer?.invalidate()
+        }
+        
+        self.actionTimer = Timer.scheduledTimer(timeInterval: 1,
+                                                target: self,
+                                                selector: #selector(self.actionCountDown),
+                                                userInfo: nil, repeats: true)
+        
+        self.videoView.seekTo(Float(self.actionLists[self.nowIndex].youtubeTime), seekAhead: true)
+        
+        let youtubestopTime = actionLists[nowIndex].stopTime
+        
+        let compareIndex = nowIndex
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + youtubestopTime) {
+            if compareIndex == self.nowIndex {
+                self.videoView.seekTo(Float(self.actionLists[self.nowIndex].youtubeTime), seekAhead: true)
+                DispatchQueue.main.asyncAfter(deadline: .now() + youtubestopTime) {
+                    if compareIndex == self.nowIndex {
+                        self.videoView.seekTo(Float(self.actionLists[self.nowIndex].youtubeTime), seekAhead: true)
+                        
+                    }
+                }
+                
+            }
+        }
+        
+        contentHeightChang()
+        actionViewWidthAnimate(cell: nil)
+        
+    }
+    
+    
+    func lessThanNowIndex(indexPath: IndexPath) {
+        
+        guard videoView.playerState == .Playing else {return}
+        for cell in indexPath.row ... nowIndex {
+            
+            actionLists[cell].cellStatus = .willplay
+            
+        }
+        
+        actionLists[nowIndex].firstPlayRest = true
+        actionLists[nowIndex].firstPlayAction = true
+        actionLists[nowIndex].actionCellDidInvisiable = false
+        actionLists[nowIndex].restCellDidInvisiable = false
+        
+        nowIndex = indexPath.row
+        
+        self.actionTableView.scrollToRow(at: indexPath, at: UITableView.ScrollPosition.top, animated: true)
+        
+        actionTableView.reloadData()
+        
+        if actionTimer != nil {
+            actionTimer?.invalidate()
+        }
+        
+        if actionTimer != nil {
+            restTimer?.invalidate()
+        }
+        
+        self.actionTimer = Timer.scheduledTimer(timeInterval: 1,
+                                                target: self,
+                                                selector: #selector(self.actionCountDown),
+                                                userInfo: nil, repeats: true)
+        
+        self.videoView.seekTo(Float(self.actionLists[self.nowIndex].youtubeTime), seekAhead: true)
+        
+        let youtubestopTime = actionLists[nowIndex].stopTime
+        
+        let compareIndex = nowIndex
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + youtubestopTime) {
+            
+            if compareIndex == self.nowIndex {
+                
+                self.videoView.seekTo(Float(self.actionLists[self.nowIndex].youtubeTime), seekAhead: true)
+                
+                DispatchQueue.main.asyncAfter(deadline: .now() + youtubestopTime) {
+                    if compareIndex == self.nowIndex {
+                        self.videoView.seekTo(Float(self.actionLists[self.nowIndex].youtubeTime), seekAhead: true)
+                        
+                    }
+                }
+            }
+        }
+        
+        actionSec = Int(actionLists[nowIndex].timesDescription)
+        contentHeightChang()
+        actionViewWidthAnimate(cell: nil)
+    }
+    
 }
 
 // MARK: - UITableViewDelegate
@@ -512,113 +626,12 @@ extension ActionVC: UITableViewDelegate {
             }
             
         } else if indexPath.row > nowIndex {
-
-            guard videoView.playerState == .Playing else {return}
             
-            for cell in 0 ..< indexPath.row {
-                
-                actionLists[cell].cellStatus = .played
-                
-            }
-            
-            nowIndex = indexPath.row
-            
-            self.actionTableView.scrollToRow(at: indexPath, at: UITableView.ScrollPosition.top, animated: true)
-            
-            actionSec = Int(actionLists[nowIndex].timesDescription)
-            
-            if actionTimer != nil {
-                actionTimer?.invalidate()
-            }
-            
-            if actionTimer != nil {
-                restTimer?.invalidate()
-            }
-            
-            self.actionTimer = Timer.scheduledTimer(timeInterval: 1,
-                                                    target: self,
-                                                    selector: #selector(self.actionCountDown),
-                                                    userInfo: nil, repeats: true)
-            
-            self.videoView.seekTo(Float(self.actionLists[self.nowIndex].youtubeTime), seekAhead: true)
-            
-            let youtubestopTime = actionLists[nowIndex].stopTime
-            
-            let compareIndex = nowIndex
-            
-            DispatchQueue.main.asyncAfter(deadline: .now() + youtubestopTime) {
-                if compareIndex == self.nowIndex {
-                    self.videoView.seekTo(Float(self.actionLists[self.nowIndex].youtubeTime), seekAhead: true)
-                    DispatchQueue.main.asyncAfter(deadline: .now() + youtubestopTime) {
-                        if compareIndex == self.nowIndex {
-                            self.videoView.seekTo(Float(self.actionLists[self.nowIndex].youtubeTime), seekAhead: true)
-                            
-                        }
-                    }
-                    
-                }
-            }
-            
-            contentHeightChang()
-            actionViewWidthAnimate(cell: nil)
+            moreThanNowIndex(indexPath: indexPath)
             
         } else if indexPath.row < nowIndex {
             
-            guard videoView.playerState == .Playing else {return}
-            for cell in indexPath.row ... nowIndex {
-                
-                actionLists[cell].cellStatus = .willplay
-                
-            }
-            
-            actionLists[nowIndex].firstPlayRest = true
-            actionLists[nowIndex].firstPlayAction = true
-            actionLists[nowIndex].actionCellDidInvisiable = false
-            actionLists[nowIndex].restCellDidInvisiable = false
-            
-            nowIndex = indexPath.row
-            
-            self.actionTableView.scrollToRow(at: indexPath, at: UITableView.ScrollPosition.top, animated: true)
-            
-            actionTableView.reloadData()
-            
-            if actionTimer != nil {
-                actionTimer?.invalidate()
-            }
-            
-            if actionTimer != nil {
-                restTimer?.invalidate()
-            }
-            
-            self.actionTimer = Timer.scheduledTimer(timeInterval: 1,
-                                                    target: self,
-                                                    selector: #selector(self.actionCountDown),
-                                                    userInfo: nil, repeats: true)
-            
-            self.videoView.seekTo(Float(self.actionLists[self.nowIndex].youtubeTime), seekAhead: true)
-            
-            let youtubestopTime = actionLists[nowIndex].stopTime
-            
-            let compareIndex = nowIndex
-            
-            DispatchQueue.main.asyncAfter(deadline: .now() + youtubestopTime) {
-                
-                if compareIndex == self.nowIndex {
-                    
-                    self.videoView.seekTo(Float(self.actionLists[self.nowIndex].youtubeTime), seekAhead: true)
-                    
-                    DispatchQueue.main.asyncAfter(deadline: .now() + youtubestopTime) {
-                        if compareIndex == self.nowIndex {
-                            self.videoView.seekTo(Float(self.actionLists[self.nowIndex].youtubeTime), seekAhead: true)
-                            
-                        }
-                    }
-                }
-            }
-            
-            actionSec = Int(actionLists[nowIndex].timesDescription)
-            contentHeightChang()
-            actionViewWidthAnimate(cell: nil)
+            lessThanNowIndex(indexPath: indexPath)
             
         }
     }
@@ -650,7 +663,8 @@ extension ActionVC: UITableViewDataSource {
         return actionLists.count
     }
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView,
+                   cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         if let cell = actionTableView.dequeueReusableCell(withIdentifier: "ActionCell") as? ActionCell {
             
@@ -729,123 +743,8 @@ extension ActionVC: UITableViewDataSource {
             return ActionCell()
         }
     }
-}
-
-// MARK: - YouTubePlayerDelegate
-
-extension ActionVC: YouTubePlayerDelegate {
     
-    func playerStateChanged(_ videoPlayer: YouTubePlayerView, playerState: YouTubePlayerState) {
-        
-        if playerState == .Playing {
-            
-            let indexPath = IndexPath(row: nowIndex, section: 0)
-            let cell = actionTableView.cellForRow(at: indexPath) as? ActionCell
-            
-            actionLists[nowIndex].playingOrPause = .playing
-            
-            if firstTimeplay == true {
-                
-                firstTimePlay()
-            }
-            
-            if actionTimer?.isValid == false && actionTimerjustStop == true {
-                
-                actionTimerjustStop = false
-                
-                self.actionTimer = Timer.scheduledTimer(timeInterval: 1,
-                                                        target: self,
-                                                        selector: #selector(self.actionCountDown),
-                                                        userInfo: nil, repeats: true)
-                
-                //有進過cellForRow的
-                if actionLists[nowIndex].actionCellDidInvisiable == true {
-                    
-                    actionViewWidthAnimate(cell: cell)
-                    
-                } else {
-                    
-                    //普通的
-                    actionAnimatorWidth.startAnimation()
-                }
-                
-            } else if restTimer?.isValid == false && restTimerjustStop == true {
-                
-                restTimerjustStop = false
-                self.restTimer = Timer.scheduledTimer(timeInterval: 1,
-                                                      target: self,
-                                                      selector: #selector(self.restCountDown),
-                                                      userInfo: nil, repeats: true)
-                
-                //有進過cellForRow的
-                
-                if actionLists[nowIndex].restCellDidInvisiable == true {
-                    restViewWidthAnimate(cell: cell)
-                } else {
-                    //普通的
-                    restAnimatorWidth.startAnimation()
-                }
-                
-            } else {
-                
-            }
-        }
-        
-        if playerState == .Buffering {
-            
-            videoPlayer.pause()
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                videoPlayer.play()
-            }
-        }
-        
-        if playerState == .Queued {
-            
-        }
-        
-        if playerState == .Paused {
-            
-            actionLists[nowIndex].playingOrPause = .pause
-            
-            let index = IndexPath(row: nowIndex, section: 0)
-            
-            guard let cell = actionTableView.cellForRow(at: index) as? ActionCell else {return}
-            
-            if actionTimer?.isValid == true {
-                //現在是action
-                
-                actionTimerjustStop = true
-                
-                actionTimer?.invalidate()
-                
-                actionAnimatorWidth.pauseAnimation()
-                
-                cell.progressView.isHidden = false
-                
-            } else if restTimer?.isValid == true {
-                //現在是rest
-                restTimerjustStop = true
-                
-                restTimer?.invalidate()
-                
-                restAnimatorWidth.pauseAnimation()
-                
-                cell.progressView.isHidden = false
-                
-            }
-        }
-    }
-    
-    func playerQualityChanged(_ videoPlayer: YouTubePlayerView, playbackQuality: YouTubePlaybackQuality) {}
-    
-    func playerReady(_ videoPlayer: YouTubePlayerView) {
-        
-        activityIndicator.isHidden = true
-        let floatYoutubeTime = Float(actionLists[nowIndex].youtubeTime)
-        videoPlayer.seekTo(floatYoutubeTime, seekAhead: true)
-        
-    }
-    
+// MARK: - YouTubePlayerStatusfunction
     func firstTimePlay() {
         
         self.actionTimer = Timer.scheduledTimer(timeInterval: 1,
@@ -881,6 +780,125 @@ extension ActionVC: YouTubePlayerDelegate {
         actionViewWidthAnimate(cell: nil)
         
         firstTimeplay = false
+        
+    }
+    
+    func playerPlaying() {
+        
+        let indexPath = IndexPath(row: nowIndex, section: 0)
+        let cell = actionTableView.cellForRow(at: indexPath) as? ActionCell
+        
+        actionLists[nowIndex].playingOrPause = .playing
+        
+        if firstTimeplay == true {
+            
+            firstTimePlay()
+        }
+        
+        if actionTimer?.isValid == false && actionTimerjustStop == true {
+            
+            actionTimerjustStop = false
+            
+            self.actionTimer = Timer.scheduledTimer(timeInterval: 1,
+                                                    target: self,
+                                                    selector: #selector(self.actionCountDown),
+                                                    userInfo: nil, repeats: true)
+            
+            if actionLists[nowIndex].actionCellDidInvisiable == true {
+                
+                actionViewWidthAnimate(cell: cell)
+                
+            } else {
+                
+                actionAnimatorWidth.startAnimation()
+            }
+            
+        } else if restTimer?.isValid == false && restTimerjustStop == true {
+            
+            restTimerjustStop = false
+            
+            self.restTimer = Timer.scheduledTimer(timeInterval: 1,
+                                                  target: self,
+                                                  selector: #selector(self.restCountDown),
+                                                  userInfo: nil, repeats: true)
+            
+            if actionLists[nowIndex].restCellDidInvisiable == true {
+                restViewWidthAnimate(cell: cell)
+            } else {
+                
+                restAnimatorWidth.startAnimation()
+            }
+            
+        }
+    }
+    
+    func playerPaused() {
+        
+        actionLists[nowIndex].playingOrPause = .pause
+        
+        let index = IndexPath(row: nowIndex, section: 0)
+        
+        guard let cell = actionTableView.cellForRow(at: index) as? ActionCell else {return}
+        
+        if actionTimer?.isValid == true {
+            //現在是action
+            
+            actionTimerjustStop = true
+            
+            actionTimer?.invalidate()
+            
+            actionAnimatorWidth.pauseAnimation()
+            
+            cell.progressView.isHidden = false
+            
+        } else if restTimer?.isValid == true {
+            //現在是rest
+            restTimerjustStop = true
+            
+            restTimer?.invalidate()
+            
+            restAnimatorWidth.pauseAnimation()
+            
+            cell.progressView.isHidden = false
+            
+        }
+    }
+}
+
+// MARK: - YouTubePlayerDelegate
+
+extension ActionVC: YouTubePlayerDelegate {
+    
+    func playerStateChanged(_ videoPlayer: YouTubePlayerView, playerState: YouTubePlayerState) {
+        
+        if playerState == .Playing {
+            playerPlaying()
+        }
+        
+        if playerState == .Buffering {
+            
+            videoPlayer.pause()
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                videoPlayer.play()
+            }
+        }
+        
+        if playerState == .Queued {
+            
+        }
+        
+        if playerState == .Paused {
+            playerPaused()
+        }
+    }
+    
+    func playerQualityChanged(_ videoPlayer: YouTubePlayerView, playbackQuality: YouTubePlaybackQuality) {}
+    
+    func playerReady(_ videoPlayer: YouTubePlayerView) {
+        
+        activityIndicator.isHidden = true
+        let floatYoutubeTime = Float(actionLists[nowIndex].youtubeTime)
+        videoPlayer.seekTo(floatYoutubeTime, seekAhead: true)
         
     }
 }

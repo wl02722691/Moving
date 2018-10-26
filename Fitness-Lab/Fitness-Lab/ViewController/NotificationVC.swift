@@ -32,10 +32,10 @@ class NotificationVC: UIViewController {
         
     }
     
-    
     func showRemoveNotificationBtn() {
         
-        UNUserNotificationCenter.current().getNotificationSettings { (settings) in
+        UNUserNotificationCenter.current().getNotificationSettings { (_) in
+            
             DispatchQueue.main.async {
                 
                 if UIApplication.shared.scheduledLocalNotifications?.count != 0 {
@@ -45,17 +45,14 @@ class NotificationVC: UIViewController {
                     self.removeNotificationBtn.cornerRadius = 25
                     self.removeNotificationBtn.isHidden = false
                     
-                    
                 } else {
                     
                     self.removeNotificationBtn.isHidden = true
-                    
                     
                 }
             }
         }
     }
-    
     
     @IBAction func okBtn(_ sender: Any) {
         
@@ -70,13 +67,15 @@ class NotificationVC: UIViewController {
         print(minString)
         
         if notificationTextView.text == "" || notificationTextView!.text == "你想跟明天的自己說什麼呢✍？"{
+            
             scheduleNotification(hour: Int(hourString) ?? 0, minute: Int(minString) ?? 0, title: "該運動囉！")
+            
          } else {
+            
             let titleText = notificationTextView.text
             scheduleNotification(hour: Int(hourString) ?? 0,
                                  minute: Int(minString) ?? 0,
                                  title: titleText ?? "該運動囉！")
-            
             
         }
         
@@ -110,7 +109,7 @@ class NotificationVC: UIViewController {
         
         self.datePicker.datePickerMode = .time
         notificationTextView.delegate = self
-        //viewWillLayoutSubviews()
+   
     }
     
     func scheduleNotification(hour: Int, minute: Int, title: String) {
@@ -134,17 +133,20 @@ class NotificationVC: UIViewController {
         
     }
     
-    
 }
 
 extension NotificationVC: UITextViewDelegate {
     
     func textViewShouldBeginEditing(_ textView: UITextView) -> Bool {
+        
         notificationTextView.text = ""
         return true
+    
     }
     
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+        
         self.view.endEditing(true)
+    
     }
 }

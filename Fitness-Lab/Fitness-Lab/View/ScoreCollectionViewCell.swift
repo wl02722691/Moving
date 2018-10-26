@@ -14,8 +14,10 @@ class ScoreCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var titleLbl: UILabel!
     
     func updateView(scoreModel: ScoreModel) {
+        
         scoreImg.image = UIImage(named: scoreModel.scoreImg)
         titleLbl.text = scoreModel.titleLbl
+    
     }
     
     override func layoutSubviews() {

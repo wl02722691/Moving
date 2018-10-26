@@ -40,7 +40,8 @@
 		698C013B216EE67C004DC719 /* GAManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 698C013A216EE67C004DC719 /* GAManager.swift */; };
 		699660D32179B54E00A5E457 /* HealthKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 699660D22179B54E00A5E457 /* HealthKit.framework */; };
 		69A47953217F09EE00B96208 /* ViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69A47952217F09EE00B96208 /* ViewController+Extension.swift */; };
-		69A47955218072D700B96208 /* UITableVie+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69A47954218072D700B96208 /* UITableVie+extension.swift */; };
+		69A47955218072D700B96208 /* UITableVie+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69A47954218072D700B96208 /* UITableVie+Extension.swift */; };
+		69A479562181C4FD00B96208 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 69D37DF9215257EE00B8F1F9 /* Assets.xcassets */; };
 		69BB972C2170DCAA00B2BDEB /* InformationVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69BB972B2170DCAA00B2BDEB /* InformationVC.swift */; };
 		69BB97382171CF2B00B2BDEB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 69BB97372171CF2A00B2BDEB /* LaunchScreen.storyboard */; };
 		69C50BA52167184B00215B4E /* CellStatusEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69C50BA42167184B00215B4E /* CellStatusEnum.swift */; };
@@ -51,7 +52,6 @@
 		69D37DF3215257EC00B8F1F9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69D37DF2215257EC00B8F1F9 /* AppDelegate.swift */; };
 		69D37DF5215257EC00B8F1F9 /* FitnessVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69D37DF4215257EC00B8F1F9 /* FitnessVC.swift */; };
 		69D37DF8215257EC00B8F1F9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 69D37DF6215257EC00B8F1F9 /* Main.storyboard */; };
-		69D37DFA215257EE00B8F1F9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 69D37DF9215257EE00B8F1F9 /* Assets.xcassets */; };
 		69D48FC32154F76E00B92B85 /* ActionVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69D48FC22154F76E00B92B85 /* ActionVC.swift */; };
 		69ED2E6F21551EE1003490E7 /* ActionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69ED2E6E21551EE1003490E7 /* ActionCell.swift */; };
 		69ED4F08217457DF003B395A /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 69BB972D2171C03000B2BDEB /* GoogleService-Info.plist */; };
@@ -95,7 +95,7 @@
 		698C013A216EE67C004DC719 /* GAManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GAManager.swift; sourceTree = "<group>"; };
 		699660D22179B54E00A5E457 /* HealthKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HealthKit.framework; path = System/Library/Frameworks/HealthKit.framework; sourceTree = SDKROOT; };
 		69A47952217F09EE00B96208 /* ViewController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ViewController+Extension.swift"; sourceTree = "<group>"; };
-		69A47954218072D700B96208 /* UITableVie+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableVie+extension.swift"; sourceTree = "<group>"; };
+		69A47954218072D700B96208 /* UITableVie+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableVie+Extension.swift"; sourceTree = "<group>"; };
 		69BB972B2170DCAA00B2BDEB /* InformationVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InformationVC.swift; sourceTree = "<group>"; };
 		69BB972D2171C03000B2BDEB /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		69BB97372171CF2A00B2BDEB /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -153,7 +153,7 @@
 				6941AF88216364C700A0D0B8 /* UIView+Extension.swift */,
 				69C50BA42167184B00215B4E /* CellStatusEnum.swift */,
 				69A47952217F09EE00B96208 /* ViewController+Extension.swift */,
-				69A47954218072D700B96208 /* UITableVie+extension.swift */,
+				69A47954218072D700B96208 /* UITableVie+Extension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -368,10 +368,10 @@
 			files = (
 				693841F22161D4EF0017D2E9 /* SettingSwitchCell.xib in Resources */,
 				69255A3521737C57005929AB /* Wate.wav in Resources */,
+				69A479562181C4FD00B96208 /* Assets.xcassets in Resources */,
 				6917E04C215CE6EF00C0A743 /* Summary1Cell.xib in Resources */,
 				6917E052215CE8F800C0A743 /* Summary2Cell.xib in Resources */,
 				696A2B5F217576CE0075EFDE /* green_circle.json in Resources */,
-				69D37DFA215257EE00B8F1F9 /* Assets.xcassets in Resources */,
 				698C0135216E22FC004DC719 /* empty_box.json in Resources */,
 				69D2000421610B000086D660 /* SettingCell.xib in Resources */,
 				69ED4F08217457DF003B395A /* GoogleService-Info.plist in Resources */,
@@ -468,7 +468,7 @@
 				69256152215375B800531F5B /* ListVC.swift in Sources */,
 				694776D321534CC400141CB7 /* FitnessCell.swift in Sources */,
 				693841F12161D4EF0017D2E9 /* SettingSwitchCell.swift in Sources */,
-				69A47955218072D700B96208 /* UITableVie+extension.swift in Sources */,
+				69A47955218072D700B96208 /* UITableVie+Extension.swift in Sources */,
 				69A47953217F09EE00B96208 /* ViewController+Extension.swift in Sources */,
 				696265DC2154B22600C68282 /* ActionModel.swift in Sources */,
 				698C013B216EE67C004DC719 /* GAManager.swift in Sources */,
@@ -643,6 +643,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = CHZWYBA9N7;
 				INFOPLIST_FILE = "Fitness-Lab/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -718,6 +719,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = CHZWYBA9N7;
 				INFOPLIST_FILE = "Fitness-Lab/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

@@ -10,23 +10,11 @@ import UIKit
 
 class Summary2Cell: UITableViewCell {
     
-  
     @IBOutlet weak var scoreTitleLbl: UILabel!
     @IBOutlet weak var durationLbl: UILabel!
     @IBOutlet weak var videoTitle: UILabel!
     @IBOutlet weak var workoutDateLbl: UILabel!
     @IBOutlet weak var videoImg: UIImageView!
-
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
-    }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
-    }
     
     func updateView(summaryModel: SummaryModel) {
  
@@ -52,4 +40,5 @@ class Summary2Cell: UITableViewCell {
         return strDate
         
     }
+    
 }

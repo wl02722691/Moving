@@ -20,4 +20,5 @@ struct SettingSwitchModel {
         self.statusSwitch = statusSwitch
         
     }
+    
 }
