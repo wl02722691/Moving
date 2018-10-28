@@ -25,24 +25,59 @@ class ListVC: UIViewController {
     var selectTimeSender = 0
     var listTableViewFirstFlag = true
     var lastContentOffset: CGFloat = 0
-     private var isAnimating: Bool = false
-
-// MARK: - initView
+    private weak var viewController: UIViewController?
+    private weak var tabbarController: UITabBarController?
+    private weak var navController: UINavigationController?
+    private(set) var statusBarView: UIView!
+    
+    // origin value
+    private var originVCFrame: CGRect = .zero
+    private var originNavBarFrame: CGRect = .zero
+    private var originNavCFrame: CGRect = .zero
+    private var originTabCFrame: CGRect = .zero
+    private var originTabbarFrame: CGRect = .zero
+    private var originStatusBarViewFrame: CGRect = .zero
+    private var topMaxVariation: CGFloat = 0.0
+    private(set) var statusBarHeight: CGFloat = 0.0
+    private(set) var tabbarHeight: CGFloat = 0.0
+    private(set) var navbarHeight: CGFloat = 0.0
+    
+    // variation value
+    private var lastOffset = CGPoint(x: 0.0, y: 0.0)
+    private var topVariation: CGFloat = 0.0
+    private var bottomVariation: CGFloat = 0.0
+    fileprivate var isFirstScroll: Bool = true
+    private var isAnimating: Bool = false
+    
+    // ParameterslastContentOffsetlastContentOffset
+    fileprivate var delayDistance: CGFloat = 0.0
+    fileprivate var scrollHideSpeed: CGFloat = 1
+    fileprivate var topFloatingHeight: CGFloat = 0
+    //    fileprivate var isStatusBarScrollable = true
+    fileprivate var isTabBarScrollable = false
+    fileprivate var isTopFloatingSpaceScrollable = true
+    fileprivate var autoHideAndShowAfterScroll = true
+    fileprivate var autoHideAndShowAfterScrollAnimationTime: TimeInterval = 0.3
+    var nowScrollStatus:ScrollDirection = ScrollDirection.scrollDown
+    var changeRatio: CGFloat = 0.0
+    
+    // MARK: - initView
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        
         backgroundDismissBtn.isHidden = true
         filterView.isHidden = true
         listTableView.separatorStyle = UITableViewCell.SeparatorStyle.none
-    
+        
         listTableView.delegate = self
         listTableView.dataSource = self
         
         let swipeRight = UISwipeGestureRecognizer(target: self, action: #selector(self.respondToSwipeGesture))
         swipeRight.direction = UISwipeGestureRecognizer.Direction.right
         self.view.addGestureRecognizer(swipeRight)
-    
+        
         let rightBarButtonItem = UIBarButtonItem.init(image: UIImage(named: "filter_Btn"),
                                                       style: .done, target: self,
                                                       action: #selector(filterBtnWasPressed))
@@ -57,22 +92,27 @@ class ListVC: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
-    
-        GAManager.createNormalScreenEventWith("ListVC")
         
+        GAManager.createNormalScreenEventWith("ListVC")
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(true)
-        
-        guard var tabBarframe = self.tabBarController?.tabBar.frame else {return}
-        tabBarframe.origin.y = UIScreen.main.bounds.height - (self.tabBarController?.tabBar.frame.size.height)!
-        self.tabBarController?.tabBar.frame = tabBarframe
-        
-        guard var navframe = self.navigationController?.navigationBar.frame else {return}
-        navframe.origin.y = UIApplication.shared.statusBarFrame.height
-        self.navigationController?.navigationBar.frame = navframe
-        
+//
+//        guard
+//            let statusBarWindow = UIApplication.shared.value(forKey: "statusBarWindow") as? UIWindow,
+//            let statusBarView = statusBarWindow.value(forKey: "statusBar") as? UIView else { return }
+//        statusBarView.frame = self.originStatusBarViewFrame
+//
+//
+//        guard var navframe = self.navigationController?.navigationBar.frame else {return}
+//        navframe = self.originNavCFrame
+//
+//
+//        guard var tabBarframe = self.tabBarController?.tabBar.frame else {return}
+//        tabBarframe = self.originTabbarFrame
+//
+//        self.view.frame = originVCFrame
     }
     
     func initList(category: FitnessCategory) {
@@ -83,22 +123,22 @@ class ListVC: UIViewController {
     }
     
     @objc func filterBtnWasPressed() {
-
+        
         if backgroundDismissBtn.isHidden == true {
-
+            
             backgroundDismissBtn.isHidden = !false
             filterView.isHidden = false
-
+            
         } else {
-
+            
             backgroundDismissBtn.isHidden = true
             filterView.isHidden = true
-
+            
         }
         
     }
     
- // MARK: - scroll bar animate
+    // MARK: - scroll bar animate
     
     func hideBar(panGestureY: CGFloat) {
         
@@ -118,7 +158,7 @@ class ListVC: UIViewController {
         
         
         if  navframe.origin.y < 0 - (navigationController?.navigationBar.frame.height)! {
-           navframe.origin.y = 0 - (navigationController?.navigationBar.frame.height)!
+            navframe.origin.y = 0 - (navigationController?.navigationBar.frame.height)!
         }
         
         self.tabBarController?.tabBar.frame = tabBarframe
@@ -180,18 +220,14 @@ class ListVC: UIViewController {
         
     }
     
-// MARK: - Button
+    // MARK: - Button
     
     @IBAction func slectTimeBtnTapped(_ sender: UIButton) {
-        
-        print(selectTimeBtns[sender.tag])
-        print(sender.tag)
         
         for button in selectTimeBtns {
             if button.tag == sender.tag {
                 
                 selectTimeSender = sender.tag
-                print("selectTimeSender\(selectTimeSender)")
                 
                 button.borderColor = #colorLiteral(red: 0, green: 0.6980392157, blue: 0.3058823529, alpha: 1)
                 button.borderWidth = 2
@@ -256,6 +292,9 @@ extension ListVC: UITableViewDelegate {
         let index = indexPath.row
         actions = lists[index].actionModel
         selectSender = index
+
+        let topIndex = IndexPath(row: 0, section: 0)
+        listTableView.scrollToRow(at: topIndex, at: UITableView.ScrollPosition.top, animated: false)
         
         performSegue(withIdentifier: "toActionVC", sender: selectLists)
         
@@ -264,39 +303,300 @@ extension ListVC: UITableViewDelegate {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let actionVC = segue.destination as? ActionVC {
             
-            DispatchQueue.global(qos: .userInitiated).async() {
-                
                 actionVC.lists = self.lists
                 actionVC.actionLists = self.actions
                 actionVC.selectSender = self.selectSender
-                
-            }
+                            
         }
-        
+
     }
     
     public func scrollViewDidScroll(_ scrollView: UIScrollView) {
         
-//        let panGestureY = scrollView.panGestureRecognizer.translation(in: scrollView.superview).y
-//
-//        if scrollView.panGestureRecognizer.translation(in: scrollView.superview).y > 0 {
-//
-//
-//            print("panGestureY\(panGestureY)")
-//            print("contentOffrest\(scrollView.contentOffset)")
-//            print("up")
-//           // showBar(panGestureY: panGestureY)
-//
-//        } else {
-//
-//            print("panGestureY\(panGestureY)")
-//            print("contentOffrest\(scrollView.contentOffset)")
-//            print("down")
-//            //hideBar(panGestureY: panGestureY)
-//
-//        }
- //        barUpdate()
+        //        let panGestureY = scrollView.panGestureRecognizer.translation(in: scrollView.superview).y
+        //
+        //        if scrollView.panGestureRecognizer.translation(in: scrollView.superview).y > 0 {
+        //
+        //
+        //            print("panGestureY\(panGestureY)")
+        //            print("contentOffrest\(scrollView.contentOffset)")
+        //            print("up")
+        //           // showBar(panGestureY: panGestureY)
+        //
+        //        } else {
+        //
+        //            print("panGestureY\(panGestureY)")
+        //            print("contentOffrest\(scrollView.contentOffset)")
+        //            print("down")
+        //            //hideBar(panGestureY: panGestureY)
+        //
+        //        }
+        //        barUpdate()
         
+        let index = IndexPath(row: 0, section: 0)
+        guard let cell = listTableView.cellForRow(at: index) as? ListCell else {return}
+        let visibleCell = listTableView.visibleCells.count
+        
+        if visibleCell * Int(cell.frame.height) > Int(listTableView.frame.height) {
+            barUpdate()
+        }
+        
+        
+        
+        
+    }
+    
+    func isOnDelayRange(scrollView: UIScrollView) -> Bool {
+        let contentOffset = scrollView.contentOffset
+        if contentOffset.y <= delayDistance {
+            return true
+        } else {
+            return false
+        }
+    }
+    
+    //    var changeRatio: CGFloat = 0.0 {
+    //        didSet {
+    //            if changeRatio == 0.0 {
+    //                self.tabbarController?.tabBar.isUserInteractionEnabled = isTabBarScrollable ? true: false
+    //                self.state = .collapsed
+    //            } else if changeRatio == 1.0 {
+    //                self.tabbarController?.tabBar.isUserInteractionEnabled = isTabBarScrollable ? false: true
+    //                self.state = .collapsed
+    //            } else {
+    //                // avoid tap tabbar when user is scrolling (and isTabbarScrollable is true)
+    //                self.tabbarController?.tabBar.isUserInteractionEnabled = isTabBarScrollable ? false: true
+    //            }
+    //        }
+    //    }
+    
+    enum ScrollDirection: Equatable {
+        case scrollUp
+        case scrollDown
+    }
+    
+    func barUpdate() {
+        
+        if isFirstScroll {
+            storeOriginData()
+            setupInitData()
+            isFirstScroll = false
+        }
+        
+        let currentOffset = listTableView.contentOffset
+        let distance =  currentOffset.y - lastOffset.y
+        self.lastOffset = currentOffset
+        
+        let isScrollDown = distance > 0
+        if isOnDelayRange(scrollView: listTableView) && isScrollDown { return }
+        
+        if isScrollDown {
+            nowScrollStatus = ScrollDirection.scrollDown
+            
+        } else {
+            nowScrollStatus = ScrollDirection.scrollUp
+        }
+        
+        if Thread.isMainThread {
+            self.updateStatusBarWith(distance: distance)
+            
+            self.updateTabbar()
+            
+            self.updateNavBar()
+            
+            updateVCFrameWith()
+            
+        } else {
+            DispatchQueue.main.async {
+                self.updateStatusBarWith(distance: distance)
+                
+                self.updateTabbar()
+                
+                self.updateNavBar()
+                
+                self.updateVCFrameWith()
+            }
+        }
+    }
+    
+    //    var changeRatio: CGFloat = 0.0 {
+    //        didSet {
+    //            if changeRatio == 0.0 {
+    //                self.tabbarController?.tabBar.isUserInteractionEnabled = isTabBarScrollable ? true: false
+    //                self.state = .collapsed
+    //            } else if changeRatio == 1.0 {
+    //                self.tabbarController?.tabBar.isUserInteractionEnabled = isTabBarScrollable ? false: true
+    //                self.state = .collapsed
+    //            } else {
+    //                // avoid tap tabbar when user is scrolling (and isTabbarScrollable is true)
+    //                self.tabbarController?.tabBar.isUserInteractionEnabled = isTabBarScrollable ? false: true
+    //            }
+    //        }
+    //    }
+    
+    //    func updateStatusBarWith(changeRatio: CGFloat) {
+    //        topVariation = -topMaxVariation * changeRatio
+    //        self.changeRatio = changeRatio
+    //        if changeRatio != 0.0 {
+    ////            switch updateType {
+    ////            case .transform:
+    ////                statusBarView.transform = CGAffineTransform(translationX: 0, y: topVariation)
+    ////            case .changeFrame:
+    //                var updateSBFrame = originStatusBarViewFrame
+    //                updateSBFrame.origin = CGPoint(x: originStatusBarViewFrame.minX,
+    //                                               y: topVariation)
+    //                statusBarView.frame = updateSBFrame
+    //  //          }
+    //        } else {
+    ////            switch updateType {
+    ////            case .transform:
+    ////                statusBarView.transform = CGAffineTransform.identity
+    ////            case .changeFrame:
+    //                statusBarView.frame = originStatusBarViewFrame
+    //            //}
+    //        }
+    //    }
+    
+    func setupInitData() {
+        guard
+            let statusBarWindow = UIApplication.shared.value(forKey: "statusBarWindow") as? UIWindow,
+            let statusBarView = statusBarWindow.value(forKey: "statusBar") as? UIView else { return }
+        self.statusBarView = statusBarView
+        self.originStatusBarViewFrame = statusBarView.frame
+        self.statusBarHeight = statusBarView.bounds.height
+        self.topMaxVariation = statusBarHeight + (navigationController?.navigationBar.frame.height ?? 0)
+        
+    }
+    
+    func storeOriginData() {
+        
+        self.originVCFrame = self.view.frame
+        
+        if let navgation = self.navigationController {
+            self.originNavCFrame = navgation.view.frame
+            self.originNavBarFrame = navgation.navigationBar.frame
+        }
+        
+        if let tabbar = self.tabBarController {
+            self.originTabCFrame = tabbar.view.frame
+            self.originTabbarFrame = tabbar.tabBar.frame
+            self.tabbarHeight = tabbar.tabBar.frame.height
+            
+        }
+    }
+    
+    private func updateStatusBarWith(distance: CGFloat) {
+        topVariation -= distance * scrollHideSpeed
+        if nowScrollStatus == ScrollDirection.scrollDown {
+            // if statusBarNextYPosition less than -floatingViewHeight, set statusBarNewYPosition to -floatingViewHeight
+            
+            topVariation = topVariation <= -topMaxVariation ? -topMaxVariation: topVariation
+        } else {
+            // if statusBar.frame.y > 0, adjust it to zero
+            topVariation = topVariation >= 0 ? 0: topVariation
+        }
+        
+        changeRatio = topVariation / -(topMaxVariation)
+        guard
+            let statusBarWindow = UIApplication.shared.value(forKey: "statusBarWindow") as? UIWindow,
+            let statusBarView = statusBarWindow.value(forKey: "statusBar") as? UIView else { return }
+        
+        self.originStatusBarViewFrame = statusBarView.frame
+        var updateSBFrame = originStatusBarViewFrame
+        updateSBFrame.origin = CGPoint(x: originStatusBarViewFrame.minX,
+                                       y: topVariation)
+        statusBarView.frame = updateSBFrame
+        
+    }
+    
+    func updateTabbar() {
+        //        if let tabbarController = self.tabbarController {
+        bottomVariation = tabbarHeight * changeRatio
+        //            if changeRatio != 0.0 {
+        //                switch updateType {
+        //                case .transform:
+        //                    tabbarController.tabBar.transform = CGAffineTransform(translationX: 0.0,
+        //                                                                          y: bottomVariation)
+        //                case .changeFrame:
+        //MARK: - You should never attempt to manipulate the UITabBar object itself stored in this property.
+        //                    let tabbarCNewHeight = originTabCFrame.height + bottomVariation
+        //                    let tabbarFrame = CGRect(origin: CGPoint(x: originTabCFrame.minX,
+        //                                                             y: originTabCFrame.minY),
+        //                                             size: CGSize(width: originTabCFrame.width,
+        //                                                          height: tabbarCNewHeight))
+        // tabbarController.view.frame = tabbarFrame
+        
+        let updateTabbarFrame = CGRect(origin: CGPoint(x: originTabbarFrame.minX,
+                                                       y: originTabbarFrame.minY + bottomVariation),
+                                       size: originTabbarFrame.size)
+        //       tabbarController.tabBar.frame = updateTabbarFrame
+        self.tabBarController?.tabBar.frame = updateTabbarFrame
+        
+        print()
+        
+    }
+    
+    //    }
+    //
+    private func updateNavBar() {
+        if let navController = self.navigationController {
+            if changeRatio != 0.0 {
+                //   switch updateType {
+                //                case .transform:
+                //                    navController.navigationBar.transform = CGAffineTransform(translationX: 0.0,
+                //                                                                              y: topVariation)
+                //                case .changeFrame:
+                //MARK: - can't directly change navigationBar frame, so change navigationController frame
+                let updateNavBarFrame = CGRect(x: originNavBarFrame.minX,
+                                               y: originNavBarFrame.minY + topVariation ,
+                                               width: originNavBarFrame.width,
+                                               height: originNavBarFrame.height)
+                navController.navigationBar.frame = updateNavBarFrame
+                
+                //  }
+            } else {
+                //                switch updateType {
+                //                case .transform:
+                //                    navController.navigationBar.transform = CGAffineTransform.identity
+                //
+                //                case .changeFrame:
+                //MARK: - can't directly change navigationBar frame, so change navigationController frame
+                navController.navigationBar.frame = originNavBarFrame
+                navController.view.frame = originNavCFrame
+            }
+        }
+    }
+    
+    
+    func updateVCFrameWith(distance: CGFloat = 0.0) {
+        
+        if (listTableView.contentOffset.y >= listTableView.contentSize.height - listTableView.frame.size.height) {
+            
+            let updateNavBarFrame = CGRect(x: originNavBarFrame.minX,
+                                           y: -100  ,
+                                           width: originNavBarFrame.width,
+                                           height: originNavBarFrame.height)
+            self.navigationController?.navigationBar.frame = updateNavBarFrame
+            
+            let updateTabbarFrame = CGRect(origin: CGPoint(x: -originTabbarFrame.minX,
+                                                           y: -originTabbarFrame.minY ),
+                                           size: originTabbarFrame.size)
+            
+            self.tabBarController?.tabBar.frame = updateTabbarFrame
+            
+        } else {
+            
+            let vcNextHeight = originVCFrame.height + (-topVariation) + bottomVariation
+            
+            let vcNextMinY = originVCFrame.minY + topVariation
+            let vcNewFrame = CGRect(x: originVCFrame.minX,
+                                    y: vcNextMinY,
+                                    width: originVCFrame.width,
+                                    height: vcNextHeight)
+            
+            self.view.frame = vcNewFrame
+            
+        }
     }
 }
 
@@ -305,13 +605,13 @@ extension ListVC: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
         return lists.count
-    
+        
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-    
-        if let cell = listTableView.dequeueReusableCell(withIdentifier: "ListCell") as? ListCell {
         
+        if let cell = listTableView.dequeueReusableCell(withIdentifier: "ListCell") as? ListCell {
+            
             let list = lists[indexPath.row]
             cell.updateView(listModel: list)
             cell.selectionStyle = .none
