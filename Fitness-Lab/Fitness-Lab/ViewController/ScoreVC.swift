@@ -63,7 +63,7 @@ class ScoreVC: UIViewController {
     func notificationToSummaryVC() {
         
         let notificationName = Notification.Name("addNewData")
-        NotificationCenter.default.post(name: notificationName, object: nil, userInfo: ["addNewData":"addNewData"])
+        NotificationCenter.default.post(name: notificationName, object: nil, userInfo: ["addNewData": "addNewData"])
         
     }
     
@@ -146,7 +146,6 @@ class ScoreVC: UIViewController {
         
         let tabController = self.view.window?.rootViewController as? UITabBarController
         tabController?.dismiss(animated: true, completion: nil)
-        
         
         tabController?.selectedIndex = 1
         

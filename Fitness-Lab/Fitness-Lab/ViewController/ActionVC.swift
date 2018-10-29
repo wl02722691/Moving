@@ -663,8 +663,7 @@ extension ActionVC: UITableViewDataSource {
         return actionLists.count
     }
     
-    func tableView(_ tableView: UITableView,
-                   cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView,cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         if let cell = actionTableView.dequeueReusableCell(withIdentifier: "ActionCell") as? ActionCell {
             
