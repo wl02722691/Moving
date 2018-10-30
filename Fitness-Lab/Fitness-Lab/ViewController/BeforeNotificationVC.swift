@@ -60,7 +60,7 @@ class BeforeNotificationVC: UIViewController {
                                                                         if firstNotification != nil {
                                                                             
                                                                             DispatchQueue.main.async {
-                                                                                UIApplication.shared.open(URL.init(string:UIApplication.openSettingsURLString)!,
+                                                                                UIApplication.shared.open(URL.init(string: UIApplication.openSettingsURLString)!,
                                                                                                           options: [:],
                                                                                                           completionHandler: nil)
                                                                                 

@@ -19,6 +19,8 @@ class FitnessVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        5.square()
+        
         fitnessTableview.separatorStyle = UITableViewCell.SeparatorStyle.none
         fitnessTableview.delegate = self
         fitnessTableview.dataSource = self
@@ -87,6 +89,14 @@ extension FitnessVC: UITableViewDataSource {
             
             return FitnessCell()
         }
+    }
+    
+}
+
+extension Int {
+    
+    func square() -> Int {
+        return self * self
     }
     
 }
