@@ -105,7 +105,7 @@ class ScoreVC: UIViewController {
                                 start: today as Date, end: today as Date, duration: resultTime,
                                 totalEnergyBurned: energyBurned, totalDistance: distance, metadata: nil)
         
-        healthStore.save(workout) { (success, error) -> Void in
+        healthStore.save(workout) { (success, _) -> Void in
             guard success else {
                 
                 print("*** An error occurred while saving")
