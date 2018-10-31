@@ -41,7 +41,7 @@ class BeforeNotificationVC: UIViewController {
         
         UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge, .carPlay],
                                                                 completionHandler: { (granted, _ ) in
- 
+                                                                    
                                                                     if granted {
                                                                         DispatchQueue.main.async {
                                                                             

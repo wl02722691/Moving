@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct FitnessCategory {
+struct FitnessCategory: Codable {
     
     private(set) public var secondTitle: String!
     private(set) public var title: String!

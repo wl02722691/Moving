@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct SettingSwitchModel {
+struct SettingSwitchModel: Codable {
     
     private(set) public var titleLbl: String
     var statusSwitch: Bool

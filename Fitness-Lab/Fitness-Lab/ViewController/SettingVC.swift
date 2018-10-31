@@ -16,7 +16,7 @@ class SettingVC: UIViewController {
     
     var settingArray = [SettingModel(titleLbl: "", statusLbl: "")]
     var cueToneStatus: CueTone = .open
-    var settingSwitchArray = Data.instance.getSettingSwitchArray()
+    var settingSwitchArray = Database.instance.getSettingSwitchArray()
     let healthStore: HKHealthStore = HKHealthStore()
     
     @IBOutlet weak var settingTableView: UITableView!
@@ -249,8 +249,8 @@ extension SettingVC: UITableViewDataSource {
     
         switch section {
             
-        case 0: return Data.instance.getSettingArray().count
-        case 1: return Data.instance.getSettingSwitchArray().count
+        case 0: return Database.instance.getSettingArray().count
+        case 1: return Database.instance.getSettingSwitchArray().count
         default: return 0
             
         }
@@ -267,7 +267,7 @@ extension SettingVC: UITableViewDataSource {
             guard let cell = settingTableView.dequeueReusableCell(withIdentifier: "SettingCell")
                 as? SettingCell else {return UITableViewCell()}
             
-            let settingArray = Data.instance.getSettingArray()[indexPath.row]
+            let settingArray = Database.instance.getSettingArray()[indexPath.row]
             settingTableView.separatorStyle = UITableViewCell.SeparatorStyle.none
             cell.selectionStyle = .none
             cell.updateView(settingModel: settingArray)

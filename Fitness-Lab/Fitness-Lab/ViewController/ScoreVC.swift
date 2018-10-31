@@ -166,7 +166,7 @@ extension ScoreVC: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         
-        return Data.instance.getScoreArray().count
+        return Database.instance.getScoreArray().count
         
     }
     
@@ -176,7 +176,7 @@ extension ScoreVC: UICollectionViewDataSource {
         if let cell = scoreCollectionView.dequeueReusableCell(withReuseIdentifier: "scoreCell",
                                                               for: indexPath) as? ScoreCollectionViewCell {
             
-            let scoreArray = Data.instance.getScoreArray()[indexPath.row]
+            let scoreArray = Database.instance.getScoreArray()[indexPath.row]
             cell.updateView(scoreModel: scoreArray)
             if indexPath == didSelectItemAt {
                 cell.layer.borderColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
@@ -221,7 +221,7 @@ extension ScoreVC: UICollectionViewDelegate, UIScrollViewDelegate {
         
         guard let cell = self.scoreCollectionView.cellForItem(at: indexPath) as? ScoreCollectionViewCell  else {return}
         
-        for otherRow in 0...Data.instance.getScoreArray().count {
+        for otherRow in 0...Database.instance.getScoreArray().count {
             let otherIndexPath = IndexPath(row: otherRow, section: 0)
             let othrtCell = self.scoreCollectionView.cellForItem(at: otherIndexPath)
             othrtCell?.layer.borderColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 0)
@@ -230,8 +230,8 @@ extension ScoreVC: UICollectionViewDelegate, UIScrollViewDelegate {
         
         cell.layer.borderColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
         cell.layer.borderWidth = 5
-        print(Data.instance.getScoreArray()[indexPath.row].titleLbl)
+        print(Database.instance.getScoreArray()[indexPath.row].titleLbl)
         
-        scoreTitleLbl = Data.instance.getScoreArray()[indexPath.row].titleLbl
+        scoreTitleLbl = Database.instance.getScoreArray()[indexPath.row].titleLbl
     }
 }

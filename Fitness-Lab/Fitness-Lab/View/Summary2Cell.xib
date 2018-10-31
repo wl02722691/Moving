@@ -19,9 +19,13 @@
                 <rect key="frame" x="0.0" y="0.0" width="392" height="151.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <imageView userInteractionEnabled="NO" alpha="0.90000000000000002" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ETv-BO-wI1">
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.90000000000000002" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ETv-BO-wI1">
                         <rect key="frame" x="16" y="26" width="100" height="100"/>
-                        <color key="backgroundColor" red="0.1529411765" green="0.1529411765" blue="0.1529411765" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" red="0.062745098040000002" green="0.062745098040000002" blue="0.062745098040000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="100" id="8d7-gu-Obg"/>
+                            <constraint firstAttribute="width" constant="100" id="qZ4-Qo-UQe"/>
+                        </constraints>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="7:00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="irL-i7-l5k">
                         <rect key="frame" x="132" y="93.5" width="30.5" height="21"/>
@@ -58,20 +62,17 @@
                 </subviews>
                 <color key="backgroundColor" red="0.062745098039215685" green="0.062745098039215685" blue="0.062745098039215685" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                 <constraints>
-                    <constraint firstItem="uLT-AL-ZJU" firstAttribute="leading" secondItem="ETv-BO-wI1" secondAttribute="trailing" constant="16" id="1rR-to-h43"/>
-                    <constraint firstItem="ETv-BO-wI1" firstAttribute="height" secondItem="Var-Dc-aE2" secondAttribute="height" id="HdT-vd-skU"/>
+                    <constraint firstItem="ETv-BO-wI1" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="EFH-Us-ZGP"/>
+                    <constraint firstItem="ZLY-vf-7HB" firstAttribute="leading" secondItem="ETv-BO-wI1" secondAttribute="trailing" constant="16" id="HDA-gY-CBD"/>
                     <constraint firstItem="Var-Dc-aE2" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="Hdo-kq-R2m"/>
                     <constraint firstItem="uLT-AL-ZJU" firstAttribute="top" secondItem="ZLY-vf-7HB" secondAttribute="bottom" constant="5" id="KGL-Ot-MPZ"/>
                     <constraint firstItem="uLT-AL-ZJU" firstAttribute="centerY" secondItem="Var-Dc-aE2" secondAttribute="centerY" id="NQY-Ap-mPz"/>
-                    <constraint firstItem="ETv-BO-wI1" firstAttribute="centerX" secondItem="Var-Dc-aE2" secondAttribute="centerX" id="PQg-Db-FI6"/>
-                    <constraint firstItem="irL-i7-l5k" firstAttribute="leading" secondItem="ETv-BO-wI1" secondAttribute="trailing" constant="16" id="Rh6-Eh-Wkz"/>
-                    <constraint firstItem="ETv-BO-wI1" firstAttribute="centerY" secondItem="Var-Dc-aE2" secondAttribute="centerY" id="aBT-Z0-DJf"/>
                     <constraint firstItem="ah7-fc-1L7" firstAttribute="leading" secondItem="irL-i7-l5k" secondAttribute="trailing" constant="16" id="b4K-Sd-BGC"/>
                     <constraint firstItem="irL-i7-l5k" firstAttribute="top" secondItem="uLT-AL-ZJU" secondAttribute="bottom" constant="5" id="bAq-CG-82Z"/>
                     <constraint firstItem="Var-Dc-aE2" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="dYK-l2-BAH"/>
                     <constraint firstAttribute="trailing" secondItem="uLT-AL-ZJU" secondAttribute="trailing" constant="16" id="enH-b9-B3O"/>
-                    <constraint firstItem="ETv-BO-wI1" firstAttribute="width" secondItem="Var-Dc-aE2" secondAttribute="width" id="iRC-hT-3Dy"/>
                     <constraint firstItem="ZLY-vf-7HB" firstAttribute="leading" secondItem="uLT-AL-ZJU" secondAttribute="leading" id="iVB-mm-Px6"/>
+                    <constraint firstItem="ETv-BO-wI1" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="mGT-rp-84o"/>
                     <constraint firstItem="ah7-fc-1L7" firstAttribute="centerY" secondItem="irL-i7-l5k" secondAttribute="centerY" id="n1e-2K-9jO"/>
                     <constraint firstItem="irL-i7-l5k" firstAttribute="leading" secondItem="uLT-AL-ZJU" secondAttribute="leading" id="r9V-pt-SUb"/>
                 </constraints>

@@ -102,8 +102,8 @@ class ListVC: FullScreenViewController {
     
     func initList(category: FitnessCategory) {
         
-        lists = Data.instance.getList(forListTitle: category.secondTitle)
-        oldlists = Data.instance.getList(forListTitle: category.secondTitle)
+        lists = Database.instance.getList(forListTitle: category.secondTitle)
+        oldlists = Database.instance.getList(forListTitle: category.secondTitle)
         
     }
     

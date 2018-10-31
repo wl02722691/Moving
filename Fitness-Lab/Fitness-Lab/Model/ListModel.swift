@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct ListModel {
+struct ListModel: Codable {
     
     private(set) public var videoImg: String
     private(set) public var durationLbl: Int

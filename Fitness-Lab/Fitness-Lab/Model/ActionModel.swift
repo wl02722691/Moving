@@ -7,7 +7,8 @@
 //
 
 import Foundation
-struct ActionModel {
+
+struct ActionModel: Equatable, Codable {
     
     private(set) public var youtubeTime: Double
     private(set) public var stopTime: Double

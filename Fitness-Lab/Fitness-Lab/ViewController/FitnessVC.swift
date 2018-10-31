@@ -19,14 +19,12 @@ class FitnessVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        5.square()
-        
         fitnessTableview.separatorStyle = UITableViewCell.SeparatorStyle.none
         fitnessTableview.delegate = self
         fitnessTableview.dataSource = self
         
         navigationController?.navigationBar.isHidden = false
-        
+       
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -36,6 +34,7 @@ class FitnessVC: UIViewController {
         viewWillLayoutSubviews()
         
     }
+    
 }
 
 // MARK: - Table view delegate
@@ -50,7 +49,7 @@ extension FitnessVC: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        let list = Data.instance.getfitCategories()[indexPath.row]
+        let list = Database.instance.getfitCategories()[indexPath.row]
         performSegue(withIdentifier: "toListVC", sender: list)
         
     }
@@ -71,7 +70,7 @@ extension FitnessVC: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        return Data.instance.getfitCategories().count
+        return Database.instance.getfitCategories().count
         
     }
     
@@ -79,7 +78,7 @@ extension FitnessVC: UITableViewDataSource {
         
         if let cell = fitnessTableview.dequeueReusableCell(withIdentifier: "FitnessCell") as? FitnessCell {
             
-            let category = Data.instance.getfitCategories()[indexPath.row]
+            let category = Database.instance.getfitCategories()[indexPath.row]
             cell.updataViews(fitnessCategory: FitnessCellModel(category: category))
             cell.selectionStyle = .none
             cell.frame.size.height = fitnessTableview.frame.height / 4
@@ -89,14 +88,6 @@ extension FitnessVC: UITableViewDataSource {
             
             return FitnessCell()
         }
-    }
-    
-}
-
-extension Int {
-    
-    func square() -> Int {
-        return self * self
     }
     
 }

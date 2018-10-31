@@ -12,9 +12,9 @@
 //swiftlint:trailing_comma
 
 import Foundation
-class Data {
+class Database {
     
-    static let instance = Data()
+    static let instance = Database()
     
     private let fitCategories = [
         
