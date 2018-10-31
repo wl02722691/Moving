@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct SettingModel {
+struct SettingModel: Codable {
     
     private(set) public var titleLbl: String
     private(set) public var statusLbl: String

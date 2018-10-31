@@ -63,6 +63,8 @@ class FullScreenViewController: UIViewController {
         }
     }
     
+    
+    
     func barUpdate() {
         
         if isFirstScroll {
@@ -178,9 +180,6 @@ class FullScreenViewController: UIViewController {
     func updateTabbar() {
        
         bottomVariation = tabbarHeight * changeRatio
-        print("tabbarHeight\(tabbarHeight)")
-        print("changeRatio\(changeRatio)")
-        print("bottomVariation\(bottomVariation)")
         
         let updateTabbarFrame = CGRect(origin: CGPoint(x: originTabbarFrame.minX,
                                                        y: originTabbarFrame.minY + bottomVariation),

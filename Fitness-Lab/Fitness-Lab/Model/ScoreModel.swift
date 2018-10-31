@@ -7,7 +7,8 @@
 //
 
 import Foundation
-struct ScoreModel {
+
+struct ScoreModel: Codable {
     
     private(set) public var scoreImg: String
     private(set) public var titleLbl: String

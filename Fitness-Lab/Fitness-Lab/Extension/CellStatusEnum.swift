@@ -8,7 +8,7 @@
 
 import Foundation
 
-enum CellStatus {
+enum CellStatus: String, Codable {
     
     case played
     case playing
@@ -16,20 +16,20 @@ enum CellStatus {
     
 }
 
-enum ActionOrRest {
+enum ActionOrRest: String, Codable {
     
     case action
     case rest
 }
 
-enum PlayingOrPause {
+enum PlayingOrPause: String, Codable {
     
     case playing
     case pause
     
 }
 
-enum TimeRange {
+enum TimeRange: String, Codable {
 
     case max3
     case threeToNine
@@ -37,7 +37,7 @@ enum TimeRange {
 
 }
 
-enum CueTone {
+enum CueTone: String, Codable {
 
     case open
     case close
