@@ -28,7 +28,7 @@ class NotificationVC: UIViewController {
         let notificationName = Notification.Name("notificationUpdate")
         NotificationCenter.default.post(name: notificationName,
                                         object: nil,
-                                        userInfo: ["timeString": "尚未設定推播"])
+                                        userInfo: ["timeString": "尚未設定"])
         
     }
     

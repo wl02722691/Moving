@@ -10,7 +10,7 @@ import UIKit
 import RealmSwift
 import Lottie
 
-class SummaryVC: UIViewController {
+class SummaryVC: UIViewController, NotificationAuthProtocal {
     
     var allTime = 0
     var allTimeToMin = 0
@@ -22,6 +22,9 @@ class SummaryVC: UIViewController {
     @IBOutlet weak var summaryTableview: UITableView!
     @IBOutlet weak var workoutNowBtn: UIButton!
     @IBOutlet weak var workoutTomorrowBtn: UIButton!
+    
+    private let cellIdenfifierSummary1Cell = String(describing: Summary1Cell.self)
+    private let cellIdenfifierSummary2Cell = String(describing: Summary2Cell.self)
     
 // MARK: - initView
 
@@ -112,14 +115,8 @@ class SummaryVC: UIViewController {
     }
     
     @IBAction func workoutTomorrowBtn(_ sender: UIButton) {
-        
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
 
-        guard let settingVC = storyboard.instantiateViewController(
-            withIdentifier: "NotificationVC") as? NotificationVC else {return}
-        
-        self.show(settingVC, sender: nil)
-        
+        notificationVCSwitch()
     }
     
 // MARK: - realm
@@ -226,7 +223,8 @@ extension SummaryVC: UITableViewDataSource {
             
         case 0:
             
-            guard let cell = summaryTableview.dequeueReusableCell(withIdentifier: "Summary1Cell") as? Summary1Cell
+            guard let cell = summaryTableview.dequeueReusableCell(withIdentifier:
+                cellIdenfifierSummary1Cell) as? Summary1Cell
                 else {return Summary1Cell()}
             cell.planNumberLbl.text = String(summaryArray.count)
             cell.allTimeLbl.text = String(allTimeToMin)
@@ -236,7 +234,8 @@ extension SummaryVC: UITableViewDataSource {
             
         case 1:
             
-            guard let cell = summaryTableview.dequeueReusableCell(withIdentifier: "Summary2Cell") as? Summary2Cell
+            guard let cell = summaryTableview.dequeueReusableCell(withIdentifier:
+                cellIdenfifierSummary2Cell) as? Summary2Cell
                 else { return Summary2Cell()}
             
             cell.updateView(summaryModel: summaryArray.reversed()[index])

@@ -386,7 +386,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="554"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" alpha="0.69999999999999996" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Abs1" translatesAutoresizingMaskIntoConstraints="NO" id="Fzg-Zi-12d">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.69999999999999996" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Abs1" translatesAutoresizingMaskIntoConstraints="NO" id="Fzg-Zi-12d">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="211"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="Fzg-Zi-12d" secondAttribute="height" multiplier="16:9" id="eKv-5Z-GwX"/>
@@ -616,7 +616,7 @@
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="20" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="scoreCell" id="TEa-Lj-j1O" customClass="ScoreCollectionViewCell" customModule="Moving" customModuleProvider="target">
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" restorationIdentifier="scoreCollectionViewCell" reuseIdentifier="scoreCollectionViewCell" id="TEa-Lj-j1O" customClass="ScoreCollectionViewCell" customModule="Moving" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="14.5" width="200" height="400"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
@@ -785,7 +785,7 @@
         <!--Before NotificationVC-->
         <scene sceneID="PjQ-Bn-kvG">
             <objects>
-                <viewController hidesBottomBarWhenPushed="YES" id="a4W-Zt-Xtf" customClass="BeforeNotificationVC" customModule="Moving" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="BeforeNotificationVC" hidesBottomBarWhenPushed="YES" id="a4W-Zt-Xtf" customClass="BeforeNotificationVC" customModule="Moving" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="0K5-zZ-ac2">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1195,6 +1195,6 @@
         <image name="tab_stopwatch" width="21" height="21"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="fjH-cM-iME"/>
+        <segue reference="O0i-nf-hgl"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -39,6 +39,8 @@ class ActionVC: UIViewController {
     var animationView = LOTAnimationView()
     var reachability = Reachability(hostName: "www.apple.com")
     
+    private let cellIdenfifier = String(describing: ActionCell.self)
+    
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var videoView: YouTubePlayerView!
     @IBOutlet weak var connectView: UIView!
@@ -664,7 +666,7 @@ extension ActionVC: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        if let cell = actionTableView.dequeueReusableCell(withIdentifier: "ActionCell") as? ActionCell {
+        if let cell = actionTableView.dequeueReusableCell(withIdentifier: cellIdenfifier) as? ActionCell {
             
             cell.selectionStyle = .none
             
@@ -899,4 +901,5 @@ extension ActionVC: YouTubePlayerDelegate {
         videoPlayer.seekTo(floatYoutubeTime, seekAhead: true)
         
     }
+    
 }

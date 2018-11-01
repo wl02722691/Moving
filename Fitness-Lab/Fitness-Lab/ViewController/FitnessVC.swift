@@ -12,6 +12,7 @@ import Firebase
 
 class FitnessVC: UIViewController {
     
+    private let cellIdenfifier = String(describing: FitnessCell.self)
     @IBOutlet weak var fitnessTableview: UITableView!
 
 // MARK: - initView
@@ -41,9 +42,22 @@ class FitnessVC: UIViewController {
 
 extension FitnessVC: UITableViewDelegate {
     
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        //1. set the initaial state of the cell
+        cell.alpha = 0
+        let transform = CATransform3DTranslate(CATransform3DIdentity, -250, 20, 0)
+        cell.layer.transform = transform
+        
+        //2. UIView animation method to chang to the final state of the cell
+        UIView.animate(withDuration: 0.4) {
+            cell.alpha = 1.0
+            cell.layer.transform = CATransform3DIdentity
+        }
+    }
+    
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         
-        return fitnessTableview.frame.size.height / 4
+        return fitnessTableview.frame.size.height / 2
     
     }
     
@@ -76,7 +90,7 @@ extension FitnessVC: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        if let cell = fitnessTableview.dequeueReusableCell(withIdentifier: "FitnessCell") as? FitnessCell {
+        if let cell = fitnessTableview.dequeueReusableCell(withIdentifier: cellIdenfifier ) as? FitnessCell {
             
             let category = Database.instance.getfitCategories()[indexPath.row]
             cell.updataViews(fitnessCategory: FitnessCellModel(category: category))

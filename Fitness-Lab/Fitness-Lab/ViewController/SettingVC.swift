@@ -12,7 +12,10 @@ import UserNotifications
 import StoreKit
 import HealthKit
 
-class SettingVC: UIViewController {
+class SettingVC: UIViewController, NotificationAuthProtocal {
+    
+    private let cellIdenfifierSettingCell = String(describing: SettingCell.self)
+    private let cellIdenfifierSettingSwitchCell = String(describing: SettingSwitchCell.self)
     
     var settingArray = [SettingModel(titleLbl: "", statusLbl: "")]
     var cueToneStatus: CueTone = .open
@@ -180,23 +183,23 @@ class SettingVC: UIViewController {
         return true
     }
     
-    func localNotification() {
-        
-        UNUserNotificationCenter.current().getNotificationSettings { (settings) in
-            DispatchQueue.main.async {
-                
-                if settings.authorizationStatus == .authorized {
-                    
-                    self.performSegue(withIdentifier: "toNotificationVC", sender: nil)
-                    
-                } else {
-                    
-                    self.performSegue(withIdentifier: "toBeforeNotificationVC", sender: nil)
-                    
-                }
-            }
-        }
-    }
+//    func localNotification() {
+//
+//        UNUserNotificationCenter.current().getNotificationSettings { (settings) in
+//            DispatchQueue.main.async {
+//
+//                if settings.authorizationStatus == .authorized {
+//
+//                    self.performSegue(withIdentifier: "toNotificationVC", sender: nil)
+//
+//                } else {
+//
+//                    self.performSegue(withIdentifier: "toBeforeNotificationVC", sender: nil)
+//
+//                }
+//            }
+//        }
+//    }
     
 }
 
@@ -227,7 +230,7 @@ extension SettingVC: UITableViewDelegate {
             
         case [0, 3]:
             
-             localNotification()
+             notificationVCSwitch()
             
         default:
          
@@ -264,7 +267,7 @@ extension SettingVC: UITableViewDataSource {
         switch indexPath.section {
             
         case 0:
-            guard let cell = settingTableView.dequeueReusableCell(withIdentifier: "SettingCell")
+            guard let cell = settingTableView.dequeueReusableCell(withIdentifier: cellIdenfifierSettingCell)
                 as? SettingCell else {return UITableViewCell()}
             
             let settingArray = Database.instance.getSettingArray()[indexPath.row]
@@ -275,7 +278,7 @@ extension SettingVC: UITableViewDataSource {
             return cell
             
         case 1:
-            guard let cell = settingTableView.dequeueReusableCell(withIdentifier: "SettingSwitchCell")
+            guard let cell = settingTableView.dequeueReusableCell(withIdentifier: cellIdenfifierSettingSwitchCell)
                 as? SettingSwitchCell else {return UITableViewCell()}
             cell.updateView(settingModel: settingSwitchArray[indexPath.row])
             cell.selectionStyle = .none

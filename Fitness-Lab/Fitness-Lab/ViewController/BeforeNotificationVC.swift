@@ -37,46 +37,44 @@ class BeforeNotificationVC: UIViewController {
         
     }
     
-    @IBAction func okBtn(_ sender: UIButton) {
+    func checkAuth() {
         
         UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge, .carPlay],
                                                                 completionHandler: { (granted, _ ) in
-                                                                    
                                                                     if granted {
                                                                         DispatchQueue.main.async {
-                                                                            
+
                                                                             self.performSegue(withIdentifier: "backToNotificationVC",
                                                                                               sender: nil)
-                                                                            
                                                                             UserDefaults.standard.set(false,
                                                                                                       forKey: "firstNotification")
                                                                         }
-                                                                        
+
                                                                     } else {
-                                                                        
+
                                                                         let firstNotification = UserDefaults.standard.value(forKey:
                                                                             "firstNotification") as? Bool
-                                                                        
+
                                                                         if firstNotification != nil {
-                                                                            
+
                                                                             DispatchQueue.main.async {
                                                                                 UIApplication.shared.open(URL.init(string: UIApplication.openSettingsURLString)!,
                                                                                                           options: [:],
                                                                                                           completionHandler: nil)
-                                                                                
                                                                             }
-                                                                            
                                                                         } else {
-                                                                            
                                                                             DispatchQueue.main.async {
-                                                                                
+
                                                                                 self.navigationController?.popToRootViewController(animated: true)
                                                                                 UserDefaults.standard.set(false, forKey: "firstNotification")
-                                                                                
                                                                             }
-                                                                        }
-                                                                        
-                                                                    }
+                                                                        }}
         })
+    }
+    
+    @IBAction func okBtn(_ sender: UIButton) {
+        
+        checkAuth()
+        
     }
 }
