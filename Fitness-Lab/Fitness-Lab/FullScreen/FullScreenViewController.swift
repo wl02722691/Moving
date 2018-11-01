@@ -63,8 +63,6 @@ class FullScreenViewController: UIViewController {
         }
     }
     
-    
-    
     func barUpdate() {
         
         if isFirstScroll {
@@ -111,6 +109,27 @@ class FullScreenViewController: UIViewController {
 //
                self.updateVCFrameWith()
             }
+        }
+    }
+    
+    func barInit() {
+        if statusBarHeight != 0 {
+            
+            self.view.frame = originVCFrame
+            
+            guard
+                let statusBarWindow = UIApplication.shared.value(forKey: "statusBarWindow") as? UIWindow,
+                let statusBarView = statusBarWindow.value(forKey: "statusBar") as? UIView else { return }
+            
+            statusBarView.frame = originStatusBarViewFrame
+            
+            if let navController = self.navigationController {
+                navController.navigationBar.frame = originNavBarFrame
+                
+            }
+            
+            self.tabBarController?.tabBar.frame = originTabbarFrame
+            
         }
     }
     
@@ -178,14 +197,18 @@ class FullScreenViewController: UIViewController {
     }
     
     func updateTabbar() {
-       
-        bottomVariation = tabbarHeight * changeRatio
         
-        let updateTabbarFrame = CGRect(origin: CGPoint(x: originTabbarFrame.minX,
-                                                       y: originTabbarFrame.minY + bottomVariation),
-                                       size: originTabbarFrame.size)
-        
-        self.tabBarController?.tabBar.frame = updateTabbarFrame
+        if let tabController = self.tabBarController {
+            
+            bottomVariation = tabbarHeight * changeRatio
+            
+            let updateTabbarFrame = CGRect(origin: CGPoint(x: originTabbarFrame.minX,
+                                                           y: originTabbarFrame.minY + bottomVariation),
+                                           size: originTabbarFrame.size)
+            
+            tabController.tabBar.frame = updateTabbarFrame
+            
+        }
         
     }
     
@@ -236,7 +259,6 @@ class FullScreenViewController: UIViewController {
                                     height: vcNextHeight)
             
             self.view.frame = vcNewFrame
-    
             
         }
     }

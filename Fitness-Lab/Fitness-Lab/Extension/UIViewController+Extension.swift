@@ -19,7 +19,7 @@ extension UIViewController {
                 
             case UISwipeGestureRecognizer.Direction.right:
                 print("Swiped right")
-                dismiss(animated: true, completion: nil)
+                navigationController?.popViewController(animated: true)
             case UISwipeGestureRecognizer.Direction.down:
                 print("Swiped down")
             case UISwipeGestureRecognizer.Direction.left:

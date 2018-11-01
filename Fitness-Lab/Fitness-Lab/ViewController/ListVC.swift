@@ -9,7 +9,8 @@
 import UIKit
 
 class ListVC: FullScreenViewController {
-
+    
+    private let cellIdenfifier = String(describing: ListCell.self)
     @IBOutlet weak var listTableviewTop: NSLayoutConstraint!
     @IBOutlet weak var listTableviewDown: NSLayoutConstraint!
     @IBOutlet var selectTimeBtns: [UIButton]!
@@ -25,41 +26,7 @@ class ListVC: FullScreenViewController {
     var selectTimeSender = 0
     var listTableViewFirstFlag = true
     var lastContentOffset: CGFloat = 0
-    private weak var viewController: UIViewController?
-    private weak var tabbarController: UITabBarController?
-    private weak var navController: UINavigationController?
- //   private(set) var statusBarView: UIView!
-    
-    // origin value
-    private var originVCFrame: CGRect = .zero
-    private var originNavBarFrame: CGRect = .zero
-    private var originNavCFrame: CGRect = .zero
-    private var originTabCFrame: CGRect = .zero
-    private var originTabbarFrame: CGRect = .zero
-    private var originStatusBarViewFrame: CGRect = .zero
-    private var topMaxVariation: CGFloat = 0.0
-//    private(set) var statusBarHeight: CGFloat = 0.0
-//    private(set) var tabbarHeight: CGFloat = 0.0
-//    private(set) var navbarHeight: CGFloat = 0.0
-    
-    // variation value
-    private var lastOffset = CGPoint(x: 0.0, y: 0.0)
-    private var topVariation: CGFloat = 0.0
-    private var bottomVariation: CGFloat = 0.0
-    fileprivate var isFirstScroll: Bool = true
-    private var isAnimating: Bool = false
-    
-    // ParameterslastContentOffsetlastContentOffset
-    fileprivate var delayDistance: CGFloat = 0.0
-    fileprivate var scrollHideSpeed: CGFloat = 1
-    fileprivate var topFloatingHeight: CGFloat = 0
-    //    fileprivate var isStatusBarScrollable = true
-    fileprivate var isTabBarScrollable = false
-    fileprivate var isTopFloatingSpaceScrollable = true
-    fileprivate var autoHideAndShowAfterScroll = true
-    fileprivate var autoHideAndShowAfterScrollAnimationTime: TimeInterval = 0.3
-//    var nowScrollStatus: ScrollDirection = ScrollDirection.scrollDown
-//    var changeRatio: CGFloat = 0.0
+
     // MARK: - initView
     
     override func viewDidLoad() {
@@ -75,7 +42,7 @@ class ListVC: FullScreenViewController {
         let swipeRight = UISwipeGestureRecognizer(target: self, action: #selector(self.respondToSwipeGesture))
         swipeRight.direction = UISwipeGestureRecognizer.Direction.right
         self.view.addGestureRecognizer(swipeRight)
-        
+
         let rightBarButtonItem = UIBarButtonItem.init(image: UIImage(named: "filter_Btn"),
                                                       style: .done, target: self,
                                                       action: #selector(filterBtnWasPressed))
@@ -89,6 +56,11 @@ class ListVC: FullScreenViewController {
         scrollView = listTableView
     }
     
+    @objc func test () {
+        barInit()
+        dismiss(animated: true, completion: nil)
+    }
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         
@@ -97,7 +69,12 @@ class ListVC: FullScreenViewController {
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(true)
-
+        
+        if lists.count != 0 {
+            let topIndex = IndexPath(row: 0, section: 0)
+            
+            listTableView.scrollToRow(at: topIndex, at: UITableView.ScrollPosition.top, animated: false)
+        }
     }
     
     func initList(category: FitnessCategory) {
@@ -119,41 +96,6 @@ class ListVC: FullScreenViewController {
             backgroundDismissBtn.isHidden = true
             filterView.isHidden = true
             
-        }
-        
-    }
-    
-    // MARK: - scroll bar animate
-    
-    func hideBar(panGestureY: CGFloat) {
-        
-        if listTableViewFirstFlag == true {
-            self.listTableView.frame.size.height += (self.tabBarController?.tabBar.frame.size.height)!
-            listTableViewFirstFlag = false
-            
-        }
-        
-        guard var tabBarframe = self.tabBarController?.tabBar.frame else {return}
-        tabBarframe.origin.y -= panGestureY/10
-        
-        guard var navframe = self.navigationController?.navigationBar.frame else {return}
-        navframe.origin.y +=  panGestureY/10
-        
-        if  navframe.origin.y < 0 - (navigationController?.navigationBar.frame.height)! {
-            navframe.origin.y = 0 - (navigationController?.navigationBar.frame.height)!
-        }
-        
-        self.tabBarController?.tabBar.frame = tabBarframe
-        self.navigationController?.navigationBar.frame = navframe
-        
-        let frameMinY = view.frame.minY
-        let frameWidth = view.frame.width
-        let frameHeight = UIScreen.main.bounds.height + UIApplication.shared.statusBarFrame.size.height
-        
-        if frameMinY > 0 {
-            view.frame = CGRect(x: 0, y: frameMinY+panGestureY/10, width: frameWidth, height: frameHeight)
-        } else if frameMinY < 0 {
-            view.frame = CGRect(x: 0, y: 0, width: frameWidth, height: frameHeight)
         }
         
     }
@@ -225,6 +167,16 @@ class ListVC: FullScreenViewController {
 }
 
 extension ListVC: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        //1. set the initaial state of the cell
+        cell.alpha = 0
+        
+        //2. UIView animation method to chang to the final state of the cell
+        UIView.animate(withDuration: 0.4) {
+            cell.alpha = 1.0
+           
+        }
+    }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let index = indexPath.row
@@ -233,6 +185,8 @@ extension ListVC: UITableViewDelegate {
 
         let topIndex = IndexPath(row: 0, section: 0)
         listTableView.scrollToRow(at: topIndex, at: UITableView.ScrollPosition.top, animated: false)
+
+       // barInit()
         
         performSegue(withIdentifier: "toActionVC", sender: selectLists)
         
@@ -257,7 +211,6 @@ extension ListVC: UITableViewDelegate {
         if bottomOffset <= height {
            
         } else {
-       
             
             barUpdate()
             
@@ -275,7 +228,7 @@ extension ListVC: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        if let cell = listTableView.dequeueReusableCell(withIdentifier: "ListCell") as? ListCell {
+        if let cell = listTableView.dequeueReusableCell(withIdentifier: cellIdenfifier) as? ListCell {
             
             let list = lists[indexPath.row]
             cell.updateView(listModel: list)

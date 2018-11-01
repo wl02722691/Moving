@@ -173,7 +173,7 @@ extension ScoreVC: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView,
                         cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        if let cell = scoreCollectionView.dequeueReusableCell(withReuseIdentifier: "scoreCell",
+        if let cell = scoreCollectionView.dequeueReusableCell(withReuseIdentifier: "scoreCollectionViewCell",
                                                               for: indexPath) as? ScoreCollectionViewCell {
             
             let scoreArray = Database.instance.getScoreArray()[indexPath.row]

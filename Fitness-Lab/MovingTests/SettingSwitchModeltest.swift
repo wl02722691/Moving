@@ -23,5 +23,3 @@ class SettingSwitchModeltest: XCTestCase {
     }
     
 }
-
-

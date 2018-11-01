@@ -277,15 +277,13 @@ class Database {
         SettingModel(titleLbl: "關於 Moving", statusLbl: ""),
         SettingModel(titleLbl: "意見回饋", statusLbl: ""),
         SettingModel(titleLbl: "評分鼓勵", statusLbl: ""),
-        SettingModel(titleLbl: "每日運動推播", statusLbl: "20:30")
-      //  SettingModel(titleLbl: "語言設定", statusLbl: "繁體中文"),
+        SettingModel(titleLbl: "每日運動推播", statusLbl: "尚未設定")
       
         ]
     
     private let settingSwitchArray = [
         
         SettingSwitchModel(titleLbl: "提示音設定", statusSwitch: false),
-//        SettingSwitchModel(titleLbl: "iCloud 備份", statusSwitch: false),
         SettingSwitchModel(titleLbl: "Apple Health", statusSwitch: false)
         
         ]
