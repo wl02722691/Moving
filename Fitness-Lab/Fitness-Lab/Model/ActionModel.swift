@@ -15,9 +15,9 @@ struct ActionModel: Equatable, Codable {
     private(set) public var timesDescription: Double
     private(set) public var actionDescription: String
     private(set) public var restTime: Double
-    public var cellStatus: CellStatus = .willplay
-    public var actionOrRest: ActionOrRest = .action
-    public var playingOrPause: PlayingOrPause = .playing
+    public var cellStatus: CellStatus
+    public var actionOrRest: ActionOrRest
+    public var playingOrPause: PlayingOrPause
     public var firstPlayAction: Bool = true
     public var firstPlayRest: Bool = true
     public var actionCellDidInvisiable: Bool = false
@@ -28,13 +28,13 @@ struct ActionModel: Equatable, Codable {
          restTime: Double,
          timesDescription: Double,
          actionDescription: String,
-         cellStatus: CellStatus,
-         actionOrRest: ActionOrRest,
-         playingOrPause: PlayingOrPause,
-         firstPlayAction: Bool,
-         firstPlayRest: Bool,
-         actionCellDidInvisiable: Bool,
-         restCellDidInvisiable: Bool) {
+         cellStatus: CellStatus = CellStatus.willplay,
+         actionOrRest: ActionOrRest = ActionOrRest.action,
+         playingOrPause: PlayingOrPause = PlayingOrPause.playing,
+         firstPlayAction: Bool = true,
+         firstPlayRest: Bool = true,
+         actionCellDidInvisiable: Bool = false,
+         restCellDidInvisiable: Bool = false) {
         
         self.youtubeTime = youtubeTime
         self.stopTime = stopTime

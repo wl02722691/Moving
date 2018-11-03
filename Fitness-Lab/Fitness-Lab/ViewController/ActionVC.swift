@@ -69,6 +69,7 @@ class ActionVC: UIViewController {
         
         GAManager.createNormalScreenEventWith("ActionVC")
         actionTableView.reloadData()
+        cueToneSetting()
         
     }
     
@@ -220,6 +221,8 @@ class ActionVC: UIViewController {
             cueTone.play()
             sayActionDescription()
             
+        } else {
+            
         }
     }
     
@@ -317,6 +320,17 @@ class ActionVC: UIViewController {
                 DispatchQueue.main.asyncAfter(deadline: .now() + youtubestopTime) {
                     if compareIndex == self.nowIndex {
                         self.videoView.seekTo(Float(self.actionLists[self.nowIndex].youtubeTime), seekAhead: true)
+                        DispatchQueue.main.asyncAfter(deadline: .now() + youtubestopTime) {
+                            if compareIndex == self.nowIndex {
+                                self.videoView.seekTo(Float(self.actionLists[self.nowIndex].youtubeTime), seekAhead: true)
+                                DispatchQueue.main.asyncAfter(deadline: .now() + youtubestopTime) {
+                                    if compareIndex == self.nowIndex {
+                                        self.videoView.seekTo(Float(self.actionLists[self.nowIndex].youtubeTime), seekAhead: true)
+                                    }
+                                }
+                            }
+                        }
+                        
                     }
                 }
             }
@@ -535,10 +549,18 @@ class ActionVC: UIViewController {
                 DispatchQueue.main.asyncAfter(deadline: .now() + youtubestopTime) {
                     if compareIndex == self.nowIndex {
                         self.videoView.seekTo(Float(self.actionLists[self.nowIndex].youtubeTime), seekAhead: true)
-                        
+                        DispatchQueue.main.asyncAfter(deadline: .now() + youtubestopTime) {
+                            if compareIndex == self.nowIndex {
+                                self.videoView.seekTo(Float(self.actionLists[self.nowIndex].youtubeTime), seekAhead: true)
+                                DispatchQueue.main.asyncAfter(deadline: .now() + youtubestopTime) {
+                                    if compareIndex == self.nowIndex {
+                                        self.videoView.seekTo(Float(self.actionLists[self.nowIndex].youtubeTime), seekAhead: true)
+                                    }
+                                }
+                            }
+                        }
                     }
                 }
-                
             }
         }
         
@@ -751,29 +773,7 @@ extension ActionVC: UITableViewDataSource {
                                                 target: self,
                                                 selector: #selector(self.actionCountDown),
                                                 userInfo: nil, repeats: true)
-        
-        let youtubestopTime = actionLists[nowIndex].stopTime
-        
-        let compareIndex = nowIndex
-        
-        DispatchQueue.main.asyncAfter(deadline: .now() + youtubestopTime) {
-            
-            if compareIndex == self.nowIndex {
-                
-                self.videoView.seekTo(Float(self.actionLists[self.nowIndex].youtubeTime), seekAhead: true)
-                
-                DispatchQueue.main.asyncAfter(deadline: .now() + youtubestopTime) {
-                    
-                    if compareIndex == self.nowIndex {
-                        self.videoView.seekTo(Float(self.actionLists[self.nowIndex].youtubeTime), seekAhead: true)
-                        
-                    }
-                }
-                
-            } else {
-                
-            }
-        }
+        renewVideo()
         
         actionSec = Int(actionLists[nowIndex].timesDescription)
         
