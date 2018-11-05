@@ -5,7 +5,6 @@
 //  Created by 張書涵 on 2018/9/21.
 //  Copyright © 2018年 AliceChang. All rights reserved.
 //
-//swiftlint:file_length
 
 import UIKit
 import YouTubePlayer_Swift
@@ -52,10 +51,13 @@ class ActionVC: UIViewController {
     @IBOutlet weak var durationLbl: UILabel!
     @IBOutlet weak var actionTableView: UITableView!
     @IBOutlet weak var reconnectBtn: UIButton!
-// MARK: - initView
+    
+    // MARK: - initView
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        initView()
         let swipeRight = UISwipeGestureRecognizer(target: self, action: #selector(self.respondToSwipeGesture))
         swipeRight.direction = UISwipeGestureRecognizer.Direction.right
         self.view.addGestureRecognizer(swipeRight)
@@ -67,7 +69,7 @@ class ActionVC: UIViewController {
         
         GAManager.createNormalScreenEventWith("ActionVC")
         actionTableView.reloadData()
-        initView()
+        cueToneSetting()
         
     }
     
@@ -87,18 +89,22 @@ class ActionVC: UIViewController {
         self.videoView.delegate = self
         activityIndicator.isHidden = true
         initCueTone()
+        
+        actionTimer?.invalidate()
+        restTimer?.invalidate()
+        
+        startBtn.cornerRadius = 38
+        let listIndex = lists[selectSender]
+        videoTitle.text = listIndex.videoTitle
+        videoImg.image = UIImage(named: listIndex.videoImg)
+        intensityLbl.text = listIndex.intensity
+        durationLbl.text = "\(listIndex.durationLbl)min"
+        
+        let index = IndexPath(row: nowIndex, section: 0)
+        actionTableView.reloadRows(at: [index], with: UITableView.RowAnimation.automatic)
+        
         cueToneSetting()
-    }
-    
-    @objc func cueToneUpdate(noti: Notification) {
-    
-        guard let status = noti.userInfo!["cueTone"] as? Bool else { return }
-
-        if status == true {
-            cueToneStatus = .open
-        } else {
-            cueToneStatus = .close
-        }
+        
     }
     
     func initList(category: FitnessCategory) {
@@ -214,7 +220,9 @@ class ActionVC: UIViewController {
             
             cueTone.play()
             sayActionDescription()
-
+            
+        } else {
+            
         }
     }
     
@@ -322,6 +330,7 @@ class ActionVC: UIViewController {
                                 }
                             }
                         }
+                        
                     }
                 }
             }
@@ -453,7 +462,7 @@ class ActionVC: UIViewController {
             return false
             
         }
-
+        
     }
     
     func downloadDataViewFalse() {
@@ -497,7 +506,7 @@ class ActionVC: UIViewController {
         
     }
     
-// MARK: - moreThanNowIndex and lessThanNowIndex 
+    // MARK: - moreThanNowIndex and lessThanNowIndex
     
     func moreThanNowIndex(indexPath: IndexPath) {
         
@@ -617,9 +626,10 @@ class ActionVC: UIViewController {
         actionSec = Int(actionLists[nowIndex].timesDescription)
         contentHeightChang()
         actionViewWidthAnimate(cell: nil)
-        }
-
     }
+    
+}
+
 // MARK: - UITableViewDelegate
 
 extension ActionVC: UITableViewDelegate {
@@ -639,25 +649,14 @@ extension ActionVC: UITableViewDelegate {
             }
             
         } else if indexPath.row > nowIndex {
-            //按之後的按鈕
-           moreThanNowIndex(indexPath: indexPath)
-
+            
+            moreThanNowIndex(indexPath: indexPath)
             
         } else if indexPath.row < nowIndex {
             
-
             lessThanNowIndex(indexPath: indexPath)
- 
             
         }
-//
-//        if contentInsetNumber < mostContentInsetHeight && videoView.playerState == .Playing  {
-//            contentInsetNumber += eachContentInsetHeight
-//            actionTableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: CGFloat(contentInsetNumber), right: 0)
-//
-//            lessThanNowIndex(indexPath: indexPath)
-//
-//        }
     }
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
@@ -766,7 +765,8 @@ extension ActionVC: UITableViewDataSource {
             return ActionCell()
         }
     }
-// MARK: - YouTubePlayerStatusfunction
+    
+    // MARK: - YouTubePlayerStatusfunction
     func firstTimePlay() {
         
         self.actionTimer = Timer.scheduledTimer(timeInterval: 1,
@@ -794,35 +794,11 @@ extension ActionVC: UITableViewDataSource {
             
             firstTimePlay()
         }
-
-            if actionTimer?.isValid == false && actionTimerjustStop == true {
-                
-                actionTimerjustStop = false
-                
-                self.actionTimer = Timer.scheduledTimer(timeInterval: 1,
-                                                        target: self,
-                                                        selector: #selector(self.actionCountDown),
-                                                        userInfo: nil, repeats: true)
-                
-                //有進過cellForRow的
-                if actionLists[nowIndex].actionCellDidInvisiable == true {
-                    
-                    actionViewWidthAnimate(cell: cell)
-                    
-                } else {
-                    
-                    //普通的
-                    actionAnimatorWidth.startAnimation()
-                }
-                
-            } else if restTimer?.isValid == false && restTimerjustStop == true {
-                
-                restTimerjustStop = false
-                self.restTimer = Timer.scheduledTimer(timeInterval: 1,
-                                                      target: self,
-                                                      selector: #selector(self.restCountDown),
-                                                      userInfo: nil, repeats: true)
-
+        
+        if actionTimer?.isValid == false && actionTimerjustStop == true {
+            
+            actionTimerjustStop = false
+            
             self.actionTimer = Timer.scheduledTimer(timeInterval: 1,
                                                     target: self,
                                                     selector: #selector(self.actionCountDown),
@@ -892,10 +868,6 @@ extension ActionVC: UITableViewDataSource {
 // MARK: - YouTubePlayerDelegate
 
 extension ActionVC: YouTubePlayerDelegate {
-    func playerQualityChanged(_ videoPlayer: YouTubePlayerView, playbackQuality: YouTubePlaybackQuality) {
-        
-    }
-    
     
     func playerStateChanged(_ videoPlayer: YouTubePlayerView, playerState: YouTubePlayerState) {
         
@@ -911,14 +883,23 @@ extension ActionVC: YouTubePlayerDelegate {
             }
         }
         
+        if playerState == .Queued {
+            
+        }
+        
         if playerState == .Paused {
             playerPaused()
         }
     }
+    
+    func playerQualityChanged(_ videoPlayer: YouTubePlayerView, playbackQuality: YouTubePlaybackQuality) {}
+    
     func playerReady(_ videoPlayer: YouTubePlayerView) {
         
         activityIndicator.isHidden = true
         let floatYoutubeTime = Float(actionLists[nowIndex].youtubeTime)
         videoPlayer.seekTo(floatYoutubeTime, seekAhead: true)
+        
     }
+    
 }
