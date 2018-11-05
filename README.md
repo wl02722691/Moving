@@ -29,12 +29,12 @@
 ### 推播
 + 設定每日推播運動的時間，並處理拒絕推播後的重啟流程。
 
-</a><img src="https://i.imgur.com/VTp5boP.png" width="320"></a><img src="https://i.imgur.com/7gaxkNs.png" width="320">
+</a><img src="https://i.imgur.com/VTp5boP.png" width="300"></a><img src="https://i.imgur.com/7gaxkNs.png" width="300">
 
 ### Health Kit
 + 連接Health Kit，統整所有運動數據。
 
-</a><img src="https://i.imgur.com/5Tg7Odg.png" width="320"></a><img src="https://i.imgur.com/lSrysy1.png" width="320">
+</a><img src="https://i.imgur.com/5Tg7Odg.png" width="ˇ300"></a><img src="https://i.imgur.com/lSrysy1.png" width="300">
 
 
 ## Libraries
