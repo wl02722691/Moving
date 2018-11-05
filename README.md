@@ -34,7 +34,7 @@
 ### Health Kit
 + 連接Health Kit，統整所有運動數據。
 
-</a><img src="https://i.imgur.com/5Tg7Odg.png" width="ˇ300"></a><img src="https://i.imgur.com/lSrysy1.png" width="300">
+</a><img src="https://i.imgur.com/5Tg7Odg.png" width="300"></a><img src="https://i.imgur.com/lSrysy1.png" width="300">
 
 
 ## Libraries
