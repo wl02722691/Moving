@@ -4,12 +4,11 @@
 //
 //  Created by 張書涵 on 2018/9/20.
 //  Copyright © 2018年 AliceChang. All rights reserved.
-//
+
 //swiftlint:disable comma
 //swiftlint:disable line_length
 //swiftlint:trailing_comma
 //swiftlint:vertical_whitespace
-//swiftlint:trailing_comma
 
 import Foundation
 class Database {
@@ -22,33 +21,11 @@ class Database {
         FitnessCategory(title: "腹部運動", imageName: "2", secondTitle: "Abs Workout"),
         FitnessCategory(title: "手臂運動", imageName: "4", secondTitle: "Arm Workout"),
         FitnessCategory(title: "腿部運動", imageName: "5", secondTitle: "Leg Workout")
+        
     ]
     
     private let coreArray = [
         
-        ListModel(videoImg: "Arm2", durationLbl: 5, videoTitle: "瘦手臂運動無工具坐著完成", videoDescription: "周六野Zoey", intensity: "入門", videoID: "Guq_bB4otbU", timeRange: TimeRange.threeToNine, actionModel: [
-            
-            ActionModel(youtubeTime: 61, stopTime: 40, restTime: 3, timesDescription: 30, actionDescription: "參拜將軍", cellStatus: CellStatus.willplay, actionOrRest: ActionOrRest.action, playingOrPause: PlayingOrPause.playing, firstPlayAction: true, firstPlayRest: true, actionCellDidInvisiable: false, restCellDidInvisiable: false),
-            
-            ActionModel(youtubeTime: 102, stopTime: 40, restTime: 3, timesDescription: 30, actionDescription: "參拜大人", cellStatus: CellStatus.willplay, actionOrRest: ActionOrRest.action, playingOrPause: PlayingOrPause.playing, firstPlayAction: true, firstPlayRest: true, actionCellDidInvisiable: false, restCellDidInvisiable: false),
-            
-            ActionModel(youtubeTime: 142, stopTime: 40, restTime: 3, timesDescription: 30, actionDescription: "參拜時卡住了", cellStatus: CellStatus.willplay, actionOrRest: ActionOrRest.action, playingOrPause: PlayingOrPause.playing, firstPlayAction: true, firstPlayRest: true, actionCellDidInvisiable: false, restCellDidInvisiable: false),
-            
-            ActionModel(youtubeTime: 197, stopTime: 40, restTime: 3, timesDescription: 30, actionDescription: "參拜皇上", cellStatus: CellStatus.willplay, actionOrRest: ActionOrRest.action, playingOrPause: PlayingOrPause.playing, firstPlayAction: true, firstPlayRest: true, actionCellDidInvisiable: false, restCellDidInvisiable: false),
-            
-            ActionModel(youtubeTime: 246, stopTime: 40, restTime: 3, timesDescription: 30, actionDescription: "參拜大神", cellStatus: CellStatus.willplay, actionOrRest: ActionOrRest.action, playingOrPause: PlayingOrPause.playing, firstPlayAction: true, firstPlayRest: true, actionCellDidInvisiable: false, restCellDidInvisiable: false),
-            
-            ActionModel(youtubeTime: 298, stopTime: 40, restTime: 3, timesDescription: 30, actionDescription: "開窗戶", cellStatus: CellStatus.willplay, actionOrRest: ActionOrRest.action, playingOrPause: PlayingOrPause.playing, firstPlayAction: true, firstPlayRest: true, actionCellDidInvisiable: false, restCellDidInvisiable: false),
-        
-            ActionModel(youtubeTime: 343, stopTime: 40, restTime: 3, timesDescription: 30, actionDescription: "開落地窗", cellStatus: CellStatus.willplay, actionOrRest: ActionOrRest.action, playingOrPause: PlayingOrPause.playing, firstPlayAction: true, firstPlayRest: true, actionCellDidInvisiable: false, restCellDidInvisiable: false),
-            
-            ActionModel(youtubeTime: 384, stopTime: 40, restTime: 3, timesDescription: 30, actionDescription: "仙女氣功", cellStatus: CellStatus.willplay, actionOrRest: ActionOrRest.action, playingOrPause: PlayingOrPause.playing, firstPlayAction: true, firstPlayRest: true, actionCellDidInvisiable: false, restCellDidInvisiable: false),
-            
-            ActionModel(youtubeTime: 441, stopTime: 40, restTime: 3, timesDescription: 30, actionDescription: "仙女攪拌器", cellStatus: CellStatus.willplay, actionOrRest: ActionOrRest.action, playingOrPause: PlayingOrPause.playing, firstPlayAction: true, firstPlayRest: true, actionCellDidInvisiable: false, restCellDidInvisiable: false),
-            
-            ActionModel(youtubeTime: 487, stopTime: 40, restTime: 3, timesDescription: 30, actionDescription: "不知道叫什麼了", cellStatus: CellStatus.willplay, actionOrRest: ActionOrRest.action, playingOrPause: PlayingOrPause.playing, firstPlayAction: true, firstPlayRest: true, actionCellDidInvisiable: false, restCellDidInvisiable: false)
-            
-            ]),
         
         ListModel(videoImg: "Abs3", durationLbl: 3, videoTitle: "3分鐘的腹部訓練", videoDescription: "Fitting Room TW", intensity: "入門", videoID: "HjP9GUWTft4", timeRange: TimeRange.max3, actionModel: [
             
@@ -71,8 +48,8 @@ class Database {
             ActionModel(youtubeTime: 70, stopTime: 40, restTime: 3, timesDescription: 30, actionDescription: "15下動作1", cellStatus: CellStatus.willplay, actionOrRest: ActionOrRest.action, playingOrPause: PlayingOrPause.playing, firstPlayAction: true, firstPlayRest: true, actionCellDidInvisiable: false, restCellDidInvisiable: false),
             
             ActionModel(youtubeTime: 123, stopTime: 55, restTime: 3, timesDescription: 55, actionDescription: "20下動作2", cellStatus: CellStatus.willplay, actionOrRest: ActionOrRest.action, playingOrPause: PlayingOrPause.playing, firstPlayAction: true, firstPlayRest: true, actionCellDidInvisiable: false, restCellDidInvisiable: false),
-        
-            ActionModel(youtubeTime: 180, stopTime: 38, restTime: 3, timesDescription: 40, actionDescription: "15下動作3", cellStatus: CellStatus.willplay, actionOrRest: ActionOrRest.action, playingOrPause: PlayingOrPause.playing, firstPlayAction: true, firstPlayRest: true, actionCellDidInvisiable: false, restCellDidInvisiable: false),
+            
+            ActionModel(youtubeTime: 180, stopTime: 38, restTime: 3, timesDescription: 30, actionDescription: "15下動作3", cellStatus: CellStatus.willplay, actionOrRest: ActionOrRest.action, playingOrPause: PlayingOrPause.playing, firstPlayAction: true, firstPlayRest: true, actionCellDidInvisiable: false, restCellDidInvisiable: false),
             
             ActionModel(youtubeTime: 226, stopTime: 44, restTime: 3, timesDescription: 40, actionDescription: "左右各15下動作4", cellStatus: CellStatus.willplay, actionOrRest: ActionOrRest.action, playingOrPause: PlayingOrPause.playing, firstPlayAction: true, firstPlayRest: true, actionCellDidInvisiable: false, restCellDidInvisiable: false),
             
@@ -80,29 +57,6 @@ class Database {
             
             ]),
         
-        ListModel(videoImg: "Abs2", durationLbl: 2, videoTitle: "練腹肌人魚線 每天100秒", videoDescription: "洪宏星", intensity: "入門", videoID: "C2dNl_xI7TU", timeRange: TimeRange.max3, actionModel: [
-            
-            ActionModel(youtubeTime: 15, stopTime: 35, restTime: 3, timesDescription: 35, actionDescription: "動作1", cellStatus: CellStatus.willplay, actionOrRest: ActionOrRest.action, playingOrPause: PlayingOrPause.playing, firstPlayAction: true, firstPlayRest: true, actionCellDidInvisiable: false, restCellDidInvisiable: false),
-            
-            ActionModel(youtubeTime: 51, stopTime: 20, restTime: 3, timesDescription: 20, actionDescription: "動作2", cellStatus: CellStatus.willplay, actionOrRest: ActionOrRest.action, playingOrPause: PlayingOrPause.playing, firstPlayAction: true, firstPlayRest: true, actionCellDidInvisiable: false, restCellDidInvisiable: false),
-            
-            ActionModel(youtubeTime: 70, stopTime: 35, restTime: 3, timesDescription: 35, actionDescription: "動作3", cellStatus: CellStatus.willplay, actionOrRest: ActionOrRest.action, playingOrPause: PlayingOrPause.playing, firstPlayAction: true, firstPlayRest: true, actionCellDidInvisiable: false, restCellDidInvisiable: false)
-            
-            ]),
-        
-//        ListModel(videoImg: "Arm1", durationLbl: 6, videoTitle: "快速瘦手臂操收拜拜肉", videoDescription: "Coffee林芊妤", intensity: "入門", videoID: "C8oSs8qf_7g", timeRange: TimeRange.threeToNine, actionModel: [
-//            
-//            ActionModel(youtubeTime: 60, stopTime: 50, restTime: 10, timesDescription: 25, actionDescription: "40次動作1", cellStatus: CellStatus.willplay, actionOrRest: ActionOrRest.action, playingOrPause: PlayingOrPause.playing, firstPlayAction: true, firstPlayRest: true, actionCellDidInvisiable: false, restCellDidInvisiable: false),
-//            
-//            ActionModel(youtubeTime: 88, stopTime: 50, restTime: 10, timesDescription: 40, actionDescription: "40次動作2", cellStatus: CellStatus.willplay, actionOrRest: ActionOrRest.action, playingOrPause: PlayingOrPause.playing, firstPlayAction: true, firstPlayRest: true, actionCellDidInvisiable: false, restCellDidInvisiable: false),
-//            
-//            ActionModel(youtubeTime: 150, stopTime: 70, restTime: 10, timesDescription: 50, actionDescription: "40次動作3", cellStatus: CellStatus.willplay, actionOrRest: ActionOrRest.action, playingOrPause: PlayingOrPause.playing, firstPlayAction: true, firstPlayRest: true, actionCellDidInvisiable: false, restCellDidInvisiable: false),
-//            
-//            ActionModel(youtubeTime: 223, stopTime: 60, restTime: 10, timesDescription: 40, actionDescription: "20次動作4", cellStatus: CellStatus.willplay, actionOrRest: ActionOrRest.action, playingOrPause: PlayingOrPause.playing, firstPlayAction: true, firstPlayRest: true, actionCellDidInvisiable: false, restCellDidInvisiable: false),
-//            
-//            ActionModel(youtubeTime: 277, stopTime: 50, restTime: 10, timesDescription: 40, actionDescription: "20次動作5", cellStatus: CellStatus.willplay, actionOrRest: ActionOrRest.action, playingOrPause: PlayingOrPause.playing, firstPlayAction: true, firstPlayRest: true, actionCellDidInvisiable: false, restCellDidInvisiable: false)
-//            
-//            ]),
         
         ListModel(videoImg: "Leg1", durationLbl: 7, videoTitle: "特快瘦大腿1個月內見效", videoDescription: "Coffee林芊妤" , intensity: "入門", videoID: "3X1PL7ym04I", timeRange: TimeRange.threeToNine, actionModel: [
             
@@ -138,9 +92,138 @@ class Database {
             
             ActionModel(youtubeTime: 330.0, stopTime: 330.0, restTime: 30, timesDescription: 30, actionDescription: "固定單車式捲腹", cellStatus: CellStatus.willplay, actionOrRest: ActionOrRest.action, playingOrPause: PlayingOrPause.playing, firstPlayAction: true, firstPlayRest: true, actionCellDidInvisiable: false, restCellDidInvisiable: false)
             
-            ])
+            ]),
         
-        ]
+        ListModel(videoImg: "Leg4", durationLbl: 3, videoTitle: "3個動作練翹臀，女生超級需要", videoDescription: "美女健身聯盟", intensity: "入門", videoID: "P_oM739xlnM", timeRange: TimeRange.max3, actionModel: [
+            
+            ActionModel(youtubeTime: 0, stopTime: 12, restTime: 1, timesDescription: 40, actionDescription: "動作1"),
+            
+            ActionModel(youtubeTime: 13, stopTime: 17, restTime: 1, timesDescription: 40, actionDescription: "動作2"),
+            
+            ActionModel(youtubeTime: 30, stopTime: 14, restTime: 1, timesDescription: 40, actionDescription: "動作3")
+            
+            ]) ,
+        
+        ListModel(videoImg: "Arm4", durationLbl: 5, videoTitle: "5分鐘的手臂訓練", videoDescription: "Fitting Room TW", intensity: "中等", videoID: "GH2Ezj9zCUU", timeRange: TimeRange.threeToNine, actionModel: [
+            
+            ActionModel(youtubeTime: 30, stopTime: 70, restTime: 3, timesDescription: 60, actionDescription: "二頭彎舉"),
+            
+            ActionModel(youtubeTime: 89, stopTime: 70, restTime: 3, timesDescription: 60, actionDescription: "反向飛鳥"),
+            
+            ActionModel(youtubeTime: 149, stopTime: 70, restTime: 3, timesDescription: 60, actionDescription: "三頭肌動作"),
+            
+            ActionModel(youtubeTime: 208, stopTime: 70, restTime: 3, timesDescription: 60, actionDescription: "胸肌肩膀動作"),
+            
+            ActionModel(youtubeTime: 268, stopTime: 70, restTime: 3, timesDescription: 60, actionDescription: "進階三頭肌動作"),
+            
+            ]),
+        
+        ListModel(videoImg: "Leg3", durationLbl: 3, videoTitle: "3個簡單動作，快速瘦腿，女生家庭瘦腿", videoDescription: "NINA宅妹", intensity: "入門", videoID: "PLK2XEX38v0", timeRange: TimeRange.max3, actionModel: [
+            
+            ActionModel(youtubeTime: 44, stopTime: 50, restTime: 3, timesDescription: 40, actionDescription: "開合跳30次"),
+            
+            ActionModel(youtubeTime: 87, stopTime: 40, restTime: 3, timesDescription: 30, actionDescription: "相撲深蹲15次"),
+            
+            ActionModel(youtubeTime: 131, stopTime: 40, restTime: 3, timesDescription: 30, actionDescription: "側臥內抬腿左側15次"),
+            
+            ActionModel(youtubeTime: 131, stopTime: 40, restTime: 3, timesDescription: 30, actionDescription: "側臥內抬腿右側15次"),
+            
+            ]),
+        
+        //
+        //        ListModel(videoImg: "Abs4", durationLbl: 6, videoTitle: "3星期內練成 小蠻腰+人魚線+腹肌", videoDescription: "Coffee林芊妤", intensity: "入門", videoID: "4Ct5PxoFy4M", timeRange: TimeRange.threeToNine, actionModel: [
+        //
+        //            ActionModel(youtubeTime: 72, stopTime: 50, restTime: 3, timesDescription: 40, actionDescription: "20下動作1", cellStatus: CellStatus.willplay, actionOrRest: ActionOrRest.action, playingOrPause: PlayingOrPause.playing, firstPlayAction: true, firstPlayRest: true, actionCellDidInvisiable: false, restCellDidInvisiable: false),
+        //
+        //            ActionModel(youtubeTime: 121, stopTime: 60, restTime: 3, timesDescription: 50, actionDescription: "10下動作2", cellStatus: CellStatus.willplay, actionOrRest: ActionOrRest.action, playingOrPause: PlayingOrPause.playing, firstPlayAction: true, firstPlayRest: true, actionCellDidInvisiable: false, restCellDidInvisiable: false),
+        //
+        //            ActionModel(youtubeTime: 185, stopTime: 20, restTime: 3, timesDescription: 10, actionDescription: "10下動作3", cellStatus: CellStatus.willplay, actionOrRest: ActionOrRest.action, playingOrPause: PlayingOrPause.playing, firstPlayAction: true, firstPlayRest: true, actionCellDidInvisiable: false, restCellDidInvisiable: false),
+        //
+        //            ActionModel(youtubeTime: 218, stopTime: 20, restTime: 3, timesDescription: 10, actionDescription: "10下動作4", cellStatus: CellStatus.willplay, actionOrRest: ActionOrRest.action, playingOrPause: PlayingOrPause.playing, firstPlayAction: true, firstPlayRest: true, actionCellDidInvisiable: false, restCellDidInvisiable: false),
+        //
+        //            ActionModel(youtubeTime: 237, stopTime: 40, restTime: 3, timesDescription: 30, actionDescription: "動作5", cellStatus: CellStatus.willplay, actionOrRest: ActionOrRest.action, playingOrPause: PlayingOrPause.playing, firstPlayAction: true, firstPlayRest: true, actionCellDidInvisiable: false, restCellDidInvisiable: false),
+        //
+        //            ActionModel(youtubeTime: 268, stopTime: 40, restTime: 3, timesDescription: 30, actionDescription: "動作6", cellStatus: CellStatus.willplay, actionOrRest: ActionOrRest.action, playingOrPause: PlayingOrPause.playing, firstPlayAction: true, firstPlayRest: true, actionCellDidInvisiable: false, restCellDidInvisiable: false),
+        //
+        //            ActionModel(youtubeTime: 292, stopTime: 20, restTime: 3, timesDescription: 10, actionDescription: "動作7", cellStatus: CellStatus.willplay, actionOrRest: ActionOrRest.action, playingOrPause: PlayingOrPause.playing, firstPlayAction: true, firstPlayRest: true, actionCellDidInvisiable: false, restCellDidInvisiable: false),
+        //
+        //            ActionModel(youtubeTime: 312, stopTime: 40, restTime: 3, timesDescription: 30, actionDescription: "動作8"),
+        //
+        //            ActionModel(youtubeTime: 357, stopTime: 50, restTime: 3, timesDescription: 40, actionDescription: "20下動作9"),
+        //
+        //            ActionModel(youtubeTime: 402, stopTime: 70, restTime: 3, timesDescription: 60, actionDescription: "動作10"),
+        //
+        //                ActionModel(youtubeTime: 465, stopTime: 40, restTime: 3, timesDescription: 30, actionDescription: "動作11")
+        //
+        //
+        //
+        //
+        //                ]) ,
+        
+        ListModel(videoImg: "Arm3", durationLbl: 2, videoTitle: "5分鐘在家瘦手臂運動，甩掉拜拜肉顯鎖骨", videoDescription: "周六野 Zoey", intensity: "入門", videoID: "uVUceueG3Ws", timeRange: TimeRange.max3, actionModel: [
+            
+            ActionModel(youtubeTime: 90, stopTime: 18, restTime: 3, timesDescription: 60, actionDescription: "超人動作", cellStatus: CellStatus.willplay, actionOrRest: ActionOrRest.action, playingOrPause: PlayingOrPause.playing, firstPlayAction: true, firstPlayRest: true, actionCellDidInvisiable: false, restCellDidInvisiable: false),
+            
+            ActionModel(youtubeTime: 150, stopTime: 25, restTime: 3, timesDescription: 60, actionDescription: "元寶動作往前", cellStatus: CellStatus.willplay, actionOrRest: ActionOrRest.action, playingOrPause: PlayingOrPause.playing, firstPlayAction: true, firstPlayRest: true, actionCellDidInvisiable: false, restCellDidInvisiable: false),
+            
+            ActionModel(youtubeTime: 150, stopTime: 25, restTime: 3, timesDescription: 60, actionDescription: "元寶動作往後", cellStatus: CellStatus.willplay, actionOrRest: ActionOrRest.action, playingOrPause: PlayingOrPause.playing, firstPlayAction: true, firstPlayRest: true, actionCellDidInvisiable: false, restCellDidInvisiable: false),
+            
+            ActionModel(youtubeTime: 215, stopTime: 20, restTime: 3, timesDescription: 60, actionDescription: "滑水動作", cellStatus: CellStatus.willplay, actionOrRest: ActionOrRest.action, playingOrPause: PlayingOrPause.playing, firstPlayAction: true, firstPlayRest: true, actionCellDidInvisiable: false, restCellDidInvisiable: false),
+            
+            ActionModel(youtubeTime: 294, stopTime: 25, restTime: 3, timesDescription: 60, actionDescription: "拳擊動作", cellStatus: CellStatus.willplay, actionOrRest: ActionOrRest.action, playingOrPause: PlayingOrPause.playing, firstPlayAction: true, firstPlayRest: true, actionCellDidInvisiable: false, restCellDidInvisiable: false)
+            
+            ]),
+        
+        ListModel(videoImg: "Arm2", durationLbl: 5, videoTitle: "瘦手臂運動無工具坐著完成", videoDescription: "周六野Zoey", intensity: "入門", videoID: "Guq_bB4otbU", timeRange: TimeRange.threeToNine, actionModel: [
+            
+            ActionModel(youtubeTime: 61, stopTime: 40, restTime: 3, timesDescription: 30, actionDescription: "參拜將軍", cellStatus: CellStatus.willplay, actionOrRest: ActionOrRest.action, playingOrPause: PlayingOrPause.playing, firstPlayAction: true, firstPlayRest: true, actionCellDidInvisiable: false, restCellDidInvisiable: false),
+            
+            ActionModel(youtubeTime: 102, stopTime: 40, restTime: 3, timesDescription: 30, actionDescription: "參拜大人", cellStatus: CellStatus.willplay, actionOrRest: ActionOrRest.action, playingOrPause: PlayingOrPause.playing, firstPlayAction: true, firstPlayRest: true, actionCellDidInvisiable: false, restCellDidInvisiable: false),
+            
+            ActionModel(youtubeTime: 142, stopTime: 40, restTime: 3, timesDescription: 30, actionDescription: "參拜時卡住了", cellStatus: CellStatus.willplay, actionOrRest: ActionOrRest.action, playingOrPause: PlayingOrPause.playing, firstPlayAction: true, firstPlayRest: true, actionCellDidInvisiable: false, restCellDidInvisiable: false),
+            
+            ActionModel(youtubeTime: 197, stopTime: 40, restTime: 3, timesDescription: 30, actionDescription: "參拜皇上", cellStatus: CellStatus.willplay, actionOrRest: ActionOrRest.action, playingOrPause: PlayingOrPause.playing, firstPlayAction: true, firstPlayRest: true, actionCellDidInvisiable: false, restCellDidInvisiable: false),
+            
+            ActionModel(youtubeTime: 246, stopTime: 40, restTime: 3, timesDescription: 30, actionDescription: "參拜大神", cellStatus: CellStatus.willplay, actionOrRest: ActionOrRest.action, playingOrPause: PlayingOrPause.playing, firstPlayAction: true, firstPlayRest: true, actionCellDidInvisiable: false, restCellDidInvisiable: false),
+            
+            ActionModel(youtubeTime: 298, stopTime: 40, restTime: 3, timesDescription: 30, actionDescription: "開窗戶", cellStatus: CellStatus.willplay, actionOrRest: ActionOrRest.action, playingOrPause: PlayingOrPause.playing, firstPlayAction: true, firstPlayRest: true, actionCellDidInvisiable: false, restCellDidInvisiable: false),
+            
+            ActionModel(youtubeTime: 343, stopTime: 40, restTime: 3, timesDescription: 30, actionDescription: "開落地窗", cellStatus: CellStatus.willplay, actionOrRest: ActionOrRest.action, playingOrPause: PlayingOrPause.playing, firstPlayAction: true, firstPlayRest: true, actionCellDidInvisiable: false, restCellDidInvisiable: false),
+            
+            ActionModel(youtubeTime: 384, stopTime: 40, restTime: 3, timesDescription: 30, actionDescription: "仙女氣功", cellStatus: CellStatus.willplay, actionOrRest: ActionOrRest.action, playingOrPause: PlayingOrPause.playing, firstPlayAction: true, firstPlayRest: true, actionCellDidInvisiable: false, restCellDidInvisiable: false),
+            
+            ActionModel(youtubeTime: 441, stopTime: 40, restTime: 3, timesDescription: 30, actionDescription: "仙女攪拌器", cellStatus: CellStatus.willplay, actionOrRest: ActionOrRest.action, playingOrPause: PlayingOrPause.playing, firstPlayAction: true, firstPlayRest: true, actionCellDidInvisiable: false, restCellDidInvisiable: false),
+            
+            ActionModel(youtubeTime: 487, stopTime: 40, restTime: 3, timesDescription: 30, actionDescription: "不知道叫什麼了", cellStatus: CellStatus.willplay, actionOrRest: ActionOrRest.action, playingOrPause: PlayingOrPause.playing, firstPlayAction: true, firstPlayRest: true, actionCellDidInvisiable: false, restCellDidInvisiable: false)
+            
+            ]),
+        
+        ListModel(videoImg: "Abs2", durationLbl: 2, videoTitle: "練腹肌人魚線 每天100秒", videoDescription: "洪宏星", intensity: "入門", videoID: "C2dNl_xI7TU", timeRange: TimeRange.max3, actionModel: [
+            
+            ActionModel(youtubeTime: 15, stopTime: 35, restTime: 3, timesDescription: 35, actionDescription: "動作1", cellStatus: CellStatus.willplay, actionOrRest: ActionOrRest.action, playingOrPause: PlayingOrPause.playing, firstPlayAction: true, firstPlayRest: true, actionCellDidInvisiable: false, restCellDidInvisiable: false),
+            
+            ActionModel(youtubeTime: 51, stopTime: 20, restTime: 3, timesDescription: 20, actionDescription: "動作2", cellStatus: CellStatus.willplay, actionOrRest: ActionOrRest.action, playingOrPause: PlayingOrPause.playing, firstPlayAction: true, firstPlayRest: true, actionCellDidInvisiable: false, restCellDidInvisiable: false),
+            
+            ActionModel(youtubeTime: 70, stopTime: 35, restTime: 3, timesDescription: 35, actionDescription: "動作3", cellStatus: CellStatus.willplay, actionOrRest: ActionOrRest.action, playingOrPause: PlayingOrPause.playing, firstPlayAction: true, firstPlayRest: true, actionCellDidInvisiable: false, restCellDidInvisiable: false)
+            
+            ]),
+        
+        //        ListModel(videoImg: "Arm1", durationLbl: 6, videoTitle: "快速瘦手臂操收拜拜肉", videoDescription: "Coffee林芊妤", intensity: "入門", videoID: "C8oSs8qf_7g", timeRange: TimeRange.threeToNine, actionModel: [
+        //
+        //            ActionModel(youtubeTime: 60, stopTime: 50, restTime: 10, timesDescription: 25, actionDescription: "40次動作1", cellStatus: CellStatus.willplay, actionOrRest: ActionOrRest.action, playingOrPause: PlayingOrPause.playing, firstPlayAction: true, firstPlayRest: true, actionCellDidInvisiable: false, restCellDidInvisiable: false),
+        //
+        //            ActionModel(youtubeTime: 88, stopTime: 50, restTime: 10, timesDescription: 40, actionDescription: "40次動作2", cellStatus: CellStatus.willplay, actionOrRest: ActionOrRest.action, playingOrPause: PlayingOrPause.playing, firstPlayAction: true, firstPlayRest: true, actionCellDidInvisiable: false, restCellDidInvisiable: false),
+        //
+        //            ActionModel(youtubeTime: 150, stopTime: 70, restTime: 10, timesDescription: 50, actionDescription: "40次動作3", cellStatus: CellStatus.willplay, actionOrRest: ActionOrRest.action, playingOrPause: PlayingOrPause.playing, firstPlayAction: true, firstPlayRest: true, actionCellDidInvisiable: false, restCellDidInvisiable: false),
+        //
+        //            ActionModel(youtubeTime: 223, stopTime: 60, restTime: 10, timesDescription: 40, actionDescription: "20次動作4", cellStatus: CellStatus.willplay, actionOrRest: ActionOrRest.action, playingOrPause: PlayingOrPause.playing, firstPlayAction: true, firstPlayRest: true, actionCellDidInvisiable: false, restCellDidInvisiable: false),
+        //
+        //            ActionModel(youtubeTime: 277, stopTime: 50, restTime: 10, timesDescription: 40, actionDescription: "20次動作5", cellStatus: CellStatus.willplay, actionOrRest: ActionOrRest.action, playingOrPause: PlayingOrPause.playing, firstPlayAction: true, firstPlayRest: true, actionCellDidInvisiable: false, restCellDidInvisiable: false)
+        //
+        //            ]),
+        
+        
+    ]
     
     private let absArray = [
         
@@ -191,6 +274,32 @@ class Database {
     ]
     
     private let armArray = [
+        ListModel(videoImg: "Arm4", durationLbl: 5, videoTitle: "5分鐘的手臂訓練", videoDescription: "Fitting Room TW", intensity: "中等", videoID: "GH2Ezj9zCUU", timeRange: TimeRange.threeToNine, actionModel: [
+            
+            ActionModel(youtubeTime: 30, stopTime: 70, restTime: 3, timesDescription: 60, actionDescription: "二頭彎舉"),
+            
+            ActionModel(youtubeTime: 89, stopTime: 70, restTime: 3, timesDescription: 60, actionDescription: "反向飛鳥"),
+            
+            ActionModel(youtubeTime: 149, stopTime: 70, restTime: 3, timesDescription: 60, actionDescription: "三頭肌動作"),
+            
+            ActionModel(youtubeTime: 208, stopTime: 70, restTime: 3, timesDescription: 60, actionDescription: "胸肌肩膀動作"),
+            
+            ActionModel(youtubeTime: 268, stopTime: 70, restTime: 3, timesDescription: 60, actionDescription: "進階三頭肌動作"),
+            
+            ]),
+        
+        
+        ListModel(videoImg: "Arm3", durationLbl: 2, videoTitle: "5分鐘在家瘦手臂運動，甩掉拜拜肉顯鎖骨", videoDescription: "周六野 Zoey", intensity: "入門", videoID: "uVUceueG3Ws", timeRange: TimeRange.max3, actionModel: [
+            
+            ActionModel(youtubeTime: 81, stopTime: 30, restTime: 3, timesDescription: 20, actionDescription: "超人動作", cellStatus: CellStatus.willplay, actionOrRest: ActionOrRest.action, playingOrPause: PlayingOrPause.playing, firstPlayAction: true, firstPlayRest: true, actionCellDidInvisiable: false, restCellDidInvisiable: false),
+            
+            ActionModel(youtubeTime: 153, stopTime: 40, restTime: 3, timesDescription: 20, actionDescription: "元寶動作", cellStatus: CellStatus.willplay, actionOrRest: ActionOrRest.action, playingOrPause: PlayingOrPause.playing, firstPlayAction: true, firstPlayRest: true, actionCellDidInvisiable: false, restCellDidInvisiable: false),
+            
+            ActionModel(youtubeTime: 215, stopTime: 3, restTime: 30, timesDescription: 20, actionDescription: "滑水動作", cellStatus: CellStatus.willplay, actionOrRest: ActionOrRest.action, playingOrPause: PlayingOrPause.playing, firstPlayAction: true, firstPlayRest: true, actionCellDidInvisiable: false, restCellDidInvisiable: false),
+            
+            ActionModel(youtubeTime: 294, stopTime: 30, restTime: 3, timesDescription: 20, actionDescription: "拳擊動作", cellStatus: CellStatus.willplay, actionOrRest: ActionOrRest.action, playingOrPause: PlayingOrPause.playing, firstPlayAction: true, firstPlayRest: true, actionCellDidInvisiable: false, restCellDidInvisiable: false)
+            
+            ]),
         
         ListModel(videoImg: "Arm2", durationLbl: 5, videoTitle: "瘦手臂運動無工具坐著完成", videoDescription: "周六野Zoey", intensity: "入門", videoID: "Guq_bB4otbU", timeRange: TimeRange.threeToNine, actionModel: [
             
@@ -216,23 +325,36 @@ class Database {
             
             ]),
         
-//        ListModel(videoImg: "Arm1", durationLbl: 6, videoTitle: "快速瘦手臂操收拜拜肉", videoDescription: "Coffee林芊妤", intensity: "入門", videoID: "C8oSs8qf_7g", timeRange: TimeRange.threeToNine, actionModel: [
-//
-//            ActionModel(youtubeTime: 60, stopTime: 50, restTime: 10, timesDescription: 25, actionDescription: "40次動作1", cellStatus: CellStatus.willplay, actionOrRest: ActionOrRest.action, playingOrPause: PlayingOrPause.playing, firstPlayAction: true, firstPlayRest: true, actionCellDidInvisiable: false, restCellDidInvisiable: false),
-//
-//            ActionModel(youtubeTime: 88, stopTime: 50, restTime: 10, timesDescription: 40, actionDescription: "40次動作2", cellStatus: CellStatus.willplay, actionOrRest: ActionOrRest.action, playingOrPause: PlayingOrPause.playing, firstPlayAction: true, firstPlayRest: true, actionCellDidInvisiable: false, restCellDidInvisiable: false),
-//
-//            ActionModel(youtubeTime: 150, stopTime: 70, restTime: 10, timesDescription: 50, actionDescription: "40次動作3", cellStatus: CellStatus.willplay, actionOrRest: ActionOrRest.action, playingOrPause: PlayingOrPause.playing, firstPlayAction: true, firstPlayRest: true, actionCellDidInvisiable: false, restCellDidInvisiable: false),
-//
-//            ActionModel(youtubeTime: 223, stopTime: 60, restTime: 10, timesDescription: 40, actionDescription: "20次動作4", cellStatus: CellStatus.willplay, actionOrRest: ActionOrRest.action, playingOrPause: PlayingOrPause.playing, firstPlayAction: true, firstPlayRest: true, actionCellDidInvisiable: false, restCellDidInvisiable: false),
-//
-//            ActionModel(youtubeTime: 277, stopTime: 50, restTime: 10, timesDescription: 40, actionDescription: "20次動作5", cellStatus: CellStatus.willplay, actionOrRest: ActionOrRest.action, playingOrPause: PlayingOrPause.playing, firstPlayAction: true, firstPlayRest: true, actionCellDidInvisiable: false, restCellDidInvisiable: false)
-//
-//            ])
+        //        ListModel(videoImg: "Arm1", durationLbl: 6, videoTitle: "快速瘦手臂操收拜拜肉", videoDescription: "Coffee林芊妤", intensity: "入門", videoID: "C8oSs8qf_7g", timeRange: TimeRange.threeToNine, actionModel: [
+        //
+        //            ActionModel(youtubeTime: 60, stopTime: 50, restTime: 10, timesDescription: 25, actionDescription: "40次動作1", cellStatus: CellStatus.willplay, actionOrRest: ActionOrRest.action, playingOrPause: PlayingOrPause.playing, firstPlayAction: true, firstPlayRest: true, actionCellDidInvisiable: false, restCellDidInvisiable: false),
+        //
+        //            ActionModel(youtubeTime: 88, stopTime: 50, restTime: 10, timesDescription: 40, actionDescription: "40次動作2", cellStatus: CellStatus.willplay, actionOrRest: ActionOrRest.action, playingOrPause: PlayingOrPause.playing, firstPlayAction: true, firstPlayRest: true, actionCellDidInvisiable: false, restCellDidInvisiable: false),
+        //
+        //            ActionModel(youtubeTime: 150, stopTime: 70, restTime: 10, timesDescription: 50, actionDescription: "40次動作3", cellStatus: CellStatus.willplay, actionOrRest: ActionOrRest.action, playingOrPause: PlayingOrPause.playing, firstPlayAction: true, firstPlayRest: true, actionCellDidInvisiable: false, restCellDidInvisiable: false),
+        //
+        //            ActionModel(youtubeTime: 223, stopTime: 60, restTime: 10, timesDescription: 40, actionDescription: "20次動作4", cellStatus: CellStatus.willplay, actionOrRest: ActionOrRest.action, playingOrPause: PlayingOrPause.playing, firstPlayAction: true, firstPlayRest: true, actionCellDidInvisiable: false, restCellDidInvisiable: false),
+        //
+        //            ActionModel(youtubeTime: 277, stopTime: 50, restTime: 10, timesDescription: 40, actionDescription: "20次動作5", cellStatus: CellStatus.willplay, actionOrRest: ActionOrRest.action, playingOrPause: PlayingOrPause.playing, firstPlayAction: true, firstPlayRest: true, actionCellDidInvisiable: false, restCellDidInvisiable: false)
+        //
+        //            ])
         
-        ]
-
+    ]
+    
     private let legArray = [
+        
+        ListModel(videoImg: "Leg3", durationLbl: 3, videoTitle: "3個簡單動作，快速瘦腿，女生家庭瘦腿", videoDescription: "NINA宅妹", intensity: "入門", videoID: "PLK2XEX38v0", timeRange: TimeRange.max3, actionModel: [
+            
+            ActionModel(youtubeTime: 44, stopTime: 50, restTime: 3, timesDescription: 40, actionDescription: "開合跳30次"),
+            
+            ActionModel(youtubeTime: 87, stopTime: 40, restTime: 3, timesDescription: 30, actionDescription: "相撲深蹲15次"),
+            
+            ActionModel(youtubeTime: 131, stopTime: 40, restTime: 3, timesDescription: 30, actionDescription: "側臥內抬腿左側15次"),
+            
+            ActionModel(youtubeTime: 131, stopTime: 40, restTime: 3, timesDescription: 30, actionDescription: "側臥內抬腿右側15次"),
+            
+            
+            ]),
         
         ListModel(videoImg: "Leg2", durationLbl: 5, videoTitle: "5分鐘在家提臀瘦大腿運動", videoDescription: "周六野 Zoey", intensity: "入門", videoID: "P2MI5A3mo1c", timeRange: TimeRange.threeToNine, actionModel: [
             
@@ -264,7 +386,18 @@ class Database {
             
             ActionModel(youtubeTime: 438, stopTime: 60, restTime: 10, timesDescription: 50, actionDescription: "畫圈20次﻿", cellStatus: CellStatus.willplay, actionOrRest: ActionOrRest.action, playingOrPause: PlayingOrPause.playing, firstPlayAction: true, firstPlayRest: true, actionCellDidInvisiable: false, restCellDidInvisiable: false)
             
-            ])
+            ]),
+        
+        ListModel(videoImg: "Leg4", durationLbl: 3, videoTitle: "3個動作練翹臀，女生超級需要", videoDescription: "美女健身聯盟", intensity: "入門", videoID: "P_oM739xlnM", timeRange: TimeRange.max3, actionModel: [
+            
+            ActionModel(youtubeTime: 0, stopTime: 12, restTime: 1, timesDescription: 40, actionDescription: "動作1"),
+            
+            ActionModel(youtubeTime: 13, stopTime: 17, restTime: 1, timesDescription: 40, actionDescription: "動作2"),
+            
+            ActionModel(youtubeTime: 30, stopTime: 14, restTime: 1, timesDescription: 40, actionDescription: "動作3")
+            
+            ]) ,
+        
         
         ]
     
@@ -278,15 +411,15 @@ class Database {
         SettingModel(titleLbl: "意見回饋", statusLbl: ""),
         SettingModel(titleLbl: "評分鼓勵", statusLbl: ""),
         SettingModel(titleLbl: "每日運動推播", statusLbl: "尚未設定")
-      
-        ]
+        
+    ]
     
     private let settingSwitchArray = [
         
         SettingSwitchModel(titleLbl: "提示音設定", statusSwitch: false),
         SettingSwitchModel(titleLbl: "Apple Health", statusSwitch: false)
         
-        ]
+    ]
     
     private let workout = [ListModel]()
     
@@ -309,7 +442,7 @@ class Database {
             return getCore()
         }
     }
-
+    
     func getCore() -> [ListModel] {
         return coreArray
     }
@@ -337,5 +470,5 @@ class Database {
     func getSettingSwitchArray() -> [SettingSwitchModel] {
         return settingSwitchArray
     }
-
+    
 }
