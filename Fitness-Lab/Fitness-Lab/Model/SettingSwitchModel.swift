@@ -11,7 +11,7 @@ import Foundation
 struct SettingSwitchModel: Codable {
     
     private(set) public var titleLbl: String
-    var statusSwitch: Bool
+    private(set) public var statusSwitch: Bool
     
     init(titleLbl: String,
          statusSwitch: Bool) {

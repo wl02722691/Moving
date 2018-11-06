@@ -13,7 +13,7 @@ class SettingCell: UITableViewCell {
     @IBOutlet weak var titleLbl: UILabel!
     @IBOutlet weak var statusLbl: UILabel!
     
-    func updateView(settingModel: SettingModel) {
+    func updateView(settingModel: SettingCellModel) {
         
         titleLbl.text = settingModel.titleLbl
         statusLbl.text = settingModel.statusLbl

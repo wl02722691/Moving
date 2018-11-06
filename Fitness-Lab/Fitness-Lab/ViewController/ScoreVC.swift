@@ -174,10 +174,12 @@ extension ScoreVC: UICollectionViewDataSource {
                         cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         if let cell = scoreCollectionView.dequeueReusableCell(withReuseIdentifier: "scoreCollectionViewCell",
-                                                              for: indexPath) as? ScoreCollectionViewCell {
+                                                              for: indexPath) as? ScoreCell {
             
             let scoreArray = Database.instance.getScoreArray()[indexPath.row]
-            cell.updateView(scoreModel: scoreArray)
+            
+            cell.updateView(scoreModel: ScoreCellModel(scoreModel: scoreArray))
+     
             if indexPath == didSelectItemAt {
                 cell.layer.borderColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
                 cell.layer.borderWidth = 5
@@ -189,7 +191,7 @@ extension ScoreVC: UICollectionViewDataSource {
             
         } else {
             
-            return ScoreCollectionViewCell()
+            return ScoreCell()
         }
     }
 }
@@ -219,7 +221,7 @@ extension ScoreVC: UICollectionViewDelegate, UIScrollViewDelegate {
         
         didSelectItemAt = indexPath
         
-        guard let cell = self.scoreCollectionView.cellForItem(at: indexPath) as? ScoreCollectionViewCell  else {return}
+        guard let cell = self.scoreCollectionView.cellForItem(at: indexPath) as? ScoreCell  else {return}
         
         for otherRow in 0...Database.instance.getScoreArray().count {
             let otherIndexPath = IndexPath(row: otherRow, section: 0)

@@ -270,17 +270,18 @@ extension SettingVC: UITableViewDataSource {
             guard let cell = settingTableView.dequeueReusableCell(withIdentifier: cellIdenfifierSettingCell)
                 as? SettingCell else {return UITableViewCell()}
             
-            let settingArray = Database.instance.getSettingArray()[indexPath.row]
+            let settingModeleArray = Database.instance.getSettingArray()[indexPath.row]
             settingTableView.separatorStyle = UITableViewCell.SeparatorStyle.none
             cell.selectionStyle = .none
-            cell.updateView(settingModel: settingArray)
+            cell.updateView(settingModel: SettingCellModel(settingModel: settingModeleArray))
             
             return cell
             
         case 1:
             guard let cell = settingTableView.dequeueReusableCell(withIdentifier: cellIdenfifierSettingSwitchCell)
                 as? SettingSwitchCell else {return UITableViewCell()}
-            cell.updateView(settingModel: settingSwitchArray[indexPath.row])
+            let settingSwitchModelArray = settingSwitchArray[indexPath.row]
+            cell.updateView(settingModel: SettingSwitchCellModel(settingSwitchModel: settingSwitchModelArray))
             cell.selectionStyle = .none
 
             return cell

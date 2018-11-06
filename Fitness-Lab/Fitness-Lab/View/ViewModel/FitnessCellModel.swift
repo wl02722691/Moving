@@ -17,10 +17,9 @@ struct FitnessCellModel {
     init(category: FitnessCategory) {
         
         self.imageName = category.imageName
-        
         self.title = category.title
-        
         self.subTitle = category.secondTitle
+    
     }
     
 }

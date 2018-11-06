@@ -13,7 +13,7 @@ class SettingSwitchCell: UITableViewCell {
     @IBOutlet weak var titleLbl: UILabel!
     @IBOutlet weak var statusSwitch: UISwitch!
     
-    func updateView(settingModel: SettingSwitchModel) {
+    func updateView(settingModel: SettingSwitchCellModel) {
         
         titleLbl.text = settingModel.titleLbl
         statusSwitch.isOn = settingModel.statusSwitch

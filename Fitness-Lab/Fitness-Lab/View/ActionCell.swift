@@ -14,7 +14,7 @@ class ActionCell: UITableViewCell {
     @IBOutlet weak var timeDescription: UILabel!
     @IBOutlet weak var actionDescription: UILabel!
     
-    func updateView(actionModel: ActionModel) {
+    func updateView(actionModel: ActionCellModel) {
         
         progressView.isHidden = true
         timeDescription.text = String("\(Int(actionModel.timesDescription))秒")

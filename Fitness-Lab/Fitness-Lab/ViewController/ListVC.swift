@@ -231,7 +231,7 @@ extension ListVC: UITableViewDataSource {
         if let cell = listTableView.dequeueReusableCell(withIdentifier: cellIdenfifier) as? ListCell {
             
             let list = lists[indexPath.row]
-            cell.updateView(listModel: list)
+            cell.updateView(listModel: ListCellModel(listModel: list))
             cell.selectionStyle = .none
             return cell
             

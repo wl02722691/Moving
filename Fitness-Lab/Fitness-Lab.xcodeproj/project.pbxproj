@@ -9,9 +9,14 @@
 /* Begin PBXBuildFile section */
 		4B656C8ACFDE34B6EEDB5562 /* Pods_Moving.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E5BC472D30D6D78E02FEA2A /* Pods_Moving.framework */; };
 		5E9B7EA7D2BB1ECBFEEBE862 /* Pods_MovingTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 31ACFB802287F17D6AABFAAC /* Pods_MovingTests.framework */; };
+		691152D821905534002EB6AA /* ListCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 691152D721905534002EB6AA /* ListCellModel.swift */; };
+		691152DC2190579A002EB6AA /* ActionCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 691152DB2190579A002EB6AA /* ActionCellModel.swift */; };
+		691152DE21906E3A002EB6AA /* ScoreCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 691152DD21906E3A002EB6AA /* ScoreCellModel.swift */; };
+		691152E021907130002EB6AA /* SettingCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 691152DF21907130002EB6AA /* SettingCellModel.swift */; };
+		691152E32190794F002EB6AA /* SettingSwitchCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 691152E22190794F002EB6AA /* SettingSwitchCellModel.swift */; };
 		6917E037215B826C00C0A743 /* SummaryVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6917E036215B826C00C0A743 /* SummaryVC.swift */; };
 		6917E03C215BAD3A00C0A743 /* ScoreVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6917E03B215BAD3A00C0A743 /* ScoreVC.swift */; };
-		6917E03F215BB41800C0A743 /* ScoreCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6917E03E215BB41800C0A743 /* ScoreCollectionViewCell.swift */; };
+		6917E03F215BB41800C0A743 /* ScoreCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6917E03E215BB41800C0A743 /* ScoreCell.swift */; };
 		6917E041215BB55400C0A743 /* ScoreModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6917E040215BB55400C0A743 /* ScoreModel.swift */; };
 		6917E044215C837C00C0A743 /* SummaryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6917E043215C837C00C0A743 /* SummaryModel.swift */; };
 		6917E046215CE27400C0A743 /* RealmService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6917E045215CE27400C0A743 /* RealmService.swift */; };
@@ -82,9 +87,14 @@
 		250E0FCBE387D7868E3002C3 /* Pods-Moving.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Moving.release.xcconfig"; path = "Pods/Target Support Files/Pods-Moving/Pods-Moving.release.xcconfig"; sourceTree = "<group>"; };
 		31ACFB802287F17D6AABFAAC /* Pods_MovingTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MovingTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5FA0A242737D5157D7D822BF /* Pods-MovingTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MovingTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-MovingTests/Pods-MovingTests.release.xcconfig"; sourceTree = "<group>"; };
+		691152D721905534002EB6AA /* ListCellModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListCellModel.swift; sourceTree = "<group>"; };
+		691152DB2190579A002EB6AA /* ActionCellModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionCellModel.swift; sourceTree = "<group>"; };
+		691152DD21906E3A002EB6AA /* ScoreCellModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoreCellModel.swift; sourceTree = "<group>"; };
+		691152DF21907130002EB6AA /* SettingCellModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingCellModel.swift; sourceTree = "<group>"; };
+		691152E22190794F002EB6AA /* SettingSwitchCellModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingSwitchCellModel.swift; sourceTree = "<group>"; };
 		6917E036215B826C00C0A743 /* SummaryVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SummaryVC.swift; sourceTree = "<group>"; };
 		6917E03B215BAD3A00C0A743 /* ScoreVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoreVC.swift; sourceTree = "<group>"; };
-		6917E03E215BB41800C0A743 /* ScoreCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoreCollectionViewCell.swift; sourceTree = "<group>"; };
+		6917E03E215BB41800C0A743 /* ScoreCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoreCell.swift; sourceTree = "<group>"; };
 		6917E040215BB55400C0A743 /* ScoreModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoreModel.swift; sourceTree = "<group>"; };
 		6917E043215C837C00C0A743 /* SummaryModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SummaryModel.swift; sourceTree = "<group>"; };
 		6917E045215CE27400C0A743 /* RealmService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmService.swift; sourceTree = "<group>"; };
@@ -173,6 +183,19 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		691152D92190575E002EB6AA /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				6934D9A12163041B00B48802 /* FitnessCellModel.swift */,
+				691152D721905534002EB6AA /* ListCellModel.swift */,
+				691152DB2190579A002EB6AA /* ActionCellModel.swift */,
+				691152DD21906E3A002EB6AA /* ScoreCellModel.swift */,
+				691152DF21907130002EB6AA /* SettingCellModel.swift */,
+				691152E22190794F002EB6AA /* SettingSwitchCellModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
 		69255A3321737C47005929AB /* CueTone */ = {
 			isa = PBXGroup;
 			children = (
@@ -295,11 +318,11 @@
 		69D37E0721525AFA00B8F1F9 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				6934D9A12163041B00B48802 /* FitnessCellModel.swift */,
+				691152D92190575E002EB6AA /* ViewModel */,
 				694776D221534CC400141CB7 /* FitnessCell.swift */,
 				696265D721538EA200C68282 /* ListCell.swift */,
 				69ED2E6E21551EE1003490E7 /* ActionCell.swift */,
-				6917E03E215BB41800C0A743 /* ScoreCollectionViewCell.swift */,
+				6917E03E215BB41800C0A743 /* ScoreCell.swift */,
 				6917E049215CE6EF00C0A743 /* Summary1Cell.swift */,
 				6917E04A215CE6EF00C0A743 /* Summary1Cell.xib */,
 				6917E04F215CE8F800C0A743 /* Summary2Cell.swift */,
@@ -589,17 +612,20 @@
 				694776DE2153540E00141CB7 /* Database.swift in Sources */,
 				69D48FC32154F76E00B92B85 /* ActionVC.swift in Sources */,
 				69D37DF5215257EC00B8F1F9 /* FitnessVC.swift in Sources */,
+				691152D821905534002EB6AA /* ListCellModel.swift in Sources */,
 				6917E037215B826C00C0A743 /* SummaryVC.swift in Sources */,
 				69D2000021610AE40086D660 /* SettingVC.swift in Sources */,
+				691152E021907130002EB6AA /* SettingCellModel.swift in Sources */,
 				696A2B652175DBEA0075EFDE /* BeforeNotificationVC.swift in Sources */,
 				6917E044215C837C00C0A743 /* SummaryModel.swift in Sources */,
 				69D37DF3215257EC00B8F1F9 /* AppDelegate.swift in Sources */,
 				69ED2E6F21551EE1003490E7 /* ActionCell.swift in Sources */,
 				69BB972C2170DCAA00B2BDEB /* InformationVC.swift in Sources */,
+				691152E32190794F002EB6AA /* SettingSwitchCellModel.swift in Sources */,
 				6917E03C215BAD3A00C0A743 /* ScoreVC.swift in Sources */,
 				695E1F03215DFD70003B297E /* FitnessNavigationController.swift in Sources */,
 				69D2000321610B000086D660 /* SettingCell.swift in Sources */,
-				6917E03F215BB41800C0A743 /* ScoreCollectionViewCell.swift in Sources */,
+				6917E03F215BB41800C0A743 /* ScoreCell.swift in Sources */,
 				694776DC2153519B00141CB7 /* FitnessCategory.swift in Sources */,
 				6917E046215CE27400C0A743 /* RealmService.swift in Sources */,
 				6941AF89216364C700A0D0B8 /* UIView+Extension.swift in Sources */,
@@ -608,6 +634,7 @@
 				6917E041215BB55400C0A743 /* ScoreModel.swift in Sources */,
 				6917E04B215CE6EF00C0A743 /* Summary1Cell.swift in Sources */,
 				6917E051215CE8F800C0A743 /* Summary2Cell.swift in Sources */,
+				691152DE21906E3A002EB6AA /* ScoreCellModel.swift in Sources */,
 				696A2B62217580120075EFDE /* Reachability.m in Sources */,
 				69D2000721610B2F0086D660 /* SettingModel.swift in Sources */,
 				696265D821538EA200C68282 /* ListCell.swift in Sources */,
@@ -615,6 +642,7 @@
 				692561542153766700531F5B /* TabBarVC.swift in Sources */,
 				696265DA21538FD600C68282 /* ListModel.swift in Sources */,
 				69C50BA52167184B00215B4E /* CellStatusEnum.swift in Sources */,
+				691152DC2190579A002EB6AA /* ActionCellModel.swift in Sources */,
 				69EF81D7216227A200AB3591 /* NotificationVC.swift in Sources */,
 				694F2BEF218AB58C0010D787 /* SwipeGestureProtocal.swift in Sources */,
 			);

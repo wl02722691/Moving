@@ -16,7 +16,7 @@ class ListCell: UITableViewCell {
     @IBOutlet weak var durationLbl: UILabel!
     @IBOutlet weak var intensityLbl: UILabel!
     
-    func updateView(listModel: ListModel) {
+    func updateView(listModel: ListCellModel) {
         
         videoImg.image = UIImage(named: listModel.videoImg)
 

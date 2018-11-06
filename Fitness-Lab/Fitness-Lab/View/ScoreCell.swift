@@ -8,12 +8,12 @@
 
 import UIKit
 
-class ScoreCollectionViewCell: UICollectionViewCell {
+class ScoreCell: UICollectionViewCell {
     
     @IBOutlet weak var scoreImg: UIImageView!
     @IBOutlet weak var titleLbl: UILabel!
     
-    func updateView(scoreModel: ScoreModel) {
+    func updateView(scoreModel: ScoreCellModel) {
         
         scoreImg.image = UIImage(named: scoreModel.scoreImg)
         titleLbl.text = scoreModel.titleLbl

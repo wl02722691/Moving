@@ -752,8 +752,8 @@ extension ActionVC: UITableViewDataSource {
                 
                 cell.actionDescription.textColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
                 let actionlistIndexRow = actionLists[indexPath.row]
-                cell.updateView(actionModel: actionlistIndexRow)
-                
+                cell.updateView(actionModel: ActionCellModel(actionModel: actionlistIndexRow))
+    
             } else {
                 
             }
