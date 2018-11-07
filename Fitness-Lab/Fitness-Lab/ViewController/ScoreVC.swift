@@ -60,6 +60,13 @@ class ScoreVC: UIViewController {
         
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(true)
+        
+        navigationController?.navigationBar.isHidden = false
+        
+    }
+    
     func notificationToSummaryVC() {
         
         let notificationName = Notification.Name("addNewData")

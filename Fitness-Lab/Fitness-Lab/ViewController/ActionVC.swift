@@ -11,7 +11,7 @@ import YouTubePlayer_Swift
 import AVFoundation
 import Lottie
 
-class ActionVC: UIViewController {
+class ActionVC: UIViewController, SwipeGestureProtocal {
     
     var actionTimer: Timer?
     var actionSec = 0
@@ -56,34 +56,67 @@ class ActionVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        print(CLongLong(round(Date().timeIntervalSince1970*1000)), "@@@@viewDidLoad")
         initView()
-        let swipeRight = UISwipeGestureRecognizer(target: self, action: #selector(self.respondToSwipeGesture))
-        swipeRight.direction = UISwipeGestureRecognizer.Direction.right
-        self.view.addGestureRecognizer(swipeRight)
-        
+        swipeGesture()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
-        
+        print( CLongLong(round(Date().timeIntervalSince1970*1000)), "@@@viewWillAppear")
         GAManager.createNormalScreenEventWith("ActionVC")
         actionTableView.reloadData()
         cueToneSetting()
         
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(true)
+         print(CLongLong(round(Date().timeIntervalSince1970*1000)), "@@@@viewDidAppear")
+        print("@@@@", self.view.subviews.count)
+        
+    }
+    
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(true)
-        
+         print( CLongLong(round(Date().timeIntervalSince1970*1000)), "@@@@viewWillDisappear")
         videoView.pause()
         animationView.removeFromSuperview()
         
     }
     
-    func initView() {
-        super.viewWillAppear(true)
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
+        print( CLongLong(round(Date().timeIntervalSince1970*1000)), "@@@@viewWillLayoutSubviews")
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
         
+        print(CLongLong(round(Date().timeIntervalSince1970*1000)), "@@@@viewDidLayoutSubviews")
+    }
+
+    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
+        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+        print(CLongLong(round(Date().timeIntervalSince1970*1000)), "@@@@nibName")
+    }
+    
+    
+    
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        print( CLongLong(round(Date().timeIntervalSince1970*1000)), "@@@@coder")
+      
+    }
+    
+    
+    
+    
+    func initView() {
+        
+        
+        
+        print( CLongLong(round(Date().timeIntervalSince1970*1000)), "@@@initView")
         actionTableView.separatorStyle = UITableViewCell.SeparatorStyle.none
         videoView.isHidden = true
         self.videoView.delegate = self
@@ -105,7 +138,21 @@ class ActionVC: UIViewController {
         
         cueToneSetting()
         
+         print( CLongLong(round(Date().timeIntervalSince1970*1000)), "@@@initView@@@@@@@")
+        
     }
+    
+
+        
+        /// 获取当前 秒级 时间戳 - 10位
+        var timeStamp : String {
+            let timeInterval: TimeInterval = Date().timeIntervalSince1970
+            let timeStamp = Int(timeInterval)
+            return "\(timeStamp)"
+        }
+  
+       
+  
     
     func initList(category: FitnessCategory) {
         
@@ -903,3 +950,4 @@ extension ActionVC: YouTubePlayerDelegate {
     }
     
 }
+

@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ListVC: FullScreenViewController {
+class ListVC: FullScreenViewController, SwipeGestureProtocal {
     
     private let cellIdenfifier = String(describing: ListCell.self)
     @IBOutlet weak var listTableviewTop: NSLayoutConstraint!
@@ -26,7 +26,7 @@ class ListVC: FullScreenViewController {
     var selectTimeSender = 0
     var listTableViewFirstFlag = true
     var lastContentOffset: CGFloat = 0
-
+    
     // MARK: - initView
     
     override func viewDidLoad() {
@@ -39,10 +39,6 @@ class ListVC: FullScreenViewController {
         listTableView.delegate = self
         listTableView.dataSource = self
         
-        let swipeRight = UISwipeGestureRecognizer(target: self, action: #selector(self.respondToSwipeGesture))
-        swipeRight.direction = UISwipeGestureRecognizer.Direction.right
-        self.view.addGestureRecognizer(swipeRight)
-
         let rightBarButtonItem = UIBarButtonItem.init(image: UIImage(named: "filter_Btn"),
                                                       style: .done, target: self,
                                                       action: #selector(filterBtnWasPressed))
@@ -54,6 +50,7 @@ class ListVC: FullScreenViewController {
         okBtn.cornerRadius = 20
         
         scrollView = listTableView
+        swipeGesture()
     }
     
     @objc func test () {
@@ -174,7 +171,7 @@ extension ListVC: UITableViewDelegate {
         //2. UIView animation method to chang to the final state of the cell
         UIView.animate(withDuration: 0.4) {
             cell.alpha = 1.0
-           
+            
         }
     }
     
@@ -182,11 +179,15 @@ extension ListVC: UITableViewDelegate {
         let index = indexPath.row
         actions = lists[index].actionModel
         selectSender = index
-
+        
         let topIndex = IndexPath(row: 0, section: 0)
         listTableView.scrollToRow(at: topIndex, at: UITableView.ScrollPosition.top, animated: false)
-
-       // barInit()
+        
+        // barInit()
+        
+      //  performSegue(withIdentifier: "toEmpty", sender: selectLists)
+        
+         print( CLongLong(round(Date().timeIntervalSince1970*1000)), "@@@@@didSelectRowAt")
         
         performSegue(withIdentifier: "toActionVC", sender: selectLists)
         
@@ -195,12 +196,13 @@ extension ListVC: UITableViewDelegate {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let actionVC = segue.destination as? ActionVC {
             
-                actionVC.lists = self.lists
-                actionVC.actionLists = self.actions
-                actionVC.selectSender = self.selectSender
-            
+            //print("aliceprepare", CLongLong(round(Date().timeIntervalSince1970*1000)))
+            actionVC.lists = self.lists
+            actionVC.actionLists = self.actions
+            actionVC.selectSender = self.selectSender
+            print( CLongLong(round(Date().timeIntervalSince1970*1000)), "@@@@@prepare")
         }
-
+        
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
@@ -209,7 +211,7 @@ extension ListVC: UITableViewDelegate {
         let contentOffsetY = scrollView.contentOffset.y
         let bottomOffset = scrollView.contentSize.height - contentOffsetY
         if bottomOffset <= height {
-           
+            
         } else {
             
             barUpdate()
@@ -243,3 +245,4 @@ extension ListVC: UITableViewDataSource {
     }
     
 }
+

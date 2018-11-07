@@ -35,7 +35,6 @@ class FitnessVC: UIViewController {
         viewWillLayoutSubviews()
         
     }
-    
 }
 
 // MARK: - Table view delegate
@@ -78,6 +77,7 @@ extension FitnessVC: UITableViewDelegate {
     }
     
 }
+
 // MARK: - Table view data source
 
 extension FitnessVC: UITableViewDataSource {
@@ -95,7 +95,7 @@ extension FitnessVC: UITableViewDataSource {
             let category = Database.instance.getfitCategories()[indexPath.row]
             cell.updataViews(fitnessCategory: FitnessCellModel(category: category))
             cell.selectionStyle = .none
-            cell.frame.size.height = fitnessTableview.frame.height / 4
+        
             return cell
             
         } else {
