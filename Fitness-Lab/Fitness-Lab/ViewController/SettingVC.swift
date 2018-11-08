@@ -11,6 +11,7 @@ import MessageUI
 import UserNotifications
 import StoreKit
 import HealthKit
+import GoogleMobileAds
 
 class SettingVC: UIViewController, NotificationAuthProtocol {
     
@@ -22,6 +23,7 @@ class SettingVC: UIViewController, NotificationAuthProtocol {
     var settingSwitchArray = Database.instance.getSettingSwitchArray()
     let healthStore: HKHealthStore = HKHealthStore()
     
+    @IBOutlet weak var bannerView: GADBannerView!
     @IBOutlet weak var settingTableView: UITableView!
 
 // MARK: - initView
@@ -40,6 +42,7 @@ class SettingVC: UIViewController, NotificationAuthProtocol {
         let editUpdatednotificationName = Notification.Name("notificationUpdate")
         NotificationCenter.default.addObserver(self, selector: #selector(notificationUpdate(noti:)),
                                                name: editUpdatednotificationName, object: nil)
+        addAd()
 
     }
     
@@ -181,6 +184,13 @@ class SettingVC: UIViewController, NotificationAuthProtocol {
         }
         
         return true
+    }
+    
+    func addAd() {
+        let request = GADRequest()
+        bannerView.adUnitID = "ca-app-pub-5095539141044986/3968683997"
+        bannerView.rootViewController = self
+        bannerView.load(request)
     }
     
 }

@@ -13,6 +13,7 @@ import IQKeyboardManagerSwift
 import Firebase
 import Fabric
 import Crashlytics
+import GoogleMobileAds
 
 //swiftlint:disable identifier_name
 @UIApplicationMain
@@ -21,8 +22,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
     static let trackId = "UA-127437353-1"
 
+
+    
     func application(_ application: UIApplication,
                      didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+        GADMobileAds.configure(withApplicationID: "ca-app-pub-5095539141044986~3361630590")
         
         UIApplication.shared.statusBarStyle = .lightContent
         

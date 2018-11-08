@@ -22,6 +22,7 @@ PODS:
     - FirebaseCore (~> 5.1)
     - GoogleUtilities/Environment (~> 5.3)
     - GoogleUtilities/UserDefaults (~> 5.3)
+  - Google-Mobile-Ads-SDK (7.34.0)
   - GoogleAnalytics (3.17.0)
   - GoogleAppMeasurement (5.2.0):
     - GoogleUtilities/AppDelegateSwizzler (~> 5.2)
@@ -66,6 +67,7 @@ DEPENDENCIES:
   - Crashlytics
   - Fabric
   - Firebase/Core
+  - Google-Mobile-Ads-SDK
   - GoogleAnalytics
   - IQKeyboardManagerSwift
   - lottie-ios
@@ -81,6 +83,7 @@ SPEC REPOS:
     - FirebaseAnalytics
     - FirebaseCore
     - FirebaseInstanceID
+    - Google-Mobile-Ads-SDK
     - GoogleAnalytics
     - GoogleAppMeasurement
     - GoogleUtilities
@@ -99,6 +102,7 @@ SPEC CHECKSUMS:
   FirebaseAnalytics: 831f1f127f4a75698e9875a87bf7e2668730d953
   FirebaseCore: c6079de64c1a87000e52e9b408dddcadc901177f
   FirebaseInstanceID: 78ba376fcd5b94c001f9999b2cbd3d1f1e56e78d
+  Google-Mobile-Ads-SDK: a1cbce28c0c78ca1fb0b6c4f213485f55527c99f
   GoogleAnalytics: f42cc53a87a51fe94334821868d9c8481ff47a7b
   GoogleAppMeasurement: 2b3a023a61239c8d002e6e4fcf4abce8eddce0e0
   GoogleUtilities: 82f04aeff8426309dbdbc75f6c8accd1e584a5da
@@ -110,6 +114,6 @@ SPEC CHECKSUMS:
   SwiftLint: 3207c1faa2240bf8973b191820a116113cd11073
   YouTubePlayer-Swift: ae82f4bcb504162a872b852596a9dc1fa3828c34
 
-PODFILE CHECKSUM: 79256d665a28520db5bf6f343e675e0bae938d54
+PODFILE CHECKSUM: 915b3b144b7ad64b37f54d7467f43a5323c13f03
 
 COCOAPODS: 1.5.3
