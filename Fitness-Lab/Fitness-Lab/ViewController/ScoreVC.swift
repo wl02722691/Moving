@@ -79,10 +79,11 @@ class ScoreVC: UIViewController {
     func realmWrite() {
         
         for actionlistsAllIndex in 0...actionLists.count-1 {
+            
             time += actionLists[actionlistsAllIndex].timesDescription
-            print("time:\(time)")
             resttime += (actionLists[actionlistsAllIndex].restTime)
             resultTime = time + resttime
+            
         }
         
         let summaryModel = SummaryModel()
@@ -113,9 +114,8 @@ class ScoreVC: UIViewController {
                                 totalEnergyBurned: energyBurned, totalDistance: distance, metadata: nil)
         
         healthStore.save(workout) { (success, _) -> Void in
+            
             guard success else {
-                
-                print("*** An error occurred while saving")
                 
                 return
                 

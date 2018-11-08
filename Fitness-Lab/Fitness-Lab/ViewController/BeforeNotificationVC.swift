@@ -11,9 +11,6 @@ import UserNotifications
 
 class BeforeNotificationVC: UIViewController {
     
-    @IBAction func closeBtn(_ sender: UIButton) {
-        navigationController?.popToRootViewController(animated: true)
-    }
     @IBOutlet weak var okBtn: UIButton!
     
     override func viewDidLoad() {
@@ -75,6 +72,12 @@ class BeforeNotificationVC: UIViewController {
     @IBAction func okBtn(_ sender: UIButton) {
         
         checkAuth()
+        
+    }
+    
+    @IBAction func closeBtn(_ sender: UIButton) {
+        
+        navigationController?.popToRootViewController(animated: true)
         
     }
 }

@@ -9,22 +9,20 @@
 import Foundation
 import UIKit
 
-protocol SwipeGestureProtocal: AnyObject {
-
+protocol SwipeGestureProtocol: AnyObject {
+    
     func swipeGesture()
-
-//    @objc func respondToSwipeGesture(gesture: UIGestureRecognizer)
-
+    
 }
 
-extension SwipeGestureProtocal where Self: UIViewController {
-
+extension SwipeGestureProtocol where Self: UIViewController {
+    
     func swipeGesture() {
-
+        
         let swipeRight = UISwipeGestureRecognizer(target: self, action: #selector(respondToSwipeGesture(gesture:)))
         swipeRight.direction = UISwipeGestureRecognizer.Direction.right
         self.view.addGestureRecognizer(swipeRight)
-
+        
     }
-
+    
 }

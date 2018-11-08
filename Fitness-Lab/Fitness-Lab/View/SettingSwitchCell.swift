@@ -16,6 +16,7 @@ class SettingSwitchCell: UITableViewCell {
     func updateView(settingModel: SettingSwitchCellModel) {
         
         titleLbl.text = settingModel.titleLbl
+        
         statusSwitch.isOn = settingModel.statusSwitch
         
     }

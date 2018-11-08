@@ -15,7 +15,8 @@ target 'Moving' do
     pod 'GoogleAnalytics'
     pod 'Firebase/Core'
     pod 'RealmSwift'
-    
+    pod 'Google-Mobile-Ads-SDK'
+
     target 'MovingTests' do
         inherit! :search_paths
     end

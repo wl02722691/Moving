@@ -11,7 +11,7 @@ import YouTubePlayer_Swift
 import AVFoundation
 import Lottie
 
-class ActionVC: UIViewController, SwipeGestureProtocal {
+class ActionVC: UIViewController, SwipeGestureProtocol {
     
     var actionTimer: Timer?
     var actionSec = 0
@@ -56,67 +56,31 @@ class ActionVC: UIViewController, SwipeGestureProtocal {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        print(CLongLong(round(Date().timeIntervalSince1970*1000)), "@@@@viewDidLoad")
+        
         initView()
         swipeGesture()
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
-        print( CLongLong(round(Date().timeIntervalSince1970*1000)), "@@@viewWillAppear")
+        
         GAManager.createNormalScreenEventWith("ActionVC")
         actionTableView.reloadData()
         cueToneSetting()
         
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(true)
-         print(CLongLong(round(Date().timeIntervalSince1970*1000)), "@@@@viewDidAppear")
-        print("@@@@", self.view.subviews.count)
-        
-    }
-    
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(true)
-         print( CLongLong(round(Date().timeIntervalSince1970*1000)), "@@@@viewWillDisappear")
+        
         videoView.pause()
         animationView.removeFromSuperview()
         
     }
     
-    override func viewWillLayoutSubviews() {
-        super.viewWillLayoutSubviews()
-        print( CLongLong(round(Date().timeIntervalSince1970*1000)), "@@@@viewWillLayoutSubviews")
-    }
-    
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        
-        print(CLongLong(round(Date().timeIntervalSince1970*1000)), "@@@@viewDidLayoutSubviews")
-    }
-
-    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
-        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
-        print(CLongLong(round(Date().timeIntervalSince1970*1000)), "@@@@nibName")
-    }
-    
-    
-    
-    required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-        print( CLongLong(round(Date().timeIntervalSince1970*1000)), "@@@@coder")
-      
-    }
-    
-    
-    
-    
     func initView() {
         
-        
-        
-        print( CLongLong(round(Date().timeIntervalSince1970*1000)), "@@@initView")
         actionTableView.separatorStyle = UITableViewCell.SeparatorStyle.none
         videoView.isHidden = true
         self.videoView.delegate = self
@@ -138,21 +102,7 @@ class ActionVC: UIViewController, SwipeGestureProtocal {
         
         cueToneSetting()
         
-         print( CLongLong(round(Date().timeIntervalSince1970*1000)), "@@@initView@@@@@@@")
-        
     }
-    
-
-        
-        /// 获取当前 秒级 时间戳 - 10位
-        var timeStamp : String {
-            let timeInterval: TimeInterval = Date().timeIntervalSince1970
-            let timeStamp = Int(timeInterval)
-            return "\(timeStamp)"
-        }
-  
-       
-  
     
     func initList(category: FitnessCategory) {
         
@@ -283,7 +233,7 @@ class ActionVC: UIViewController, SwipeGestureProtocal {
         
         actionSec -= 1
         
-        if actionSec <= 0 {
+        if actionSec <= -1 {
             
             actionTimer?.invalidate()
             
@@ -377,7 +327,6 @@ class ActionVC: UIViewController, SwipeGestureProtocal {
                                 }
                             }
                         }
-                        
                     }
                 }
             }
@@ -485,12 +434,10 @@ class ActionVC: UIViewController, SwipeGestureProtocal {
         
         if reachability?.currentReachabilityStatus().rawValue == 0 {
             
-            print("no internet connected.")
             return false
             
         } else {
             
-            print("internet connected successfully.")
             return true
             
         }
@@ -584,33 +531,7 @@ class ActionVC: UIViewController, SwipeGestureProtocal {
                                                 selector: #selector(self.actionCountDown),
                                                 userInfo: nil, repeats: true)
         
-        self.videoView.seekTo(Float(self.actionLists[self.nowIndex].youtubeTime), seekAhead: true)
-        
-        let youtubestopTime = actionLists[nowIndex].stopTime
-        
-        let compareIndex = nowIndex
-        
-        DispatchQueue.main.asyncAfter(deadline: .now() + youtubestopTime) {
-            if compareIndex == self.nowIndex {
-                self.videoView.seekTo(Float(self.actionLists[self.nowIndex].youtubeTime), seekAhead: true)
-                DispatchQueue.main.asyncAfter(deadline: .now() + youtubestopTime) {
-                    if compareIndex == self.nowIndex {
-                        self.videoView.seekTo(Float(self.actionLists[self.nowIndex].youtubeTime), seekAhead: true)
-                        DispatchQueue.main.asyncAfter(deadline: .now() + youtubestopTime) {
-                            if compareIndex == self.nowIndex {
-                                self.videoView.seekTo(Float(self.actionLists[self.nowIndex].youtubeTime), seekAhead: true)
-                                DispatchQueue.main.asyncAfter(deadline: .now() + youtubestopTime) {
-                                    if compareIndex == self.nowIndex {
-                                        self.videoView.seekTo(Float(self.actionLists[self.nowIndex].youtubeTime), seekAhead: true)
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        }
-        
+        renewVideo()
         contentHeightChang()
         actionViewWidthAnimate(cell: nil)
         
@@ -649,26 +570,7 @@ class ActionVC: UIViewController, SwipeGestureProtocal {
                                                 selector: #selector(self.actionCountDown),
                                                 userInfo: nil, repeats: true)
         
-        self.videoView.seekTo(Float(self.actionLists[self.nowIndex].youtubeTime), seekAhead: true)
-        
-        let youtubestopTime = actionLists[nowIndex].stopTime
-        
-        let compareIndex = nowIndex
-        
-        DispatchQueue.main.asyncAfter(deadline: .now() + youtubestopTime) {
-            
-            if compareIndex == self.nowIndex {
-                
-                self.videoView.seekTo(Float(self.actionLists[self.nowIndex].youtubeTime), seekAhead: true)
-                
-                DispatchQueue.main.asyncAfter(deadline: .now() + youtubestopTime) {
-                    if compareIndex == self.nowIndex {
-                        self.videoView.seekTo(Float(self.actionLists[self.nowIndex].youtubeTime), seekAhead: true)
-                        
-                    }
-                }
-            }
-        }
+        renewVideo()
         
         actionSec = Int(actionLists[nowIndex].timesDescription)
         contentHeightChang()
@@ -723,11 +625,13 @@ extension ActionVC: UITableViewDelegate {
             
         }
     }
+    
 }
 
 // MARK: - UITableViewDataSource
 
 extension ActionVC: UITableViewDataSource {
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
         return actionLists.count
@@ -800,7 +704,7 @@ extension ActionVC: UITableViewDataSource {
                 cell.actionDescription.textColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
                 let actionlistIndexRow = actionLists[indexPath.row]
                 cell.updateView(actionModel: ActionCellModel(actionModel: actionlistIndexRow))
-    
+                
             } else {
                 
             }
@@ -888,7 +792,6 @@ extension ActionVC: UITableViewDataSource {
         guard let cell = actionTableView.cellForRow(at: index) as? ActionCell else {return}
         
         if actionTimer?.isValid == true {
-            //現在是action
             
             actionTimerjustStop = true
             
@@ -899,7 +802,7 @@ extension ActionVC: UITableViewDataSource {
             cell.progressView.isHidden = false
             
         } else if restTimer?.isValid == true {
-            //現在是rest
+            
             restTimerjustStop = true
             
             restTimer?.invalidate()
@@ -910,6 +813,7 @@ extension ActionVC: UITableViewDataSource {
             
         }
     }
+    
 }
 
 // MARK: - YouTubePlayerDelegate

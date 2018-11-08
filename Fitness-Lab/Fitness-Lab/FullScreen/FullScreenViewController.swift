@@ -53,7 +53,7 @@ class FullScreenViewController: UIViewController {
         case scrollUp
         case scrollDown
     }
-
+    
     func isOnDelayRange(scrollView: UIScrollView) -> Bool {
         let contentOffset = scrollView.contentOffset
         if contentOffset.y <= delayDistance {
@@ -75,7 +75,7 @@ class FullScreenViewController: UIViewController {
         
         let currentOffset = scrollView.contentOffset
         let distance =  currentOffset.y - lastOffset.y
-    
+        
         self.lastOffset = currentOffset
         
         let isScrollDown = distance > 0
@@ -93,21 +93,21 @@ class FullScreenViewController: UIViewController {
             self.updateStatusBarWith(distance: distance)
             
             self.updateTabbar()
-
+            
             self.updateNavBar()
-//
+            
             updateVCFrameWith()
             
         } else {
             
             DispatchQueue.main.async {
                 self.updateStatusBarWith(distance: distance)
-        
+                
                 self.updateTabbar()
-
+                
                 self.updateNavBar()
-//
-               self.updateVCFrameWith()
+                
+                self.updateVCFrameWith()
             }
         }
     }
@@ -147,7 +147,7 @@ class FullScreenViewController: UIViewController {
     func storeOriginData() {
         
         self.originVCFrame = self.view.frame
-
+        
         if let navigationController = self.navigationController {
             
             self.originNavCFrame = navigationController.view.frame
@@ -164,7 +164,7 @@ class FullScreenViewController: UIViewController {
             self.originTabCFrame = tabbar.view.frame
             self.originTabbarFrame = tabbar.tabBar.frame
             self.tabbarHeight = tabbar.tabBar.frame.height
-    
+            
         }
     }
     
@@ -193,7 +193,7 @@ class FullScreenViewController: UIViewController {
         updateSBFrame.origin = CGPoint(x: originStatusBarViewFrame.minX,
                                        y: topVariation)
         statusBarView.frame = updateSBFrame
-    
+        
     }
     
     func updateTabbar() {

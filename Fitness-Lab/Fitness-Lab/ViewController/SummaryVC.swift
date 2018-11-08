@@ -10,7 +10,7 @@ import UIKit
 import RealmSwift
 import Lottie
 
-class SummaryVC: UIViewController, NotificationAuthProtocal {
+class SummaryVC: UIViewController, NotificationAuthProtocol {
     
     var allTime = 0
     var allTimeToMin = 0
@@ -244,7 +244,9 @@ extension SummaryVC: UITableViewDataSource {
             return cell
             
         default:
+            
             break
+            
         }
         return Summary1Cell()
     }

@@ -30,16 +30,16 @@ enum PlayingOrPause: String, Codable {
 }
 
 enum TimeRange: String, Codable {
-
+    
     case max3
     case threeToNine
     case min9
-
+    
 }
 
 enum CueTone: String, Codable {
-
+    
     case open
     case close
-
+    
 }

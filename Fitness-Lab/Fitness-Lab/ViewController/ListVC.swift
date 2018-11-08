@@ -8,9 +8,8 @@
 
 import UIKit
 
-class ListVC: FullScreenViewController, SwipeGestureProtocal {
+class ListVC: FullScreenViewController, SwipeGestureProtocol {
     
-    private let cellIdenfifier = String(describing: ListCell.self)
     @IBOutlet weak var listTableviewTop: NSLayoutConstraint!
     @IBOutlet weak var listTableviewDown: NSLayoutConstraint!
     @IBOutlet var selectTimeBtns: [UIButton]!
@@ -18,14 +17,15 @@ class ListVC: FullScreenViewController, SwipeGestureProtocal {
     @IBOutlet weak var backgroundDismissBtn: UIButton!
     @IBOutlet weak var filterView: UIView!
     @IBOutlet weak var listTableView: UITableView!
-    private(set) public var lists = [ListModel]()
-    private(set) public var oldlists = [ListModel]()
-    private(set) public var selectLists = [ListModel]()
-    private(set) public var actions = [ActionModel]()
+    var lists = [ListModel]()
+    var oldlists = [ListModel]()
+    var selectLists = [ListModel]()
+    var actions = [ActionModel]()
     var selectSender = 0
     var selectTimeSender = 0
     var listTableViewFirstFlag = true
     var lastContentOffset: CGFloat = 0
+    let cellIdenfifier = String(describing: ListCell.self)
     
     // MARK: - initView
     
@@ -53,15 +53,11 @@ class ListVC: FullScreenViewController, SwipeGestureProtocal {
         swipeGesture()
     }
     
-    @objc func test () {
-        barInit()
-        dismiss(animated: true, completion: nil)
-    }
-    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         
         GAManager.createNormalScreenEventWith("ListVC")
+        
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -72,6 +68,7 @@ class ListVC: FullScreenViewController, SwipeGestureProtocal {
             
             listTableView.scrollToRow(at: topIndex, at: UITableView.ScrollPosition.top, animated: false)
         }
+        
     }
     
     func initList(category: FitnessCategory) {
@@ -165,10 +162,9 @@ class ListVC: FullScreenViewController, SwipeGestureProtocal {
 
 extension ListVC: UITableViewDelegate {
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        //1. set the initaial state of the cell
+       
         cell.alpha = 0
-        
-        //2. UIView animation method to chang to the final state of the cell
+
         UIView.animate(withDuration: 0.4) {
             cell.alpha = 1.0
             
@@ -182,13 +178,7 @@ extension ListVC: UITableViewDelegate {
         
         let topIndex = IndexPath(row: 0, section: 0)
         listTableView.scrollToRow(at: topIndex, at: UITableView.ScrollPosition.top, animated: false)
-        
-        // barInit()
-        
-      //  performSegue(withIdentifier: "toEmpty", sender: selectLists)
-        
-         print( CLongLong(round(Date().timeIntervalSince1970*1000)), "@@@@@didSelectRowAt")
-        
+
         performSegue(withIdentifier: "toActionVC", sender: selectLists)
         
     }
@@ -196,11 +186,10 @@ extension ListVC: UITableViewDelegate {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let actionVC = segue.destination as? ActionVC {
             
-            //print("aliceprepare", CLongLong(round(Date().timeIntervalSince1970*1000)))
             actionVC.lists = self.lists
             actionVC.actionLists = self.actions
             actionVC.selectSender = self.selectSender
-            print( CLongLong(round(Date().timeIntervalSince1970*1000)), "@@@@@prepare")
+   
         }
         
     }
@@ -245,4 +234,3 @@ extension ListVC: UITableViewDataSource {
     }
     
 }
-

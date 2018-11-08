@@ -15,7 +15,7 @@ struct FitnessCategory: Codable {
     private(set) public var imageName: String!
     
     init(title: String, imageName: String, secondTitle: String) {
-    
+        
         self.title = title
         self.imageName = imageName
         self.secondTitle = secondTitle

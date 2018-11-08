@@ -19,7 +19,9 @@ class NotificationVC: UIViewController {
     @IBAction func removeNotificationBtnWasPressed(_ sender: UIButton) {
         
         if UIApplication.shared.scheduledLocalNotifications?.count == 0 {
+            
             navigationController?.popToRootViewController(animated: true)
+        
         }
         
         UIApplication.shared.cancelAllLocalNotifications()

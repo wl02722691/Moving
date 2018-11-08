@@ -12,7 +12,7 @@ import UserNotifications
 import StoreKit
 import HealthKit
 
-class SettingVC: UIViewController, NotificationAuthProtocal {
+class SettingVC: UIViewController, NotificationAuthProtocol {
     
     private let cellIdenfifierSettingCell = String(describing: SettingCell.self)
     private let cellIdenfifierSettingSwitchCell = String(describing: SettingSwitchCell.self)
@@ -183,24 +183,6 @@ class SettingVC: UIViewController, NotificationAuthProtocal {
         return true
     }
     
-//    func localNotification() {
-//
-//        UNUserNotificationCenter.current().getNotificationSettings { (settings) in
-//            DispatchQueue.main.async {
-//
-//                if settings.authorizationStatus == .authorized {
-//
-//                    self.performSegue(withIdentifier: "toNotificationVC", sender: nil)
-//
-//                } else {
-//
-//                    self.performSegue(withIdentifier: "toBeforeNotificationVC", sender: nil)
-//
-//                }
-//            }
-//        }
-//    }
-    
 }
 
 // MARK: - UITableViewDelegate
@@ -214,10 +196,8 @@ extension SettingVC: UITableViewDelegate {
         case [0, 0]:
             
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
-            
             guard let informationVC = storyboard.instantiateViewController(withIdentifier:
                 "InformationVC") as? InformationVC  else { return }
-            
             self.show(informationVC, sender: nil)
             
         case [0, 1]:

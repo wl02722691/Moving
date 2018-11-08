@@ -23,34 +23,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication,
                      didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+        
         UIApplication.shared.statusBarStyle = .lightContent
+        
         print(Realm.Configuration.defaultConfiguration.fileURL)
         
-        //realm測試
-        let summary = SummaryModel()
-        summary.durationLbl = 600
-        summary.scoreTitleLbl = "困難"
-        summary.workoutDate = Date().timeIntervalSince1970
-        summary.videoImg = "Abs3"
-        summary.videoTitle = "連續22天的腹肌訓練計畫"
-
-        do {
-            let realm = try Realm()
-            try realm.write {
-               //  realm.add(summary)
-            }
-        } catch {
-            print("Error initalisting new realm, \(error)")
-        }
-
-//        let notificationCenter = UNUserNotificationCenter.current()
-//        notificationCenter.requestAuthorization(options: [.alert, .badge, .sound]) { (granted, error) in
-//
-//        }
-        
         IQKeyboardManager.shared.enable = true
-        
-        //Google analytics
         
         FirebaseApp.configure()
         
@@ -58,11 +36,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             assert(false, "Google Analytics not configured correctly")
             return false
         }
+        
         gai.tracker(withTrackingId: AppDelegate.trackId)
     
         gai.trackUncaughtExceptions = true
         
-        //Google analytics
         Fabric.with([Crashlytics.self])
         
         return true

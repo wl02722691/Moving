@@ -30,13 +30,13 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yh4-sb-fdL">
-                                                    <rect key="frame" x="10" y="10" width="580" height="179.5"/>
+                                                    <rect key="frame" x="10" y="10" width="355" height="179.5"/>
                                                     <subviews>
                                                         <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="1" translatesAutoresizingMaskIntoConstraints="NO" id="Neb-iX-Dqm">
-                                                            <rect key="frame" x="0.0" y="0.0" width="580" height="179.5"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="355" height="179.5"/>
                                                         </imageView>
                                                         <view alpha="0.45000000000000001" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GcZ-jB-oMp">
-                                                            <rect key="frame" x="0.0" y="0.0" width="580" height="179.5"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="355" height="179.5"/>
                                                             <color key="backgroundColor" red="0.062745098040000002" green="0.062745098040000002" blue="0.062745098040000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         </view>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="BEHIND THE SCENES" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="r8H-DQ-ncr">
@@ -179,17 +179,17 @@
                                                     <color key="backgroundColor" red="0.047207959000000001" green="0.015794906769999999" blue="0.039822466670000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 </view>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jzX-Z1-XB7">
-                                                    <rect key="frame" x="0.0" y="199" width="600" height="1"/>
+                                                    <rect key="frame" x="0.0" y="199" width="375" height="1"/>
                                                     <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="calibratedWhite"/>
                                                 </view>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text=" Title" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Nez-jw-h6B">
-                                                    <rect key="frame" x="132" y="25" width="452" height="25.5"/>
+                                                    <rect key="frame" x="132" y="25" width="227" height="25.5"/>
                                                     <fontDescription key="fontDescription" name="PingFangTC-Medium" family="PingFang TC" pointSize="18"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" Description" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sjt-cr-vFV">
-                                                    <rect key="frame" x="132" y="70.5" width="452" height="54.5"/>
+                                                    <rect key="frame" x="132" y="70.5" width="227" height="54.5"/>
                                                     <fontDescription key="fontDescription" name="PingFangHK-Medium" family="PingFang HK" pointSize="14"/>
                                                     <color key="textColor" red="0.80392156859999997" green="0.80392156859999997" blue="0.80392156859999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
@@ -731,7 +731,7 @@
                                     <constraint firstAttribute="width" constant="50" id="Op9-Xl-sUe"/>
                                 </constraints>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="版本：1.2.6" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="35u-xM-F7K">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="版本：1..5" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="35u-xM-F7K">
                                 <rect key="frame" x="0.0" y="170" width="375" height="24"/>
                                 <fontDescription key="fontDescription" name="PingFangTC-Regular" family="PingFang TC" pointSize="17"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

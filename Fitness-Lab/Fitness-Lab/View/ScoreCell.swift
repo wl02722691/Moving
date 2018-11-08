@@ -16,6 +16,7 @@ class ScoreCell: UICollectionViewCell {
     func updateView(scoreModel: ScoreCellModel) {
         
         scoreImg.image = UIImage(named: scoreModel.scoreImg)
+        
         titleLbl.text = scoreModel.titleLbl
     
     }

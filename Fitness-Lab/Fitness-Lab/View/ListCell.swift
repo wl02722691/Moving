@@ -25,7 +25,7 @@ class ListCell: UITableViewCell {
         videoDescription.text = listModel.videoDescription
         
         durationLbl.text = "\(listModel.durationLbl)min"
-        
+
         intensityLbl.text = listModel.intensity
         
     }
