@@ -14,6 +14,7 @@ import Foundation
 class Database {
     
     static let instance = Database()
+    private init() {}
     
     private let fitCategories = [
         
@@ -25,7 +26,6 @@ class Database {
     ]
     
     private let coreArray = [
-        
         
         ListModel(videoImg: "Abs3", durationLbl: 3, videoTitle: "3分鐘的腹部訓練", videoDescription: "Fitting Room TW", intensity: "入門", videoID: "HjP9GUWTft4", timeRange: TimeRange.max3, actionModel: [
             
@@ -56,7 +56,6 @@ class Database {
             ActionModel(youtubeTime: 323, stopTime: 93, restTime: 3, timesDescription: 90, actionDescription: "左右各15下動作5", cellStatus: CellStatus.willplay, actionOrRest: ActionOrRest.action, playingOrPause: PlayingOrPause.playing, firstPlayAction: true, firstPlayRest: true, actionCellDidInvisiable: false, restCellDidInvisiable: false)
             
             ]),
-        
         
         ListModel(videoImg: "Leg1", durationLbl: 7, videoTitle: "特快瘦大腿1個月內見效", videoDescription: "Coffee林芊妤" , intensity: "入門", videoID: "3X1PL7ym04I", timeRange: TimeRange.threeToNine, actionModel: [
             
@@ -114,7 +113,7 @@ class Database {
             
             ActionModel(youtubeTime: 208, stopTime: 70, restTime: 3, timesDescription: 60, actionDescription: "胸肌肩膀動作"),
             
-            ActionModel(youtubeTime: 268, stopTime: 70, restTime: 3, timesDescription: 60, actionDescription: "進階三頭肌動作"),
+            ActionModel(youtubeTime: 268, stopTime: 70, restTime: 3, timesDescription: 60, actionDescription: "進階三頭肌動作")
             
             ]),
         
@@ -126,10 +125,9 @@ class Database {
             
             ActionModel(youtubeTime: 131, stopTime: 40, restTime: 3, timesDescription: 30, actionDescription: "側臥內抬腿左側15次"),
             
-            ActionModel(youtubeTime: 131, stopTime: 40, restTime: 3, timesDescription: 30, actionDescription: "側臥內抬腿右側15次"),
+            ActionModel(youtubeTime: 131, stopTime: 40, restTime: 3, timesDescription: 30, actionDescription: "側臥內抬腿右側15次")
             
             ]),
-        
         
         ListModel(videoImg: "Arm3", durationLbl: 2, videoTitle: "5分鐘在家瘦手臂運動，甩掉拜拜肉顯鎖骨", videoDescription: "周六野 Zoey", intensity: "入門", videoID: "uVUceueG3Ws", timeRange: TimeRange.max3, actionModel: [
             
@@ -177,7 +175,7 @@ class Database {
             
             ActionModel(youtubeTime: 70, stopTime: 35, restTime: 3, timesDescription: 35, actionDescription: "動作3", cellStatus: CellStatus.willplay, actionOrRest: ActionOrRest.action, playingOrPause: PlayingOrPause.playing, firstPlayAction: true, firstPlayRest: true, actionCellDidInvisiable: false, restCellDidInvisiable: false)
             
-            ]) ,
+            ]) 
         
         ]
     
@@ -240,7 +238,7 @@ class Database {
             
             ActionModel(youtubeTime: 208, stopTime: 70, restTime: 3, timesDescription: 60, actionDescription: "胸肌肩膀動作"),
             
-            ActionModel(youtubeTime: 268, stopTime: 70, restTime: 3, timesDescription: 60, actionDescription: "進階三頭肌動作"),
+            ActionModel(youtubeTime: 268, stopTime: 70, restTime: 3, timesDescription: 60, actionDescription: "進階三頭肌動作")
             
             ]),
         
@@ -278,8 +276,7 @@ class Database {
             
             ActionModel(youtubeTime: 487, stopTime: 40, restTime: 3, timesDescription: 30, actionDescription: "不知道叫什麼了", cellStatus: CellStatus.willplay, actionOrRest: ActionOrRest.action, playingOrPause: PlayingOrPause.playing, firstPlayAction: true, firstPlayRest: true, actionCellDidInvisiable: false, restCellDidInvisiable: false)
             
-            ]),
-        
+            ])
         
         ]
     
@@ -293,8 +290,7 @@ class Database {
             
             ActionModel(youtubeTime: 131, stopTime: 40, restTime: 3, timesDescription: 30, actionDescription: "側臥內抬腿左側15次"),
             
-            ActionModel(youtubeTime: 131, stopTime: 40, restTime: 3, timesDescription: 30, actionDescription: "側臥內抬腿右側15次"),
-            
+            ActionModel(youtubeTime: 131, stopTime: 40, restTime: 3, timesDescription: 30, actionDescription: "側臥內抬腿右側15次")
             
             ]),
         
@@ -338,8 +334,7 @@ class Database {
             
             ActionModel(youtubeTime: 30, stopTime: 14, restTime: 1, timesDescription: 40, actionDescription: "動作3")
             
-            ]) ,
-        
+            ]) 
         
         ]
     
