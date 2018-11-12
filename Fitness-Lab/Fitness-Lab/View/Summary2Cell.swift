@@ -22,7 +22,11 @@ class Summary2Cell: UITableViewCell {
         let seconds = (summaryModel.durationLbl % 3600) % 60
         
         scoreTitleLbl.text = summaryModel.scoreTitleLbl
-        durationLbl.text = ("\(minutes):\(seconds)")
+        if seconds < 10 {
+            durationLbl.text = ("\(minutes):0\(seconds)")
+        } else {
+            durationLbl.text = ("\(minutes):\(seconds)")
+        }
         videoTitle.text = summaryModel.videoTitle
         workoutDateLbl.text = timeIntervalToString(workoutDate: summaryModel.workoutDate)
         videoImg.image = UIImage(named: summaryModel.videoImg)
