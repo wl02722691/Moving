@@ -82,7 +82,7 @@ class ListVC: FullScreenViewController, SwipeGestureProtocol {
         
         if backgroundDismissBtn.isHidden == true {
             
-            backgroundDismissBtn.isHidden = !false
+            backgroundDismissBtn.isHidden = false
             filterView.isHidden = false
             
         } else {

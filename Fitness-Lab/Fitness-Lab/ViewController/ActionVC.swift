@@ -421,9 +421,11 @@ class ActionVC: UIViewController, SwipeGestureProtocol {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
         if let scoreVC = segue.destination as? ScoreVC {
+            
             scoreVC.lists = lists
             scoreVC.actionLists = actionLists
             scoreVC.selectSender = selectSender
+            
         }
         
     }
@@ -513,6 +515,7 @@ class ActionVC: UIViewController, SwipeGestureProtocol {
         }
         
         nowIndex = indexPath.row
+        
         
         self.actionTableView.scrollToRow(at: indexPath, at: UITableView.ScrollPosition.top, animated: true)
         
