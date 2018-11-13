@@ -121,6 +121,7 @@ class ActionVC: UIViewController, SwipeGestureProtocol {
             videoView.loadVideoID(lists[selectSender].videoID)
             activityIndicator.startAnimating()
             activityIndicator.isHidden = false
+            videoView.isUserInteractionEnabled = false
             
         } else {
             
