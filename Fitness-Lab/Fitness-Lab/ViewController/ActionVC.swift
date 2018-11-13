@@ -508,16 +508,22 @@ class ActionVC: UIViewController, SwipeGestureProtocol {
         
         guard videoView.playerState == .Playing else {return}
         
-        for cell in 0 ..< indexPath.row {
+        for cellrow in 0 ..< indexPath.row {
             
-            actionLists[cell].cellStatus = .played
-            let indexPath = IndexPath(row: cell, section: 0)
-            actionTableView.reloadRows(at: [indexPath], with: .none)
+            actionLists[cellrow].cellStatus = .played
+            
+            let moreindexPath = IndexPath(row: cellrow, section: 0)
+            
+           if actionTableView.isCellVisible(indexSection: 0, indexRow: cellrow) == true {
+
+                actionTableView.reloadRows(at: [moreindexPath], with: .right)
+
+                print("*indexPath", moreindexPath)
+
+            }
         }
         
         nowIndex = indexPath.row
-        
-        self.actionTableView.scrollToRow(at: indexPath, at: UITableView.ScrollPosition.top, animated: true)
         
         actionSec = Int(actionLists[nowIndex].timesDescription)
         
@@ -538,8 +544,6 @@ class ActionVC: UIViewController, SwipeGestureProtocol {
         contentHeightChang()
         actionViewWidthAnimate(cell: nil)
         
-        
-        
     }
     
     func lessThanNowIndex(indexPath: IndexPath) {
@@ -557,8 +561,6 @@ class ActionVC: UIViewController, SwipeGestureProtocol {
         actionLists[nowIndex].restCellDidInvisiable = false
         
         nowIndex = indexPath.row
-        
-        self.actionTableView.scrollToRow(at: indexPath, at: UITableView.ScrollPosition.top, animated: true)
         
         actionTableView.reloadData()
         
