@@ -233,7 +233,7 @@ class ActionVC: UIViewController, SwipeGestureProtocol {
         
         actionSec -= 1
         
-        if actionSec <= -1 {
+        if actionSec <= 0 {
             
             actionTimer?.invalidate()
             
