@@ -511,7 +511,8 @@ class ActionVC: UIViewController, SwipeGestureProtocol {
         for cell in 0 ..< indexPath.row {
             
             actionLists[cell].cellStatus = .played
-            
+            let indexPath = IndexPath(row: cell, section: 0)
+            actionTableView.reloadRows(at: [indexPath], with: .none)
         }
         
         nowIndex = indexPath.row
@@ -536,7 +537,8 @@ class ActionVC: UIViewController, SwipeGestureProtocol {
         renewVideo()
         contentHeightChang()
         actionViewWidthAnimate(cell: nil)
-        actionTableView.reloadData()
+        
+        
         
     }
     

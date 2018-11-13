@@ -185,7 +185,7 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		691152D92190575E002EB6AA /* ViewModel */ = {
+		691152D92190575E002EB6AA /* CellModel */ = {
 			isa = PBXGroup;
 			children = (
 				6934D9A12163041B00B48802 /* FitnessCellModel.swift */,
@@ -195,7 +195,7 @@
 				691152DF21907130002EB6AA /* SettingCellModel.swift */,
 				691152E22190794F002EB6AA /* SettingSwitchCellModel.swift */,
 			);
-			path = ViewModel;
+			path = CellModel;
 			sourceTree = "<group>";
 		};
 		69255A3321737C47005929AB /* CueTone */ = {
@@ -310,7 +310,7 @@
 		69D37E0721525AFA00B8F1F9 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				691152D92190575E002EB6AA /* ViewModel */,
+				691152D92190575E002EB6AA /* CellModel */,
 				694776D221534CC400141CB7 /* FitnessCell.swift */,
 				696265D721538EA200C68282 /* ListCell.swift */,
 				69ED2E6E21551EE1003490E7 /* ActionCell.swift */,
