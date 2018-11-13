@@ -42,7 +42,10 @@ class SettingVC: UIViewController, NotificationAuthProtocol {
         let editUpdatednotificationName = Notification.Name("notificationUpdate")
         NotificationCenter.default.addObserver(self, selector: #selector(notificationUpdate(noti:)),
                                                name: editUpdatednotificationName, object: nil)
-        addAd()
+        
+        ADMAnager.addAd(bannerView: bannerView,
+                        adUnitID: "ca-app-pub-5095539141044986/3968683997",
+                        rootViewController: self)
 
     }
     
@@ -184,13 +187,6 @@ class SettingVC: UIViewController, NotificationAuthProtocol {
         }
         
         return true
-    }
-    
-    func addAd() {
-        let request = GADRequest()
-        bannerView.adUnitID = "ca-app-pub-5095539141044986/3968683997"
-        bannerView.rootViewController = self
-        bannerView.load(request)
     }
     
 }

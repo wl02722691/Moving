@@ -41,7 +41,6 @@ class FullScreenViewController: UIViewController {
     fileprivate var delayDistance: CGFloat = 0.0
     fileprivate var scrollHideSpeed: CGFloat = 1
     fileprivate var topFloatingHeight: CGFloat = 0
-    //    fileprivate var isStatusBarScrollable = true
     fileprivate var isTabBarScrollable = false
     fileprivate var isTopFloatingSpaceScrollable = true
     fileprivate var autoHideAndShowAfterScroll = true
@@ -140,7 +139,8 @@ class FullScreenViewController: UIViewController {
         self.statusBarView = statusBarView
         self.originStatusBarViewFrame = statusBarView.frame
         self.statusBarHeight = statusBarView.bounds.height
-        self.topMaxVariation = statusBarHeight + self.navigationController!.navigationBar.frame.height
+        self.topMaxVariation = statusBarHeight +
+            self.navigationController!.navigationBar.frame.height
         
     }
     

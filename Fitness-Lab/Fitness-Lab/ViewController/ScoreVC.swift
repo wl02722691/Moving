@@ -152,6 +152,7 @@ class ScoreVC: UIViewController {
         navigationController?.popToRootViewController(animated: true)
         
         let tabController = self.view.window?.rootViewController as? UITabBarController
+        
         tabController?.dismiss(animated: true, completion: nil)
         
         tabController?.selectedIndex = 1

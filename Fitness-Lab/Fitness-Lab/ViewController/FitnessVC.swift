@@ -43,13 +43,12 @@ extension FitnessVC: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         //1. set the initaial state of the cell
-        cell.alpha = 0
-        let transform = CATransform3DTranslate(CATransform3DIdentity, -250, 20, 0)
-        cell.layer.transform = transform
+        let transform = CATransform3DTranslate(CATransform3DIdentity, -250, 0, 0)
+        
+            cell.layer.transform = transform
         
         //2. UIView animation method to chang to the final state of the cell
-        UIView.animate(withDuration: 0.4) {
-            cell.alpha = 1.0
+        UIView.animate(withDuration: 0.3) {
             cell.layer.transform = CATransform3DIdentity
         }
     }
