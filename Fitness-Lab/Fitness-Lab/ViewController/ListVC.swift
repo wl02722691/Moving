@@ -49,7 +49,6 @@ class ListVC: FullScreenViewController, SwipeGestureProtocol {
         filterView.cornerRadius = 10
         okBtn.cornerRadius = 20
         
-        scrollView = listTableView
         swipeGesture()
     }
     
@@ -106,8 +105,11 @@ class ListVC: FullScreenViewController, SwipeGestureProtocol {
                 button.borderColor = #colorLiteral(red: 0, green: 0.6980392157, blue: 0.3058823529, alpha: 1)
                 button.borderWidth = 2
                 button.cornerRadius = 15
+                
             } else {
+                
                 button.borderColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
+            
             }
         }
     }
@@ -119,6 +121,7 @@ class ListVC: FullScreenViewController, SwipeGestureProtocol {
             lists = oldlists
             
         } else if selectTimeSender == 1 {
+            
             lists = oldlists
             lists = lists.filter({ $0.timeRange == TimeRange.max3 })
             
@@ -153,6 +156,7 @@ class ListVC: FullScreenViewController, SwipeGestureProtocol {
     }
     
     @IBAction func backgroundDismissBtnWasPress(_ sender: UIButton) {
+        
         filterView.isHidden = true
         backgroundDismissBtn.isHidden = true
         

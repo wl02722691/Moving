@@ -349,7 +349,7 @@ class ActionVC: UIViewController, SwipeGestureProtocol {
             
             actionAnimatorWidth = UIViewPropertyAnimator(duration: actionLists[nowIndex].timesDescription,
                                                          curve: .easeIn) {
-                                                            cell.progressView.frame.size.width = cell.frame.size.width}
+            cell.progressView.frame.size.width = cell.frame.size.width}
             
         } else {
             
@@ -361,7 +361,6 @@ class ActionVC: UIViewController, SwipeGestureProtocol {
             let proportion =  1 - (Double(actionSec) / timesDescription)
             
             let progressViewWidthProportion = Double(cell.frame.size.width) * proportion
-            print(progressViewWidthProportion)
             
             cell.progressView.frame.size.width = CGFloat(progressViewWidthProportion)
             actionAnimatorWidth = UIViewPropertyAnimator(duration: TimeInterval(actionSec), curve: .easeIn) {
@@ -518,8 +517,6 @@ class ActionVC: UIViewController, SwipeGestureProtocol {
            if actionTableView.isCellVisible(indexSection: 0, indexRow: cellrow) == true {
 
                 actionTableView.reloadRows(at: [moreindexPath], with: .right)
-
-                print("*indexPath", moreindexPath)
 
             }
         }

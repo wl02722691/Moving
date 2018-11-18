@@ -9,11 +9,13 @@
 import Foundation
 import UserNotifications
 
-protocol NotificationAuthProtocol {
+protocol NotificationAuthProtocol: AnyObject {
     
     func notificationVCSwitch()
     
 }
+
+//extension NotificationAuthProtocol where Self: UIViewController {
 
 extension NotificationAuthProtocol where Self: UIViewController {
     

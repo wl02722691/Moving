@@ -62,12 +62,15 @@ class FullScreenViewController: UIViewController {
         }
     }
     
+    //call barUpdate() from child classes
     func barUpdate() {
         
         if isFirstScroll {
             
             setupInitData()
+            
             storeOriginData()
+            
             isFirstScroll = false
             
         }
@@ -136,9 +139,13 @@ class FullScreenViewController: UIViewController {
         guard
             let statusBarWindow = UIApplication.shared.value(forKey: "statusBarWindow") as? UIWindow,
             let statusBarView = statusBarWindow.value(forKey: "statusBar") as? UIView else { return }
+        
         self.statusBarView = statusBarView
+        
         self.originStatusBarViewFrame = statusBarView.frame
+        
         self.statusBarHeight = statusBarView.bounds.height
+        
         self.topMaxVariation = statusBarHeight +
             self.navigationController!.navigationBar.frame.height
         
