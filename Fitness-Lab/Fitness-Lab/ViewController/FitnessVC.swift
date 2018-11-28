@@ -25,7 +25,23 @@ class FitnessVC: UIViewController {
         fitnessTableview.dataSource = self
         
         navigationController?.navigationBar.isHidden = false
+        
+        FirebaseManager.instance.loadData(address: "allAction")
        
+ 
+  //      FirebaseManager.instance.getQuery(category: .arm)
+    //    FirebaseManager.instance.getQuery(category: .leg)
+        
+//
+//        let jsonEncoder = JSONEncoder()
+//
+//        let jsonData = try? jsonEncoder.encode(LocaolDatabase.instance.getAbs())
+//
+//        let jsonString = String(data: jsonData!, encoding: .utf8)!
+//        print(jsonString)
+        
+    //    FirebaseManager.instance.updateData(path: "actionData", event: .create, value: ["allAction" : jsonData])
+
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -61,8 +77,24 @@ extension FitnessVC: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        let list = Database.instance.getfitCategories()[indexPath.row]
-        performSegue(withIdentifier: "toListVC", sender: list)
+        if FirebaseManager.instance.alllistModelFromFirebase.count == 0 {
+            
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                
+                if FirebaseManager.instance.alllistModelFromFirebase.count != 0 {
+                    
+                    let list = LocaolDatabase.instance.getfitCategories()[indexPath.row]
+                    self.performSegue(withIdentifier: "toListVC", sender: list)
+            
+                }
+            }
+            
+        } else {
+            
+            let list = LocaolDatabase.instance.getfitCategories()[indexPath.row]
+            performSegue(withIdentifier: "toListVC", sender: list)
+            
+        }
         
     }
     
@@ -70,7 +102,7 @@ extension FitnessVC: UITableViewDelegate {
         
         if let listVC = segue.destination as? ListVC {
             
-            listVC.initList(category: (sender as? FitnessCategory)!)
+            listVC.initList(category: (sender as? FitnessModel)!)
             
         }
     }
@@ -83,7 +115,7 @@ extension FitnessVC: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        return Database.instance.getfitCategories().count
+        return LocaolDatabase.instance.getfitCategories().count
         
     }
     
@@ -91,8 +123,9 @@ extension FitnessVC: UITableViewDataSource {
         
         if let cell = fitnessTableview.dequeueReusableCell(withIdentifier: cellIdenfifier ) as? FitnessCell {
             
-            let category = Database.instance.getfitCategories()[indexPath.row]
+            let category = LocaolDatabase.instance.getfitCategories()[indexPath.row]
             cell.updataViews(fitnessCategory: FitnessCellModel(category: category))
+        
             cell.selectionStyle = .none
         
             return cell

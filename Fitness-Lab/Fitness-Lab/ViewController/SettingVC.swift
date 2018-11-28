@@ -20,7 +20,7 @@ class SettingVC: UIViewController, NotificationAuthProtocol {
     
     var settingArray = [SettingModel(titleLbl: "", statusLbl: "")]
     var cueToneStatus: CueTone = .open
-    var settingSwitchArray = Database.instance.getSettingSwitchArray()
+    var settingSwitchArray = LocaolDatabase.instance.getSettingSwitchArray()
     let healthStore: HKHealthStore = HKHealthStore()
     
     @IBOutlet weak var bannerView: GADBannerView!
@@ -238,8 +238,8 @@ extension SettingVC: UITableViewDataSource {
     
         switch section {
             
-        case 0: return Database.instance.getSettingArray().count
-        case 1: return Database.instance.getSettingSwitchArray().count
+        case 0: return LocaolDatabase.instance.getSettingArray().count
+        case 1: return LocaolDatabase.instance.getSettingSwitchArray().count
         default: return 0
             
         }
@@ -256,7 +256,7 @@ extension SettingVC: UITableViewDataSource {
             guard let cell = settingTableView.dequeueReusableCell(withIdentifier: cellIdenfifierSettingCell)
                 as? SettingCell else {return UITableViewCell()}
             
-            let settingModeleArray = Database.instance.getSettingArray()[indexPath.row]
+            let settingModeleArray = LocaolDatabase.instance.getSettingArray()[indexPath.row]
             settingTableView.separatorStyle = UITableViewCell.SeparatorStyle.none
             cell.selectionStyle = .none
             cell.updateView(settingModel: SettingCellModel(settingModel: settingModeleArray))

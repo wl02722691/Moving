@@ -17,10 +17,11 @@ class ListVC: FullScreenViewController, SwipeGestureProtocol {
     @IBOutlet weak var backgroundDismissBtn: UIButton!
     @IBOutlet weak var filterView: UIView!
     @IBOutlet weak var listTableView: UITableView!
-    var lists = [ListModel]()
-    var oldlists = [ListModel]()
+    var lists = [NewListModel]()
+    var oldlists = [NewListModel]()
     var selectLists = [ListModel]()
-    var actions = [ActionModel]()
+    //var actions = [ActionModel]()
+    var actions = [NewActionModel]()
     var selectSender = 0
     var selectTimeSender = 0
     var listTableViewFirstFlag = true
@@ -49,6 +50,8 @@ class ListVC: FullScreenViewController, SwipeGestureProtocol {
         filterView.cornerRadius = 10
         okBtn.cornerRadius = 20
         
+        scrollView = listTableView
+        
         swipeGesture()
     }
     
@@ -70,10 +73,12 @@ class ListVC: FullScreenViewController, SwipeGestureProtocol {
         
     }
     
-    func initList(category: FitnessCategory) {
+    func initList(category: FitnessModel) {
         
-        lists = Database.instance.getList(forListTitle: category.secondTitle)
-        oldlists = Database.instance.getList(forListTitle: category.secondTitle)
+        lists = FirebaseManager.instance.getList(forListTitle: category.secondTitle)
+            //LocaolDatabase.instance.getList(forListTitle: category.secondTitle)
+        oldlists = FirebaseManager.instance.getList(forListTitle: category.secondTitle)
+            //LocaolDatabase.instance.getList(forListTitle: category.secondTitle)
         
     }
     
@@ -177,6 +182,7 @@ extension ListVC: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let index = indexPath.row
+        //actions = lists[index].actionModel
         actions = lists[index].actionModel
         selectSender = index
         

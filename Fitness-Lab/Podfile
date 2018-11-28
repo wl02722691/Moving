@@ -14,8 +14,10 @@ target 'Moving' do
     pod 'Crashlytics'
     pod 'GoogleAnalytics'
     pod 'Firebase/Core'
+    pod 'Firebase/Database'
     pod 'RealmSwift'
     pod 'Google-Mobile-Ads-SDK'
+    pod 'Kingfisher'
 
     target 'MovingTests' do
         inherit! :search_paths

@@ -67,6 +67,8 @@ class FullScreenViewController: UIViewController {
         
         if isFirstScroll {
             
+            barInit()
+            
             setupInitData()
             
             storeOriginData()
@@ -103,6 +105,7 @@ class FullScreenViewController: UIViewController {
         } else {
             
             DispatchQueue.main.async {
+                
                 self.updateStatusBarWith(distance: distance)
                 
                 self.updateTabbar()
@@ -247,7 +250,10 @@ class FullScreenViewController: UIViewController {
                                            y: originStatusBarViewFrame.maxY  ,
                                            width: originNavBarFrame.width,
                                            height: originNavBarFrame.height)
-            navController!.navigationBar.frame = updateNavBarFrame
+            
+            guard let navController = navController else {return}
+            
+            navController.navigationBar.frame = updateNavBarFrame
             
             let updateTabbarFrame = CGRect(origin: CGPoint(x: -originTabbarFrame.minX,
                                                            y: -originTabbarFrame.minY ),

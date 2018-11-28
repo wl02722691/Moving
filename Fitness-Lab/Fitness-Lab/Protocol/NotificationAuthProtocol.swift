@@ -15,8 +15,6 @@ protocol NotificationAuthProtocol: AnyObject {
     
 }
 
-//extension NotificationAuthProtocol where Self: UIViewController {
-
 extension NotificationAuthProtocol where Self: UIViewController {
     
     func notificationVCSwitch() {

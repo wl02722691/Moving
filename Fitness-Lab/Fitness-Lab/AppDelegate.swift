@@ -24,11 +24,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(_ application: UIApplication,
                      didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+        
+        
+        
         GADMobileAds.configure(withApplicationID: "ca-app-pub-5095539141044986~3361630590")
         
         UIApplication.shared.statusBarStyle = .lightContent
         
-        print(Realm.Configuration.defaultConfiguration.fileURL)
+       // print(Realm.Configuration.defaultConfiguration.fileURL)
         
         IQKeyboardManager.shared.enable = true
         

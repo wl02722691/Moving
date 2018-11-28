@@ -18,6 +18,7 @@ struct ListModel: Codable {
     private(set) public var intensity: String
     private(set) public var timeRange: TimeRange
     private(set) public var actionModel: [ActionModel]
+
     
     init(videoImg: String,
          durationLbl: Int,
@@ -26,7 +27,8 @@ struct ListModel: Codable {
          intensity: String,
          videoID: String,
          timeRange: TimeRange,
-         actionModel: [ActionModel]) {
+         actionModel: [ActionModel]
+        ) {
         self.videoImg = videoImg
         self.durationLbl = durationLbl
         self.videoTitle = videoTitle
@@ -35,6 +37,7 @@ struct ListModel: Codable {
         self.actionModel = actionModel
         self.videoID = videoID
         self.timeRange = timeRange
+       // self.category = category
     }
     
 }

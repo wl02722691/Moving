@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Kingfisher
 
 class Summary2Cell: UITableViewCell {
     
@@ -29,8 +30,18 @@ class Summary2Cell: UITableViewCell {
         }
         videoTitle.text = summaryModel.videoTitle
         workoutDateLbl.text = timeIntervalToString(workoutDate: summaryModel.workoutDate)
-        videoImg.image = UIImage(named: summaryModel.videoImg)
-      
+        
+        if summaryModel.videoImg.contains("https://firebasestorage") {
+            
+            guard let url = URL(string: summaryModel.videoImg) else { return }
+            videoImg.kf.setImage(with: url)
+            
+        } else {
+            
+            videoImg.image = UIImage(named: summaryModel.videoImg)
+            
+        }
+       
     }
     
     func timeIntervalToString(workoutDate: TimeInterval) -> String {

@@ -7,6 +7,7 @@
 //
 
 import Foundation
+//swiftlint:disable identifier_name
 
 enum CellStatus: String, Codable {
     
@@ -41,5 +42,13 @@ enum CueTone: String, Codable {
     
     case open
     case close
+    
+}
+
+enum Category: String, Codable {
+    
+    case abs
+    case leg
+    case arm 
     
 }

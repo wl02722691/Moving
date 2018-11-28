@@ -14,7 +14,7 @@ struct FitnessCellModel {
     let title: String
     let subTitle: String
     
-    init(category: FitnessCategory) {
+    init(category: FitnessModel) {
         
         self.imageName = category.imageName
         self.title = category.title

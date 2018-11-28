@@ -23,7 +23,7 @@ struct ActionCellModel {
     private(set) public var actionCellDidInvisiable: Bool = false
     private(set) public var restCellDidInvisiable: Bool = false
     
-    init(actionModel: ActionModel) {
+    init(actionModel: NewActionModel) {
         
         self.youtubeTime = actionModel.youtubeTime
         self.stopTime = actionModel.stopTime

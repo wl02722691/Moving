@@ -10,6 +10,7 @@ import UIKit
 import YouTubePlayer_Swift
 import AVFoundation
 import Lottie
+import Kingfisher
 
 class ActionVC: UIViewController, SwipeGestureProtocol {
     
@@ -29,8 +30,8 @@ class ActionVC: UIViewController, SwipeGestureProtocol {
     var actionAnimatorWidth = UIViewPropertyAnimator()
     var restAnimatorWidth = UIViewPropertyAnimator()
     
-    var lists =  [ListModel]()
-    var actionLists = [ActionModel]()
+    var lists =  [NewListModel]()
+    var actionLists = [NewActionModel]()
     
     var cueTone: AVAudioPlayer!
     var cueToneStatus: CueTone = .open
@@ -93,7 +94,10 @@ class ActionVC: UIViewController, SwipeGestureProtocol {
         startBtn.cornerRadius = 38
         let listIndex = lists[selectSender]
         videoTitle.text = listIndex.videoTitle
-        videoImg.image = UIImage(named: listIndex.videoImg)
+        
+        guard let url = URL(string: listIndex.videoImg) else { return }
+        videoImg.kf.setImage(with: url)
+        
         intensityLbl.text = listIndex.intensity
         durationLbl.text = "\(listIndex.durationLbl)min"
         
@@ -104,9 +108,10 @@ class ActionVC: UIViewController, SwipeGestureProtocol {
         
     }
     
-    func initList(category: FitnessCategory) {
+    func initList(category: FitnessModel) {
         
-        lists = Database.instance.getList(forListTitle: category.secondTitle)
+        lists = FirebaseManager.instance.getList(forListTitle: category.secondTitle)
+        //    LocaolDatabase.instance.getList(forListTitle: category.secondTitle)
         
     }
     
@@ -271,11 +276,24 @@ class ActionVC: UIViewController, SwipeGestureProtocol {
             } else {
                 
                 videoView.pause()
-                performSegue(withIdentifier: "toScoreVC", sender: nil)
+                performSegue(withIdentifier: "toScoreVC", sender: actionLists)
                 
             }
         }
     }
+    
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let scoreVC = segue.destination as? ScoreVC {
+            
+            scoreVC.lists = self.lists
+            scoreVC.actionLists = self.actionLists
+            scoreVC.selectSender = self.selectSender
+            
+        }
+    }
+
+  
     
     @objc func restCountDown() {
         
@@ -413,20 +431,6 @@ class ActionVC: UIViewController, SwipeGestureProtocol {
         }
         
         restAnimatorWidth.startAnimation()
-        
-    }
-    
-    // MARK: - ToScoreVC
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        
-        if let scoreVC = segue.destination as? ScoreVC {
-            
-            scoreVC.lists = lists
-            scoreVC.actionLists = actionLists
-            scoreVC.selectSender = selectSender
-            
-        }
         
     }
     
@@ -709,7 +713,9 @@ extension ActionVC: UITableViewDataSource {
                 
                 cell.actionDescription.textColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
                 let actionlistIndexRow = actionLists[indexPath.row]
+                //cell.updateView(actionModel: <#T##ActionCellModel#>)
                 cell.updateView(actionModel: ActionCellModel(actionModel: actionlistIndexRow))
+                //cell.updateView(actionModel: ActionCellModel(actionModel: actionlistIndexRow))
                 
             } else {
                 

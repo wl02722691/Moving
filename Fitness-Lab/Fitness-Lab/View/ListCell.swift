@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Kingfisher
 
 class ListCell: UITableViewCell {
     
@@ -18,7 +19,9 @@ class ListCell: UITableViewCell {
     
     func updateView(listModel: ListCellModel) {
         
-        videoImg.image = UIImage(named: listModel.videoImg)
+        guard let url = URL(string: listModel.videoImg) else {return}
+        
+        videoImg.kf.setImage(with: url)
 
         videoTitle.text = listModel.videoTitle
         

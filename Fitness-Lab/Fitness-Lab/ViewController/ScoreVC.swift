@@ -10,13 +10,14 @@ import UIKit
 import RealmSwift
 import Firebase
 import HealthKit
+import Kingfisher
 
 class ScoreVC: UIViewController {
     
     @IBOutlet weak var finishBtn: UIButton!
     @IBOutlet weak var scoreCollectionView: UICollectionView!
-    var lists =  [ListModel]()
-    var actionLists = [ActionModel]()
+    var lists =  [NewListModel]()
+    var actionLists = [NewActionModel]()
     var selectSender = 0
     let cellScaling: CGFloat = 0.6
     var didSelectItemAt = IndexPath(row: 0, section: 0)
@@ -78,15 +79,27 @@ class ScoreVC: UIViewController {
     
     func realmWrite() {
         
-        for actionlistsAllIndex in 0...actionLists.count-1 {
+        
+        if actionLists.count == 0 {
             
-            time += actionLists[actionlistsAllIndex].timesDescription
-            resttime += (actionLists[actionlistsAllIndex].restTime)
+            time += actionLists[0].timesDescription
+            resttime += (actionLists[0].restTime)
             resultTime = time + resttime
+            
+        }else{
+            
+            for actionlistsAllIndex in 0...actionLists.count-1 {
+                
+                time += actionLists[actionlistsAllIndex].timesDescription
+                resttime += (actionLists[actionlistsAllIndex].restTime)
+                resultTime = time + resttime
+                
+            }
             
         }
         
         let summaryModel = SummaryModel()
+
         summaryModel.videoImg = lists[selectSender].videoImg
         summaryModel.durationLbl = Int(resultTime)
         summaryModel.videoTitle = lists[selectSender].videoTitle
@@ -103,15 +116,9 @@ class ScoreVC: UIViewController {
         
         let today = Date()
         
-        let energyBurned = HKQuantity(unit: HKUnit.kilocalorie(),
-                                      doubleValue: 425.0)
-        
-        let distance = HKQuantity(unit: HKUnit.mile(),
-                                  doubleValue: 3.2)
-        
         let workout = HKWorkout(activityType: HKWorkoutActivityType.traditionalStrengthTraining,
                                 start: today as Date, end: today as Date, duration: resultTime,
-                                totalEnergyBurned: energyBurned, totalDistance: distance, metadata: nil)
+                                totalEnergyBurned: nil, totalDistance: nil, metadata: nil)
         
         healthStore.save(workout) { (success, _) -> Void in
             
@@ -174,7 +181,7 @@ extension ScoreVC: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         
-        return Database.instance.getScoreArray().count
+        return LocaolDatabase.instance.getScoreArray().count
         
     }
     
@@ -184,7 +191,7 @@ extension ScoreVC: UICollectionViewDataSource {
         if let cell = scoreCollectionView.dequeueReusableCell(withReuseIdentifier: "scoreCollectionViewCell",
                                                               for: indexPath) as? ScoreCell {
             
-            let scoreArray = Database.instance.getScoreArray()[indexPath.row]
+            let scoreArray = LocaolDatabase.instance.getScoreArray()[indexPath.row]
             
             cell.updateView(scoreModel: ScoreCellModel(scoreModel: scoreArray))
      
@@ -231,7 +238,7 @@ extension ScoreVC: UICollectionViewDelegate, UIScrollViewDelegate {
         
         guard let cell = self.scoreCollectionView.cellForItem(at: indexPath) as? ScoreCell  else {return}
         
-        for otherRow in 0...Database.instance.getScoreArray().count {
+        for otherRow in 0...LocaolDatabase.instance.getScoreArray().count {
             let otherIndexPath = IndexPath(row: otherRow, section: 0)
             let othrtCell = self.scoreCollectionView.cellForItem(at: otherIndexPath)
             othrtCell?.layer.borderColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 0)
@@ -240,8 +247,8 @@ extension ScoreVC: UICollectionViewDelegate, UIScrollViewDelegate {
         
         cell.layer.borderColor = #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1)
         cell.layer.borderWidth = 5
-        print(Database.instance.getScoreArray()[indexPath.row].titleLbl)
+        print(LocaolDatabase.instance.getScoreArray()[indexPath.row].titleLbl)
         
-        scoreTitleLbl = Database.instance.getScoreArray()[indexPath.row].titleLbl
+        scoreTitleLbl = LocaolDatabase.instance.getScoreArray()[indexPath.row].titleLbl
     }
 }
